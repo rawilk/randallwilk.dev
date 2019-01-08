@@ -1,4 +1,4 @@
-import startCase from 'lodash/startcase';
+import { startcase } from 'lodash';
 import get from 'lodash/get';
 import looseEqual from '../../utils/looseEqual';
 import stableSort from '../../utils/stableSort';
@@ -283,7 +283,7 @@ export default {
                 // Normalize array Form
                 this.fields.filter(f => f).forEach(f => {
                     if (typeof f === 'string') {
-                        fields.push({ key: f, label: startCase(f) });
+                        fields.push({ key: f, label: startcase(f) });
                     } else if (typeof f === 'object' && f.key && typeof f.key === 'string') {
                         // Full object definition. We use assign so that we don't mutate the original
                         fields.push(assign({}, f));
@@ -317,7 +317,7 @@ export default {
 
                 keys(sample).forEach(k => {
                     if (! ignoredKeys.includes(k)) {
-                        fields.push({ key: k, label: startCase(k) });
+                        fields.push({ key: k, label: startcase(k) });
                     }
                 });
             }
@@ -327,7 +327,7 @@ export default {
             return fields.filter(f => {
                 if (! memo[f.key]) {
                     memo[f.key] = true;
-                    f.label = typeof f.label === 'string' ? f.label : startCase(f.key);
+                    f.label = typeof f.label === 'string' ? f.label : startcase(f.key);
 
                     return true;
                 }
