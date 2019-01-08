@@ -28,10 +28,14 @@ class DeploySite extends Command
      */
     public function handle()
     {
+        $this->call('down');
+
         $this->clearCaches();
         $this->installAssets();
         $this->linkStorage();
         $this->optimize();
+
+        $this->call('up');
 
         $this->info('Deployment complete');
     }
