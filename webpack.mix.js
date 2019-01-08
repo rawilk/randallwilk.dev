@@ -1,15 +1,34 @@
 const mix = require('laravel-mix');
+require('laravel-mix-auto-extract');
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
+mix.setPublicPath('public');
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix
+    .sass('resources/scss/vendor/vendor-frontend.scss', 'css/vendor')
+    .sass('resources/scss/frontend/theme/theme.scss', 'css/frontend/theme')
+    .sass('resources/scss/frontend/theme/theme-elements.scss', 'css/frontend/theme')
+    .sass('resources/scss/frontend/theme/skins/default.scss', 'css/frontend/theme/skins')
+    .sass('resources/scss/frontend/app.scss', 'css/frontend')
+
+    .js('resources/js/core/core.js', 'js/core')
+    .js('resources/js/frontend/app.js', 'js/frontend')
+    .js('resources/js/frontend/pages/contact/index.js', 'js/frontend/pages/contact')
+    .js('resources/js/frontend/pages/projects/index.js', 'js/frontend/pages/projects');
+
+if (mix.inProduction()) {
+    mix.version();
+} else {
+    mix.sourceMaps();
+}
+
+mix.webpackConfig({
+    resolve: {
+        extensions: ['.js', '.json', '.vue'],
+        alias: {
+            '~': path.join(__dirname + '/resources/js')
+        }
+    }
+});
+
+// Auto extract vendor libraries
+mix.autoExtract();

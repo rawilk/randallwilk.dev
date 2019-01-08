@@ -1,0 +1,30 @@
+.back-to-top-fade-enter-active,
+.back-to-top-fade-leave-active {
+    transition: opacity .7s;
+}
+
+.back-to-top-fade-enter,
+.back-to-top-fade-leave-to {
+    opacity: 0;
+}
+
+.lara-back-to-top {
+    position: fixed;
+    z-index: 1000;
+    cursor: pointer;
+
+    .default {
+        width: $back-to-top-size;
+        height: $back-to-top-size;
+        line-height: $back-to-top-size;
+        color: $white;
+        background-color: $back-to-top;
+        border-radius: 50%;
+        opacity: .75;
+        text-align: center;
+
+        &:hover {
+            opacity: .9;
+        }
+    }
+}

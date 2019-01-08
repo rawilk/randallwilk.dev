@@ -1,0 +1,215 @@
+@mixin nav-pills($type, $color) {
+    html {
+        .nav-pills-#{$type} {
+            a {
+                color: $color;
+
+                &:hover,
+                &:focus {
+                    color: lighten($color, 5%);
+                }
+
+                &:active {
+                    color: darken($color, 5%);
+                }
+            }
+
+            .nav-link.active,
+            > li.active > a {
+                background-color: $color;
+            }
+
+            .nav-link.active:hover,
+            > li.active > a:hover,
+            .nav-link.active:focus,
+            > li.active > a:focus {
+                background-color: $color;
+            }
+        }
+    }
+}
+
+@mixin section($type, $color, $fore-color: #fff) {
+    html {
+        section.section-#{$type} {
+            background-color: $color !important;
+            border-color: darken($color, 5%) !important;
+
+            h1, h2, h3, h4, h5, h6 {
+                color: $fore-color;
+            }
+
+            p {
+                color: darken($fore-color, 10%);
+            }
+        }
+
+        section.section-#{$type}-scale-2 {
+            background-color: darken($color, 10%);
+            border-color: darken($color, 15%);
+        }
+    }
+}
+
+@mixin page-header($type, $color, $fore-color: #fff) {
+    html {
+        .page-header-color.page-header-#{$type} {
+            background-color: $color;
+            border-bottom-color: $color;
+            color: $fore-color;
+
+            h1 {
+                color: $fore-color;
+
+                span {
+                    color: $fore-color;
+                }
+            }
+
+            a {
+                color: $fore-color;
+            }
+
+            .breadcrumb > .active {
+                color: $fore-color;
+            }
+        }
+    }
+}
+
+@mixin list-icons($type, $color, $fore-color: #fff) {
+    html .list-#{$type}.list-icons {
+        li {
+            > [class*="mdi-"]:first-child,
+            a:first-child > [class*="mdi-"]:first-child,
+            > .icons:first-child,
+            a:first-child > .icons:first-child {
+                color: $color;
+                border-color: $color;
+            }
+        }
+    }
+
+    html .list-#{$type}.list-icons-style-3 {
+        li {
+            > [class*="mdi-"]:first-child,
+            a:first-child > [class*="mdi-"]:first-child,
+            > .icons:first-child,
+            a:first-child > .icons:first-child {
+                background-color: $color;
+                color: $fore-color;
+            }
+        }
+    }
+}
+
+@mixin featured-box($type, $color) {
+    .featured-box-#{$type} {
+        .icon-featured {
+            background-color: $color;
+
+            &:after {
+                border-color: $color;
+            }
+        }
+
+        h4 {
+            color: $color;
+        }
+
+        .box-content {
+            border-top-color: $color;
+        }
+    }
+
+    html .featured-box-#{$type} {
+        .icon-featured {
+            background-color: $color;
+        }
+
+        h4 {
+            color: $color;
+        }
+
+        .box-content {
+            border-top-color: $color;
+        }
+    }
+
+    html .featured-boxes-style-3 .featured-box.featured-box-#{$type} .icon-featured {
+        border-color: $color;
+        color: $color;
+    }
+
+    html .featured-boxes-style-4 .featured-box.featured-box-#{$type} .icon-featured {
+        border-color: $color;
+        color: $color;
+    }
+
+    html .featured-boxes-style-5 .featured-box.featured-box-#{$type} .icon-featured {
+        color: $color;
+    }
+
+    html .featured-boxes-style-6 .featured-box.featured-box-#{$type} .icon-featured {
+        color: $color;
+    }
+
+    html .featured-boxes-style-8 .featured-box.featured-box-#{$type} .icon-featured {
+        color: $color;
+    }
+
+    .featured-boxes-modern-style-#{$type} .featured-box {
+        background: $color;
+        background: linear-gradient(135deg, $color 0%, #383f48 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$color}', endColorstr='#383f48', GradientType=1);
+    }
+
+    html .featured-box-effect-2.featured-box-#{$type} .icon-featured:after {
+        box-shadow: 0 0 0 3px $color;
+    }
+
+    html .featured-box-effect-3.featured-box-#{$type} .icon-featured:after {
+        box-shadow: 0 0 0 10px $color;
+    }
+
+    html .featured-box-effect-3.featured-box-#{$type}:hover .icon-featured {
+        background: $color !important;
+    }
+
+    html .feature-box-#{$type} .feature-box-icon {
+        background-color: $color;
+    }
+
+    html .feature-box-#{$type}.feature-box-style-2 .feature-box-icon {
+        [class*="mdi-"],
+        .icons {
+            color: $color;
+        }
+    }
+
+    html .feature-box-#{$type}.feature-box-style-3 .feature-box-icon {
+        border-color: $color;
+
+        [class*="mdi-"], .icons {
+            color: $color;
+        }
+    }
+
+    html .feature-box-#{$type}.feature-box-style-4 .feature-box-icon {
+        [class*="mdi-"], .icons {
+            color: $color;
+        }
+    }
+
+    html .feature-box-#{$type}.feature-box-style-5 .feature-box-icon {
+        [class*="mdi-"], .icons {
+            color: $color;
+        }
+    }
+
+    html .feature-box-#{$type}.feature-box-style-6 .feature-box-icon {
+        [class*="mdi-"], .icons {
+            color: $color;
+        }
+    }
+}

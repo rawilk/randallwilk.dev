@@ -1,0 +1,20 @@
+{
+    "posts": [
+        {
+            "id": 2,
+            "date": "2019-01-01",
+            "slug": "create-custom-validation-rules-laravel",
+            "title": "Create Custom Validation Rules In Laravel",
+            "image": "/images/posts/create-custom-validation-rules-laravel.jpg",
+            "excerpt": "If you ever find yourself needing to create custom validation methods in Laravel, it's relatively simple and quick to implement your own rules.",
+            "categories": [
+                "laravel",
+                "php"
+            ]
+        }
+    ],
+    "categories": {
+        "laravel": "Laravel",
+        "php": "PHP"
+    }
+}

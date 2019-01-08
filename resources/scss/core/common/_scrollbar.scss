@@ -1,0 +1,23 @@
+.ps__scrollbar-y-rail {
+    z-index: 1;
+}
+
+$y-rail-bg: transparent;
+
+.ps:hover {
+    &.ps--in-scrolling.ps--y {
+        > .ps__scrollbar-y-rail {
+            background-color: $y-rail-bg !important;
+        }
+    }
+
+    > .ps__scrollbar-y-rail:hover {
+        background-color: $y-rail-bg !important;
+    }
+}
+
+.ps {
+    > .ps__scrollbar-y-rail {
+        background-color: $y-rail-bg !important;
+    }
+}

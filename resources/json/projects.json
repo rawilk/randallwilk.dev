@@ -1,0 +1,62 @@
+{
+    "projects": [
+        {
+            "slug": "vue-context",
+            "uri": "https://rawilk.github.io/vue-context/",
+            "title": "vue-context",
+            "featured": true,
+            "image": "/images/projects/vue-context.png",
+            "id": 1,
+            "excerpt": "vue-context is a simple yet flexible context menu for Vue. It is styled by default for a <code>ul</code> tag, but any markup can be used.",
+            "categories": [
+                "JavaScript",
+                "Vue"
+            ],
+            "skills": [
+                "JavaScript",
+                "Vue",
+                "Sass"
+            ]
+        },
+        {
+            "slug": "laravel-modules",
+            "uri": "https://rawilk.github.io/laravel-modules/",
+            "title": "Laravel Modules",
+            "featured": true,
+            "image": "/images/projects/laravel-modules.png",
+            "id": 2,
+            "excerpt": "Easily build modular Laravel applications using laravel-modules. Generate and manage modules with the package.",
+            "categories": [
+                "Laravel",
+                "PHP"
+            ],
+            "skills": [
+                "PHP",
+                "Laravel"
+            ]
+        },
+        {
+            "slug": "new-server-setup",
+            "uri": "https://github.com/rawilk/new-server-setup",
+            "title": "Server Setup Scripts",
+            "featured": false,
+            "image": "/images/projects/new-server-setup.png",
+            "id": 3,
+            "excerpt": "Quickly deploy applications on Linode using these stack scripts.",
+            "categories": [
+                "Linux"
+            ],
+            "skills": [
+                "Linux",
+                "Bash"
+            ]
+        }
+    ],
+    "categories": [
+        "JavaScript",
+        "Laravel",
+        "Linux",
+        "PHP",
+        "Vue"
+    ]
+}

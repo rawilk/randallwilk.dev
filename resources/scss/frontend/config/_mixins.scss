@@ -1,0 +1,31 @@
+// Animation performance
+@mixin performance() {
+    perspective: 1000px;
+}
+
+@mixin clearfix {
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+}
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+@mixin flexbox($grow, $shrink, $basis) {
+    -webkit-box-flex: $grow;
+    -ms-flex: $grow $shrink $basis;
+    flex: $grow $shrink $basis;
+    max-width: $basis;
+}
