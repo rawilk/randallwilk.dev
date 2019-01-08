@@ -4,6 +4,7 @@
  * Get all of the stored projects.
  *
  * @return array
+ * @throws \Exception
  */
 function getProjects() : array
 {
@@ -14,6 +15,7 @@ function getProjects() : array
  * Get all of the blog posts.
  *
  * @return array
+ * @throws \Exception
  */
 function getPosts() : array
 {
@@ -25,17 +27,20 @@ function getPosts() : array
  *
  * @param string $filename
  * @return array
+ * @throws \Exception
  */
 function getDataFromJsonFile(string $filename) : array
 {
     $path = resource_path("json/{$filename}");
 
-    if (! File::exists($path)) {
-        return [];
-    }
+    return cache()->rememberForever($path, function () use ($path) {
+        if (! File::exists($path)) {
+            return [];
+        }
 
-    return json_decode(
-        File::get($path),
-        true
-    );
+        return json_decode(
+            File::get($path),
+            true
+        );
+    });
 }
