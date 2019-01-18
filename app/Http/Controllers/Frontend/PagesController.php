@@ -39,6 +39,7 @@ class PagesController extends BaseController
      * Get all the stored projects.
      *
      * @return array
+     * @throws \Exception
      */
     private function getProjectsData() : array
     {
@@ -61,6 +62,7 @@ class PagesController extends BaseController
      * Get all the blog posts.
      *
      * @return array
+     * @throws \Exception
      */
     private function getBlogData() : array
     {
