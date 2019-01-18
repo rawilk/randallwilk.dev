@@ -64,12 +64,16 @@ class PostsController extends BaseController
      *
      * @param string $category
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function category($category)
     {
         abort_unless(postCategoryExists($category), Response::HTTP_NOT_FOUND);
 
         $posts = postsByCategory($category);
+
+        // Sort by descending order
+        $posts = collect($posts)->sortByDesc('id')->values()->toArray();
 
         return view('frontend.posts.post-category')
             ->withCanonical(getPostCategoryLink($category))

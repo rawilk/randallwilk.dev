@@ -20,6 +20,7 @@ function getPostImage(array $post) : string
  *
  * @param int $limit
  * @return array
+ * @throws \Exception
  */
 function latestPosts(int $limit = 4) : array
 {
@@ -39,6 +40,7 @@ function latestPosts(int $limit = 4) : array
  *
  * @param string $category
  * @return array
+ * @throws \Exception
  */
 function postsByCategory(string $category) : array
 {
@@ -62,6 +64,7 @@ function postsByCategory(string $category) : array
  *
  * @param string $category
  * @return bool
+ * @throws \Exception
  */
 function postCategoryExists(string $category) : bool
 {
@@ -81,6 +84,7 @@ function postCategoryExists(string $category) : bool
  *
  * @param string $category
  * @return string|null
+ * @throws \Exception
  */
 function postCategoryDisplay(string $category) : ?string
 {

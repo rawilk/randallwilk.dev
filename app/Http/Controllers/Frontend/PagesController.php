@@ -66,7 +66,12 @@ class PagesController extends BaseController
      */
     private function getBlogData() : array
     {
-        return getPosts();
+        $posts = getPosts();
+
+        // Sort the posts
+        $posts['posts'] = collect($posts['posts'])->sortByDesc('id')->values();
+
+        return $posts;
     }
 
     /**
