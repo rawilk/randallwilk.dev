@@ -11,10 +11,24 @@
                 "laravel",
                 "php"
             ]
+        },
+        {
+            "id": 2,
+            "date": "2019-02-08",
+            "slug": "why-i-ditched-wordpress",
+            "title": "Why I Ditched Wordpress",
+            "image": "/images/posts/why-i-ditched-wordpress.jpg",
+            "excerpt": "My switch from Wordpress to Laravel is long overdue and it took the release of Wordpress version 5.0 to really push me into switching.",
+            "showOldNotice": false,
+            "categories": [
+                "laravel",
+                "web-development"
+            ]
         }
     ],
     "categories": {
         "laravel": "Laravel",
-        "php": "PHP"
+        "php": "PHP",
+        "web-development": "Web Development"
     }
 }
