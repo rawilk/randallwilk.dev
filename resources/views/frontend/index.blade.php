@@ -120,43 +120,50 @@
         </div>
     </section>
 
-    <div class="container" v-cloak>
-        <featured-boxes box-style="3" flat class="py-5b mt-5b mb-4">
+    <div class="container py-5b my-5b">
+        <div class="featured-boxes featured-boxes-style-3 featured-boxes-flat py-4">
             <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <featured-box variant="primary" effect="3" icon="mdi mdi-code-braces">
-                        <template slot="title">Custom Programming</template>
 
-                        <p>
+                <div class="col-lg-4 col-sm-6">
+                    @component('frontend.components.featured-box')
+                        @slot('icon', 'mdi mdi-code-braces')
+                        @slot('title', 'Custom Programming')
+
+                        <p class="mb-0">
                             My expertise in HTML5, CSS3, PHP, Laravel and Vue
                             guarantees web site designs that are optimized
                             for all browsers and major mobile devices
                             including iPhone and iPad.
                         </p>
-                    </featured-box>
+                    @endcomponent
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <featured-box variant="primary" effect="3" icon="mdi mdi-desktop-mac">
-                        <template slot="title">Web Design</template>
 
-                        <p>
+                <div class="col-lg-4 col-sm-6">
+                    @component('frontend.components.featured-box')
+                        @slot('icon', 'mdi mdi-desktop-mac')
+                        @slot('title', 'Web Design')
+
+                        <p class="mb-0">
                             Parallax, responsive, creative and everything else on the web,
                             I have it covered.
                         </p>
-                    </featured-box>
+                    @endcomponent
                 </div>
-                <div class="col-lg-4 col-sm-6">
-                    <featured-box variant="primary" effect="3" icon="mdi mdi-image-multiple">
-                        <template slot="title">Content Management</template>
 
-                        <p>
+                <div class="col-lg-4 col-sm-6">
+                    @component('frontend.components.featured-box')
+                        @slot('icon', 'mdi mdi-image-multiple')
+                        @slot('title', 'Content Management')
+
+                        <p class="mb-0">
                             I have expertise in developing custom solutions for Laravel and WordPress, as
                             well as developing custom plugins for WordPress.
                         </p>
-                    </featured-box>
+                    @endcomponent
                 </div>
+
             </div>
-        </featured-boxes>
+        </div>
     </div>
 
     <section class="section bg-color-grey-scale-1 border-0 mb-0">
