@@ -2,6 +2,7 @@
 
 return [
     'google_analytics_id'      => env('GOOGLE_ANALYTICS_ID', null),
+    'google_site_verification' => env('GOOGLE_SITE_VERIFICATION', null),
     'contact_name'             => 'Randall Wilk',
     'contact_email'            => 'randall@randallwilk.com',
     'contact_phone'            => '(715) 551 - 8945',

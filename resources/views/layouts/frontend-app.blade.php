@@ -2,6 +2,11 @@
 <html lang="{!! app()->getLocale() !!}">
     <head>
         @include('partials.basic-meta')
+
+        @if (! empty(config('randallwilk.google_site_verification')))
+            <meta name="google-site-verification" content="{{ config('randallwilk.google_site_verification') }}">
+        @endif
+
         <title>@yield('title') | {{ config('app.name') }}</title>
         <link rel="canonical" href="{{ getCanonicalLink($canonical ?? null, $exception ?? null) }}">
         <meta property="og:locale" content="{!! app()->getLocale() !!}">
