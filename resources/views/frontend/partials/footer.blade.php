@@ -104,6 +104,14 @@
                     </nav>
                 </b-col>
             </b-row>
+            <div class="py-1 text-center">
+                <p>
+                    Proudly hosted with
+                    <b-link target="_blank" href="https://forge.laravel.com" class="link-hover-style-1">Laravel Forge</b-link>
+                    and
+                    <b-link target="_blank" href="https://www.linode.com" class="link-hover-style-1">Linode</b-link>.
+                </p>
+            </div>
         </b-container>
     </div>
 </footer>
