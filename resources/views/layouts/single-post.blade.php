@@ -20,7 +20,7 @@
 @endpush
 
 @push('styles')
-    <link rel="stylesheet" href="https://assets-cdn.github.com/assets/gist-embed-1baaff35daab552f019ad459494450f1.css">
+    <link rel="stylesheet" href="https://github.githubassets.com/assets/gist-embed-a9a1cf2ca01efd362bfa52312712ae94.css">
 @endpush
 
 @section('content')
