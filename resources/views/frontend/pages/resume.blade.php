@@ -142,9 +142,9 @@
 
         <div class="row">
             <div class="col">
-                <h3 class="font-weight-normal mb-2 text-transform-none">Bachelor of Science in Web Technologies (Pursuing)</h3>
+                <h3 class="font-weight-normal mb-2 text-transform-none">Bachelor of Science in Web Technologies</h3>
                 <p class="text-muted mb-3">
-                    <b-link href="https://www.bellevue.edu" target="_blank">Bellevue University</b-link>, Bellevue, NE, September 2016 - Present
+                    <b-link href="https://www.bellevue.edu" target="_blank">Bellevue University</b-link>, Bellevue, NE, September 2016 - March 2019
                 </p>
                 <hr class="height-3 mb-35">
                 <h3 class="font-weight-normal mb-2 text-transform-none">Associate of Applied Science in Software Development</h3>
