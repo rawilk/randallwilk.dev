@@ -99,7 +99,7 @@
                     Proudly hosted with
                     <b-link target="_blank" href="https://forge.laravel.com" class="link-hover-style-1">Laravel Forge</b-link>
                     and
-                    <b-link target="_blank" href="https://www.linode.com/?r=a6ec5a5f84fb249e03ed74998e766f3306b10535" class="link-hover-style-1">Linode</b-link>.
+                    <b-link target="_blank" href="https://m.do.co/c/0f79a60f0243" class="link-hover-style-1">DigitalOcean</b-link>.
                 </p>
             </div>
         </b-container>
