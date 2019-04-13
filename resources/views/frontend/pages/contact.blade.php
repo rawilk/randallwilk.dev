@@ -113,11 +113,6 @@
                     </h4>
                     <ul class="list list-icons list-icons-style-2 mt-3">
                         <li>
-                            <i class="mdi mdi-cellphone"></i>
-                            <strong class="text-dark">Phone:</strong>
-                            {{ config('randallwilk.contact_phone') }}
-                        </li>
-                        <li>
                             <i class="mdi mdi-email"></i>
                             <strong class="text-dark">Email:</strong>
                             {{ config('randallwilk.contact_email') }}

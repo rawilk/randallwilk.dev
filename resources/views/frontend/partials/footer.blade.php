@@ -19,16 +19,6 @@
                             </b-link>
                         </p>
                     </li>
-                    <li class="mb-1">
-                        <i class="far mdi mdi-cellphone text-primary"></i>
-                        <p class="m-0">
-                            <b-link href="tel:{{ \App\Helpers\Classes\Filter::digits(config('randallwilk.contact_phone')) }}"
-                                    class="link-hover-style-1"
-                            >
-                                {{ config('randallwilk.contact_phone') }}
-                            </b-link>
-                        </p>
-                    </li>
                 </ul>
 
                 @component('frontend.components.social-icons')
