@@ -64,13 +64,13 @@
                                     <div class="plan-header">
                                         <h3>{{ $project['title'] }}</h3>
                                     </div>
-                                    <div class="plan-price p-0">
+                                    <div class="plan-price p-0 border-bottom">
                                         <b-img src="{{ getProjectImage($project) }}" alt="{{ $project['title'] }}"
                                                fluid
                                         >
                                         </b-img>
                                     </div>
-                                    <div class="plan-features mt-3 border-top">
+                                    <div class="plan-features mt-3">
                                         <p class="m-0">{!! $project['excerpt'] !!}</p>
                                     </div>
                                     <div class="plan-footer">
