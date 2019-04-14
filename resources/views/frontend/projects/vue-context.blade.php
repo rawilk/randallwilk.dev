@@ -1,11 +1,12 @@
 @extends('layouts.single-project')
-@section('metaDescription', 'vue-context is a simple yet flexible context menu for Vue.')
+@section('metaDescription', 'vue-context provides a simple yet flexible context menu for Vue. It is styled for the standard ul tag, but any menu template can be used.')
 
 @section('description')
     <p>
-        vue-context is a simple yet flexible context menu for Vue. It is styled for the standard
-        <code>ul</code> tag, but any menu template can be used. I made this package pretty lightweight
-        and its only dependency is Vue.
+        vue-context provides a simple yet flexible context menu for Vue. It is styled for the standard
+        <code>&lt;ul&gt;</code> tag, but any menu template can be used. The menu is lightweight with its only
+        dependency being <code>vue-clickaway</code>. The menu has some basic styles applied to it but
+        they can be easily overridden by your own styles.
     </p>
 
     <p>
@@ -15,7 +16,7 @@
 @endsection
 
 @section('version')
-    3.4.0
+    3.4.2
 @endsection
 
 @section('date')

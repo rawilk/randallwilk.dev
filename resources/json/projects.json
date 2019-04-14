@@ -2,12 +2,12 @@
     "projects": [
         {
             "slug": "vue-context",
-            "uri": "https://rawilk.github.io/vue-context/",
+            "uri": "https://vue-context.randallwilk.com",
             "title": "vue-context",
             "featured": true,
-            "image": "/images/projects/vue-context.png",
+            "image": "/images/projects/vue-context.jpg",
             "id": 1,
-            "excerpt": "vue-context is a simple yet flexible context menu for Vue. It is styled by default for a <code>ul</code> tag, but any markup can be used.",
+            "excerpt": "vue-context provides a simple yet flexible context menu for Vue. It is styled for the standard <code>ul</code> tag, but any menu template can be used.",
             "categories": [
                 "JavaScript",
                 "Vue"
