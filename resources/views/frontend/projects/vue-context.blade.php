@@ -5,7 +5,7 @@
     <p>
         vue-context provides a simple yet flexible context menu for Vue. It is styled for the standard
         <code>&lt;ul&gt;</code> tag, but any menu template can be used. The menu is lightweight with its only
-        dependency being <code>vue-clickaway</code>. The menu has some basic styles applied to it but
+        dependencies being <code>vue-clickaway</code> and <code>core-js</code>. The menu has some basic styles applied to it but
         they can be easily overridden by your own styles.
     </p>
 
