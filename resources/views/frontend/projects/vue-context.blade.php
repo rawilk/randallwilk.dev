@@ -16,7 +16,7 @@
 @endsection
 
 @section('version')
-    4.0.0
+    4.0.2
 @endsection
 
 @section('date')
