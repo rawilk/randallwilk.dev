@@ -106,12 +106,23 @@
             <div class="col">
                 <h3 class="font-weight-normal mb-2 text-transform-none">Full-Stack Web Developer</h3>
                 <p class="text-muted mb-3">
-                    <b-link href="https://invizon.com" target="_blank">Invizon</b-link>, Merrill, WI, September 2015 - Present
+                    <b-link href="http://www.riverwoodeducational.com/" target="_blank">Riverwood Educational Services, Inc.</b-link>, Merrill, WI, May 2019 - Present
                 </p>
                 <p class="text-4">
-                    Work on projects ranging from small, 2-man builds to 5-man sites utilizing PHP and the Laravel
-                    framework. GIT is often used for version control on projects. Ensure client expectations
-                    are surpassed and deadlines are met. Primary code utilization includes HTML5, CSS3, PHP, and JavaScript.
+                    Build and maintain an internal inventory management system utilizing PHP and the Laravel framework.
+                    Primary code utilization includes HTML5, CSS3, PHP, and JavaScript, with GIT used for version control.
+                </p>
+
+                <hr class="height-3 mb-35">
+
+                <h3 class="font-weight-normal mb-2 text-transform-none">Full-Stack Web Developer</h3>
+                <p class="text-muted mb-3">
+                    <b-link href="https://invizon.com" target="_blank">Invizon</b-link>, Merrill, WI, September 2015 - May 2019
+                </p>
+                <p class="text-4">
+                    Worked on projects ranging from small, 2-man builds to 5-man sites utilizing PHP and the Laravel
+                    framework. GIT was often used for version control on projects. Ensured client expectations
+                    were surpassed and deadlines were met. Primary code utilization included HTML5, CSS3, PHP, and JavaScript.
                 </p>
 
                 <hr class="height-3 mb-35">
