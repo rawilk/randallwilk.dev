@@ -1,0 +1,22 @@
+/* purgecss start ignore */
+.content {
+    ul {
+        @apply list-disc pl-12;
+    }
+
+    li {
+        @apply mb-1;
+
+        &:last-child {
+            @apply mb-0;
+        }
+    }
+
+    a {
+        &:hover {
+            @apply underline;
+        }
+    }
+}
+
+/* purgecss end ignore */

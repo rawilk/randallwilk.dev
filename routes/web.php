@@ -1,7 +1,9 @@
 <?php
 
-Route::namespace('Frontend')
-    ->as('frontend.')
-    ->group(function () {
-        includeRouteFiles(__DIR__ . '/frontend/');
-    });
+use Illuminate\Support\Facades\Route;
+
+Route::redirect('about', '/');
+
+Route::view('/', 'pages.home')->name('home');
+Route::view('projects', 'pages.projects')->name('projects');
+Route::view('contact', 'pages.contact')->name('contact');
