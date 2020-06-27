@@ -28,6 +28,10 @@ return [
                 'url' => 'https://github.com/rawilk/vue-context',
             ],
             [
+                'name' => 'Laravel Printing',
+                'url' => 'https://github.com/rawilk/laravel-printing',
+            ],
+            [
                 'name' => 'Laravel Modules',
                 'url' => 'https://github.com/rawilk/laravel-modules',
             ],
