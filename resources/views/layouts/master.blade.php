@@ -14,6 +14,7 @@
         <div class="hidden lg:flex items-center justify-end flex-1 text-sm text-right md:pl-10 sm:text-base">
             <a href="{{ route('projects') }}" class="ml-3 sm:ml-6 {{ optional(request()->route())->named('projects') ? 'active' : '' }}">Projects</a>
             <a href="{{ route('contact') }}" class="ml-3 sm:ml-6 {{ optional(request()->route())->named('contact') ? 'active' : '' }}">Contact</a>
+            <a href="{{ route('uses') }}" class="ml-3 sm:ml-6 {{ optional(request()->route())->named('uses') ? 'active' : '' }}">Uses</a>
         </div>
 
         <div
@@ -42,6 +43,7 @@
 
                     <a href="{{ route('projects') }}" class="mb-4 {{ optional(request()->route())->named('projects') ? 'active' : '' }}">Projects</a>
                     <a href="{{ route('contact') }}" class="mb-4 {{ optional(request()->route())->named('contact') ? 'active' : '' }}">Contact</a>
+                    <a href="{{ route('uses') }}" class="mb-4 {{ optional(request()->route())->named('uses') ? 'active' : '' }}">Uses</a>
                 </div>
             </div>
         </div>
