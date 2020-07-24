@@ -32,6 +32,10 @@ return [
                 'url' => 'https://github.com/rawilk/laravel-printing',
             ],
             [
+                'name' => 'Laravel App Key Rotator',
+                'url' => 'https://github.com/rawilk/laravel-app-key-rotator',
+            ],
+            [
                 'name' => 'Laravel Modules',
                 'url' => 'https://github.com/rawilk/laravel-modules',
             ],
