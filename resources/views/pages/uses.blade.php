@@ -55,15 +55,14 @@
         a big learning experience for me, but I can't say I'd ever want to go back to it.
     </p>
     <p>
-        As with my IDE, I like to keep things minimal. I hide the dock by default, but I do keep the menu bar in place. I also like
+        As with my IDE, I like to keep things minimal. I hide the dock by default as well as removing all apps from it. I also like
         to keep my desktop clean; not even hard disks are allowed to be displayed here. Generally, only apps that are running are shown
-        in the dock, but I do keep a few apps pinned to it for convenience. Here's a screenshot where I've
-        deliberately moved my pointer down so the dock is shown.
+        in the dock. Here's a screenshot where I've deliberately moved my pointer down so the dock is shown.
     </p>
     <img src="{{ asset('images/screenshots/mac-screenshot.png') }}" alt="mac screenshot">
     <p>
-        I've also hidden the indicator for running apps (that dot underneath each app), because with
-        the exception of the apps already in there, if it's on my dock it's running.
+        I've also hidden the indicator for running apps (that dot underneath each app), because if the app
+        is in my dock, it's running.
     </p>
     <p>
         These are some of the apps I'm using:
@@ -119,10 +118,12 @@
     </ul>
 
     <h2>Hardware</h2>
+    <div>
+        <img src="{{ asset('images/screenshots/screenshot-macos.png') }}" alt="MacOS screenshot">
+    </div>
     <p>
-        I'm using a MacBook Air 13" (2020) with a 1.1 GHz Dual-Core Intel Core i3 processor, 8GB of RAM
-        and 256GB hard disk. It's not the most powerful computer out there, but it actually performs quite
-        well so far. I'm just using this until my 27" iMac comes in a few months.
+        I'm using a 27" iMac with a 3.7 GHz 6-Core Intel Core i5 processor, 8GB of RAM
+        and 1TB SSD.
     </p>
     <p>
         My peripherals include:
@@ -130,10 +131,6 @@
     <ul>
         <li>a silver wireless Apple Magic Keyboard with numeric keys</li>
         <li>a Basilisk X HyperSpeed mouse</li>
-        <li>
-            a 27" AOC external monitor - I actually have two of these which I use as dual monitors for my Windows
-            machine if I ever use it now, but I don't think they sell the particular model I have anymore.
-        </li>
     </ul>
 
     <p>My current phone is an iPhone 11 with 64 GB of storage.</p>
