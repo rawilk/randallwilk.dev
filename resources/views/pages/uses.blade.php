@@ -119,10 +119,10 @@
 
     <h2>Hardware</h2>
     <div>
-        <img src="{{ asset('images/screenshots/screenshot-macos.png') }}" alt="MacOS screenshot">
+        <img src="{{ asset('images/screenshots/macos-screenshot.png') }}" alt="MacOS screenshot">
     </div>
     <p>
-        I'm using a 27" iMac with a 3.7 GHz 6-Core Intel Core i5 processor, 8GB of RAM
+        I'm using a 27" iMac with a 3.7 GHz 6-Core Intel Core i5 processor, 72GB of RAM
         and 1TB SSD.
     </p>
     <p>
