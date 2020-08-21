@@ -28,19 +28,23 @@ return [
                 'url' => 'https://github.com/rawilk/vue-context',
             ],
             [
-                'name' => 'Laravel Printing',
+                'name' => 'laravel-printing',
                 'url' => 'https://github.com/rawilk/laravel-printing',
             ],
             [
-                'name' => 'Laravel Settings',
+                'name' => 'laravel-settings',
                 'url' => 'https://github.com/rawilk/laravel-settings',
             ],
             [
-                'name' => 'Laravel App Key Rotator',
+                'name' => 'laravel-app-key-rotator',
                 'url' => 'https://github.com/rawilk/laravel-app-key-rotator',
             ],
             [
-                'name' => 'Laravel Modules',
+                'name' => 'laravel-breadcrumbs',
+                'url' => 'https://github.com/rawilk/laravel-breadcrumbs',
+            ],
+            [
+                'name' => 'laravel-modules',
                 'url' => 'https://github.com/rawilk/laravel-modules',
             ],
             [
