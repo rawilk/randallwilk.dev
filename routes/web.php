@@ -2,9 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('about', '/');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-Route::view('/', 'pages.home')->name('home');
-Route::view('projects', 'pages.projects')->name('projects');
-Route::view('contact', 'pages.contact')->name('contact');
-Route::view('uses', 'pages.uses')->name('uses');
+Route::get('/', function () {
+    return view('welcome');
+});
