@@ -31,8 +31,7 @@ class Repositories extends Component
         $filterable = true,
         $highlighted = false,
         $sort = '-downloads'
-    ): void
-    {
+    ): void {
         $this->type = $type;
         $this->filterable = $filterable;
         $this->highlighted = $highlighted;

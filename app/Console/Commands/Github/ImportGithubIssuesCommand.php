@@ -36,7 +36,7 @@ class ImportGithubIssuesCommand extends Command
                         'url' => $issueData['html_url'],
                         'title' => $issueData['title'],
                         'number' => $issueData['number'],
-                        'created_at' => Carbon::createFromTimeString($issueData['created_at'])
+                        'created_at' => Carbon::createFromTimeString($issueData['created_at']),
                     ]);
 
                     $this->info("Imported {$repository->name}#{$issue->number}: `{$issue->title}`");
