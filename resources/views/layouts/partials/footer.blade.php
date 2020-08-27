@@ -44,7 +44,7 @@
 
     <x-shape-divider
         shape="tilt"
-        fill="#f9fafb"
+        {{--fill="#f9fafb"--}}
         :flip="true"
         :invert="false"
         position="top"
