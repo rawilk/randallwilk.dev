@@ -1,0 +1,40 @@
+.banner {
+    @apply py-8;
+
+    @screen md {
+        @apply py-12;
+    }
+
+    @screen lg {
+        @apply py-16;
+    }
+}
+
+.banner-slogan {
+    @apply font-serif font-bold text-4xl;
+    line-height: 0.9;
+
+    @screen sm {
+        @apply text-5xl;
+    }
+
+    @screen md {
+        @apply text-6xl;
+    }
+}
+
+.banner-intro {
+    @apply hidden;
+
+    @screen md {
+        @apply block;
+        @apply text-2xl;
+        @apply mt-5;
+    }
+
+    @screen print {
+        @apply block;
+        @apply text-xl;
+        @apply mt-5;
+    }
+}

@@ -1,0 +1,28 @@
+.select {
+    @apply inline-flex;
+    @apply items-center;
+    @apply rounded-sm;
+    @apply px-2;
+    @apply py-1;
+}
+
+.select select {
+    @apply font-display;
+    @apply lowercase;
+    @apply block;
+    @apply w-full;
+    @apply pl-3;
+    @apply pr-10;
+    @apply py-2;
+    @apply text-base;
+    @apply border-gray-300;
+
+    &:focus {
+        @apply outline-none;
+        @apply border-blue-300;
+    }
+
+    @screen sm {
+        @apply text-sm;
+    }
+}

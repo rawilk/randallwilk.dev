@@ -1,0 +1,16 @@
+:root {
+    --bullet-color: inherit;
+}
+
+.bullets li .icon {
+    @apply pr-2;
+    fill: var(--bullet-color);
+}
+
+.bullets li:not(:last-child) {
+    margin-bottom: .35em;
+}
+
+.bullets-white {
+    --bullet-color: #fff;
+}

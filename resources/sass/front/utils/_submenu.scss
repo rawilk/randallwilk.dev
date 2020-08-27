@@ -1,0 +1,42 @@
+.submenu-wrap {
+    @apply sticky top-0 z-10 flex justify-start px-8 mx-auto max-w-columns;
+
+    @screen sm {
+        @apply px-16 justify-center;
+    }
+}
+
+.submenu {
+    @apply px-6 py-4;
+    @apply rounded-b;
+    @apply shadow-light;
+}
+
+.submenu,
+.submenu ul {
+    @apply grid;
+    @apply grid-flow-col;
+    @apply gap-4;
+
+    @screen md {
+        @apply gap-8;
+    }
+}
+
+.submenu li a {
+    @apply px-2;
+}
+
+.submenu li {
+    @apply rounded;
+}
+
+.submenu li:not(.submenu-active):hover {
+    @apply bg-opacity-25;
+    @apply bg-blue-400;
+}
+
+.submenu-active {
+    @apply bg-opacity-50;
+    @apply bg-blue-400;
+}

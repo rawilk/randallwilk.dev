@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+
+@import 'bootstrap';
+
+@import 'utils/banner';
+@import 'utils/bullets';
+@import 'utils/card';
+@import 'utils/cell';
+@import 'utils/char';
+@import 'utils/counter';
+@import 'utils/font';
+@import 'utils/justify-items';
+@import 'utils/gradient';
+@import 'utils/grid';
+@import 'utils/icon';
+@import 'utils/line';
+@import 'utils/links';
+@import 'utils/markup';
+@import 'utils/section';
+@import 'utils/select';
+@import 'utils/submenu';
+@import 'utils/title';
+@import 'utils/wrap';
+
+@tailwind utilities;

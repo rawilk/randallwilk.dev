@@ -1,0 +1,25 @@
+@responsive {
+    .gradient {
+        background-image: linear-gradient(var(--gradient-angle), var(--gradient-from), var(--gradient-to));
+    }
+
+    .gradient-none {
+        background-image: none;
+    }
+}
+
+.gradient-blue {
+    --gradient-angle: 120deg;
+    --gradient-from: #90CDF4;
+    --gradient-to: #63B3ED;
+
+    @apply bg-blue-100;
+}
+
+.gradient-dark {
+    --gradient-angle: 120deg;
+    --gradient-from: #31302f;
+    --gradient-to: #172a3d;
+
+    @apply bg-black;
+}
