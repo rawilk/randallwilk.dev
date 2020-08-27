@@ -1,6 +1,6 @@
 <header class="pt-8 flex-none z-10 md:bg-white md:shadow-light md:py-8 print:bg-transparent print:shadow-none">
     <div class="wrap leading-loose md:leading-none md:flex md:items-stretch" role="navigation">
-        <a class="flex-shrink-0 logo h-8 w-20 mr-16 mb-8 block md:mb-0 md:w-48 md:h-auto relative"
+        <a class="flex-shrink-0 logo h-8 w-20 mr-16 mb-8 block md:mb-0 md:w-48 md:h-auto relative print:hidden"
            href="{!! route('home') !!}"
            title="Home"
         >

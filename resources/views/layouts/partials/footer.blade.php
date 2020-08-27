@@ -1,6 +1,6 @@
 <footer class="relative">
     <div class="bg-gray-700 flex-none pt-64 pb-8 print:pb-2" role="navigation">
-        <div class="wrap links links-white leading-loose md:leading-normal">
+        <div class="wrap links links-white leading-loose md:leading-normal print:hidden">
             <div class="grid grid-cols-2 items-start text-sm md:flex md:justify-between">
                 @include('layouts.partials.menu')
 
@@ -44,12 +44,11 @@
 
     <x-shape-divider
         shape="tilt"
-        {{--fill="#f9fafb"--}}
         :flip="true"
         :invert="false"
         position="top"
         height="240px"
         width="100%"
-        class="footer-divider"
+        class="footer-divider print:hidden"
     />
 </footer>
