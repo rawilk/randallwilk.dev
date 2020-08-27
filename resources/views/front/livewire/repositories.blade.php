@@ -127,7 +127,7 @@
 
         @unless(count($repositories))
             <p class="mt-12 text-lg text-gray-500">
-                Apparently there's not a single package I've created.
+                It appears there isn't a package I've created for that.
                 <br>Try checking back later.
             </p>
         @endunless
