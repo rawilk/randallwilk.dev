@@ -10,6 +10,11 @@
     @apply px-6 py-4;
     @apply rounded-b;
     @apply shadow-light;
+    @apply w-full;
+
+    @screen sm {
+        @apply w-auto;
+    }
 }
 
 .submenu,
@@ -29,6 +34,11 @@
 
 .submenu li {
     @apply rounded;
+    @apply text-center;
+
+    @screen sm {
+        @apply text-left;
+    }
 }
 
 .submenu li:not(.submenu-active):hover {

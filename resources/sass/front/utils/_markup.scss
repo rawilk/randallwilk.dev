@@ -97,7 +97,7 @@
 }
 
 .markup-lists ul li:before {
-    @apply text-blue-500;
+    @apply text-black;
     content: '•';
     left: 0;
     position: absolute;

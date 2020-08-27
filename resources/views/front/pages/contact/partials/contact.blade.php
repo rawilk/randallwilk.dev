@@ -15,7 +15,7 @@
                 I also have various social networking profiles:
             </p>
 
-            <ul class="pl-10">
+            <ul class="sm:pl-10">
                 @foreach (config('site.contact.social') as $name => $url)
                     <li>
                         {!! $name !!}: <a href="{!! $url !!}" target="_blank" rel="nofollow noreferrer noopener">{!! $url !!}</a>

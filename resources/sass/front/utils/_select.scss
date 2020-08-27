@@ -2,8 +2,14 @@
     @apply inline-flex;
     @apply items-center;
     @apply rounded-sm;
-    @apply px-2;
+    @apply px-0;
     @apply py-1;
+    @apply w-full;
+
+    @screen sm {
+        @apply px-2;
+        @apply w-auto;
+    }
 }
 
 .select select {

@@ -1,18 +1,18 @@
 <div>
     @if ($this->filterable)
-        <div class="wrap flex justify-start mb-8">
+        <div class="hidden wrap sm:flex justify-start mb-8">
 
         </div>
 
         <div class="wrap">
-            <div class="flex items-baseline justify-between mb-8">
+            <div class="sm:flex sm:items-baseline sm:justify-between mb-8">
                 <input wire:model="search"
                        type="search"
-                       class="form-input px-4"
+                       class="form-input px-4 w-full sm:w-auto"
                        placeholder="Search packages..."
                 >
 
-                <div class="ml-6">
+                <div class="mt-3 sm:mt-0 sm:ml-6">
                     <label for="sort" class="text-gray-500 mr-2">
                         Sort
                     </label>
@@ -70,7 +70,7 @@
 
                             @if ($repository->hasIssues())
                                 <a href="{{ $repository->issues_url }}" target="_blank" rel="nofollow noreferrer noopener"
-                                   class="rounded-full px-2 py-1 ml-2 bg-gray-200 text-gray-600"
+                                   class="rounded-full px-2 py-1 ml-0 sm:ml-2 whitespace-no-wrap bg-gray-200 text-gray-600"
                                 >
                                     {{ $repository->issues->count() }} open {{ Str::plural('issue', $repository->issues->count()) }}
                                 </a>
