@@ -9,13 +9,31 @@
     xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
     <projectFiles>
-        <directory name="src"/>
+        <directory name="app"/>
          <ignoreFiles>
             <directory name="vendor"/>
         </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>
+        <!-- https://github.com/psalm/psalm-plugin-laravel/issues/62 -->
+        <InvalidArgument errorLevel="suppress"/>
+
+        <!-- https://github.com/psalm/psalm-plugin-laravel/issues/62 -->
+        <UndefinedMagicMethod errorLevel="suppress"/>
+
+        <!-- https://github.com/psalm/psalm-plugin-laravel/issues/62 -->
+        <UndefinedPropertyFetch errorLevel="suppress"/>
+
+        <UndefinedInterfaceMethod errorLevel="suppress"/>
+
+        <MissingImmutableAnnotation errorLevel="suppress"/>
+
+        <!--
+            Suppressed because we don't want to cast UUID classes to strings when using AggregateRoot::retrieve.
+            We might want to fix this in spatie/laravel-event-sourcing
+        -->
+        <ImplicitToStringCast errorLevel="suppress"/>
     </issueHandlers>
 
     <plugins>
