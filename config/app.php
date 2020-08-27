@@ -178,6 +178,7 @@ return [
         App\Providers\NavigationServiceProvider::class,
         App\Providers\LivewireServiceProvider::class,
         App\Services\Github\GithubServiceProvider::class,
+        App\Services\Npm\NpmServiceProvider::class,
     ],
 
     /*

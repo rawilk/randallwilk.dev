@@ -55,7 +55,7 @@
 
                             @if ($repository->downloads !== null)
                                 <span>
-                                    {{ number_format($repository->downloads, 0, '.', ' ') }}
+                                    {{ number_format($repository->downloads, 0) }}
                                     <span class="icon fill-current text-gray-500">
                                         <x-heroicon-s-download />
                                     </span>
@@ -63,7 +63,7 @@
                                 </span>
                             @endif
 
-                            {{ number_format($repository->stars, 0, '.', ' ') }}
+                            {{ number_format($repository->stars, 0) }}
                             <span class="icon fill-current text-gray-500" style="transform: translateY(-2px);">
                                 <x-heroicon-s-star />
                             </span>

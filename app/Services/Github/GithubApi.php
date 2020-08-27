@@ -36,6 +36,10 @@ class GithubApi
         $issues = $paginator->fetchAll($api, 'all', [$username, $repository, ['state' => 'open']]);
 
         return collect($issues)->filter(static function (array $issue) use ($labelFilters) {
+            if (! empty($issue['pull_request'])) {
+                return false; // we don't want pull requests to be factored into this number.
+            }
+
             if (! $labelFilters) {
                 return true;
             }
