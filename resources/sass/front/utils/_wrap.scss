@@ -1,0 +1,58 @@
+.wrap {
+    @apply px-8 mx-auto max-w-columns;
+
+    @screen lg {
+        @apply px-16;
+    }
+}
+
+.wrap-6 > :not(:first-child),
+.wrap-8 > :not(:first-child) {
+    @apply mt-8;
+}
+
+.wrap-card > :not(:first-child) {
+    @apply mt-8;
+}
+
+@supports (display: grid) {
+    .wrap-6 > :not(:first-child),
+    .wrap-8 > :not(:first-child),
+    .wrap-card > :not(:first-child) {
+        @apply mt-0;
+    }
+
+    .wrap-card {
+        @apply gap-8;
+    }
+
+    .wrap-6 {
+        @apply grid;
+        @apply gap-8;
+    }
+
+    @screen sm {
+        .wrap-6 {
+            grid-template-columns: repeat(6, minmax(min-content, 7rem));
+        }
+    }
+
+    .wrap-8 {
+        @apply grid;
+        @apply gap-8;
+    }
+
+    @screen sm {
+        .wrap-8 {
+            grid-template-columns: minmax(0, 1fr) repeat(6, minmax(min-content, 9rem)) minmax(0, 1fr);
+            @apply px-0;
+            max-width: none;
+        }
+    }
+
+    @screen lg {
+        .wrap-8 {
+            grid-template-columns: minmax(2rem, 1fr) repeat(6, minmax(min-content, 8.33rem)) minmax(2rem, 1fr);
+        }
+    }
+}

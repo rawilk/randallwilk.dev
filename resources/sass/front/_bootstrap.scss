@@ -1,0 +1,158 @@
+/* purgecss start ignore */
+* {
+    position: relative;
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+
+    &:after,
+    &:before {
+        box-sizing: inherit;
+    }
+}
+
+html {
+    @apply font-display font-normal leading-normal text-black;
+    box-sizing: border-box;
+    font-size: 16px;
+
+    @screen lg {
+        font-size: 1.2vw;
+    }
+
+    @screen xl {
+        font-size: 18px;
+    }
+
+    @screen print {
+        font-size: 12px;
+    }
+}
+
+select:focus,
+input:focus {
+    outline: 0p
+}
+
+a {
+    text-decoration: none;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+hr {
+    border: 0;
+    background-color: currentcolor;
+}
+
+img,
+svg {
+    display: block;
+    vertical-align: middle;
+}
+
+// From http://valhead.com/2017/06/23/reduced-motion-query/
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+// Print
+@screen print {
+    a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+}
+
+@page :first {
+    margin-top: 0;
+}
+
+@page {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+//body {
+//    font-size: 17px;
+//}
+//
+//a {
+//    @apply font-semibold no-underline text-blue-700;
+//
+//    &:hover {
+//        @apply text-blue-800;
+//    }
+//}
+//
+//header a {
+//    @apply font-normal;
+//
+//    &:hover {
+//        @apply underline;
+//    }
+//
+//    &.active {
+//        @apply font-semibold;
+//    }
+//}
+//
+//h1,
+//h2,
+//h3,
+//h4,
+//h5,
+//h6 {
+//    @apply leading-tight;
+//    @apply mb-4;
+//    @apply mt-8;
+//    @apply text-blue-900;
+//    @apply font-display;
+//
+//    &:first-child {
+//        @apply mt-0;
+//    }
+//}
+//
+//h1 {
+//    @apply font-extrabold text-5xl;
+//}
+//
+//h2 {
+//    @apply font-bold text-4xl;
+//}
+//
+//ol,
+//ul {
+//    @apply my-4;
+//}
+//
+//p {
+//    @apply my-6 text-lg leading-7;
+//}
+//
+//.content.container {
+//    @screen lg {
+//        @apply max-w-screen-lg;
+//    }
+//}
+//
+//footer a {
+//    &:hover {
+//        @apply underline;
+//    }
+//}
+/* purgecss end ignore */

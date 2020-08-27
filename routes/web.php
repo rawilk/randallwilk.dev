@@ -2,9 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('about', '/');
+Route::view('contact', 'front.pages.contact.index')->name('contact');
+Route::view('/', 'front.pages.home.index')->name('home');
 
-Route::view('/', 'pages.home')->name('home');
-Route::view('projects', 'pages.projects')->name('projects');
-Route::view('contact', 'pages.contact')->name('contact');
-Route::view('uses', 'pages.uses')->name('uses');
+Route::prefix('open-source')->group(static function () {
+    Route::view('/', 'front.pages.open-source.packages')->name('open-source.packages');
+    Route::view('projects', 'front.pages.open-source.projects')->name('open-source.projects');
+});
+
+Route::view('legal', 'front.pages.legal.index')->name('legal.index');
+Route::view('privacy', 'front.pages.legal.privacy')->name('legal.privacy');
+Route::view('disclaimer', 'front.pages.legal.disclaimer')->name('legal.disclaimer');

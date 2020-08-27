@@ -1,0 +1,14 @@
+.font-display-normal {
+    @apply font-display;
+    @apply font-normal;
+}
+
+.font-display-bold {
+    @apply font-display;
+    @apply font-bold;
+}
+
+.font-serif-bold {
+    @apply font-serif;
+    @apply font-bold;
+}

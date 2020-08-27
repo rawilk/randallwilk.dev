@@ -1,12 +1,24 @@
-@extends('layouts.page')
-@section('title', 'Page Not Found')
+<x-page title="Page not found">
+    <section id="banner" class="banner" role="banner">
+        <div class="wrap">
+            <h1 class="banner-slogan">Page not found</h1>
+            <p class="banner-intro">
+                There could be a typo in your url, or the link you are using could be deprecated...
+            </p>
+        </div>
+    </section>
 
-@section('content')
-    <h1>Page Not Found</h1>
+    <div class="section section-group pt-0">
+        @include('errors.partials.suggestions')
 
-    <p>Looks like you've followed a broken link or entered a URL that doesn't exist on this site.</p>
+        <section class="section">
+            <div class="wrap">
+                <p class="text-2xl">
+                    If you still need help, just contact me so I can help you out.
+                </p>
 
-    <p>
-        <a href="{{ route('home') }}">Back to site</a>
-    </p>
-@endsection
+                @include('errors.partials.contact')
+            </div>
+        </section>
+    </div>
+</x-page>

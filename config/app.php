@@ -171,10 +171,14 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\BladeComponentsServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
+        App\Providers\NavigationServiceProvider::class,
+        App\Providers\LivewireServiceProvider::class,
+        App\Services\Github\GithubServiceProvider::class,
+        App\Services\Npm\NpmServiceProvider::class,
     ],
 
     /*

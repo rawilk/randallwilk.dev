@@ -17,11 +17,18 @@ class RouteServiceProvider extends ServiceProvider
     public function map(): void
     {
         $this->mapWebRoutes();
+
+        $this->mapRedirects();
     }
 
     protected function mapWebRoutes(): void
     {
         Route::middleware('web')
             ->group(base_path('routes/web.php'));
+    }
+
+    protected function mapRedirects(): void
+    {
+        require base_path('routes/redirects.php');
     }
 }
