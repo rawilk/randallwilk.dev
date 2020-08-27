@@ -6,8 +6,9 @@
             </p>
 
             <p class="text-lg">
-                Almost every new package arises from client work. Whenever I build functionality in client projects that could be useful for others
-                or that I may want to re-use again, I extract it to an open source package.
+                In the past if I needed some kind of functionality on an application, I would just write it into the application itself and forget about it.
+                If I needed that same functionality on another project, I would just copy and paste it over, modifying as needed. Obviously this isn't very sustainable,
+                so I've started extracting some packages now that either I need to reuse or that I think others may find useful.
             </p>
         </div>
     </div>
