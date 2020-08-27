@@ -1,10 +1,10 @@
 <div>
     @if ($this->filterable)
-        <div class="hidden wrap sm:flex justify-start mb-8">
+        <div class="hidden print:hidden wrap sm:flex justify-start mb-8">
 
         </div>
 
-        <div class="wrap">
+        <div class="wrap print:hidden">
             <div class="sm:flex sm:items-baseline sm:justify-between mb-8">
                 <input wire:model="search"
                        type="search"
