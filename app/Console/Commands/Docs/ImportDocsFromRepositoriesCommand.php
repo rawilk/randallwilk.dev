@@ -6,8 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use React\ChildProcess\Process;
 use React\EventLoop\Factory;
-use Spatie\Sheets\Sheets;
 use function React\Promise\all;
+use Spatie\Sheets\Sheets;
 use function WyriHaximus\React\childProcessPromise;
 
 class ImportDocsFromRepositoriesCommand extends Command
