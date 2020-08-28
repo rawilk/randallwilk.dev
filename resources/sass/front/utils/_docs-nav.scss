@@ -1,0 +1,22 @@
+ul.table-of-contents {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: block;
+        margin-bottom: .5em;
+
+        a {
+            position: relative;
+            font-size: .89em;
+            font-weight: 500;
+            text-decoration: none;
+
+            &:before {
+                content: "# ";
+                @apply text-black;
+            }
+        }
+    }
+}
