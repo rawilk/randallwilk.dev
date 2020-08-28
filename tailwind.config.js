@@ -33,6 +33,7 @@ module.exports = {
             display: ['Nunito', 'sans-serif'],
             body: ['Graphik', 'sans-serif'],
             serif: ['Lora', 'serif'],
+            mono: ['Fira Code', 'monospace'],
         },
 
         lineHeight: {
@@ -54,6 +55,32 @@ module.exports = {
 
                 'gold-lightest': '#eee8d6',
                 'gold-darkest': '#51492c',
+
+                'gray-lightest': '#f3efea',
+                'gray-lighter': '#cbd2ce',
+                'gray-light': '#b8bfbb',
+                'gray-dark': '#686666',
+                'gray-darker': '#4c534f',
+                'gray-darkest': '#171e1a',
+
+                'blue-lightest': '#cae1e8',
+                'blue-lighter': '#22a4c9',
+                'blue-light': '#22a4c9',
+                'blue-dark': '#004966',
+                'blue-darker': '#172a3d',
+                'blue-darkest': '#0f1c29',
+
+                'pink-lightest': '#f2d8db',
+                pink: '#dd9099',
+                'pink-dark': '#8d3b44',
+
+                'green-lightest': '#daefe8',
+                'green-lighter': '#94dac4',
+                'green-light': '#57c9a5',
+                green: '#21b989',
+                'green-dark': '#0a8867',
+
+                purple: '#885de3',
             },
 
             fontSize: {

@@ -28,6 +28,13 @@
     @apply text-xs;
 }
 
+.markup blockquote:not(.tip) {
+    @apply mb-8;
+    @apply px-4 py-2;
+    @apply bg-gray-200;
+    @apply border-l;
+}
+
 .markup-titles h1 {
     @apply text-4xl;
     @apply font-serif;
@@ -74,6 +81,10 @@
     @apply mt-16;
     page-break-inside: avoid;
     page-break-after: avoid;
+}
+
+[class*="api-"] h3 {
+    text-transform: none;
 }
 
 .markup-titles h4 {
@@ -125,3 +136,40 @@
     }
 }
 
+.markup-code code:not(.hljs) {
+    @apply bg-gray-300;
+    @apply text-gray-800;
+    @apply px-1;
+    @apply font-mono;
+    @apply rounded;
+    font-size: .85em;
+}
+
+// Permalinks in front of markdown title
+a.anchor-link {
+    @apply border-0;
+    @apply text-sm;
+    @apply opacity-50;
+    @apply no-underline;
+    @apply pr-2;
+    @apply font-light;
+    @apply absolute;
+    @apply text-right;
+    right: 100%;
+    top: .3em;
+    font-size: .75em;
+    height: 1em;
+    width: 1em;
+}
+
+.tip {
+    @apply bg-blue-50;
+    @apply text-blue-500;
+    @apply p-4;
+    @apply rounded-lg;
+    @apply mb-4;
+
+    p {
+        @apply text-sm;
+    }
+}
