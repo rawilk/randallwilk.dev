@@ -3,10 +3,16 @@
 use App\Http\Controllers\DocsController;
 use App\Http\Controllers\RedirectDocAssetsController;
 use App\Http\Controllers\RedirectDocsDomainController;
+use App\Http\Controllers\RedirectVueContextDomainController;
 use Illuminate\Support\Facades\Route;
 
 Route::domain('docs.randallwilk.dev')->group(static function () {
     Route::get('/{url}', RedirectDocsDomainController::class)
+        ->where('url', '.*');
+});
+
+Route::domain('vue-context.com')->group(static function () {
+    Route::get('/{url}', RedirectVueContextDomainController::class)
         ->where('url', '.*');
 });
 
