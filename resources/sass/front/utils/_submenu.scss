@@ -46,7 +46,9 @@
     @apply bg-blue-400;
 }
 
+/* purgecss start ignore */
 .submenu-active {
     @apply bg-opacity-50;
     @apply bg-blue-400;
 }
+/* purgecss end ignore */
