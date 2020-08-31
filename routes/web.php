@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DocsController;
+use App\Http\Controllers\RedirectDocAssetsController;
 use App\Http\Controllers\RedirectDocsDomainController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,12 @@ Route::view('disclaimer', 'front.pages.legal.disclaimer')->name('legal.disclaime
 Route::prefix('docs')->group(static function () {
     Route::get('/', [DocsController::class, 'index'])->name('docs');
     Route::get('/{repository}/{alias?}', [DocsController::class, 'repository'])->name('docs.repository');
+
+    // Kind of a dirty workaround for now to redirect doc assets from "/docs" to "/doc_files" until I can figure out why
+    // the live server is serving a 403 error when the public directory is the same as this endpoint.
+    Route::get('/{repository}/{alias}/images/{path}', RedirectDocAssetsController::class)->where('path', '.*');
+    Route::get('/{repository}/{alias}/scripts/{path}', RedirectDocAssetsController::class)->where('path', '.*');
+
     Route::get('/{repository}/{alias}/{slug}', [DocsController::class, 'show'])
         ->name('docs.show')
         ->where('slug', '.*');
