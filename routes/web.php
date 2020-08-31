@@ -1,7 +1,13 @@
 <?php
 
 use App\Http\Controllers\DocsController;
+use App\Http\Controllers\RedirectDocsDomainController;
 use Illuminate\Support\Facades\Route;
+
+Route::domain('docs.randallwilk.dev')->group(static function () {
+    Route::get('/{url}', RedirectDocsDomainController::class)
+        ->where('url', '.*');
+});
 
 Route::view('contact', 'front.pages.contact.index')->name('contact');
 Route::view('/', 'front.pages.home.index')->name('home');

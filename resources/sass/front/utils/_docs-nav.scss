@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 ul.table-of-contents {
     list-style-type: none;
     margin: 0;
@@ -19,4 +20,23 @@ ul.table-of-contents {
             }
         }
     }
+
+    > li > p > a {
+        @apply font-bold;
+    }
+
+    li p {
+        margin-bottom: 0 !important;
+    }
+
+    li ul li {
+        &:before {
+            display: none;
+        }
+    }
+
+    > li ul {
+        @apply mt-1;
+    }
 }
+/* purgecss end ignore */

@@ -31,7 +31,7 @@
         <input type="search"
                id="algolia-search"
                placeholder="Search..."
-               class="text-xs form-input w-full h-8 py-0 px-2 mb-8"
+               class="text-xs form-input w-full h-8 py-0 px-2"
         >
 
         <ol class="text-xs grid gap-2 links-black">

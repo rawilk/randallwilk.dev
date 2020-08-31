@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 .markup table {
     @apply w-full;
     @apply text-left;
@@ -28,3 +29,4 @@
 .markup table + p {
     @apply mt-8;
 }
+/* purgecss end ignore */

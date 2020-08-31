@@ -4,6 +4,7 @@ module.exports = {
     purge: [
         './resources/**/*.blade.php',
         './resources/**/*.js',
+        './storage/docs/**/*.md',
     ],
 
     plugins: [

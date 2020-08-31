@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 .markup .title {
     @apply mb-8;
 }
@@ -75,12 +76,15 @@
 .markup-titles h3 {
     @apply font-display;
     @apply font-bold;
-    @apply uppercase;
     @apply leading-tight;
     @apply mb-4;
     @apply mt-16;
     page-break-inside: avoid;
     page-break-after: avoid;
+}
+
+.markup-titles:not(.no-title-uppercase) h3 {
+    @apply uppercase;
 }
 
 [class*="api-"] h3 {
@@ -178,3 +182,8 @@ a.anchor-link {
         @apply text-sm;
     }
 }
+
+#close-on-scroll-app {
+    @apply mb-4;
+}
+/* purgecss end ignore */

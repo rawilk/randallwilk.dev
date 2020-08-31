@@ -3,6 +3,12 @@
 <x-page title="{{ $page->title }} | {{ $repository->slug }}"
         description="{{ $repository->slug }}"
 >
+    @push('head')
+        <meta name="docsearch:version" content="{{ $alias->slug }}">
+        <meta name="docsearch:project" content="{{ $repository->slug }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css">
+    @endpush
+
     @include('front.pages.docs.partials.breadcrumbs')
 
     <section class="wrap grid pb-24 gap-8 md:grid-cols-3 items-stretch">
@@ -24,7 +30,7 @@
                 <h1 class="title-xl mb-8">{{ $page->title }}</h1>
             @endif
 
-            <div class="markup markup-titles markup-lists markup-code links-black links-underline {{ str_replace('/', '-', $page->slug) }}">
+            <div class="markup markup-titles markup-lists markup-code links-black links-underline no-title-uppercase {{ str_replace('/', '-', $page->slug) }}">
                 {!! $page->contents !!}
             </div>
 
@@ -33,4 +39,22 @@
             </div>
         </div>
     </section>
+
+    @push('js')
+        <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+
+        <script>
+            docsearch({
+                apiKey: '{{ config('services.algolia.key') }}',
+                indexName: '{{ config('services.algolia.index') }}',
+                inputSelector: '#algolia-search',
+                debug: false,
+
+                algoliaOptions: {
+                    hitsPerPage: 5,
+                    facetFilters: ['project:{{ $repository->slug }}', 'version:{{ $alias->slug }}'],
+                },
+            });
+        </script>
+    @endpush
 </x-page>

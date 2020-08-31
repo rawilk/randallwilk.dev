@@ -36,4 +36,9 @@ return [
         'docs_access_token' => env('GITHUB_ACCESS_TOKEN'),
     ],
 
+    'algolia' => [
+        'key' => env('ALGOLIA_API_KEY'),
+        'index' => env('ALGOLIA_INDEX_NAME'),
+    ],
+
 ];
