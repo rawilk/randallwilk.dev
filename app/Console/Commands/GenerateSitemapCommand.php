@@ -37,7 +37,7 @@ class GenerateSitemapCommand extends Command
         $this->comment('Generating docs sitemap...');
 
         SitemapGenerator::create(config('app.url'))
-            ->shouldCrawl(fn (UriInterface $url) => Str::startsWith($url->getPath(), '/docs'))
+            ->shouldCrawl(fn (UriInterface $url) => Str::contains($url->getPath(), 'docs/'))
             ->writeToFile(public_path('docs_sitemap.xml'));
     }
 
