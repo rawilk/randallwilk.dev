@@ -27,6 +27,10 @@
             <div class="markup markup-titles markup-lists markup-code links-black links-underline {{ str_replace('/', '-', $page->slug) }}">
                 {!! $page->contents !!}
             </div>
+
+            <div class="pt-8 pb-6 mt-12 border-t-2">
+                <x-doc-footer-links :previous="$alias->previousPage()" :next="$alias->nextPage()" />
+            </div>
         </div>
     </section>
 </x-page>

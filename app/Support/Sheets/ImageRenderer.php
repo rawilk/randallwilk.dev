@@ -38,7 +38,7 @@ class ImageRenderer implements InlineRendererInterface, ConfigurationAwareInterf
 
             $relativePath = preg_match('$^../$', $url);
 
-            $attrs = $relativePath ? Str::after($url, '../') : $url;
+            $attrs['src'] = $relativePath ? Str::after($url, '../') : $url;
         }
 
         $alt = $htmlRenderer->renderInlines($inline->children());

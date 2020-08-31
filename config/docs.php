@@ -34,5 +34,13 @@ return [
             ],
             'category' => 'Laravel',
         ],
+        [
+            'name' => 'vue-context',
+            'repository' => 'rawilk/vue-context',
+            'branches' => [
+                'master' => 'v6',
+            ],
+            'category' => 'Vue',
+        ],
     ],
 ];

@@ -103,16 +103,21 @@
     margin-bottom: .35em;
 }
 
-.markup-lists ul li {
+.markup-lists ul:not(.table-of-contents):not(.v-context):not(.demo) li {
     padding-left: 1em;
 }
 
-.markup-lists ul li:before {
+.markup-lists ul:not(.table-of-contents):not(.v-context):not(.demo) li:before {
     @apply text-black;
     content: '•';
     left: 0;
     position: absolute;
     opacity: .75;
+}
+
+.demo a {
+    @apply text-gray-500;
+    @apply no-underline;
 }
 
 .markup-lists ol {

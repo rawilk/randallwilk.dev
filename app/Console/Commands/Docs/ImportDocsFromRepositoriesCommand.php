@@ -43,6 +43,7 @@ class ImportDocsFromRepositoriesCommand extends Command
                     && cp -r docs/* ../../../docs/{$repository['name']}/{$alias} \
                     && echo "---\ntitle: {$repository['name']}\ncategory: {$repository['category']}\n---" > ../../../docs/{$repository['name']}/_index.md \
                     && cd docs/ \
+                    && rm -rf {$publicDocsAssetPath}/{$repository['name']}/{$alias} \
                     && find . -not -name '*.md' | cpio -pdm {$publicDocsAssetPath}/{$repository['name']}/{$alias}/
                 BASH
                 );

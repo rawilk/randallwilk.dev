@@ -54,6 +54,7 @@ class DocsController
         $repositories = $docs->getRepositories();
 
         $navigation = $this->getNavigation($pages);
+        $alias->setNavigation($navigation);
 
         $showBigTitle = $page->slug === $navigation['_root']['pages'][0]->slug;
 

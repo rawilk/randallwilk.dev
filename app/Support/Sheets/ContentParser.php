@@ -9,6 +9,7 @@ use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
 use League\CommonMark\Extension\Attributes\AttributesExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
+use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\TableOfContents\TableOfContentsExtension;
 use League\CommonMark\Inline\Element\Image;
 use Spatie\CommonMarkHighlighter\FencedCodeRenderer;
@@ -29,6 +30,7 @@ class ContentParser implements \Spatie\Sheets\ContentParser
         $environment->addExtension(new HeadingPermalinkExtension);
         $environment->addExtension(new AttributesExtension);
         $environment->addExtension(new TableOfContentsExtension);
+        $environment->addExtension(new TableExtension);
 
         $config = [
             'heading_permalink' => [
@@ -36,7 +38,7 @@ class ContentParser implements \Spatie\Sheets\ContentParser
                 'symbol' => '#',
             ],
             'table_of_contents' => [
-                'max_heading_level' => 2,
+                'max_heading_level' => 3,
             ],
         ];
 
