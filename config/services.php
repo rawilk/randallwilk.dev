@@ -33,9 +33,12 @@ return [
     'github' => [
         'username' => env('GITHUB_USERNAME'),
         'token' => env('GITHUB_TOKEN'),
-        'client_id' => env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('GITHUB_REDIRECT_URL'),
+        'docs_access_token' => env('GITHUB_ACCESS_TOKEN'),
+    ],
+
+    'algolia' => [
+        'key' => env('ALGOLIA_API_KEY'),
+        'index' => env('ALGOLIA_INDEX_NAME'),
     ],
 
 ];

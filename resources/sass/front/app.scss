@@ -2,6 +2,8 @@
 @tailwind components;
 
 @import 'bootstrap';
+@import 'highlight';
+@import 'utils/algolia';
 
 @import 'utils/banner';
 @import 'utils/bullets';
@@ -9,6 +11,7 @@
 @import 'utils/cell';
 @import 'utils/char';
 @import 'utils/counter';
+@import 'utils/docs-nav';
 @import 'utils/font';
 @import 'utils/footer';
 @import 'utils/justify-items';
@@ -21,6 +24,7 @@
 @import 'utils/section';
 @import 'utils/select';
 @import 'utils/submenu';
+@import 'utils/table';
 @import 'utils/title';
 @import 'utils/wrap';
 

@@ -19,7 +19,7 @@ class NavigationServiceProvider extends ServiceProvider
 
         Menu::macro('service', function () {
             return Menu::new()
-                ->url('https://docs.randallwilk.dev', 'Docs')
+                ->route('docs', 'Docs')
                 ->withoutWrapperTag()
                 ->withoutParentTag()
                 ->setActiveClassOnLink()

@@ -1,3 +1,4 @@
+/* purgecss start ignore */
 .markup .title {
     @apply mb-8;
 }
@@ -26,6 +27,13 @@
 .markup sub,
 .markup sup {
     @apply text-xs;
+}
+
+.markup blockquote:not(.tip) {
+    @apply mb-8;
+    @apply px-4 py-2;
+    @apply bg-gray-200;
+    @apply border-l;
 }
 
 .markup-titles h1 {
@@ -68,12 +76,19 @@
 .markup-titles h3 {
     @apply font-display;
     @apply font-bold;
-    @apply uppercase;
     @apply leading-tight;
     @apply mb-4;
     @apply mt-16;
     page-break-inside: avoid;
     page-break-after: avoid;
+}
+
+.markup-titles:not(.no-title-uppercase) h3 {
+    @apply uppercase;
+}
+
+[class*="api-"] h3 {
+    text-transform: none;
 }
 
 .markup-titles h4 {
@@ -92,16 +107,21 @@
     margin-bottom: .35em;
 }
 
-.markup-lists ul li {
+.markup-lists ul:not(.table-of-contents):not(.v-context):not(.demo) li {
     padding-left: 1em;
 }
 
-.markup-lists ul li:before {
+.markup-lists ul:not(.table-of-contents):not(.v-context):not(.demo) li:before {
     @apply text-black;
     content: '•';
     left: 0;
     position: absolute;
     opacity: .75;
+}
+
+.demo a {
+    @apply text-gray-500;
+    @apply no-underline;
 }
 
 .markup-lists ol {
@@ -125,3 +145,45 @@
     }
 }
 
+.markup-code code:not(.hljs) {
+    @apply bg-gray-300;
+    @apply text-gray-800;
+    @apply px-1;
+    @apply font-mono;
+    @apply rounded;
+    font-size: .85em;
+}
+
+// Permalinks in front of markdown title
+a.anchor-link {
+    @apply border-0;
+    @apply text-sm;
+    @apply opacity-50;
+    @apply no-underline;
+    @apply pr-2;
+    @apply font-light;
+    @apply absolute;
+    @apply text-right;
+    right: 100%;
+    top: .3em;
+    font-size: .75em;
+    height: 1em;
+    width: 1em;
+}
+
+.tip {
+    @apply bg-blue-50;
+    @apply text-blue-500;
+    @apply p-4;
+    @apply rounded-lg;
+    @apply mb-4;
+
+    p {
+        @apply text-sm;
+    }
+}
+
+#close-on-scroll-app {
+    @apply mb-4;
+}
+/* purgecss end ignore */

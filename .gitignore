@@ -16,3 +16,7 @@ yarn-error.log
 _ide_helper.php
 _ide_helper_models.php
 .php_cs.cache
+/storage/docs
+/public/sitemap.xml
+/public/docs_sitemap.xml
+/public/sitemap_index.xml
