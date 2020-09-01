@@ -103,8 +103,10 @@
                     <div class="cell-r mt-4 flex flex-col justify-center md:mt-0 md:grid-text-right">
                         @if ($repository->blogpost_url)
                             <a href="{{ $repository->blogpost_url }}"
-                               target="_blank"
-                               rel="nofollow noreferrer noopener"
+                               @if (isExternalLink($repository->blogpost_url))
+                                    target="_blank"
+                                    rel="nofollow noreferrer noopener"
+                               @endif
                                class="link-underline link-gray text-xs"
                             >
                                 Introduction
@@ -113,8 +115,10 @@
 
                         @if ($repository->documentation_url)
                             <a href="{{ $repository->documentation_url }}"
-                               target="_blank"
-                               rel="nofollow noreferrer noopener"
+                               @if (isExternalLink($repository->documentation_url))
+                                    target="_blank"
+                                    rel="nofollow noreferrer noopener"
+                               @endif
                                class="link-underline link-gray text-xs"
                             >
                                 Documentation
