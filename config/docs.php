@@ -6,7 +6,8 @@ return [
             'name' => 'laravel-app-key-rotator',
             'repository' => 'rawilk/laravel-app-key-rotator',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
