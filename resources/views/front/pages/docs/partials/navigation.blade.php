@@ -9,7 +9,7 @@
                     <option value="{{ $aliasOption->slug }}"
                             {{ $page->alias === $aliasOption->slug ? 'selected' : '' }}
                     >
-                        {{ $aliasOption->slug }} ({{ $aliasOption->branch }})
+                        {{ $aliasOption->slug }} @if ($aliasOption->isMasterBranch())({{ $aliasOption->branch }})@endif
                     </option>
                 @endforeach
             </select>
