@@ -8,35 +8,14 @@ use Livewire\Component;
 
 class Repositories extends Component
 {
-    /** @var string */
-    public $search = '';
-
-    /** @var string */
-    public $sort = '-downloads';
-
-    /** @var string */
-    public $type = 'packages';
-
-    /** @var bool */
-    public $filterable = true;
-
-    /** @var bool */
-    public $highlighted = false;
+    public string $search = '';
+    public string $sort = '-downloads';
+    public string $type = 'packages';
+    public bool $filterable = true;
+    public bool $highlighted = false;
 
     /** @var string[] */
-    protected $updatesQueryString = ['search', 'sort'];
-
-    public function mount(
-        $type = 'packages',
-        $filterable = true,
-        $highlighted = false,
-        $sort = '-downloads'
-    ): void {
-        $this->type = $type;
-        $this->filterable = $filterable;
-        $this->highlighted = $highlighted;
-        $this->sort = $sort;
-    }
+    protected $queryString = ['search', 'sort'];
 
     public function render()
     {
