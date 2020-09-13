@@ -43,5 +43,13 @@ return [
             ],
             'category' => 'Vue',
         ],
+        [
+            'name' => 'laravel-form-components',
+            'repository' => 'rawilk/laravel-form-components',
+            'branches' => [
+                'master' => 'v1',
+            ],
+            'category' => 'Laravel',
+        ],
     ],
 ];
