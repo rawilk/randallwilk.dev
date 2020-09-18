@@ -21,7 +21,7 @@ return [
         ],
         [
             'name' => 'laravel-settings',
-            'repository' =>  'rawilk/laravel-settings',
+            'repository' => 'rawilk/laravel-settings',
             'branches' => [
                 'master' => 'v1',
             ],
@@ -42,6 +42,14 @@ return [
                 'master' => 'v6',
             ],
             'category' => 'Vue',
+        ],
+        [
+            'name' => 'laravel-casters',
+            'repository' => 'rawilk/laravel-casters',
+            'branches' => [
+                'master' => 'v1',
+            ],
+            'category' => 'Laravel',
         ],
     ],
 ];
