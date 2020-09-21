@@ -15,7 +15,10 @@ class Repositories extends Component
     public bool $highlighted = false;
 
     /** @var string[] */
-    protected $queryString = ['search', 'sort'];
+    protected $queryString = [
+        'search' => ['except' => ''],
+        'sort' => ['except' => '-downloads'],
+    ];
 
     public function render()
     {
