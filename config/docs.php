@@ -51,5 +51,13 @@ return [
             ],
             'category' => 'Laravel',
         ],
+        [
+            'name' => 'laravel-ups',
+            'repository' => 'rawilk/laravel-ups',
+            'branches' => [
+                'master' => 'v1',
+            ],
+            'category' => 'Laravel',
+        ],
     ],
 ];
