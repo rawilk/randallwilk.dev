@@ -52,6 +52,14 @@ return [
             'category' => 'Laravel',
         ],
         [
+            'name' => 'laravel-form-components',
+            'repository' => 'rawilk/laravel-form-components',
+            'branches' => [
+                'master' => 'v1',
+            ],
+            'category' => 'Laravel',
+        ],
+        [
             'name' => 'laravel-ups',
             'repository' => 'rawilk/laravel-ups',
             'branches' => [
