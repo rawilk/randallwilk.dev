@@ -24,9 +24,9 @@
                 </p>
 
                 <p class="text-lg">
-                    Some of the technologies I'm most comfortable working with are PHP/Laravel, MySQL, and VueJS. I also have a lot of experience working with
-                    semantic, accessible, and SEO-friendly HTML, CSS, and JavaScript (including modern ES syntax and build tools like Webpack). I'm currently
-                    working on learning Laravel Livewire, Tailwind CSS, and AlpineJS, which I hope to incorporate into my daily workflow as well.
+                    Some of the technologies I'm most comfortable working with are PHP/Laravel, MySQL, Tailwind CSS, AlpineJS, and Laravel Livewire.
+                    I also have a lot of experience working with semantic, accessible, and SEO-friendly HTML, CSS, and JavaScript (including modern
+                    ES syntax and build tools like Webpack).
                 </p>
             </div>
 
