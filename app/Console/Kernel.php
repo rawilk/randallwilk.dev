@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Docs\ImportDocsFromRepositoriesCommand;
 use App\Console\Commands\GenerateSitemapCommand;
 use App\Console\Commands\Github\ImportGithubIssuesCommand;
 use App\Console\Commands\Github\ImportGithubRepositoriesCommand;
@@ -18,6 +19,8 @@ class Kernel extends ConsoleKernel
         $schedule->command(ImportPackagistDownloadsCommand::class)->hourly();
         $schedule->command(ImportNpmDownloadsCommand::class)->daily();
         $schedule->command(ImportGithubRepositoriesCommand::class)->daily();
+
+        $schedule->command(ImportDocsFromRepositoriesCommand::class)->everyThirtyMinutes();
 
         $schedule->command(GenerateSitemapCommand::class)->daily();
     }
