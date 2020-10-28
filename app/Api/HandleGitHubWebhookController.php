@@ -29,7 +29,7 @@ final class HandleGitHubWebhookController
 
     protected function ensureValidRequest(Request $request): void
     {
-        $signature = $request->headers->get('X-Hub-Signature');
+        $signature = $request->headers->get('X-Hub-Signature-256');
 
         if ($signature === null) {
             throw new BadRequestHttpException('Header is not set.');
@@ -41,7 +41,7 @@ final class HandleGitHubWebhookController
             throw new BadRequestHttpException('Signature has an invalid format.');
         }
 
-        $knownSignature = hash_hmac('sha1', $request->getContent(), Config::get('services.github.webhook_secret'));
+        $knownSignature = hash_hmac('sha256', $request->getContent(), Config::get('services.github.webhook_secret'));
 
         if (! hash_equals($knownSignature, $signatureParts[1])) {
             throw new UnauthorizedException('Could not verify the request signature ' . $signatureParts[1]);
