@@ -15,7 +15,8 @@ return [
             'name' => 'laravel-breadcrumbs',
             'repository' => 'rawilk/laravel-breadcrumbs',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
