@@ -37,13 +37,6 @@ module.exports = {
             mono: ['Fira Code', 'monospace'],
         },
 
-        lineHeight: {
-            none: 1,
-            tight: 1.1,
-            normal: 1.6,
-            loose: 2,
-        },
-
         letterSpacing: {
             tight: '-0.05em',
             normal: '0',
@@ -51,6 +44,13 @@ module.exports = {
         },
 
         extend: {
+            lineHeight: {
+                none: 1,
+                tight: 1.1,
+                normal: 1.6,
+                loose: 2,
+            },
+
             colors: {
                 black: '#172a3d',
 

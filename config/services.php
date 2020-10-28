@@ -34,6 +34,7 @@ return [
         'username' => env('GITHUB_USERNAME'),
         'token' => env('GITHUB_TOKEN'),
         'docs_access_token' => env('GITHUB_ACCESS_TOKEN'),
+        'webhook_secret' => env('GITHUB_WEBHOOK_SECRET'),
     ],
 
     'algolia' => [

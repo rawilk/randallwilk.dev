@@ -12,7 +12,7 @@
 
 .banner-slogan {
     @apply font-serif font-bold text-4xl;
-    line-height: 0.9;
+    @apply leading-tight;
 
     @screen sm {
         @apply text-5xl;

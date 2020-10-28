@@ -146,12 +146,20 @@
 }
 
 .markup-code code:not(.hljs) {
-    @apply bg-gray-300;
-    @apply text-gray-800;
-    @apply px-1;
+    @apply text-cool-gray-700;
+    @apply font-semibold;
     @apply font-mono;
     @apply rounded;
     font-size: .85em;
+
+    &:before,
+    &:after {
+        content: "`";
+    }
+
+    @screen lg {
+        font-size: .8888889em;
+    }
 }
 
 // Permalinks in front of markdown title

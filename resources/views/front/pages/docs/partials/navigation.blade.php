@@ -27,7 +27,7 @@
         </a>
     </div>
 
-    <div class="sticky top-0 pt-4">
+    <div class="sticky top-0 pt-4 space-y-8">
         <input type="search"
                id="algolia-search"
                placeholder="Search..."
