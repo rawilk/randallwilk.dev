@@ -8,5 +8,4 @@ use Livewire\Component;
 
 final class Reset extends Component
 {
-
 }
