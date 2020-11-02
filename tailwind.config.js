@@ -8,19 +8,13 @@ module.exports = {
     ],
 
     plugins: [
-        require('@tailwindcss/ui'),
+        require('@tailwindcss/ui')({
+            layout: 'sidebar',
+        }),
+        require('@tailwindcss/typography'),
     ],
 
     theme: {
-        boxShadow: {
-            default: '0 2px 4px 0 rgba(76, 55, 55, 0.12)',
-            light: '0 2px 4px 0 rgba(76, 55, 55, 0.04)',
-            md: '0 4px 8px 0 rgba(162, 184, 193, 0.12), 0 2px 4px 0 rgba(76, 55, 55, 0.12)',
-            lg: '0 15px 30px 0 rgba(162, 184, 193, 0.14), 0 5px 15px 0 rgba(76, 55, 55, 0.12)',
-            inner: 'inset 0 2px 4px 0 rgba(76, 55, 55, 0.12)',
-            'inner-light': 'inset 0 2px 4px 0 rgba(76, 55, 55, 0.04)',
-            none: 'none',
-        },
 
         screens: {
             sm: '720px',
@@ -37,13 +31,23 @@ module.exports = {
             mono: ['Fira Code', 'monospace'],
         },
 
-        letterSpacing: {
-            tight: '-0.05em',
-            normal: '0',
-            wide: '0.05em',
-        },
-
         extend: {
+            boxShadow: {
+                default: '0 2px 4px 0 rgba(76, 55, 55, 0.12)',
+                light: '0 2px 4px 0 rgba(76, 55, 55, 0.04)',
+                md: '0 4px 8px 0 rgba(162, 184, 193, 0.12), 0 2px 4px 0 rgba(76, 55, 55, 0.12)',
+                lg: '0 15px 30px 0 rgba(162, 184, 193, 0.14), 0 5px 15px 0 rgba(76, 55, 55, 0.12)',
+                inner: 'inset 0 2px 4px 0 rgba(76, 55, 55, 0.12)',
+                'inner-light': 'inset 0 2px 4px 0 rgba(76, 55, 55, 0.04)',
+                none: 'none',
+            },
+
+            letterSpacing: {
+                tight: '-0.05em',
+                normal: '0',
+                wide: '0.05em',
+            },
+
             lineHeight: {
                 none: 1,
                 tight: 1.1,
@@ -71,14 +75,10 @@ module.exports = {
                 'blue-darker': '#172a3d',
                 'blue-darkest': '#0f1c29',
 
-                'pink-lightest': '#f2d8db',
-                pink: '#dd9099',
-                'pink-dark': '#8d3b44',
-
                 'green-lightest': '#daefe8',
                 'green-lighter': '#94dac4',
                 'green-light': '#57c9a5',
-                green: '#21b989',
+                // green: '#21b989',
                 'green-dark': '#0a8867',
 
                 purple: '#885de3',

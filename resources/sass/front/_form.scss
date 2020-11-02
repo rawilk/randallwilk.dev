@@ -1,0 +1,36 @@
+/**
+ * Remove the default box-shadow for invalid elements to prevent
+ * inputs in Livewire components showing with a
+ * red border by default in Firefox.
+ *
+ * See: https://github.com/laravel-frontend-presets/tall/issues/7
+ */
+input:invalid, textarea:invalid, select:invalid {
+    box-shadow: none;
+}
+
+.form-fields {
+    @apply px-4;
+    @apply pt-6;
+
+    @screen sm {
+        @apply px-6;
+        @apply pt-5;
+    }
+}
+
+@import '../../../vendor/rawilk/laravel-form-components/resources/sass/form-components';
+
+/**
+ * laravel-form-components overrides
+ */
+.form-checkbox,
+.form-radio {
+    @apply text-blue-600;
+}
+
+.focused {
+    .custom-select--option__text .custom-select-option-subtext {
+        @apply text-white;
+    }
+}

@@ -4,6 +4,7 @@ use App\Http\Controllers\DocsController;
 use App\Http\Controllers\RedirectDocAssetsController;
 use App\Http\Controllers\RedirectDocsDomainController;
 use App\Http\Controllers\RedirectVueContextDomainController;
+use App\Http\Livewire;
 use Illuminate\Support\Facades\Route;
 
 Route::domain('docs.randallwilk.dev')->group(static function () {
@@ -18,6 +19,17 @@ Route::domain('vue-context.com')->group(static function () {
 
 Route::view('contact', 'front.pages.contact.index')->name('contact');
 Route::view('/', 'front.pages.home.index')->name('home');
+
+// Authentication...
+Route::middleware('guest')->group(static function () {
+    Route::get('/login', Livewire\Auth\Login::class)->name('login');
+});
+
+Route::get('/password/reset', Livewire\Auth\Passwords\Email::class)
+    ->name('password.request');
+
+Route::get('/password/reset/{token}', Livewire\Auth\Passwords\Reset::class)
+    ->name('password.reset');
 
 Route::prefix('open-source')->group(static function () {
     Route::view('/', 'front.pages.open-source.packages')->name('open-source.packages');

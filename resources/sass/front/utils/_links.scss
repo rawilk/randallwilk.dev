@@ -71,3 +71,21 @@ a.link-gray,
         --link-border-color: theme(colors.gray.500) 80;
     }
 }
+
+.app-link {
+    @apply font-medium;
+    @apply text-blue-600;
+    @apply transition;
+    @apply ease-in-out;
+    @apply duration-150;
+
+    &:hover {
+        @apply text-blue-500;
+        @apply underline;
+    }
+
+    &:focus {
+        @apply outline-none;
+        @apply underline;
+    }
+}

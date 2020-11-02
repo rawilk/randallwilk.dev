@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6efaffcdf1f3fd049ae1667a63582676",
+    "content-hash": "71f1db8be65a6ba60e4293b4e231381a",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3515,6 +3515,156 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
+        },
+        {
+            "name": "rawilk/laravel-casters",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rawilk/laravel-casters.git",
+                "reference": "ecda97202297d83d6706da1a6628dd8abfa786c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rawilk/laravel-casters/zipball/ecda97202297d83d6706da1a6628dd8abfa786c0",
+                "reference": "ecda97202297d83d6706da1a6628dd8abfa786c0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^7.28|^8.0",
+                "illuminate/support": "^7.28|^8.0",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^9.3",
+                "psalm/plugin-laravel": "^1.4",
+                "vimeo/psalm": "^3.11"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rawilk\\LaravelCasters\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Randall Wilk",
+                    "email": "randall@randallwilk.dev",
+                    "homepage": "https://randallwilk.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A collection of custom casts for Laravel.",
+            "homepage": "https://github.com/rawilk/laravel-casters",
+            "keywords": [
+                "custom casts",
+                "encryption cast",
+                "laravel-casters",
+                "password cast",
+                "rawilk"
+            ],
+            "support": {
+                "issues": "https://github.com/rawilk/laravel-casters/issues",
+                "source": "https://github.com/rawilk/laravel-casters/tree/1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/rawilk",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-21T15:44:49+00:00"
+        },
+        {
+            "name": "rawilk/laravel-form-components",
+            "version": "1.4.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rawilk/laravel-form-components.git",
+                "reference": "4580cd273586f29c58506725019180a191702763"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rawilk/laravel-form-components/zipball/4580cd273586f29c58506725019180a191702763",
+                "reference": "4580cd273586f29c58506725019180a191702763",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/filesystem": "^8.0",
+                "illuminate/support": "^8.0",
+                "illuminate/view": "^8.0",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "blade-ui-kit/blade-heroicons": "^0.2.1",
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "gajus/dindent": "^2.0",
+                "orchestra/testbench": "^6.2",
+                "phpunit/phpunit": "^9.4",
+                "psalm/plugin-laravel": "^1.4",
+                "vimeo/psalm": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rawilk\\FormComponents\\FormComponentsServiceProvider"
+                    ],
+                    "aliases": {
+                        "FormComponents": "Rawilk\\FormComponents\\Facades\\FormComponents"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rawilk\\FormComponents\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Randall Wilk",
+                    "email": "randall@randallwilk.dev",
+                    "homepage": "https://randallwilk.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Set of Blade components for TailwindCSS forms.",
+            "homepage": "https://github.com/rawilk/laravel-form-components",
+            "keywords": [
+                "blade",
+                "date picker",
+                "form",
+                "laravel",
+                "laravel-form-components",
+                "rawilk",
+                "tailwind"
+            ],
+            "support": {
+                "issues": "https://github.com/rawilk/laravel-form-components/issues",
+                "source": "https://github.com/rawilk/laravel-form-components/tree/1.4.9"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/rawilk",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-30T13:07:45+00:00"
         },
         {
             "name": "react/child-process",

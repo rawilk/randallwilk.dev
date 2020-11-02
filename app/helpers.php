@@ -18,3 +18,12 @@ if (! function_exists('isExternalLink')) {
         return ($parsed['host'] ?? '') !== ($parsedSiteUrl['host'] ?? '');
     }
 }
+
+if (! function_exists('defaultLoginRedirect')) {
+    function defaultLoginRedirect(): string
+    {
+        return auth()->user()->is_admin
+            ? '#'
+            : '#';
+    }
+}
