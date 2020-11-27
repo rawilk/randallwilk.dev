@@ -57,7 +57,8 @@ return [
             'name' => 'laravel-form-components',
             'repository' => 'rawilk/laravel-form-components',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
