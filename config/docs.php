@@ -25,7 +25,8 @@ return [
             'name' => 'laravel-settings',
             'repository' => 'rawilk/laravel-settings',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
