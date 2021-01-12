@@ -34,7 +34,8 @@ return [
             'name' => 'laravel-printing',
             'repository' => 'rawilk/laravel-printing',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
