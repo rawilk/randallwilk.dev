@@ -5,12 +5,15 @@ namespace App\Console\Commands\Github;
 use App\Models\Repository;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Collection;
 use Spatie\Packagist\PackagistClient;
 use Spatie\Packagist\PackagistUrlGenerator;
 
-class ImportPackagistDownloadsCommand extends Command
+final class ImportPackagistDownloadsCommand extends Command
 {
-    protected $signature = 'import:packagist-downloads';
+    private const USERNAME = 'rawilk';
+
+    protected $signature = 'import:packagist-downloads {--repo= : Only import downloads for a specific package}';
 
     protected $description = 'Import download counts of packages.';
 
@@ -18,15 +21,7 @@ class ImportPackagistDownloadsCommand extends Command
     {
         $this->info('Importing downloads from Packagist...');
 
-        $client = new Client;
-        $generator = new PackagistUrlGenerator;
-
-        $packagist = new PackagistClient($client, $generator);
-
-        collect($packagist->getPackagesNamesByVendor('rawilk')['packageNames'])
-            ->map(function ($packageName) use ($packagist) {
-                return $packagist->getPackage($packageName)['package'];
-            })
+        $this->getPackages()
             ->each(function ($package) {
                 $name = explode('/', $package['name'])[1];
 
@@ -38,5 +33,21 @@ class ImportPackagistDownloadsCommand extends Command
             });
 
         $this->info('Downloads all synced!');
+    }
+
+    private function getPackages(): Collection
+    {
+        $packagist = new PackagistClient(client: new Client, url: new PackagistUrlGenerator);
+
+        if ($this->option('repo')) {
+            try {
+                return collect([$packagist->getPackage(self::USERNAME . '/' . $this->option('repo'))['package'] ?? null])->filter();
+            } catch (\Exception) {
+                return collect();
+            }
+        }
+
+        return collect($packagist->getPackagesNamesByVendor(self::USERNAME)['packageNames'])
+            ->map(fn ($packageName) => $packagist->getPackage($packageName)['package']);
     }
 }

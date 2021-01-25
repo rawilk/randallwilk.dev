@@ -1,40 +1,24 @@
 .banner {
-    @apply py-8;
-
-    @screen md {
-        @apply py-12;
-    }
-
-    @screen lg {
-        @apply py-16;
-    }
+    @apply py-8
+        md:py-12
+        lg:py-16;
 }
 
 .banner-slogan {
-    @apply font-serif font-bold text-4xl;
-    @apply leading-tight;
-
-    @screen sm {
-        @apply text-5xl;
-    }
-
-    @screen md {
-        @apply text-6xl;
-    }
+    @apply font-serif
+        font-bold
+        text-4xl
+        leading-tight
+        sm:text-5xl
+        md:text-6xl;
 }
 
 .banner-intro {
-    @apply hidden;
-
-    @screen md {
-        @apply block;
-        @apply text-2xl;
-        @apply mt-5;
-    }
-
-    @screen print {
-        @apply block;
-        @apply text-xl;
-        @apply mt-5;
-    }
+    @apply hidden
+        md:block
+        md:text-3xl
+        md:mt-5
+        print:block
+        print:text-xl
+        print:mt-5;
 }

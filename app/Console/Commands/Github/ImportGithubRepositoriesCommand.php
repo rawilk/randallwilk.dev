@@ -9,9 +9,11 @@ use DateTime;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
-class ImportGithubRepositoriesCommand extends Command
+final class ImportGithubRepositoriesCommand extends Command
 {
-    protected $signature = 'import:github-repositories';
+    private const USERNAME = 'rawilk';
+
+    protected $signature = 'import:github-repositories {--repo= : Only import a specific (public) repository}';
 
     protected $description = 'Import public repositories';
 
@@ -19,13 +21,15 @@ class ImportGithubRepositoriesCommand extends Command
     {
         $this->info('Syncing all repositories...');
 
-        $repositories = $api->fetchPublicRepositories('rawilk');
+        $repositories = $this->option('repo')
+            ? $api->fetchRepositoryFor(self::USERNAME, $this->option('repo'))
+            : $api->fetchPublicRepositories(self::USERNAME);
 
         $repositories->each(function (array $repositoryAttributes) use ($api) {
             $this->comment("Importing `{$repositoryAttributes['name']}`...");
 
             /** @var \App\Models\Repository $repository */
-            $repository = Repository::updateOrCreate(['name' => $repositoryAttributes['name'] ?? null], [
+            $repository = Repository::withTrashed()->updateOrCreate(['name' => $repositoryAttributes['name'] ?? null], [
                 'name' => $repositoryAttributes['name'],
                 'description' => $repositoryAttributes['description'],
                 'stars' => $repositoryAttributes['stargazers_count'],
@@ -37,7 +41,7 @@ class ImportGithubRepositoriesCommand extends Command
                 Cache::remember(
                     "repository_topics-{$repository->name}",
                     3600,
-                    fn () => $api->fetchRepositoryTopics('rawilk', $repository->name)
+                    fn () => $api->fetchRepositoryTopics(self::USERNAME, $repository->name)
                 )
             );
         });

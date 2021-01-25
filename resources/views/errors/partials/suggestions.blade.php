@@ -1,33 +1,30 @@
-<section id="resources" class="section">
+<section id="resources" class="section pt-0 pb-8">
     <div class="wrap">
-        <div class="card gradient gradient-dark text-white">
-            <div class="grid-rows gap-8 md:grid-cols md:items-center" style="--cols: 1fr 1fr;">
-                <h2 class="title-xl">A few <br>suggestions</h2>
 
-                <ul class="text-2xl links-white links-underline bullets bullets-white mt-4">
-                    <li>
-                    <span class="icon">
-                        <x-heroicon-s-chevron-right />
+        <p class="title-2xl font-sans">A few suggestions</p>
 
-                        <a href="{!! route('home') !!}">Homepage</a>
-                    </span>
-                    </li>
-                    <li>
-                    <span class="icon">
-                        <x-heroicon-s-chevron-right />
+        <x-elements.action-item-list>
 
-                        <a href="{!! route('open-source.packages') !!}">Open source packages</a>
-                    </span>
-                    </li>
-                    <li>
-                    <span class="icon">
-                        <x-heroicon-s-chevron-right />
+            {{-- home --}}
+            <x-elements.action-item href="{!! route('home') !!}" icon="heroicon-o-home">
+                Home page
+            </x-elements.action-item>
 
-                        <a href="{!! route('contact') !!}">Contact</a>
-                    </span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+            {{-- open source packages --}}
+            <x-elements.action-item href="{!! route('open-source.packages') !!}" icon="heroicon-o-tag">
+                Open source packages
+            </x-elements.action-item>
+
+            {{-- contact --}}
+            <x-elements.action-item href="{!! route('contact') !!}" icon="heroicon-o-chat">
+                Contact
+            </x-elements.action-item>
+
+            {{-- docs --}}
+            <x-elements.action-item href="{!! route('docs') !!}" icon="heroicon-o-document-text">
+                Docs
+            </x-elements.action-item>
+
+        </x-elements.action-item-list>
     </div>
 </section>

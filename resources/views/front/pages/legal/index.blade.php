@@ -10,22 +10,20 @@
         </div>
     </section>
 
-    <div class="section section-group pt-0">
-        <section>
-            <div class="wrap wrap-6 items-start">
-                <div class="sm:col-span-3 line-l">
-                    <h2 class="title-sm">Policies & disclaimers</h2>
+    <section class="section pt-0">
+        <div class="wrap sm:grid sm:grid-cols-6">
+            <div class="sm:col-span-3 border-l-4 pl-4 border-blue-gray-400">
+                <h2 class="title-sm">Policies & disclaimers</h2>
 
-                    <ul class="links-underline links-blue">
-                        <li class="mt-4">
-                            <a href="{!! route('legal.disclaimer') !!}">Disclaimer</a>
-                        </li>
-                        <li class="mt-4">
-                            <a href="{!! route('legal.privacy') !!}">Privacy policy</a>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="links-underline links-black">
+                    <li class="mt-4">
+                        <a href="{!! route('legal.disclaimer') !!}">Disclaimer</a>
+                    </li>
+                    <li class="mt-2">
+                        <a href="{!! route('legal.privacy') !!}">Privacy policy</a>
+                    </li>
+                </ul>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 </x-page>

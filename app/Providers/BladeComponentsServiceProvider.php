@@ -1,14 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 
-class BladeComponentsServiceProvider extends ServiceProvider
+final class BladeComponentsServiceProvider extends ServiceProvider
 {
-    public function register(): void
+    public function boot(): void
     {
-        Blade::component('layouts.base', 'page');
+        $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
+            foreach (Config::get('app-blade-components.components', []) as $alias => $component) {
+                $blade->component($component['class'], $alias);
+            }
+
+            $blade->component('layouts.base', 'page');
+            $blade->component('layouts.admin.base', 'admin-app');
+        });
     }
 }

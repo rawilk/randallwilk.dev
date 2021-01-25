@@ -8,16 +8,16 @@
         </div>
     </section>
 
-    <section class="section section-group">
+    <section class="section pt-0">
         @foreach ($repositories->groupBy('category') as $category => $repositories)
             <div class="wrap">
-                <h2 class="title line-after mb-12">{{ $category }}</h2>
+                <h2 class="title line-after mb-8">{{ $category }}</h2>
             </div>
 
             <div class="wrap mb-24">
-                <div class="grid col-gap-6 row-gap-8 sm:grid-cols-2 items-stretch">
+                <x-elements.action-item-list>
                     @each('front.pages.docs.partials.repository', $repositories, 'repository')
-                </div>
+                </x-elements.action-item-list>
             </div>
         @endforeach
     </section>

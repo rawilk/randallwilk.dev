@@ -1,36 +1,19 @@
-.title-2xl {
-    @apply font-serif font-bold text-4xl;
-    display: inline-block;
-    margin-top: 0;
-    margin-bottom: 3rem;
-    padding-top: .25em;
-    line-height: 1;
-
-    @screen print {
-        margin-top: 1cm;
-    }
-
-    @screen sm {
-        @apply text-5xl;
-    }
-}
-
-.title-xl {
-    @apply text-4xl font-serif font-bold leading-tight;
-
-    @screen sm {
-        @apply text-5xl;
-    }
-}
-
 .title {
-    @apply text-2xl font-display font-bold leading-tight;
+    @apply text-2xl font-sans font-bold leading-tight;
+}
+
+.title-2xl {
+    @apply font-bold
+        font-serif
+        text-4xl
+        inline-block
+        mt-0
+        mb-12
+        pt-1
+        leading-none
+        sm:text-5xl;
 }
 
 .title-sm {
-    @apply font-display font-bold uppercase leading-tight;
-}
-
-.title-subtext {
-    @apply text-xs font-display font-bold uppercase leading-tight mt-2;
+    @apply font-sans font-bold uppercase leading-tight;
 }

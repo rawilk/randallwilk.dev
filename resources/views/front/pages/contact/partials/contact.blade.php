@@ -1,7 +1,5 @@
-<section id="email" class="section pb-0">
-    <div class="wrap">
-        <h1 class="title-2xl">Contact</h1>
-    </div>
+<section id="email">
+
 
     <div class="wrap items-start">
         <div class="markup markup-lists links-underline links-black">
@@ -15,7 +13,7 @@
                 I also have various social networking profiles:
             </p>
 
-            <ul class="sm:pl-10">
+            <ul class="sm:pl-6">
                 @foreach (config('site.contact.social') as $name => $url)
                     <li>
                         {!! $name !!}: <a href="{!! $url !!}" target="_blank" rel="nofollow noreferrer noopener">{!! $url !!}</a>

@@ -46,6 +46,7 @@ return [
                 'master' => 'v6',
             ],
             'category' => 'Vue',
+            'archived' => true,
         ],
         [
             'name' => 'laravel-casters',
