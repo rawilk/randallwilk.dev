@@ -15,7 +15,8 @@ return [
             'name' => 'laravel-breadcrumbs',
             'repository' => 'rawilk/laravel-breadcrumbs',
             'branches' => [
-                'master' => 'v2',
+                'master' => 'v3',
+                'v2' => 'v2',
                 'v1' => 'v1',
             ],
             'category' => 'Laravel',
@@ -24,7 +25,8 @@ return [
             'name' => 'laravel-settings',
             'repository' => 'rawilk/laravel-settings',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
@@ -32,7 +34,8 @@ return [
             'name' => 'laravel-printing',
             'repository' => 'rawilk/laravel-printing',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
@@ -43,12 +46,14 @@ return [
                 'master' => 'v6',
             ],
             'category' => 'Vue',
+            'archived' => true,
         ],
         [
             'name' => 'laravel-casters',
             'repository' => 'rawilk/laravel-casters',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
@@ -56,7 +61,9 @@ return [
             'name' => 'laravel-form-components',
             'repository' => 'rawilk/laravel-form-components',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v3',
+                'v2' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],

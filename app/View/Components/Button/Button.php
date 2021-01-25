@@ -8,16 +8,42 @@ use App\View\Components\BladeComponent;
 
 class Button extends BladeComponent
 {
-    public string $variant;
-    public bool $block;
-    public bool $icon;
-    public string $containerClass;
+    public function __construct(
+        public string $variant = 'secondary',
+        public bool $block = false,
+        public bool $icon = false,
+        public string $containerClass = '',
+        public bool $rounded = false,
+        public null|string $size = 'md',
+        public null|string $href = null
+    ) {}
 
-    public function __construct(string $variant = 'primary', bool $block = false, bool $icon = false, string $containerClass = '')
+    public function buttonClass(): string
     {
-        $this->variant = $variant;
-        $this->block = $block;
-        $this->icon = $icon;
-        $this->containerClass = $containerClass;
+        return collect([
+            'relative',
+            'button',
+            $this->variant ? "button--{$this->variant}" : null,
+            $this->block ? 'w-full button--block' : null,
+            $this->icon ? 'button--icon' : null,
+            $this->rounded ? 'rounded-full' : null,
+            $this->size ? "button--{$this->size}" : null,
+        ])->filter()->implode(' ');
+    }
+
+    public function tag(): string
+    {
+        return $this->href ? 'a' : 'button';
+    }
+
+    public function containerClass(): string
+    {
+        return collect([
+            'relative',
+            'inline-flex',
+            'button-container',
+            $this->block ? 'w-full button--block' : null,
+            $this->containerClass,
+        ])->filter()->implode(' ');
     }
 }

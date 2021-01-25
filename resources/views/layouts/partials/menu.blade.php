@@ -1,4 +1,7 @@
 {!! Menu::main()
-        ->addClass('md:grid md:grid-flow-col md:gap-12 md:justify-between print:hidden')
-        ->setActiveClass('font-display-bold')
+        ->withoutWrapperTag()
+        ->withoutParentTag()
+        ->addItemClass('text-base font-medium text-gray-500 hover:text-gray-900')
+        ->setActiveClass('text-gray-900 font-semibold')
+        ->setActiveClassOnLink()
 !!}

@@ -2,14 +2,24 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\LocalizesDates;
 use App\Models\Enums\RepositoryType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class Repository extends BaseModel
 {
+    use SoftDeletes;
+    use LocalizesDates;
+
+    public const TYPES = [
+        'package' => 'Package',
+        'project' => 'Project',
+    ];
+
     protected $casts = [
         'new' => 'boolean',
         'visible' => 'boolean',
@@ -48,6 +58,11 @@ class Repository extends BaseModel
         return "https://github.com/rawilk/{$this->name}";
     }
 
+    public function getShowUrlAttribute(): string
+    {
+        return route('admin.repositories.show', $this);
+    }
+
     public function getFullNameAttribute(): string
     {
         return "rawilk/{$this->name}";
@@ -63,9 +78,37 @@ class Repository extends BaseModel
         return $colors[$this->language] ?? 'gray';
     }
 
+    public function getTypeBackgroundColorAttribute(): string
+    {
+        return [
+            'project' => 'bg-blue-200',
+            'package' => 'bg-green-200',
+        ][$this->type] ?? 'bg-gray-200';
+    }
+
     public static function getTotalDownloads(): int
     {
-        return static::sum('downloads');
+        return self::sum('downloads');
+    }
+
+    public function isNpmPackage(): bool
+    {
+        return $this->language === 'JavaScript';
+    }
+
+    public function hasDocs(): bool
+    {
+        return collect(config('docs.repositories'))->keyBy('name')->has($this->name);
+    }
+
+    public function getDownloadsForHumansAttribute(): string
+    {
+        return number_format($this->downloads);
+    }
+
+    public function getStarsForHumansAttribute(): string
+    {
+        return number_format($this->stars);
     }
 
     public function setTopics(Collection $topics): self
@@ -95,13 +138,6 @@ class Repository extends BaseModel
     public function scopeHighlighted(Builder $query): void
     {
         $query->where('highlighted', true);
-    }
-
-    public function scopeSearch(Builder $query, string $search): void
-    {
-        if ($search) {
-            $query->where('name', 'LIKE', "%{$search}%");
-        }
     }
 
     public function scopeApplySort(Builder $query, string $sort): void

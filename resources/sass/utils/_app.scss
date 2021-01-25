@@ -1,0 +1,15 @@
+[x-cloak] {
+    display: none;
+}
+
+.info-list-item:nth-child(odd) {
+    @apply bg-blue-gray-50;
+}
+
+.info-list-item:nth-child(even) {
+    @apply bg-white;
+}
+
+.z-top {
+    z-index: 9999;
+}

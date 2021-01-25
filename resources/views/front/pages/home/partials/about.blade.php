@@ -1,4 +1,4 @@
-<section id="about" class="mt-20">
+<section id="about" class="mt-10 pb-20">
     <div class="wrap">
         <div class="markup">
             <h1 class="title-2xl">About</h1>

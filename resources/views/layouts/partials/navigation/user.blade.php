@@ -1,0 +1,1 @@
+<livewire:profile.profile-navigation />

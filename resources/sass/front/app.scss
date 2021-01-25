@@ -1,34 +1,35 @@
-@tailwind base;
-@tailwind components;
+@charset "UTF-8";
 
+@import '../utils/bootstrap';
+@import '../vendor/vendor';
+@import '../vendor/prism';
+
+// Front specific styles...
 @import 'bootstrap';
-@import 'highlight';
-@import 'utils/algolia';
-@import 'form';
 
-@import 'utils/alert';
-@import 'utils/banner';
-@import 'utils/bullets';
-@import 'utils/button';
-@import 'utils/card';
-@import 'utils/cell';
-@import 'utils/char';
-@import 'utils/counter';
-@import 'utils/docs-nav';
-@import 'utils/font';
-@import 'utils/footer';
-@import 'utils/justify-items';
-@import 'utils/gradient';
-@import 'utils/grid';
-@import 'utils/icon';
-@import 'utils/line';
-@import 'utils/links';
-@import 'utils/markup';
-@import 'utils/section';
-@import 'utils/select';
-@import 'utils/submenu';
-@import 'utils/table';
-@import 'utils/title';
-@import 'utils/wrap';
+@layer components {
+    @import '../utils/app';
+    @import '../utils/alert';
+    @import '../utils/badge';
+    @import '../utils/button';
+    @import '../utils/dropdown';
+    @import '../utils/form';
+    @import '../utils/links';
+    @import '../utils/modal';
+    @import '../utils/tooltip';
 
-@tailwind utilities;
+    // Front specific utils...
+    @import 'utils/actions';
+    @import 'utils/algolia';
+    @import 'utils/banner';
+    @import 'utils/char';
+    @import 'utils/counter';
+    @import 'utils/docs';
+    @import 'utils/docs-nav';
+    @import 'utils/line';
+    @import 'utils/links';
+    @import 'utils/markup';
+    @import 'utils/section';
+    @import 'utils/title';
+    @import 'utils/wrap';
+}

@@ -1,4 +1,4 @@
-<div class="alert alert-{{ $type }} {{ $border ? 'alert--border' : '' }}"
+<div class="alert alert--{{ $type }} {{ $border ? 'alert--border' : '' }}"
      @if ($dismiss)
      x-data="{ open: true }"
      x-show="open"

@@ -18,6 +18,7 @@ final class BladeComponentsServiceProvider extends ServiceProvider
             }
 
             $blade->component('layouts.base', 'page');
+            $blade->component('layouts.admin.base', 'admin-app');
         });
     }
 }

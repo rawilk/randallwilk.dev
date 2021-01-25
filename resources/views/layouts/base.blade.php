@@ -1,35 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        @include('layouts.partials.analytics')
-        @include('layouts.partials.meta')
+@php($title = $title ?? '')
+@php($showHeader = $showHeader ?? true)
 
-        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i,900" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{!! mix('css/app.css') !!}">
+@push('head-top')
+    @include('layouts.partials.analytics')
+    @include('layouts.partials.meta')
+@endpush
 
-        @if ($livewire ?? false)
-            <livewire:styles />
+@push('head')
+    @include('layouts.partials.front-styles')
+@endpush
+
+<x-app :title="$title">
+    <div class="flex flex-col min-h-screen bg-gray-50">
+        @if ($showHeader)
+            {{-- header --}}
+            @include('layouts.partials.header')
+
+            @include('layouts.partials.impersonate-banner')
         @endif
 
-        @include('layouts.partials.favicons')
-
-        @stack('head')
-    </head>
-    <body class="flex flex-col min-h-screen bg-gray-50">
-        @include('layouts.partials.header')
-
+        {{-- body --}}
         <main class="flex-grow" role="main">
             {{ $slot }}
         </main>
 
+        {{-- footer --}}
         @include('layouts.partials.footer')
+    </div>
 
-        @if ($livewire ?? false)
-            <livewire:scripts />
-        @endif
-
-        @stack('js')
-    </body>
-</html>
+    {{-- notifications --}}
+    <x-notification />
+</x-app>

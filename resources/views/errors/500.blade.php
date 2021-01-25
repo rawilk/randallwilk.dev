@@ -9,10 +9,10 @@
         </div>
     </section>
 
-    <div class="section section-group pt-0">
+    <div class="section pt-0">
         @include('errors.partials.suggestions')
 
-        <section class="section">
+        <section class="section pt-0">
             <div class="wrap">
                 <p class="text-2xl">
                     If you still need help, just contact me so I can help you out.

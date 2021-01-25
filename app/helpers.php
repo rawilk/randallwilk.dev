@@ -22,8 +22,37 @@ if (! function_exists('isExternalLink')) {
 if (! function_exists('defaultLoginRedirect')) {
     function defaultLoginRedirect(): string
     {
-        return auth()->user()->is_admin
-            ? '#'
-            : '#';
+        return auth()->user()?->is_admin
+            ? route('admin.dashboard')
+            : route('profile.show');
+    }
+}
+
+if (! function_exists('appTimezone')) {
+    function appTimezone(): string {
+        return config('site.timezone');
+    }
+}
+
+if (! function_exists('userTimezone')) {
+    function userTimezone(): string
+    {
+        return auth()->user()?->timezone ?? appTimezone();
+    }
+}
+
+if (! function_exists('formatPageTitle')) {
+    function formatPageTitle(...$segments): string
+    {
+        return collect($segments)
+            ->flatten()
+            ->implode(' | ');
+    }
+}
+
+if (! function_exists('isImpersonating')) {
+    function isImpersonating(): bool
+    {
+        return session()->has('impersonate');
     }
 }

@@ -44,5 +44,95 @@ return [
             'view' => 'components.alerts.session-alert',
         ],
 
+        'notification' => [
+            'class' => 'components.alerts.notification',
+        ],
+
+        'dropdown' => [
+            'class' => Components\Navigation\Dropdown::class,
+            'view' => 'components.navigation.dropdown',
+        ],
+
+        'dropdown-item' => [
+            'class' => 'components.navigation.dropdown-item',
+        ],
+
+        'admin-page-title' => [
+            'class' => Components\Admin\Layout\PageTitle::class,
+            'view' => 'components.admin.layout.page-title',
+        ],
+
+        'modal' => [
+            'class' => Components\Modal\Modal::class,
+            'view' => 'components.modal.modal',
+        ],
+
+        'dialog-modal' => [
+            'class' => Components\Modal\DialogModal::class,
+            'view' => 'components.modal.dialog-modal',
+        ],
+
+        'slide-over' => [
+            'class' => Components\Modal\SlideOver::class,
+            'view' => 'components.modal.slide-over',
+        ],
+
+        'slide-over-form' => [
+            'class' => Components\Modal\SlideOverForm::class,
+            'view' => 'components.modal.slide-over-form',
+        ],
+
+        'badge' => [
+            'class' => Components\Elements\Badge::class,
+            'view' => 'components.elements.badge',
+        ],
+
+        'info-list' => [
+            'class' => 'components.lists.info-list',
+        ],
+
+        'info-list-item' => [
+            'class' => 'components.lists.info-list-item',
+        ],
+
+        'table' => [
+            'class' => Components\Table\Table::class,
+            'view' => 'components.table.table',
+        ],
+
+        'tr' => [
+            'class' => 'components.table.tr',
+        ],
+
+        'th' => [
+            'class' => 'components.table.th',
+        ],
+
+        'td' => [
+            'class' => 'components.table.td',
+        ],
+
+        'two-column-card-form' => [
+            'class' => 'components.elements.two-column-card-form',
+        ],
+
+        'card' => [
+            'class' => Components\Elements\Card::class,
+            'view' => 'components.elements.card',
+        ],
+
+        'action-menu' => [
+            'class' => 'components.elements.action-menu',
+        ],
+
+        'inner-nav' => [
+            'class' => 'components.navigation.inner-nav',
+        ],
+
+        'inner-nav-item' => [
+            'class' => Components\Navigation\InnerNavItem::class,
+            'view' => 'components.navigation.inner-nav-item',
+        ],
+
     ],
 ];

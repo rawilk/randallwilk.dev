@@ -9,9 +9,9 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 
-class ImportGithubIssuesCommand extends Command
+final class ImportGithubIssuesCommand extends Command
 {
-    protected $signature = 'import:github-issues';
+    protected $signature = 'import:github-issues {--repo= : Only sync issues with a specific repository}';
 
     protected $description = 'Import issues';
 
@@ -19,7 +19,7 @@ class ImportGithubIssuesCommand extends Command
     {
         $this->info('Importing issues from github.');
 
-        Repository::get()->each(function (Repository $repository) use ($api) {
+        $this->repositories()->each(function (Repository $repository) use ($api) {
             $this->comment("Searching for issues in `{$repository->name}`...");
 
             $issues = $api->fetchOpenIssues('rawilk', $repository->name);
@@ -48,7 +48,7 @@ class ImportGithubIssuesCommand extends Command
         $this->info('Issues were imported.');
     }
 
-    protected function cleanupIssuesForRepository(Repository $repository, Collection $currentIssues): void
+    private function cleanupIssuesForRepository(Repository $repository, Collection $currentIssues): void
     {
         $closedIssues = Issue::query()
             ->where('repository_id', $repository->id)
@@ -62,5 +62,12 @@ class ImportGithubIssuesCommand extends Command
         $closedIssues->each->delete();
 
         $this->warn("Deleted {$closedIssues->count()} closed issues.");
+    }
+
+    private function repositories(): Collection
+    {
+        return Repository::query()
+            ->when($this->option('repo'), fn ($query, $name) => $query->where('name', $name))
+            ->get();
     }
 }

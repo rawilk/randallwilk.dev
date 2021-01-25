@@ -27,6 +27,14 @@ class GithubApi
             ->filter(fn ($repo) => $repo['private'] === false);
     }
 
+    // Fetch a single repository
+    public function fetchRepositoryFor(string $username, string $repository): Collection
+    {
+        return $this->fetchPublicRepositories($username)
+            ->filter(fn ($repo) => $repo['name'] === $repository)
+            ->values();
+    }
+
     public function fetchOpenIssues(string $username, string $repository, array $labelFilters = []): Collection
     {
         $api = $this->client->api('issue');
