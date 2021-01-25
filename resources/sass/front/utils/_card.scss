@@ -1,8 +1,0 @@
-.card {
-    @apply px-8 py-8;
-    @apply rounded-lg;
-
-    @screen print {
-        page-break-after: avoid;
-    }
-}

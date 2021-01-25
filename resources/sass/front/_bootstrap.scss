@@ -18,7 +18,11 @@
 }
 
 html {
-    @apply font-display font-normal leading-normal text-black;
+    @apply font-sans
+        font-normal
+        leading-normal
+        text-black;
+
     box-sizing: border-box;
     font-size: 16px;
 
@@ -35,33 +39,25 @@ html {
     }
 }
 
-select:focus,
-input:focus {
-    outline: 0p
-}
-
 a {
-    text-decoration: none;
+    @apply no-underline;
 }
 
 ol,
 ul {
-    list-style: none;
+    @apply list-none;
 }
 
 hr {
-    border: 0;
-    background-color: currentcolor;
+    @apply border-none bg-current;
 }
 
 img,
 svg {
-    display: block;
-    vertical-align: middle;
+    @apply block align-middle;
 }
 
 // From http://valhead.com/2017/06/23/reduced-motion-query/
-
 @media (prefers-reduced-motion: reduce) {
     * {
         animation: none !important;
@@ -85,4 +81,3 @@ svg {
     margin-left: 0;
     margin-right: 0;
 }
-/* purgecss end ignore */

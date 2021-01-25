@@ -1,12 +1,25 @@
-<div class="flex flex-col rounded-lg shadow-md overflow-hidden">
-    <div class="flex-1 bg-white p-6 flex flex-col justify-between">
-        <div class="flex-1">
-            <a href="{{ action([\App\Http\Controllers\DocsController::class, 'repository'], $repository->slug) }}">
-                <h2 class="text-xl leading-7 link-black link-underline">{{ $repository->slug }}</h2>
-            </a>
-            <p class="mt-3 text-base leading-6 text-gray-500">{{ $repository->aliases->last()->slogan }}</p>
-        </div>
+<x-elements.action-item href="{{ action([\App\Http\Controllers\DocsController::class, 'repository'], $repository->slug) }}">
+    @if ($repository->getIcon())
+        <x-slot name="before">
+            <div class="rounded-lg inline-flex p-3 ring-white {{ $repository->iconClass() }}">
+                {{ renderSvg($repository->getIcon()) }}
+            </div>
+        </x-slot>
+    @endif
 
+    <div class="flex items-center space-x-2">
+        <span>{{ $repository->slug }}</span>
+
+        @if ($repository->isArchived())
+            <x-badge class="mt-1" variant="orange">{{ __('front.repositories.archived') }}</x-badge>
+        @endif
+    </div>
+
+    <x-slot name="description">
+        {{ $repository->aliases->last()?->slogan }}
+    </x-slot>
+
+    <x-slot name="extra">
         <div class="mt-6 flex items-center">
             <div class="text-xs grid grid-flow-col gap-2 justify-start items-center">
                 @foreach ($repository->aliases as $alias)
@@ -20,5 +33,5 @@
                 @endforeach
             </div>
         </div>
-    </div>
-</div>
+    </x-slot>
+</x-elements.action-item>

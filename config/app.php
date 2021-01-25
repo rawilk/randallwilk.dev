@@ -179,6 +179,8 @@ return [
         App\Providers\LivewireServiceProvider::class,
         App\Services\Github\GithubServiceProvider::class,
         App\Services\Npm\NpmServiceProvider::class,
+        App\Providers\BreadcrumbsServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
     ],
 
     /*

@@ -1,42 +1,74 @@
 /* purgecss start ignore */
-ul.table-of-contents {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.docs-sidebar {
+    ul {
+        @apply list-none m-0 p-0;
+
+        li {
+            @apply block whitespace-nowrap py-2;
+
+            h2 {
+                @apply block text-black no-underline mb-3 font-semibold text-doc-nav;
+            }
+
+            a {
+                @apply relative block font-semibold text-black no-underline text-doc-nav transition;
+
+                &:hover {
+                    transform: translate3d(5px, 0, 0);
+                }
+            }
+        }
+
+        ul {
+            @apply overflow-hidden;
+
+            li a {
+                @apply pl-4 font-normal leading-tight;
+            }
+        }
+
+        li.active a {
+            @apply font-semibold;
+        }
+
+        li.active a:before {
+            content: '';
+            @apply w-2 h-2 bg-blue-gray-500 rounded-full left-0.5 top-0.5 absolute;
+        }
+    }
+}
+
+.docs-main ul.table-of-contents {
+    @apply list-none m-0 mb-6 p-0;
+
+    p {
+        margin-bottom: 0 !important;
+    }
 
     li {
-        display: block;
-        margin-bottom: .5em;
+        @apply block mb-2;
 
         a {
-            position: relative;
-            font-size: .89em;
-            font-weight: 500;
-            text-decoration: none;
+            @apply relative text-sm font-semibold text-black hover:text-black no-underline;
 
             &:before {
-                content: "# ";
-                @apply text-black;
+                content: '# ';
+                @apply text-blue-500;
             }
         }
     }
 
-    > li > p > a {
-        @apply font-bold;
-    }
-
-    li p {
+    ul {
+        @apply mt-1.5 p-0;
         margin-bottom: 0 !important;
-    }
 
-    li ul li {
-        &:before {
-            display: none;
+        li {
+            @apply pl-6 mb-1;
+
+            a {
+                @apply font-normal;
+            }
         }
-    }
-
-    > li ul {
-        @apply mt-1;
     }
 }
 /* purgecss end ignore */

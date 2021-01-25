@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Repository;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
@@ -20,7 +21,14 @@ class Repositories extends Component
         'sort' => ['except' => '-downloads'],
     ];
 
-    public function render()
+    public function getSearchPlaceholderProperty(): string
+    {
+        return $this->type === 'packages'
+            ? __('front.repositories.package_filter_placeholder')
+            : __('front.repositories.project_filter_placeholder');
+    }
+
+    public function render(): View
     {
         return view('front.livewire.repositories', [
             'repositories' => $this->getRepositories(),
@@ -40,7 +48,7 @@ class Repositories extends Component
         }
 
         $query
-            ->search($this->search)
+            ->search('name', $this->search)
             ->applySort($this->sort);
 
         return $query->get();

@@ -11,8 +11,8 @@
         </div>
     </section>
 
-    <div class="section section-group pt-0">
-        <section class="section">
+    <div class="section pt-0">
+        <section class="section pt-0">
             <div class="wrap">
                 <p class="text-2xl">
                     Even though my site is not available at the moment, <br>you can still reach me.

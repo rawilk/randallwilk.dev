@@ -6,22 +6,20 @@
             <h1 class="banner-slogan">Privacy policy</h1>
 
             <p class="mt-4 print:hidden">
-                <span class="icon mr-2 opacity-50 fill-current text-black">
-                    <x-heroicon-s-chevron-left />
-                </span>
                 <a href="{!! route('legal.index') !!}"
-                   class="link-underline link-blue"
+                   class="link-underline link-black inline-flex items-center space-x-1"
                 >
-                    Legal overview
+                    <x-heroicon-s-chevron-left class="h-4 w-4" />
+
+                    <span>Legal overview</span>
                 </a>
             </p>
         </div>
     </section>
 
-    <div class="section section-group pt-0">
-        <section>
+    <section class="section pt-0">
             <div class="wrap">
-                <div class="markup markup-titles markup-lists counters links-underline links-blue">
+                <div class="markup markup-titles markup-lists counters links-underline links-black">
                     <h2>Why this Privacy Statement</h2>
 
                     <p>
@@ -224,5 +222,4 @@
                 </div>
             </div>
         </section>
-    </div>
 </x-page>

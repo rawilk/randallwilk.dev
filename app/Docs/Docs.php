@@ -37,6 +37,7 @@ class Docs
         return $this->pages
             ->pluck('repository')
             ->unique()
+            ->filter()
             ->map(function (string $repository) {
                 $aliases = $this->pages
                     ->where('repository', $repository)

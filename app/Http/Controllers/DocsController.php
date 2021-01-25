@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Docs\Docs;
 use App\Docs\DocumentationPage;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 
 final class DocsController
 {
-    public function index(Docs $docs)
+    public function index(Docs $docs): View
     {
         return view('front.pages.docs.index', [
             'repositories' => $docs->getRepositories(),
