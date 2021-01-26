@@ -5,6 +5,7 @@ namespace App\Services\Github;
 use Github\Client;
 use Github\ResultPager;
 use Illuminate\Support\Collection;
+use Throwable;
 
 class GithubApi
 {
@@ -41,7 +42,11 @@ class GithubApi
 
         $paginator = new ResultPager($this->client);
 
-        $issues = $paginator->fetchAll($api, 'all', [$username, $repository, ['state' => 'open']]);
+        try {
+            $issues = $paginator->fetchAll($api, 'all', [$username, $repository, ['state' => 'open']]);
+        } catch (Throwable) {
+            $issues = [];
+        }
 
         return collect($issues)->filter(static function (array $issue) use ($labelFilters) {
             if (! empty($issue['pull_request'])) {
