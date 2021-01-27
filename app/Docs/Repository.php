@@ -10,9 +10,9 @@ class Repository
     /** @var \Illuminate\Support\Collection|\App\Docs\Alias[] */
     public Collection $aliases;
 
-    public null|string $category;
-    private null|string $icon = null;
-    private null|bool $archived = null;
+    public null | string $category;
+    private null | string $icon = null;
+    private null | bool $archived = null;
 
     public function __construct(public string $slug, Collection $aliases, DocumentationPage $index)
     {
@@ -25,7 +25,7 @@ class Repository
         return $this->aliases->firstWhere('slug', $alias);
     }
 
-    public function getIcon(): null|string
+    public function getIcon(): null | string
     {
         if (! is_null($this->icon)) {
             return $this->icon;
@@ -37,7 +37,7 @@ class Repository
         };
     }
 
-    public function iconClass(): null|string
+    public function iconClass(): null | string
     {
         return match($this->getIcon()) {
             'laravel' => 'bg-red-50 text-red-700',

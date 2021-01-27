@@ -14,7 +14,8 @@ class Badge extends BladeComponent
         public bool $rounded = false,
         public bool $removeable = false,
         public bool $dot = false
-    ) {}
+    ) {
+    }
 
     public function badgeClass(): string
     {

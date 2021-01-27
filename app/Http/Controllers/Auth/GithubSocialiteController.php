@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 final class GithubSocialiteController
 {
-    private null|string $newUserPassword = null;
+    private null | string $newUserPassword = null;
 
     public function redirect(): RedirectResponse
     {

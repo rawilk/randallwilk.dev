@@ -9,7 +9,9 @@ use Spatie\Menu\Laravel\View;
 
 final class AdminMenuItems
 {
-    public function __construct(private Menu $menu, private string $iconView, private string $submenuView) {}
+    public function __construct(private Menu $menu, private string $iconView, private string $submenuView)
+    {
+    }
 
     public function register(): Menu
     {

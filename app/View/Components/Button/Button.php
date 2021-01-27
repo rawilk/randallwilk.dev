@@ -14,9 +14,10 @@ class Button extends BladeComponent
         public bool $icon = false,
         public string $containerClass = '',
         public bool $rounded = false,
-        public null|string $size = 'md',
-        public null|string $href = null
-    ) {}
+        public null | string $size = 'md',
+        public null | string $href = null
+    ) {
+    }
 
     public function buttonClass(): string
     {

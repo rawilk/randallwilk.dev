@@ -13,5 +13,6 @@ final class Card extends BladeComponent
         public $header = false,
         public $footer = false,
         public bool $roundedOnMobile = true,
-    ) {}
+    ) {
+    }
 }

@@ -12,6 +12,7 @@ final class Dropdown extends BladeComponent
         public bool $right = false,
         public bool $fixedPosition = false,
         public bool $withBackground = false,
-        public null|string $triggerText = null
-    ) {}
+        public null | string $triggerText = null
+    ) {
+    }
 }

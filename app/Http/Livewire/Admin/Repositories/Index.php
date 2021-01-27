@@ -25,8 +25,8 @@ final class Index extends Component
 
     public bool $showDelete = false;
     public bool $showEdit = false;
-    public null|Repository $deleting = null;
-    public null|Repository $editing = null;
+    public null | Repository $deleting = null;
+    public null | Repository $editing = null;
     public string $sortBy = 'name';
     public string $sortDirection = 'asc';
 

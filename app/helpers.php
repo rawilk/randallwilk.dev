@@ -29,7 +29,8 @@ if (! function_exists('defaultLoginRedirect')) {
 }
 
 if (! function_exists('appTimezone')) {
-    function appTimezone(): string {
+    function appTimezone(): string
+    {
         return config('site.timezone');
     }
 }

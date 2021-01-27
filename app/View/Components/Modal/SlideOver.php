@@ -11,14 +11,15 @@ class SlideOver extends BladeComponent
     protected bool $isTenantComponent = true;
 
     public function __construct(
-        public null|string $id = null,
+        public null | string $id = null,
         public bool $wide = true,
-        public null|string $header = null,
-        public null|string $footer = null,
+        public null | string $header = null,
+        public null | string $footer = null,
         public bool $showClose = true,
-    ) {}
+    ) {
+    }
 
-    public function id(): null|string
+    public function id(): null | string
     {
         return $this->id ?? md5((string) $this->attributes->wire('model'));
     }

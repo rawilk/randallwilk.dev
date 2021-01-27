@@ -10,7 +10,7 @@ final class ExpandableMenu implements MenuMacro
 {
     public function register(): void
     {
-        Menu::macro('expandable', function (null|callable $callback = null) {
+        Menu::macro('expandable', function (null | callable $callback = null) {
             /** @var \Spatie\Menu\Laravel\Menu $this */
             $this
                 ->wrap('div', [

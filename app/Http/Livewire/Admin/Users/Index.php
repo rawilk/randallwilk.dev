@@ -21,7 +21,7 @@ final class Index extends Component
 
     public bool $showDelete = false;
     public bool $showDeleteAll = false;
-    public null|User $deleting = null;
+    public null | User $deleting = null;
 
     protected $listeners = [
         'refresh-users' => '$refresh',

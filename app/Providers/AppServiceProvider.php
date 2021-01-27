@@ -9,7 +9,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Builder::macro('search', function (array|string $field, string|null $search) {
+        Builder::macro('search', function (array | string $field, string | null $search) {
             /** @var \Illuminate\Database\Eloquent\Builder $this */
             if (empty($search)) {
                 return $this;

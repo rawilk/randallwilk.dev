@@ -6,7 +6,6 @@ namespace App\Services\Menus;
 
 use App\Services\Menus\Macros\ExpandableMenu;
 use Spatie\Menu\Laravel\Facades\Menu;
-use Spatie\Menu\Laravel\View;
 
 final class AdminMenu
 {
@@ -14,7 +13,9 @@ final class AdminMenu
         ExpandableMenu::class,
     ];
 
-    public function __construct(private string $iconView, private string $submenuView) {}
+    public function __construct(private string $iconView, private string $submenuView)
+    {
+    }
 
     public function register(): void
     {

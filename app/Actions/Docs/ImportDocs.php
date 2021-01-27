@@ -12,13 +12,15 @@ use Illuminate\Support\Facades\File;
 use React\ChildProcess\Process;
 use React\EventLoop\Factory;
 use React\EventLoop\StreamSelectLoop;
-use Spatie\Sheets\Sheets;
 use function React\Promise\all;
+use Spatie\Sheets\Sheets;
 use function WyriHaximus\React\childProcessPromise;
 
 final class ImportDocs
 {
-    public function __construct(private array $updatedRepositoryNames, private null|Command $command = null) {}
+    public function __construct(private array $updatedRepositoryNames, private null | Command $command = null)
+    {
+    }
 
     public function execute(): void
     {

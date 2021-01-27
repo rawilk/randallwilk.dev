@@ -13,7 +13,9 @@ class ImportDocsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(private array $repositoryNames) {}
+    public function __construct(private array $repositoryNames)
+    {
+    }
 
     public function handle(): void
     {

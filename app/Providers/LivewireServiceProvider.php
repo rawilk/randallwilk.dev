@@ -21,7 +21,7 @@ final class LivewireServiceProvider extends ServiceProvider
 
     private function bootMacros(): void
     {
-        Component::macro('notify', function (string|null $message) {
+        Component::macro('notify', function (string | null $message) {
             /** @var \Livewire\Component $this */
             $this->dispatchBrowserEvent('notify', $message);
         });

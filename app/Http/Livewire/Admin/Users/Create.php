@@ -28,7 +28,7 @@ final class Create extends Component
     /*
      * The new user's password.
      */
-    public null|string $password = null;
+    public null | string $password = null;
 
     public function rules(): array
     {

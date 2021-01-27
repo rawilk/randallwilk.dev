@@ -10,10 +10,10 @@ use Illuminate\Support\Str;
 final class Table extends BladeComponent
 {
     public function __construct(
-        public null|string $id = null,
+        public null | string $id = null,
         public bool $border = false,
         public $head = null,
-        public null|string $tbodyRef = null,
+        public null | string $tbodyRef = null,
     ) {
         $this->id = $this->id ?? Str::random(10);
     }
