@@ -40,19 +40,22 @@ final class ImportDocs
         return collect($this->updatedRepositoryNames)
             ->map(fn (string $repositoryName) => $repositoriesWithDocs[$repositoryName] ?? null)
             ->filter()
-            ->flatMap(function (array $repository) {
+            ->map(function (array $repository) {
                 return collect($repository['branches'])
                     ->map(fn (string $alias, string $branch) => [$repository, $alias, $branch])
                     ->toArray();
             })
-            ->mapSpread(function (array $repository, string $alias, string $branch) use ($loop) {
-                $process = $this->createProcessComponent(repository: $repository, branch: $branch, alias: $alias);
+            ->each(function (array $branches) use ($loop) {
+                collect($branches)
+                    ->mapSpread(function (array $repository, string $alias, string $branch) use ($loop) {
+                        $process = $this->createProcessComponent(repository: $repository, branch: $branch, alias: $alias);
 
-                if ($this->command) {
-                    $this->command->info("Created import process for {$repository['name']} {$branch}");
-                }
+                        if ($this->command) {
+                            $this->command->info("Created import process for {$repository['name']} {$branch}");
+                        }
 
-                return childProcessPromise($loop, $process);
+                        return childProcessPromise($loop, $process);
+                    });
             });
     }
 
