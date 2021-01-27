@@ -101,7 +101,8 @@
         @apply text-blue-500 underline break-words transition-colors hover:text-blue-400;
     }
 
-    ul:not(:first-of-type) {
+    ul:not(:first-of-type),
+    ol {
         @apply p-0 pl-6 list-disc m-0 mb-6;
 
         li {
@@ -120,6 +121,14 @@
             code {
                 @apply text-code;
             }
+        }
+    }
+
+    ol {
+        @apply list-decimal;
+
+        li {
+            @apply pl-1;
         }
     }
 
