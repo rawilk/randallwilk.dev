@@ -2,26 +2,25 @@
 
 This repo contains the source code of [my personal website](https://randallwilk.dev).
 
-# Local Development:
+# Local Development
 
 To work on this project on your local machine, you may follow the instructions below. These instructions
 assume you are serving the site  using Laravel Valet out of your `~/Sites` directory:
 
 1. Fork this repository
 2. Open your terminal and `cd` to your `~/Sites` folder
-3. Clone your fork into the `~/Sites/randallwik.dev` folder, by running the following command with your username placed 
-into the {username} slot:
-```bash
-git clone git@github.com:{username}/randallwilk.dev randallwilk.dev
-```
+3. Clone your fork into the `~/Sites/randallwik.dev` folder, by running the following command *with your username placed into the {username} slot*:
+    ```bash
+    git clone git@github.com:{username}/randallwilk.dev randallwilk.dev
+    ```
 4. CD into the new directory you just created:
-```bash
-cd randallwilk.dev
-```
+    ```bash
+    cd randallwilk.dev
+    ```
 5. Run the `setup.sh` bin script, which will take all the steps necessary to prepare your local install:
-```bash
-./bin/setup.sh
-```
+    ```bash
+    ./bin/setup.sh
+    ```
 6. You should also open up a `php artisan tinker` session and create an admin user so the admin panel can be accessed.
 
 # Syncing Upstream Changes Into Your Fork
