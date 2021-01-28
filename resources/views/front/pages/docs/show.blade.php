@@ -87,9 +87,6 @@
         </div>
     </div>
 
-
-{{--    @include('front.pages.docs.partials.breadcrumbs')--}}
-
     <section class="wrap grid pb-24 gap-8 md:grid-cols-3 items-stretch hidden">
         <div class="z-10 print:hidden">
             @include('front.pages.docs.partials.navigation')
