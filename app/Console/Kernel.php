@@ -17,10 +17,10 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command(ImportGithubIssuesCommand::class)->hourly();
         $schedule->command(ImportPackagistDownloadsCommand::class)->hourly();
-        $schedule->command(ImportNpmDownloadsCommand::class)->daily();
-        $schedule->command(ImportGithubRepositoriesCommand::class)->daily();
+        $schedule->command(ImportNpmDownloadsCommand::class)->weekly();
+        $schedule->command(ImportGithubRepositoriesCommand::class)->weekly();
 
-        $schedule->command(ImportDocsFromRepositoriesCommand::class)->everyThirtyMinutes();
+        $schedule->command(ImportDocsFromRepositoriesCommand::class)->runInBackground()->everyThirtyMinutes();
 
         $schedule->command(GenerateSitemapCommand::class)->daily();
     }
