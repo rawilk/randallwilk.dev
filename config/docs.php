@@ -71,7 +71,8 @@ return [
             'name' => 'laravel-ups',
             'repository' => 'rawilk/laravel-ups',
             'branches' => [
-                'master' => 'v1',
+                'master' => 'v2',
+                'v1' => 'v1',
             ],
             'category' => 'Laravel',
         ],
