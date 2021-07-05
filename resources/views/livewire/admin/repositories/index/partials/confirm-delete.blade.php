@@ -11,7 +11,7 @@
     </x-slot>
 
     <x-slot name="footer">
-        <x-button variant="danger"
+        <x-button variant="red"
                   wire:click="deleteRepository"
                   wire:target="deleteRepository"
         >

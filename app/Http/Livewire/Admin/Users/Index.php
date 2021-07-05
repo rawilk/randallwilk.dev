@@ -130,6 +130,7 @@ final class Index extends Component
 
     public function render(): View
     {
+        $this->emit('filters-hidden');
         return view('livewire.admin.users.index.index', [
             'users' => $this->rows,
         ])->layout('layouts.admin.base', ['title' => __('users.page_title')]);

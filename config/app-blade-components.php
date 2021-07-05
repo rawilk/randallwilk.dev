@@ -57,6 +57,10 @@ return [
             'class' => 'components.navigation.dropdown-item',
         ],
 
+        'dropdown-divider' => [
+            'class' => 'components.navigation.dropdown-divider',
+        ],
+
         'admin-page-title' => [
             'class' => Components\Admin\Layout\PageTitle::class,
             'view' => 'components.admin.layout.page-title',
@@ -112,6 +116,11 @@ return [
             'class' => 'components.table.td',
         ],
 
+        'column-select' => [
+            'class' => Components\Table\ColumnSelect::class,
+            'view' => 'components.table.column-select',
+        ],
+
         'two-column-card-form' => [
             'class' => 'components.elements.two-column-card-form',
         ],
@@ -126,12 +135,22 @@ return [
         ],
 
         'inner-nav' => [
-            'class' => 'components.navigation.inner-nav',
+            'class' => Components\Navigation\InnerNav::class,
+            'view' => 'components.navigation.inner-nav',
         ],
 
         'inner-nav-item' => [
             'class' => Components\Navigation\InnerNavItem::class,
             'view' => 'components.navigation.inner-nav-item',
+        ],
+
+        'tooltip' => [
+            'class' => Components\Elements\Tooltip::class,
+            'view' => 'components.elements.tooltip',
+        ],
+
+        'tooltip-help' => [
+            'class' => 'components.elements.tooltip-help',
         ],
 
     ],

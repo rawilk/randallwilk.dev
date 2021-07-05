@@ -64,7 +64,7 @@
                 </div>
 
                 <div>
-                    <x-button type="submit" block variant="primary" wire:target="login">
+                    <x-button type="submit" block variant="blue" wire:target="login">
                         {{ __('Sign in') }}
                     </x-button>
                 </div>

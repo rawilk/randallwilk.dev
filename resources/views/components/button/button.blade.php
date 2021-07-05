@@ -9,9 +9,10 @@
             {{ $attributes->merge(['type' => 'button', 'class' => $buttonClass()]) }}
         @endif
         @if ($wireTarget)
-                wire:loading.attr="disabled"
-                wire:loading.class="button--busy"
+            wire:loading.attr="disabled"
+            wire:loading.class="button--busy"
         @endif
+        {{ $extraAttributes }}
     >
         {{ $slot }}
     </{{ $tag() }}>

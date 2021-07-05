@@ -69,9 +69,9 @@
             <div class="w-0 flex-1 flex">
                 <button wire:click="confirmDelete({{ $repository->id }})"
                         class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-blue-gray-700 font-medium border border-transparent rounded-bl-lg
-                        hover:text-blue-gray-500 transition-colors focus:outline-blue-gray {{ $repository->visible ? 'hover:bg-blue-gray-100' : 'hover:bg-danger-100' }}"
+                        hover:text-blue-gray-500 transition-colors focus:outline-blue-gray {{ $repository->visible ? 'hover:bg-blue-gray-100' : 'hover:bg-red-100' }}"
                 >
-                    <x-heroicon-o-trash class="h-5 w-5 text-danger-400" />
+                    <x-heroicon-o-trash class="h-5 w-5 text-red-400" />
 
                     <span class="ml-3">{{ __('labels.delete_button') }}</span>
                 </button>
@@ -80,7 +80,7 @@
                 <button wire:click="edit({{ $repository->id }})"
                         type="button"
                         class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-blue-gray-700 font-medium border border-transparent rounded-br-lg
-                        hover:text-blue-gray-500 transition-colors focus:outline-blue-gray {{ $repository->visible ? 'hover:bg-blue-gray-100' : 'hover:bg-danger-100' }}"
+                        hover:text-blue-gray-500 transition-colors focus:outline-blue-gray {{ $repository->visible ? 'hover:bg-blue-gray-100' : 'hover:bg-red-100' }}"
                 >
                     <x-heroicon-s-pencil class="h-5 w-5 text-blue-gray-400" />
 

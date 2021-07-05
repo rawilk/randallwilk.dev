@@ -76,7 +76,7 @@
                 {{ __('Cancel') }}
             </x-button>
 
-            <x-button wire:target="save" variant="primary" type="submit" form="edit-repo-form">
+            <x-button wire:target="save" variant="blue" type="submit" form="edit-repo-form">
                 <span>{{ __('Update') }}</span>
 
                 <x-heroicon-s-check />

@@ -1,5 +1,5 @@
 <div>
-    <x-card flush :rounded-on-mobile="false">
+    <x-card flush>
         <x-slot name="header">
             <h2 class="card__title">{{ __('labels.actions') }}</h2>
         </x-slot>
@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="mt-4 flex-shrink-0 sm:mt-0">
-                            <x-button wire:click="impersonate" variant="outline-danger" class="sm:button--lg">
+                            <x-button wire:click="impersonate" variant="outline-red" class="sm:button--lg">
                                 {{ __('users.actions.impersonate_button') }}
                             </x-button>
                         </div>
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="mt-4 flex-shrink-0 sm:mt-0">
-                            <x-button wire:click="confirmDelete" variant="outline-danger" class="sm:button--lg">
+                            <x-button wire:click="confirmDelete" variant="outline-red" class="sm:button--lg">
                                 {{ __('labels.delete_button') }}
                             </x-button>
                         </div>

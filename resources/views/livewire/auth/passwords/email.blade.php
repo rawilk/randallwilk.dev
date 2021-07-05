@@ -21,7 +21,7 @@
                     </x-form-group>
 
                     <div>
-                        <x-button variant="primary" type="submit" block wire:target="sendPasswordResetLink">
+                        <x-button variant="blue" type="submit" block wire:target="sendPasswordResetLink">
                             {{ __('Send password reset link') }}
                         </x-button>
                     </div>

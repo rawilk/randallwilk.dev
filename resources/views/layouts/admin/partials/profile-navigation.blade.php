@@ -1,8 +1,8 @@
 <div>
-    <x-dropdown right>
+    <x-dropdown right width-class="w-screen max-w-md">
         <x-slot name="trigger">
             <button type="button"
-                    class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                    class="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     id="user-menu"
                     aria-haspopup="true"
             >
@@ -34,7 +34,7 @@
             <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                 {{-- profile --}}
                 <a href="{{ route('profile.show') }}" class="-m-3 p-3 flex items-start rounded-lg hover:bg-blue-gray-100 transition-colors focus:outline-blue-gray">
-                    <div class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-primary-500 text-white sm:h-12 sm:w-12">
+                    <div class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
                         <x-heroicon-o-cog class="h-6 w-6" />
                     </div>
 
@@ -51,7 +51,7 @@
                 {{-- horizon --}}
                 @can ('viewHorizon')
                     <a href="{{ route('horizon.index') }}" class="-m-3 p-3 flex items-start rounded-lg hover:bg-blue-gray-100 transition-colors focus:outline-blue-gray">
-                        <div class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-primary-500 text-white sm:h-12 sm:w-12">
+                        <div class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
                             <x-css-database class="h-6 w-6" />
                         </div>
 

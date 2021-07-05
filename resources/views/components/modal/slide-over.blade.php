@@ -4,7 +4,7 @@
             // All focusable element types...
             let selector = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex=\'-1\'])';
 
-            return [...$el.querySelectorAll(selector)]
+            return [...$root.querySelectorAll(selector)]
                 // All non-disabled elements...
                 .filter(el => ! el.hasAttribute('disabled'));
         },
@@ -14,7 +14,7 @@
         prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },
         nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
         prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
-        autofocus() { let focusable = $el.querySelector('[autofocus]'); if (focusable) focusable.focus() },
+        autofocus() { let focusable = $root.querySelector('[autofocus]'); if (focusable) focusable.focus() },
      }"
      x-init="$watch('show', value => value && setTimeout(autofocus, 500))"
      x-on:close.stop="show = false"
@@ -51,7 +51,7 @@
                  x-transition:leave-end="translate-x-full"
                  role="dialog"
                  aria-modal="true"
-                 {{ $attributes->except('wire:model')->merge([
+                 {{ $attributes->except(['wire:model', 'wire:model.defer'])->merge([
                     'class' => 'w-screen ' . ($wide ? 'max-w-2xl' : 'max-w-md')
                  ]) }}
             >
@@ -69,7 +69,7 @@
                         <button x-on:click="show = false"
                                 type="button"
                                 aria-label="{{ __('Close panel') }}"
-                                class="text-blue-gray-300 hover:text-white transition-colors focus:outline-black"
+                                class="text-blue-gray-300 hover:text-white transition-colors focus:outline-blue-gray"
                         >
                             <x-heroicon-s-x class="h-6 w-6" />
                         </button>

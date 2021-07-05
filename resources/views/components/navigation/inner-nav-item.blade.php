@@ -2,10 +2,9 @@
    {{ $attributes->merge(['class' => $linkClass()]) }}
 >
     @if ($icon)
-        <x-dynamic-component
-            :component="$icon"
-            class="{{ $iconClass() }}"
-            aria-hidden="true"
+        <x-dynamic-component :component="$icon"
+                             class="{{ $iconClass() }}"
+                             aria-hidden="true"
         />
     @endif
 

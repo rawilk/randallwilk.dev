@@ -60,7 +60,7 @@
                             <x-heroicon-s-chevron-left class="opacity-75" />
                         </span>
                     @else
-                        <x-button wire:click="previousPage" variant="white" rel="prev" icon aria-label="{{ __('pagination.previous') }}" class="rounded-r-none">
+                        <x-button wire:click="previousPage" variant="white" rel="prev" icon aria-label="{{ __('pagination.previous') }}" class="h-full rounded-r-none" container-class="h-full">
                             <x-heroicon-s-chevron-left />
                         </x-button>
                     @endif
@@ -70,7 +70,7 @@
                         {{-- "Three Dots" Separator --}}
                         @if (is_string($element))
                             <span aria-disabled="true">
-                                <span class="button button--white button--md rounded-none bg-blue-gray-100 button--disabled">{{ $element }}</span>
+                                <span class="button button--white button--md rounded-none bg-blue-gray-100 button--disabled h-full flex items-start">{{ $element }}</span>
                             </span>
                         @endif
 
@@ -80,13 +80,14 @@
                                 <span wire:key="paginator-page-{{ $page }}">
                                     @if ($page === $paginator->currentPage())
                                         <span aria-current="page">
-                                            <span class="button button--white button--md button--disabled rounded-none bg-blue-gray-100 hover:bg-blue-gray-100">
+                                            <span class="h-full button button--white button--md button--disabled rounded-none bg-blue-gray-100 hover:bg-blue-gray-100">
                                                 {{ $page }}
                                             </span>
                                         </span>
                                     @else
                                         <x-button wire:click="gotoPage({{ $page }})"
-                                                  class="rounded-none"
+                                                  class="rounded-none h-full"
+                                                  container-class="h-full"
                                                   variant="white"
                                                   aria-label="{{ __('Go to page :page', ['page' => $page]) }}"
                                         >

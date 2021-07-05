@@ -4,7 +4,7 @@
      x-init="$wire.on('{{ $on }}', () => { clearTimeout(timeout); shown = true; timeout = setTimeout(() => { shown = false }, 2000);  })"
      x-show.transition.opacity.out.duration.1500ms="shown"
      style="display: none;"
-     {{ $attributes->merge(['class' => 'text-sm text-success-600 font-medium leading-5', 'role' => 'alert']) }}
+     {{ $attributes->merge(['class' => 'text-sm text-green-600 font-medium leading-5', 'role' => 'alert']) }}
 >
     <div class="flex-shrink-0">
         <span class="inline-flex">

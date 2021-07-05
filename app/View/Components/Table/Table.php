@@ -10,11 +10,13 @@ use Illuminate\Support\Str;
 final class Table extends BladeComponent
 {
     public function __construct(
-        public null | string $id = null,
+        public null|string $id = null,
         public bool $border = false,
         public $head = null,
-        public null | string $tbodyRef = null,
-    ) {
+        public null|string $tbodyRef = null,
+        public bool $rounded = true,
+    )
+    {
         $this->id = $this->id ?? Str::random(10);
     }
 
@@ -25,12 +27,12 @@ final class Table extends BladeComponent
 
     public function tableClass($extraClasses = null): string
     {
-        return collect([
+        return collect(array_filter([
             'table',
             'min-w-full',
             'divide-y',
-            'divide-cool-gray-200',
+            'divide-blue-gray-200',
             $extraClasses,
-        ])->filter()->implode(' ');
+        ]))->filter()->implode(' ');
     }
 }

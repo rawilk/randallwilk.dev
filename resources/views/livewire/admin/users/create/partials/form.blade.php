@@ -6,7 +6,7 @@
 
         <div class="sm:flex sm:flex-row-reverse items-center space-y-3 sm:space-y-0 my-6">
             <span class="flex w-full rounded-md shadow-sm ml-0 sm:ml-3 sm:w-auto">
-                <x-button type="submit" variant="primary" wire:target="createUser">
+                <x-button type="submit" variant="blue" wire:target="createUser">
                     <span>{{ __('labels.forms.create_button') }}</span>
 
                     <x-heroicon-s-check />

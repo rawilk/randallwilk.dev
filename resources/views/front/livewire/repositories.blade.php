@@ -38,7 +38,7 @@
                         <div class="mb-1 flex items-center space-x-2">
                             @if ($repository->new)
                                 <div>
-                                    <x-badge class="bg-warning-200 text-warning-600">
+                                    <x-badge class="bg-orange-200 text-orange-600">
                                         <span class="uppercase font-bold">{{ __('front.repositories.new') }}</span>
                                     </x-badge>
                                 </div>
@@ -161,12 +161,5 @@
                 </li>
             @endforelse
         </ul>
-
-{{--        @unless(count($repositories))--}}
-{{--            <p class="mt-12 text-lg text-gray-500">--}}
-{{--                It appears there isn't a package I've created for that.--}}
-{{--                <br>Try checking back later.--}}
-{{--            </p>--}}
-{{--        @endunless--}}
     </div>
 </div>

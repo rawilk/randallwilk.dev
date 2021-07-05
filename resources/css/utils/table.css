@@ -1,0 +1,12 @@
+tr.selected {
+    @apply bg-orange-100;
+}
+
+.table-fit {
+    width: 1%;
+    @apply whitespace-nowrap;
+}
+
+td.table-check {
+    justify-content: flex-start;
+}

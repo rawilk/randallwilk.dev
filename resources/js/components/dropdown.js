@@ -2,145 +2,181 @@
  * Dropdown Component Definition.
  */
 
-import findLastIndex from '../../../vendor/rawilk/laravel-form-components/resources/js/util/findLastIndex';
+import { createPopper } from '@popperjs/core';
 
-export default function dropdown(options) {
-    return {
-        open: false,
-        posX: '',
-        posY: '',
-        fixed: false,
-        currentIndex: -1,
-        activeChildren: [],
-        ...options,
+const FOCUSABLE_ELEMENTS = '.dropdown-item:not([disabled]), [role="menuitem"]:not([disabled])';
 
-        get menuStyle() {
-            const style = {};
+const focusElement = (el, menu) => {
+    try {
+        const offsetTop = el.offsetTop;
+        menu.scrollTop = offsetTop || 0;
 
-            if (this.fixed) {
-                style.top = `${this.posY}px`;
-                style.right = `${this.posX}px`;
-            }
-
-            if (! this.open) {
-                style.display = 'none';
-            }
-
-            let styleString = '';
-
-            Object.keys(style).forEach(key => {
-                styleString += `${key}: ${style[key]};`;
-            });
-
-            return styleString;
-        },
-
-        init() {
-
-        },
-
-        toggleMenu() {
-            this.currentIndex = -1;
-            this.open = ! this.open;
-
-            if (this.open) {
-                this.activeChildren = this.getActiveChildren();
-            }
-
-            this.updatePosition();
-        },
-
-        updatePosition() {
-            if (! this.open || ! this.fixed) {
-                return;
-            }
-
-            const trigger = this.$refs.trigger.childNodes[1] || this.$refs.trigger;
-            const width = window.innerWidth;
-
-            const { bottom, right } = trigger.getBoundingClientRect();
-
-            this.posX = width - right;
-            this.posY = bottom;
-        },
-
-        getActiveChildren() {
-            const findChildren = parent => {
-                let children = [];
-
-                for (let child of parent.children) {
-                    if (child.hasAttribute('disabled')) {
-                        continue;
-                    }
-
-                    if (child.hasAttribute('role') && child.getAttribute('role') === 'menuitem') {
-                        children.push(child);
-                    } else if (child.children && child.children.length) {
-                        children = children.concat(findChildren(child));
-                    }
-                }
-
-                return children;
-            };
-
-            return findChildren(this.$refs.menu);
-        },
-
-        onArrowUp() {
-            if (! this.activeChildren.length) {
-                this.currentIndex = -1;
-
-                return;
-            }
-
-            let prevIndex = findLastIndex(this.activeChildren, (c, index) => index < this.currentIndex);
-            if (prevIndex < 0) {
-                prevIndex = this.activeChildren.length - 1;
-            }
-
-            this.currentIndex = prevIndex;
-            this.focusChild(this.activeChildren[this.currentIndex]);
-        },
-
-        onArrowDown() {
-            if (! this.activeChildren.length) {
-                this.currentIndex = -1;
-
-                return;
-            }
-
-            let nextIndex = this.activeChildren.findIndex((c, index) => index > this.currentIndex);
-            if (nextIndex === -1 || (nextIndex + 1) > this.activeChildren.length) {
-                nextIndex = 0;
-            }
-
-            this.currentIndex = nextIndex;
-            this.focusChild(this.activeChildren[this.currentIndex]);
-        },
-
-        onEnd() {
-            if (! this.activeChildren.length) {
-                return;
-            }
-
-            this.focusChild(this.activeChildren[this.activeChildren.length - 1]);
-        },
-
-        onHome() {
-            if (! this.activeChildren.length) {
-                return;
-            }
-
-            this.focusChild(this.activeChildren[0]);
-        },
-
-        focusChild(child) {
-            if (! child || ! child.focus) {
-                return;
-            }
-
-            child.focus();
-        },
-
-    };
+        el.focus();
+    } catch (e) {}
 };
+
+export default (options) => ({
+    open: false,
+    fixed: options.fixed || false,
+    disabled: options.disabled || false,
+    placement: options.placement || 'bottom-start',
+    offset: options.offset,
+    focusedIndex: -1,
+    focusableElements: null,
+    _popper: null,
+
+    get trigger () {
+        if (! this.$refs.trigger) {
+            return this.$root.querySelector('[x-ref="trigger"]');
+        }
+
+        return this.$refs.trigger;
+    },
+
+    closeMenu(refocusTrigger = true) {
+        if (! this.open) {
+            return;
+        }
+
+        this.open = false;
+        this.focusedIndex = -1;
+        this.focusableElements = null;
+
+        if (this._popper) {
+            this._popper.destroy();
+            this._popper = null;
+        }
+
+        if (refocusTrigger) {
+            this.trigger && this.trigger.focus();
+        }
+    },
+
+    openMenu() {
+        if (this.disabled) {
+            return;
+        }
+
+        this._popper = createPopper(this.trigger, this.$refs.menu, {
+            placement: this.placement,
+            strategy: this.fixed ? 'fixed' : 'absolute',
+            modifiers: [
+                {
+                    name: 'offset',
+                    options: {
+                        offset: [0, this.offset],
+                    },
+                },
+                {
+                    name: 'preventOverflow',
+                    options: {
+                        boundariesElement: this.$refs.root,
+                    },
+                },
+            ],
+        });
+
+        this.open = true;
+    },
+
+    toggleMenu() {
+        if (this.open) {
+            return this.closeMenu();
+        }
+
+        this.openMenu();
+    },
+
+    getFocusableElements() {
+        if (this.focusableElements !== null) {
+            return this.focusableElements;
+        }
+
+        return this.focusableElements = this.$refs.menu.querySelectorAll(FOCUSABLE_ELEMENTS);
+    },
+
+    /*
+     * Event handlers...
+     */
+    focusNext() {
+        if (this.disabled) {
+            return;
+        }
+
+        if (! this.open) {
+            this.openMenu();
+
+            return this.$nextTick(() => { this.focusNext(true) });
+        }
+
+        const elements = this.getFocusableElements();
+
+        if (! elements.length) {
+            this.focusedIndex = -1;
+
+            return;
+        }
+
+        this.focusedIndex++;
+        if (this.focusedIndex + 1 > elements.length) {
+            this.focusedIndex = 0;
+        }
+
+        focusElement(elements[this.focusedIndex], this.$refs.menu);
+    },
+
+    focusPrevious() {
+        if (this.disabled) {
+            return;
+        }
+
+        if (! this.open) {
+            this.openMenu();
+
+            return this.$nextTick(() => { this.focusPrevious() });
+        }
+
+        const elements = this.getFocusableElements();
+
+        if (! elements.length) {
+            this.focusedIndex = -1;
+
+            return;
+        }
+
+        this.focusedIndex--;
+        if (this.focusedIndex < 0) {
+            this.focusedIndex = elements.length - 1;
+        }
+
+        focusElement(elements[this.focusedIndex], this.$refs.menu);
+    },
+
+    focusFirst() {
+        const elements = this.getFocusableElements();
+
+        if (! elements.length) {
+            this.focusedIndex = -1;
+
+            return;
+        }
+
+        this.focusedIndex = 0;
+
+        focusElement(elements[this.focusedIndex], this.$refs.menu);
+    },
+
+    focusLast() {
+        const elements = this.getFocusableElements();
+
+        if (! elements.length) {
+            this.focusedIndex = -1;
+
+            return;
+        }
+
+        this.focusedIndex = elements.length - 1;
+
+        focusElement(elements[this.focusedIndex], this.$refs.menu);
+    },
+});

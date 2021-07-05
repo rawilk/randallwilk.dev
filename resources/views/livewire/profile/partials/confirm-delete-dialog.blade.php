@@ -19,7 +19,7 @@
     <x-slot name="footer">
         <x-button wire:click="deleteUser"
                   wire:target="deleteUser"
-                  variant="danger"
+                  variant="red"
         >
             {{ __('users.profile.account_info.confirm_delete_button') }}
         </x-button>

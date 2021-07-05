@@ -6,7 +6,7 @@
     <div class="py-4 space-y-4">
         <div class="px-4 lg:px-0">
             {{-- topbar --}}
-            <x-elements.index-topbar :show-column-filter="false">
+            <x-elements.index-topbar :show-columns="false">
                 <x-dropdown trigger-text="{{ __('Actions') }}" with-background right>
                     <x-dropdown-item wire:click="syncRepos" wire:loading.attr="disabled" wire:target="syncRepos">
                         <x-heroicon-s-refresh wire:loading.class="animate-spin" wire:target="syncRepos" />
@@ -35,7 +35,7 @@
             @empty
                 <li class="col-span-1">
                     <div class="flex items-center space-x-2">
-                        <x-heroicon-o-information-circle class="h-5 w-5 text-danger-400" />
+                        <x-heroicon-o-information-circle class="h-5 w-5 text-red-400" />
 
                         <p class="text-lg text-blue-gray-600 font-medium">
                             {{ __('No repositories found...') }}

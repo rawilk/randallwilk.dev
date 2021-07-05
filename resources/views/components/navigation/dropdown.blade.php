@@ -1,52 +1,53 @@
-<div x-data="dropdown({
-        fixed: {{ $fixedPosition ? 'true' : 'false' }},
-     })"
-     x-init="init()"
-     x-on:click.away="open = false"
-     x-on:keydown.escape.window="open = false"
-     x-on:keydown.arrow-down.prevent="onArrowDown()"
-     x-on:keydown.arrow-up.prevent="onArrowUp()"
-     x-on:keydown.home.prevent="onHome()"
-     x-on:keydown.end.prevent="onEnd()"
+<div x-data="dropdown({ {{ $configToJson() }} })"
+     x-on:keydown.escape.prevent.window="closeMenu"
+     x-on:click.outside="closeMenu(false)"
+     x-on:keydown.tab.prevent="closeMenu"
+     x-on:keydown.arrow-down.prevent="focusNext"
+     x-on:keydown.arrow-up.prevent="focusPrevious"
+     x-on:keydown.home.prevent="focusFirst"
+     x-on:keydown.end.prevent="focusLast"
      wire:ignore.self
-     {{ $attributes->merge(['class' => 'relative']) }}
+     wire:key="drop-{{ \Illuminate\Support\Str::random(3) }}-{{ time() }}"
+     {{ $attributes->class('relative inline-block text-left') }}
 >
-    <div x-ref="trigger"
-         x-on:click="toggleMenu()"
-         x-bind:aria-expanded="JSON.stringify(open)"
-         aria-haspopup="true"
-    >
-        @if ($triggerText)
-            <x-button variant="white">
-                <span>{{ $triggerText }}</span>
+    {{-- trigger --}}
+    <div class="w-full">
+        {{-- default trigger button --}}
+        @includeWhen($triggerText && ! $splitButton, 'components.navigation.partials.dropdown-trigger')
 
-                <x-heroicon-s-chevron-down class="transform transition" x-bind:class="{ 'rotate-180': open }" />
-            </x-button>
-        @else
-            {{ $trigger ?? '' }}
-        @endif
+        {{-- default trigger button - split button --}}
+        @includeWhen($triggerText && $splitButton, 'components.navigation.partials.dropdown-trigger-split')
+
+        {{-- custom trigger --}}
+        @includeWhen(! $triggerText && ! $splitButton, 'components.navigation.partials.dropdown-trigger-custom')
+
+        {{-- custom trigger - split button --}}
+        @includeWhen(! $triggerText && $splitButton, 'components.navigation.partials.dropdown-trigger-custom-split')
     </div>
 
-    <div x-show="open"
+    {{-- menu --}}
+    <div x-ref="menu"
+         x-cloak
          x-transition:enter="transition ease-out duration-100"
          x-transition:enter-start="transform opacity-0 scale-95"
          x-transition:enter-end="transform opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-75"
-         x-transition:leave-start="transform opacity-100 scale-100"
-         x-transition:leave-end="transform opacity-0 scale-95"
-         x-cloak
-         @unless ($withBackground) x-ref="menu" @endunless
-         class="{{ $fixedPosition ? 'fixed z-top' : 'absolute z-10' }} mt-2 @if (! $fixedPosition) {{ $right ? 'origin-top-right right-0' : 'origin-top-left' }} @endif"
-         x-bind:style="menuStyle"
+         x-bind:aria-hidden="JSON.stringify(! open)"
+         x-bind:class="{ 'invisible': ! open }"
+         class="dropdown-menu z-top absolute origin-top-right right-0 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none min-w-48 {{ $widthClass }}"
+         role="menu"
+         aria-orientation="vertical"
+         @unless ($id === false)
+            id="{{ $menuId() }}"
+            aria-labelledby="{{ $triggerId() }}"
+         @endunless
+         tabindex="-1"
     >
-        @if ($withBackground)
-            <div x-ref="menu" class="text-left rounded-md shadow-lg max-w-full min-w-48 bg-white py-1">
-        @endif
+        <div role="none">
+            @includeWhen($withBackground, 'components.navigation.partials.dropdown-menu-standard')
 
-        {{ $slot }}
-
-        @if ($withBackground)
-            </div>
-        @endif
+            @unless ($withBackground)
+                {{ $slot }}
+            @endunless
+        </div>
     </div>
 </div>

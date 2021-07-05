@@ -53,6 +53,4 @@
             </div>
         @endif
     </x-elements.advanced-search>
-
-    <x-removes-flatpickrs />
 </div>

@@ -83,12 +83,12 @@
 
             <x-info-list-item label="{{ __('Marked as New') }}">
                 <span class="sr-only">{{ $repository->new ? __('Yes') : __('No') }}</span>
-                <x-dynamic-component :component="$repository->new ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle'" :class="'w-5 h-5 ' . ($repository->new ? 'text-success-500' : 'text-danger-500')" />
+                <x-dynamic-component :component="$repository->new ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle'" :class="'w-5 h-5 ' . ($repository->new ? 'text-green-500' : 'text-red-500')" />
             </x-info-list-item>
 
             <x-info-list-item label="{{ __('Marked as Featured') }}">
                 <span class="sr-only">{{ $repository->highlighted ? __('Yes') : __('No') }}</span>
-                <x-dynamic-component :component="$repository->highlighted ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle'" :class="'w-5 h-5 ' . ($repository->highlighted ? 'text-success-500' : 'text-danger-500')" />
+                <x-dynamic-component :component="$repository->highlighted ? 'heroicon-o-check-circle' : 'heroicon-o-x-circle'" :class="'w-5 h-5 ' . ($repository->highlighted ? 'text-green-500' : 'text-red-500')" />
             </x-info-list-item>
 
             <x-info-list-item label="{{ __('Repository Created At') }}">

@@ -1,5 +1,5 @@
 <div>
-    <x-card :rounded-on-mobile="false">
+    <x-card>
         <x-slot name="header">
             <h2 class="card__title">{{ __('users.labels.account_info_title') }}</h2>
             <p class="text-sm text-cool-gray-500">
@@ -26,7 +26,7 @@
                 <x-action-message on="account.updated" />
 
                 <x-confirms-password wire:then="updateAccount">
-                    <x-button wire:target="updateAccount,startConfirmingPassword" variant="primary">
+                    <x-button wire:target="updateAccount,startConfirmingPassword" variant="blue">
                         <span>{{ __('labels.forms.save_button') }}</span>
 
                         <x-heroicon-s-check />

@@ -1,5 +1,5 @@
 <div>
-    <x-card :rounded-on-mobile="false">
+    <x-card>
         <x-slot name="header">
             <h2 class="card__title">
                 {{ __('users.labels.profile_info_title') }}
@@ -55,7 +55,7 @@
             <div class="flex justify-end items-center space-x-4">
                 <x-action-message on="profile.updated" />
 
-                <x-button type="submit" form="user-details-form" wire:target="save" variant="primary">
+                <x-button type="submit" form="user-details-form" wire:target="save" variant="blue">
                     <span>{{ __('labels.forms.save_button') }}</span>
 
                     <x-heroicon-s-check />
@@ -65,7 +65,7 @@
     </x-card>
 
     <x-update-title-script function="userInfo" action="profile.updated">
-        const newTitle = $wire.state.name;
+        const newTitle = @this.state['name'];
 
         updateBreadcrumb(newTitle);
     </x-update-title-script>

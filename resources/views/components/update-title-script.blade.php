@@ -1,23 +1,15 @@
-@props(['function' => 'onNameUpdate', 'action'])
-
-{{-- Quick & dirty div so we can access the "$wire" property --}}
-<div x-data
-     x-init="{{ $function }}($wire)"
->
-</div>
+@props(['action'])
 
 @push('js')
 <script>
-    function {{ $function }}($wire) {
-        $wire.on('{{ $action }}', () => {
-            @if ($slot->isEmpty())
-                const newTitle = `Edit ${$wire.state['name']}`;
-            @else
-                {{ $slot }}
-            @endif
+    @this.on('{{ $action }}', () => {
+        @if ($slot->isEmpty())
+            const newTitle = `Edit ${@this.state['name']}`;
+        @else
+            {{ $slot }}
+        @endif
 
-            updatePageTitle(newTitle);
-        });
-    }
+        updatePageTitle(newTitle);
+    });
 </script>
 @endpush

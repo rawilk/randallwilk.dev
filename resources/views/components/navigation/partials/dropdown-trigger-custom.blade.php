@@ -1,0 +1,3 @@
+<div {{ $triggerAttributes() }}>
+    {{ $trigger ?? '' }}
+</div>

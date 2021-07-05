@@ -1,0 +1,28 @@
+* {
+    @apply relative box-border;
+}
+
+[x-cloak] {
+    display: none;
+}
+
+.z-top {
+    z-index: 9999;
+}
+
+.info-list-item:nth-child(odd) {
+    @apply bg-white;
+}
+
+.info-list-item:nth-child(even) {
+    @apply bg-blue-gray-50;
+}
+
+.info-list-item.dimmed {
+    @apply opacity-50 bg-blue-gray-300 text-white;
+}
+
+.info-list-item.dimmed dt,
+.info-list-item.dimmed dd {
+    @apply text-blue-gray-500;
+}

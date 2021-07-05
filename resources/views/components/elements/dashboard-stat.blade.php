@@ -10,7 +10,7 @@
     <div class="flex-grow px-4 py-5 sm:p-6">
         <div class="flex items-center">
             @if ($icon)
-                <div class="flex-shrink-0 bg-primary-500 rounded-md p-3">
+                <div class="flex-shrink-0 bg-blue-500 rounded-md p-3">
                     <x-dynamic-component :component="$icon" class="h-6 w-6 text-white" />
                 </div>
             @endif

@@ -12,6 +12,7 @@
 /public/sitemap.xml
 /public/sitemap_index.xml
 /public/storage
+/public/js/*.txt
 /storage/*.key
 /storage/docs
 /vendor

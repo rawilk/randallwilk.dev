@@ -20,7 +20,7 @@
             prevFocusable() { return this.focusables()[this.prevFocusableIndex()] || this.lastFocusable() },
             nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
             prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
-            autofocus() { let focusable = $el.querySelector('[autofocus]'); if (focusable) focusable.focus() },
+            autofocus() { let focusable = $root.querySelector('[autofocus]'); if (focusable) focusable.focus() },
          }"
          x-init="$watch('show', value => value && setTimeout(autofocus, 500))"
          x-show="show"

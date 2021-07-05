@@ -1,0 +1,24 @@
+.banner {
+    @apply py-8
+    md:py-12
+    lg:py-16;
+}
+
+.banner-slogan {
+    @apply font-serif
+    font-bold
+    text-4xl
+    leading-tight
+    sm:text-5xl
+    md:text-6xl;
+}
+
+.banner-intro {
+    @apply hidden
+    md:block
+    md:text-3xl
+    md:mt-5
+    print:block
+    print:text-xl
+    print:mt-5;
+}

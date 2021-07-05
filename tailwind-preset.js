@@ -1,7 +1,8 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
+
+    mode: 'jit',
 
     purge: {
         content: [
@@ -9,50 +10,45 @@ module.exports = {
             './resources/**/*.html',
             './resources/**/*.js',
             './resources/**/*.php',
-        ],
+            './config/site.php',
 
-        options: {
-            defaultExtractor: content => content.match(/[\w-/.:]+(?<!:)/g) || [],
-            safelist: [/-active$/, /-enter$/, /-leave-to$/, /show$/],
-        },
+            // Vendor
+            './vendor/rawilk/laravel-form-components/resources/js/*.js',
+            './vendor/rawilk/laravel-breadcrumbs/resources/**/*.php',
+            './vendor/rawilk/laravel-form-components/src/**/*.php',
+            './vendor/rawilk/laravel-form-components/resources/**/*.php',
+        ],
     },
 
     plugins: [
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
+
+        // custom plugins
+        require('./resources/js/tailwind-plugins/alert'),
+        require('./resources/js/tailwind-plugins/badge'),
+        require('./resources/js/tailwind-plugins/button'),
     ],
 
-    darkMode: false, // or 'media' or 'class'
-
-    variants: {
-        extend: {
-            backgroundColor: ['even', 'odd'],
-            boxShadow: ['focus-within'],
-        },
-    },
+    darkMode: false,
 
     theme: {
-
-        colors: {
-            transparent: 'transparent',
-            current: 'currentColor',
-            black: '#000',
-            white: '#fff',
-            'blue-gray': colors.blueGray,
-            'cool-gray': colors.coolGray,
-            gray: colors.gray,
-            blue: colors.blue,
-            red: colors.red,
-            rose: colors.rose,
-            green: colors.green,
-            orange: colors.orange,
-        },
 
         extend: {
 
             fontFamily: {
-                sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+                sans: [
+                    'Nunito',
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    'Segoe UI',
+                    'Ubuntu',
+                    'Fira Sans',
+                    'Droid Sans',
+                    'Helvetica Neue',
+                    'sans-serif',
+                ],
             },
 
             minWidth: {
@@ -70,25 +66,18 @@ module.exports = {
                 help: 'help',
             },
 
+            colors: {
+                'blue-gray': colors.blueGray,
+                'cool-gray': colors.coolGray,
+                orange: colors.orange,
+            },
+
             outline: {
                 'blue-gray': [`2px dotted ${colors.blueGray['500']}`, '2px'],
             },
 
         },
 
-    },
-
-    // Helpers...
-
-    colorPalette: (color, defaultColorLevel = '400') => {
-        return {
-            ...Object.assign.apply(
-                {},
-                ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
-                    .map(level => ({ [level]: colors[color][level] }))
-            ),
-            DEFAULT: colors[color][defaultColorLevel],
-        }
     },
 
 };

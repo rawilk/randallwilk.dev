@@ -1,5 +1,5 @@
 <div>
-    <x-card :rounded-on-mobile="false">
+    <x-card>
         <x-slot name="header">
             <h2 class="card__title">{{ __('users.profile.account_info.update_password_title') }}</h2>
             <p class="text-sm text-cool-gray-500">{{ __('users.profile.account_info.update_password_sub_title') }}</p>
@@ -52,7 +52,7 @@
             <div class="flex justify-end items-center space-x-4">
                 <x-action-message on="password.updated" />
 
-                <x-button type="submit" variant="primary" form="update-password-form" wire:target="updatePassword">
+                <x-button type="submit" variant="blue" form="update-password-form" wire:target="updatePassword">
                     <span>{{ __('labels.forms.save_button') }}</span>
 
                     <x-heroicon-s-check />

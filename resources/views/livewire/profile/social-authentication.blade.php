@@ -1,5 +1,5 @@
 <div>
-    <x-card :rounded-on-mobile="false">
+    <x-card>
         <x-slot name="header">
             <h2 class="card__title">{{ __('users.profile.authentication.social_auth_title') }}</h2>
             <p class="text-sm text-cool-gray-500">{{ __('users.profile.authentication.social_auth_sub_title') }}</p>
@@ -24,7 +24,7 @@
                             </p>
 
                             <div class="mt-3">
-                                <x-button variant="danger" wire:click="disconnectFromGithub" wire:target="disconnectFromGithub">
+                                <x-button variant="red" wire:click="disconnectFromGithub" wire:target="disconnectFromGithub">
                                     {{ __('users.profile.authentication.disconnect_from_provider_button', ['provider' => 'GitHub']) }}
                                 </x-button>
                             </div>

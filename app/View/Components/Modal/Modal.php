@@ -6,16 +6,15 @@ namespace App\View\Components\Modal;
 
 use App\View\Components\BladeComponent;
 
-final class Modal extends BladeComponent
+class Modal extends BladeComponent
 {
     public function __construct(
-        public null | string $id = null,
-        public null | string $maxWidth = null,
+        public null|string $id = null,
+        public null|string $maxWidth = null,
         public bool $showClose = true,
-    ) {
-    }
+    ) {}
 
-    public function id(): null | string
+    public function id(): null|string
     {
         return $this->id ?? md5((string) $this->attributes->wire('model'));
     }

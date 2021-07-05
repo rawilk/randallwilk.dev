@@ -1,6 +1,6 @@
-<div {{ $attributes->merge(['class' => 'bg-white overflow-hidden shadow ' . ($roundedOnMobile ? 'rounded-lg' : 'lg:rounded-lg')]) }}>
+<div {{ $attributes->class('bg-white shadow lg:rounded-lg') }}>
     @if ($header)
-        <div class="bg-blue-gray-50 px-4 py-5 sm:px-6">
+        <div class="px-4 py-5 sm:px-6 rounded-t-lg {{ $getHeaderClass() }}">
             {{ $header }}
         </div>
     @endif

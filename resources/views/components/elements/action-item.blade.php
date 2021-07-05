@@ -1,6 +1,6 @@
 @props([
     'icon' => false,
-    'iconClass' => 'bg-primary-50 text-primary-700 ring-white',
+    'iconClass' => 'bg-blue-50 text-blue-700 ring-white',
     'href' => '#',
     'description' => false,
     'extra' => false,

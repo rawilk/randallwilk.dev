@@ -1,21 +1,20 @@
 @props([
-    'role' => 'menuitem',
     'href' => false,
-    'spaceX' => '2',
-    'type' => 'button',
 ])
 
 @if ($href)
-    <a role="{{ $role }}"
+    <a role="menuItem"
        href="{{ $href }}"
-       {{ $attributes->merge(['class' => 'dropdown-item space-x-' . $spaceX]) }}
+       tabindex="-1"
+       {{ $attributes->class('dropdown-item space-x-2') }}
     >
         {{ $slot }}
     </a>
 @else
-    <button type="{{ $type }}"
-            role="{{ $role }}"
-            {{ $attributes->merge(['class' => 'w-full dropdown-item space-x-' . $spaceX]) }}
+    <button type="button"
+            role="menuitem"
+            tabindex="-1"
+            {{ $attributes->class('w-full dropdown-item space-x-2') }}
     >
         {{ $slot }}
     </button>

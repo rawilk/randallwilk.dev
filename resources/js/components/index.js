@@ -1,3 +1,7 @@
 import dropdown from './dropdown';
+import tooltip from './tooltip';
 
-window.dropdown = dropdown;
+export default {
+    dropdown,
+    tooltip,
+};

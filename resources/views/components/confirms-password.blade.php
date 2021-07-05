@@ -39,7 +39,7 @@
     <x-slot name="footer">
         <x-button wire:click="confirmPassword"
                   wire:target="confirmPassword"
-                  variant="primary"
+                  variant="blue"
         >
             {{ $button }}
         </x-button>

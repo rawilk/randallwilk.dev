@@ -15,7 +15,7 @@
     <x-slot name="footer">
         <x-button wire:click="deleteUser"
                   wire:target="deleteUser"
-                  variant="danger"
+                  variant="red"
         >
             {{ __('users.labels.delete_modal_button') }}
         </x-button>

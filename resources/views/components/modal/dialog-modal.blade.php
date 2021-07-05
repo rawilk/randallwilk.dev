@@ -12,7 +12,7 @@
                     {{ $title ?? '' }}
                 </h3>
 
-                <div class="mt-2 text-left">
+                <div class="mt-2 text-left modal-content">
                     {{ $content ?? '' }}
                 </div>
             </div>

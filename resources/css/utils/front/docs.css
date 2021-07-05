@@ -1,0 +1,177 @@
+/* purgecss start ignore */
+.docs-main h1:not(.banner-slogan) {
+    @apply text-4xl font-semibold tracking-normal;
+}
+
+.docs-main p {
+    @apply text-base leading-7 text-black font-light;
+}
+
+.docs-main ol,
+.docs-main p,
+.docs-main ul:not(.table-of-contents) {
+    @apply mb-5;
+}
+
+.docs-main h1,
+.docs-main h2,
+.docs-main h3,
+.docs-main h4,
+.docs-main h5,
+.docs-main h6 {
+    @apply font-normal mb-4;
+}
+
+.docs-main h2 {
+    @apply text-2xl tracking-normal lg:text-3xl mt-6;
+}
+
+.docs-main pre[class*="language-"] + h2 {
+    @apply mt-12;
+}
+
+.docs-main h3,
+.docs-main h4 {
+    @apply tracking-normal font-medium;
+}
+
+.docs-main h3 {
+    @apply text-base lg:text-lg;
+}
+
+.docs-main h4 {
+    @apply text-sm lg:text-base;
+}
+
+.docs-main h2 a,
+.docs-main h3 a,
+.docs-main h4 a {
+    @apply text-blue-500
+        text-2xl
+        lg:text-3xl
+        opacity-75
+        no-underline
+        font-light
+        absolute
+        text-right
+        pr-2
+        -left-6
+        top-0
+        hover:opacity-100;
+}
+
+.docs-main h3 a {
+    @apply text-base lg:text-lg -left-4 top-0;
+}
+
+.docs-main h4 a {
+    @apply text-sm lg:text-base -left-4 top-0;
+}
+
+.docs-main p code {
+    @apply text-code;
+}
+
+.docs-main :not(pre) > code,
+.docs-main pre[class*="language-"] {
+    @apply select-auto bg-code-bg text-blue-600;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+.docs-main pre[class*="language-"] {
+    @apply mb-6 rounded-lg relative flex overflow-hidden;
+}
+
+.docs-main pre[class*="language-"] > code {
+    @apply flex-1 overflow-auto py-2 pl-6;
+}
+
+.docs-main :not(pre) > code {
+    @apply inline-flex py-0 px-1 max-w-full overflow-x-auto;
+}
+
+.docs-main code {
+    @apply font-medium text-code text-black leading-code font-mono;
+}
+
+.docs-main ol a,
+.docs-main p a,
+.docs-main ul:not(.table-of-contents) a {
+    @apply text-blue-500 underline break-words transition-colors hover:text-blue-400;
+}
+
+.docs-main ul:not(:first-of-type),
+.docs-main ol {
+    @apply p-0 pl-6 list-disc m-0 mb-6;
+}
+
+.docs-main ul:not(:first-of-type) li,
+.docs-main ol li {
+    @apply relative p-0 mb-3 text-base text-black leading-7 font-light;
+}
+
+.docs-main ul:not(:first-of-type) li:not(:last-child),
+.docs-main ol li:not(:last-child) {
+    @apply mb-1.5;
+}
+
+.docs-main ul:not(:first-of-type) li code,
+.docs-main ol li code {
+    @apply text-code;
+}
+
+.docs-main ol {
+    @apply list-decimal;
+}
+
+.docs-main ol li {
+    @apply pl-1;
+}
+
+.docs-main table {
+    @apply w-full border-collapse text-sm mb-8;
+}
+
+.docs-main table th,
+.docs-main table td {
+    @apply border border-gray-300 p-4 text-left;
+}
+
+.docs-main table th {
+    @apply text-base;
+}
+
+.docs-main b,
+.docs-main strong {
+    @apply font-medium;
+}
+
+.docs-main blockquote.ignore {
+    @apply border-l-4 border-blue-gray-300 bg-gray-100 pl-4 py-2;
+}
+
+.docs-main blockquote.ignore p {
+    @apply mb-0;
+}
+
+.callout p {
+    @apply mb-0;
+}
+
+pre .copyBtn {
+    @apply absolute
+    right-3
+    top-3
+    h-6
+    w-6
+    outline-none
+    text-gray-600
+    hover:text-white
+    focus:text-white
+    focus:outline-none;
+}
+
+.docs-constrained {
+    max-width: calc(100% - 4rem);
+}
+/* purgecss end ignore */

@@ -10,7 +10,7 @@
                 </p>
             </div>
             <div class="mt-5">
-                <x-button variant="danger" wire:click="confirmUserDeletion">
+                <x-button variant="red" wire:click="confirmUserDeletion">
                     {{ __('users.profile.account_info.delete_account_trigger_button') }}
                 </x-button>
             </div>

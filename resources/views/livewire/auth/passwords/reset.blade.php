@@ -30,7 +30,7 @@
                 </x-form-group>
 
                 <div>
-                    <x-button type="submit" variant="primary" block wire:target="resetPassword">
+                    <x-button type="submit" variant="blue" block wire:target="resetPassword">
                         {{ __('Reset password') }}
                     </x-button>
                 </div>

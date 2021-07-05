@@ -5,7 +5,7 @@
 
             @can('create', \App\Models\User::class)
                 <x-slot name="actions">
-                    <x-button href="{{ route('admin.users.create') }}" variant="primary">
+                    <x-button href="{{ route('admin.users.create') }}" variant="blue">
                         <x-css-math-plus />
 
                         <span>{{ __('labels.forms.add_button', ['item' => __('users.singular')]) }}</span>

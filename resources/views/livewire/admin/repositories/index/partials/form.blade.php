@@ -77,17 +77,17 @@
     </div>
 
     <x-slot name="footer">
-        <div class="flex justify-end space-x-4">
+        <div class="flex flex-row-reverse justify-start space-x-4 space-x-reverse">
+            <x-button wire:target="save" variant="blue" type="submit" form="edit-repo-form">
+                <span>{{ __('Update') }}</span>
+
+                <x-heroicon-s-check />
+            </x-button>
+
             <x-button wire:click="$set('showEdit', false)"
                       variant="white"
             >
                 {{ __('Cancel') }}
-            </x-button>
-
-            <x-button wire:target="save" variant="primary" type="submit" form="edit-repo-form">
-                <span>{{ __('Update') }}</span>
-
-                <x-heroicon-s-check />
             </x-button>
         </div>
     </x-slot>
