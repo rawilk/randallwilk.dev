@@ -7,6 +7,7 @@ use App\Docs\DocumentationPage;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 final class DocsController
 {
@@ -52,6 +53,12 @@ final class DocsController
         $pages = $alias->pages;
 
         $page = $pages->firstWhere('slug', $slug);
+
+        $page->contents = Str::replace(
+            ['{version}'],
+            [$page->alias],
+            $page->contents,
+        );
 
         if (! $page) {
             return redirect()->action([__CLASS__, 'repository'], [$repository->slug, $alias->slug]);
