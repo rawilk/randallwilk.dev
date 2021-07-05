@@ -55,12 +55,10 @@ final class DocsController
         $page = $pages->firstWhere('slug', $slug);
 
         $page->contents = Str::replace(
-            ['{version}', '{branch}'],
+            ['%7Bversion&7D', '%7Bbranch%7D'],
             [$page->alias, $alias->branch],
             $page->contents,
         );
-
-        ray($alias);
 
         if (! $page) {
             return redirect()->action([__CLASS__, 'repository'], [$repository->slug, $alias->slug]);
