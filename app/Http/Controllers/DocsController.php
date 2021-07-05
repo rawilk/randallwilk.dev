@@ -56,7 +56,7 @@ final class DocsController
 
         $page->contents = Str::replace(
             ['%7Bversion&7D', '%7Bbranch%7D'],
-            [$page->alias, $alias->branch],
+            [$alias->slug, $alias->branch],
             $page->contents,
         );
 
