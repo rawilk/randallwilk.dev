@@ -27,10 +27,10 @@ return [
             'name' => 'laravel-settings',
             'repository' => 'rawilk/laravel-settings',
             'branches' => [
-                'master' => 'v2',
+                'main' => 'v2',
                 'v1' => 'v1',
             ],
-            'main_branch' => 'master',
+            'main_branch' => 'main',
             'category' => 'Laravel',
         ],
         [
