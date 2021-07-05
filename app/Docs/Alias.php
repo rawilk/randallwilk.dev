@@ -27,7 +27,8 @@ class Alias
 
     public function isMasterBranch(): bool
     {
-        return $this->branch === 'master';
+        return $this->branch === 'master'
+            || $this->branch === 'main';
     }
 
     public function setNavigation(Collection $navigation): void
