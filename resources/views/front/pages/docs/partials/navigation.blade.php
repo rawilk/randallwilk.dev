@@ -7,7 +7,7 @@
 </div>
 
 <aside x-data="{ navIsOpen: false }"
-       x-on:click.away="navIsOpen = false"
+       x-on:click.outside="navIsOpen = false"
        x-on:keydown.window.escape="navIsOpen = false"
        x-bind:class="{ 'w-64': navIsOpen, 'sticky': ! navIsOpen }"
        x-init="
