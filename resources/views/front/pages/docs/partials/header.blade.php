@@ -21,7 +21,7 @@
                             <option value="/docs/{{ $repository->slug }}/{{ $aliasOption->slug }}"
                                     @if ($page->alias === $aliasOption->slug) selected @endif
                             >
-                                {{ $aliasOption->slug }} @if ($aliasOption->isMasterBranch()) ({{ $aliasOption->branch }}) @endif
+                                {{ $aliasOption->slug }} @if ($aliasOption->isMainBranch()) ({{ $aliasOption->branch }}) @endif
                             </option>
                         @endforeach
                     </x-select>

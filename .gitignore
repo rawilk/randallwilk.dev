@@ -15,6 +15,7 @@
 /public/js/*.txt
 /storage/*.key
 /storage/docs
+/storage/docs-temp
 /vendor
 Homestead.json
 Homestead.yaml

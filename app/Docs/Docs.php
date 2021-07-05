@@ -43,7 +43,7 @@ class Docs
                     ->where('repository', $repository)
                     ->whereNotNull('alias')
                     ->groupBy(fn (DocumentationPage $page) => $page->alias)
-                    ->map(static function (Collection $pages, string $alias) {
+                    ->map(static function (Collection $pages) use ($repository) {
                         $index = $pages->firstWhere('slug', '_index');
                         $pages = $pages
                             ->where('slug', '<>', '_index')
@@ -54,7 +54,8 @@ class Docs
                             $index->slogan,
                             $index->branch,
                             $index->githubUrl,
-                            $pages
+                            $pages,
+                            $repository,
                         );
                     })
                     ->sortBy('slug');

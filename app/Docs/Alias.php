@@ -2,33 +2,38 @@
 
 namespace App\Docs;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Config;
 
 class Alias
 {
-    public string $slug;
-    public string $slogan;
-    public string $branch;
-    public string $githubUrl;
+    protected null|Collection $navigation = null;
+    public string $mainBranchName;
 
-    /** @var \Illuminate\Support\Collection|\App\Docs\DocumentationPage[] */
-    public Collection $pages;
-
-    protected ?Collection $navigation = null;
-
-    public function __construct(string $slug, string $slogan, string $branch, string $githubUrl, Collection $pages)
-    {
-        $this->slug = $slug;
-        $this->slogan = $slogan;
-        $this->branch = $branch;
-        $this->githubUrl = $githubUrl;
-        $this->pages = $pages;
+    public function __construct(
+        public string $slug,
+        public string $slogan,
+        public string $branch,
+        public string $githubUrl,
+        public Collection $pages,
+        public null|string $repository = null,
+    ) {
+        $this->mainBranchName = $this->getMainBranchName();
     }
 
-    public function isMasterBranch(): bool
+    public function isMainBranch(): bool
     {
-        return $this->branch === 'master'
-            || $this->branch === 'main';
+        return $this->branch === $this->mainBranchName;
+    }
+
+    private function getMainBranchName(): string
+    {
+        $config = collect(Config::get('docs.repositories'))
+            ->where('name', $this->repository)
+            ->first();
+
+        return Arr::get($config, 'main_branch', 'main');
     }
 
     public function setNavigation(Collection $navigation): void

@@ -9,6 +9,7 @@ return [
                 'master' => 'v2',
                 'v1' => 'v1',
             ],
+            'main_branch' => 'master',
             'category' => 'Laravel',
         ],
         [
@@ -19,6 +20,7 @@ return [
                 'v2' => 'v2',
                 'v1' => 'v1',
             ],
+            'main_branch' => 'master',
             'category' => 'Laravel',
         ],
         [
@@ -28,6 +30,7 @@ return [
                 'master' => 'v2',
                 'v1' => 'v1',
             ],
+            'main_branch' => 'master',
             'category' => 'Laravel',
         ],
         [
@@ -37,6 +40,7 @@ return [
                 'master' => 'v2',
                 'v1' => 'v1',
             ],
+            'main_branch' => 'master',
             'category' => 'Laravel',
         ],
         [
@@ -46,6 +50,7 @@ return [
                 'master' => 'v6',
             ],
             'category' => 'Vue',
+            'main_branch' => 'master',
             'archived' => true,
         ],
         [
@@ -55,6 +60,7 @@ return [
                 'master' => 'v2',
                 'v1' => 'v1',
             ],
+            'main_branch' => 'master',
             'category' => 'Laravel',
         ],
         [
@@ -67,6 +73,7 @@ return [
                 'v2' => 'v2',
                 'v1' => 'v1',
             ],
+            'main_branch' => 'main',
             'category' => 'Laravel',
         ],
         [
@@ -76,6 +83,7 @@ return [
                 'master' => 'v2',
                 'v1' => 'v1',
             ],
+            'main_branch' => 'master',
             'category' => 'Laravel',
         ],
     ],

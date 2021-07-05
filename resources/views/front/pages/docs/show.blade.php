@@ -36,7 +36,7 @@
                                 </blockquote>
                             @endif
 
-                            @unless ($alias->isMasterBranch())
+                            @unless ($alias->isMainBranch())
                                 <blockquote>
                                     <p>
                                         {note}
@@ -72,7 +72,7 @@
                     <div class="pt-4 pb-6 mt-4 border-t-2 border-blue-gray-300">
                         <p class="text-sm">
                             Caught a mistake?
-                            <a href="{{ $alias->githubUrl }}/blob/{{ $alias->isMasterBranch() ? 'master' : $alias->slug }}/docs/{{ $page->slug }}.md"
+                            <a href="{{ $alias->githubUrl }}/blob/{{ $alias->isMainBranch() ? $alias->mainBranchName : $alias->slug }}/docs/{{ $page->slug }}.md"
                                class="link-black link-underline inline-flex items-center space-x-1"
                                target="_blank"
                                rel="nofollow noopener noreferrer"
