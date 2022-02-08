@@ -67,7 +67,8 @@ return [
             'name' => 'laravel-form-components',
             'repository' => 'rawilk/laravel-form-components',
             'branches' => [
-                'main' => 'v6',
+                'main' => 'v7',
+                'v6' => 'v6',
                 'v5' => 'v5',
                 'v4' => 'v4',
                 'v3' => 'v3',
