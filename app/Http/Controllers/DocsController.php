@@ -55,7 +55,7 @@ final class DocsController
         $page = $pages->firstWhere('slug', $slug);
 
         $page->contents = Str::replace(
-            ['%7Bversion&7D', '%7Bbranch%7D', '{version}', '{branch}'],
+            ['%7Bversion%7D', '%7Bbranch%7D', '{version}', '{branch}'],
             [$alias->slug, $alias->branch, $alias->slug, $alias->branch],
             $page->contents,
         );
