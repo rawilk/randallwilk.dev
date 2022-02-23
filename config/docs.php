@@ -6,21 +6,21 @@ return [
             'name' => 'laravel-app-key-rotator',
             'repository' => 'rawilk/laravel-app-key-rotator',
             'branches' => [
-                'master' => 'v2',
+                'main' => 'v2',
                 'v1' => 'v1',
             ],
-            'main_branch' => 'master',
+            'main_branch' => 'main',
             'category' => 'Laravel',
         ],
         [
             'name' => 'laravel-breadcrumbs',
             'repository' => 'rawilk/laravel-breadcrumbs',
             'branches' => [
-                'master' => 'v3',
+                'main' => 'v3',
                 'v2' => 'v2',
                 'v1' => 'v1',
             ],
-            'main_branch' => 'master',
+            'main_branch' => 'main',
             'category' => 'Laravel',
         ],
         [
@@ -58,10 +58,10 @@ return [
             'name' => 'laravel-casters',
             'repository' => 'rawilk/laravel-casters',
             'branches' => [
-                'master' => 'v2',
+                'main' => 'v2',
                 'v1' => 'v1',
             ],
-            'main_branch' => 'master',
+            'main_branch' => 'main',
             'category' => 'Laravel',
         ],
         [
