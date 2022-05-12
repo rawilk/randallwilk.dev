@@ -89,5 +89,14 @@ return [
             'main_branch' => 'main',
             'category' => 'Laravel',
         ],
+        [
+            'name' => 'yubikey-u2f',
+            'repository' => 'rawilk/yubikey-u2f',
+            'branches' => [
+                'main' => 'v1',
+            ],
+            'main_branch' => 'main',
+            'category' => 'Laravel',
+        ],
     ],
 ];
