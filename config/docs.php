@@ -90,6 +90,15 @@ return [
             'category' => 'Laravel',
         ],
         [
+            'name' => 'laravel-webauthn',
+            'repository' => 'rawilk/laravel-webauthn',
+            'branches' => [
+                'main' => 'v1',
+            ],
+            'main_branch' => 'main',
+            'category' => 'Laravel',
+        ],
+        [
             'name' => 'yubikey-u2f',
             'repository' => 'rawilk/yubikey-u2f',
             'branches' => [
