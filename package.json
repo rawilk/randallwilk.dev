@@ -1,24 +1,14 @@
 {
-    "name": "randallwilk",
     "private": true,
-    "scripts": {},
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
     "devDependencies": {
-        "@fullhuman/postcss-purgecss": "^4.0.3",
-        "@popperjs/core": "^2.9.2",
-        "@ryangjchandler/alpine-clipboard": "^2.0.0",
-        "@tailwindcss/aspect-ratio": "^0.2.1",
-        "@tailwindcss/forms": "^0.3.3",
-        "@tailwindcss/typography": "^0.4.1",
-        "alpinejs": "^3.2.1",
-        "babel-plugin-prismjs": "^2.0.1",
-        "clipboard": "^2.0.8",
-        "cross-env": "^7.0.3",
-        "flatpickr": "^4.6.9",
-        "laravel-mix": "^6.0.25",
-        "postcss-import": "^14.0.2",
-        "prismjs": "^1.24.0",
-        "resolve-url-loader": "^4.0.0",
-        "sortablejs": "^1.13.0",
-        "tailwindcss": "^2.2.4"
+        "axios": "^0.27",
+        "laravel-vite-plugin": "^0.5.0",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14",
+        "vite": "^3.0.0"
     }
 }

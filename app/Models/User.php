@@ -1,56 +1,44 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Models;
 
-use App\Models\Concerns\HasAvatar;
-use App\Models\Concerns\LocalizesDates;
-use App\Observers\UserObserver;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Rawilk\LaravelCasters\Casts\Password;
-use Rawilk\LaravelCasters\Support\Name;
+use Laravel\Sanctum\HasApiTokens;
 
-final class User extends Authenticatable
+class User extends Authenticatable
 {
-    use Notifiable, HasFactory;
-    use LocalizesDates;
-    use HasAvatar;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    protected $guarded = ['id'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
-        'is_admin' => 'bool',
-        'password' => Password::class,
-        'name' => Name::class,
+        'email_verified_at' => 'datetime',
     ];
-
-    public function getEditUrlAttribute(): string
-    {
-        return route('admin.users.edit', $this);
-    }
-
-    public function impersonate(): void
-    {
-        if (! Session::has('impersonate')) {
-            Session::put('impersonate', Auth::id());
-        }
-
-        Auth::loginUsingId($this->id);
-
-        redirect()->route('profile.show');
-    }
-
-    protected static function booted(): void
-    {
-        self::observe(UserObserver::class);
-    }
 }

@@ -18,6 +18,7 @@ return [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
     ],
 
     'postmark' => [
@@ -28,25 +29,6 @@ return [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-    ],
-
-    'github' => [
-        'username' => env('GITHUB_USERNAME'),
-        'token' => env('GITHUB_TOKEN'),
-        'docs_access_token' => env('GITHUB_ACCESS_TOKEN'),
-        'webhook_secret' => env('GITHUB_WEBHOOK_SECRET'),
-        'client_id' => env('GITHUB_CLIENT_ID'),
-        'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => env('GITHUB_CALLBACK_URL'),
-    ],
-
-    'algolia' => [
-        'key' => env('ALGOLIA_API_KEY'),
-        'index' => env('ALGOLIA_INDEX_NAME'),
-    ],
-
-    'horizon' => [
-        'email' => env('HORIZON_EMAIL'),
     ],
 
 ];
