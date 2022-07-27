@@ -57,7 +57,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install --no-interaction --prefer-dist --optimize-loader
+          composer install --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Generate key
         run: php artisan key:generate
