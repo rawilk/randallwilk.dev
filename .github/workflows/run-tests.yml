@@ -47,11 +47,6 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
           coverage: none
 
-      - name: Setup problem matchers
-        run: |
-          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
@@ -64,6 +59,11 @@ jobs:
 
       - name: Directory permissions
         run: chmod -R 777 storage bootstrap/cache
+
+      - name: Build frontend assets
+        run: |
+          npm install
+          npm run build
 
       - name: Execute tests
         run: vendor/bin/pest -p
