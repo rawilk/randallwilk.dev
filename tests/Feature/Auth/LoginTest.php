@@ -71,4 +71,3 @@ it('shows message after failed login attempt', function () {
 
     expect(Auth::check())->toBeFalse();
 });
-
