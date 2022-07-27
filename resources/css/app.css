@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+@import 'vendor/vendor.css';
+@import '../../vendor/rawilk/laravel-base/resources/css/components/index.css';
+@import 'utils/form.css';
+
+@import 'tailwindcss/utilities';
+@import '../../vendor/rawilk/laravel-base/resources/css/utils/app.css';
+@import 'utils/app.css';

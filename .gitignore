@@ -22,5 +22,7 @@ _ide_helper.php
 _ide_helper_models.php
 auth.json
 npm-debug.log
-public/avatars
 yarn-error.log
+
+# Storage disks
+public/avatars

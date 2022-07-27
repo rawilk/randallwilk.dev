@@ -195,6 +195,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Custom Service Providers...
+         */
+        App\Providers\LaravelBaseServiceProvider::class,
+        App\Providers\BladeComponentsServiceProvider::class,
+        App\Providers\BreadcrumbsServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
+        App\Providers\NavigationServiceProvider::class,
+        App\Providers\ViewComposerProvider::class,
+
     ],
 
     /*

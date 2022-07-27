@@ -31,4 +31,18 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'github' => [
+        'username' => env('GITHUB_USERNAME'),
+        'token' => env('GITHUB_TOKEN'),
+        'docs_access_token' => env('GITHUB_ACCESS_TOKEN'),
+        'webhook_secret' => env('GITHUB_WEBHOOK_SECRET'),
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_CALLBACK_URL'),
+    ],
+
+    'horizon' => [
+        'email' => env('HORIZON_EMAIL'),
+    ],
+
 ];
