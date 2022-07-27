@@ -1,5 +1,7 @@
 # The source code of randallwilk.dev
 
+[![Tests](https://github.com/rawilk/randallwilk.dev/actions/workflows/run-tests.yml/badge.svg)](https://github.com/rawilk/randallwilk.dev/actions/workflows/run-tests.yml)
+
 This repo contains the source code of [my personal website](https://randallwilk.dev).
 
 # Local Development
