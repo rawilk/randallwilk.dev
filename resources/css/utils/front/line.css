@@ -1,0 +1,16 @@
+@layer components {
+    .line-after {
+        @apply flex;
+        @apply items-center;
+    }
+
+    .line-after:after {
+        @apply bg-slate-300;
+        content: '';
+        flex-grow: 1;
+        height: 2px;
+        opacity: .25;
+        margin-left: 1rem;
+        border-radius: 4px;
+    }
+}

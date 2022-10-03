@@ -201,6 +201,7 @@ return [
         App\Providers\LaravelBaseServiceProvider::class,
         App\Providers\BladeComponentsServiceProvider::class,
         App\Providers\BreadcrumbsServiceProvider::class,
+        App\Providers\GitHubServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\NavigationServiceProvider::class,
         App\Providers\ViewComposerProvider::class,

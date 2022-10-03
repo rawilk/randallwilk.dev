@@ -24,6 +24,8 @@ final class BladeComponentsServiceProvider extends ServiceProvider
     {
         $this->callAfterResolving(BladeCompiler::class, function (BladeCompiler $blade) {
             $blade->component('layouts.admin.base', 'admin-app');
+            $blade->component('layouts.front.base', 'page');
+            $blade->component('layouts.docs.base', 'doc-page');
         });
     }
 }

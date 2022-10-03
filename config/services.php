@@ -45,4 +45,8 @@ return [
         'email' => env('HORIZON_EMAIL'),
     ],
 
+    'algolia' => [
+        'app_id' => env('ALGOLIA_APP_ID'),
+    ],
+
 ];

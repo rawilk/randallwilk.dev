@@ -10,6 +10,13 @@
         <h1>Redirecting...</h1>
 
         <script>
+            @if (session()->has(\Rawilk\LaravelBase\Components\Alerts\Alert::ERROR))
+                try {
+                window.localStorage.setItem('socialite.error', {{ Js::from(session()->pull(\Rawilk\LaravelBase\Components\Alerts\Alert::ERROR)) }});
+            } catch {
+            }
+            @endif
+
             if (window.opener && window.opener !== window) {
                 // This is an auth popup. We can close this window and
                 // the parent window will take care of the user.

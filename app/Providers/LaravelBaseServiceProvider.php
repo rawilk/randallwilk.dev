@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Actions\Auth\ResetUserPasswordAction;
+use App\Actions\LaravelBase\UpdatePasswordAction;
+use App\Actions\LaravelBase\UpdateUserProfileInformationAction;
+use App\Actions\Users\DeleteUserAction;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Rawilk\LaravelBase\LaravelBase;
@@ -49,11 +52,21 @@ final class LaravelBaseServiceProvider extends ServiceProvider
                     'title' => __('auth.passwords.confirm.title'),
                 ]);
         });
+
+        LaravelBase::twoFactorChallengeView(function () {
+            return view('livewire.auth.two-factor-challenge')
+                ->layout('layouts.auth.base', [
+                    'title' => __('base::2fa.challenge.title'),
+                ]);
+        });
     }
 
     private function registerBindings(): void
     {
         LaravelBase::resetUserPasswordsUsing(ResetUserPasswordAction::class);
+        LaravelBase::updateUserProfileInformationUsing(UpdateUserProfileInformationAction::class);
+        LaravelBase::updateUserPasswordsUsing(UpdatePasswordAction::class);
+        LaravelBase::deleteUsersUsing(DeleteUserAction::class);
     }
 
     private function setDefaultPasswordRules(): void

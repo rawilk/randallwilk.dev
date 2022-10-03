@@ -7,10 +7,10 @@
 /node_modules
 /public/build
 /public/docs
-/public/docs_sitemap.xml
 /public/hot
 /public/sitemap.xml
-/public/sitemap_index.xml
+/public/sitemap_docs.xml
+/public/sitemap_pages.xml
 /public/storage
 /storage/*.key
 /storage/docs

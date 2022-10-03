@@ -70,6 +70,11 @@ return [
             'days' => 14,
         ],
 
+        'deprecations' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/php-deprecations.log'),
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
@@ -116,6 +121,16 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        /*
+         * Custom logs...
+         */
+
+        'docs' => [
+            'driver' => 'daily',
+            'days' => 14,
+            'path' => storage_path('logs/docs/docs.log'),
         ],
     ],
 

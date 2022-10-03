@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
+use Illuminate\Support\Facades\Lang;
 use RuntimeException;
 
 enum PermissionEnum: string
 {
     // Permissions...
     case PERMISSIONS_ASSIGN = 'permissions.assign';
+
+    // Repositories...
+    case REPOSITORIES_MANAGE = 'repositories.manage';
 
     // Roles...
     case ROLES_CREATE = 'roles.create';
@@ -25,10 +29,8 @@ enum PermissionEnum: string
 
     public function description(): string
     {
-        $description = __("enums.permission.{$this->value}");
+        throw_unless(Lang::has("enums.permission.{$this->value}"), RuntimeException::class, "No description provided yet for: {$this->value}!");
 
-        throw_unless($description, RuntimeException::class, "No description provided yet for: {$this->name}!");
-
-        return $description;
+        return __("enums.permission.{$this->value}");
     }
 }

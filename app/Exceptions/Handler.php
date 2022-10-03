@@ -47,4 +47,21 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    // public function render($request, Throwable $e)
+    // {
+    //     /*
+    //      * This will help ensure we don't receive a "Session store not found on request"
+    //      * error on our error pages, e.g. 404.
+    //      */
+    //     // if ($this->isHttpException($e)) {
+    //     //     Route::any(request()->path(), function () use ($request, $e) {
+    //     //         return parent::render($request, $e);
+    //     //     })->middleware('web');
+    //     //
+    //     //     return app(Kernel::class)->handle($request);
+    //     // }
+    //
+    //     return parent::render($request, $e);
+    // }
 }

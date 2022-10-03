@@ -2,31 +2,28 @@
 
 namespace App\Console;
 
+use App\Console\Commands\GenerateSitemapCommand;
+use App\Console\Commands\GitHub\ImportGitHubRepositoriesCommand;
+use App\Console\Commands\GitHub\ImportPackagistDownloadsCommand;
+use App\Console\Commands\Npm\ImportNpmDownloadsCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
-class Kernel extends ConsoleKernel
+final class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
-     */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command(ImportGitHubRepositoriesCommand::class)->weekly();
+        $schedule->command(ImportPackagistDownloadsCommand::class)->hourly();
+        $schedule->command(ImportNpmDownloadsCommand::class)->weekly();
+        $schedule->command(GenerateSitemapCommand::class)->daily();
+
+        // Model pruning...
+        $schedule->command('queue:prune-batches --hours=48 --unfinished=72')->daily()->runInBackground();
     }
 
-    /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');
-
-        require base_path('routes/console.php');
     }
 }

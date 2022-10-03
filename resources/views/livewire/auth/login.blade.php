@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-6" id="form-wrapper">
             @include('layouts.partials.session-alert')
 
             <x-form wire:submit.prevent="login">
@@ -79,9 +79,22 @@
                 </div>
             </x-form>
         </div>
+
+        @env('local')
+            <div class="mt-10 text-center rounded-lg bg-gray-100 p-3 text-sm">
+                <div class="text-lg text-slate-600 font-semibold mb-3">Development Logins</div>
+                <x-login-link
+                    email="randall@randallwilk.dev"
+                    label="Login as super admin"
+                    redirect-url="{{ route('admin.dashboard') }}"
+                />
+            </div>
+        @endenv
     </x-auth.authentication-form>
 
     @push('js')
+        @include('layouts.partials.socialite-error-notification', ['errorWrapper' => 'form-wrapper'])
+
         <script>
             function showGitHubAuthWindow() {
                 const authWindow = window.open(

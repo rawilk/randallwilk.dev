@@ -16,6 +16,15 @@ return [
     'middleware' => ['web', \Rawilk\LaravelBase\Http\Middleware\EnsureActiveUserMiddleware::class],
     'admin_middleware' => ['web', 'admin', \Rawilk\LaravelBase\Http\Middleware\EnsureActiveUserMiddleware::class],
 
+    'views' => [
+        'users' => [
+            'index' => 'admin.users.index.index',
+            'create' => 'admin.users.create.index',
+            'edit' => 'admin.users.edit.index',
+            'abilities' => 'admin.users.edit.abilities',
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Features

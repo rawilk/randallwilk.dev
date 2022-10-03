@@ -6,17 +6,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User\User;
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Rawilk\LaravelBase\Components\Alerts\Alert;
-use Rawilk\LaravelCasters\Support\Name;
 
 final class GitHubSocialiteController
 {
-    private ?string $newUserPassword = null;
+    // private ?string $newUserPassword = null;
 
     public function redirect(): RedirectResponse
     {
@@ -43,7 +42,13 @@ final class GitHubSocialiteController
             return redirect()->route(Auth::check() ? 'profile.authentication' : 'login');
         }
 
-        $user = $this->retrieveUser($githubUser);
+        try {
+            $user = $this->retrieveUser($githubUser);
+        } catch (ModelNotFoundException) {
+            Session::flash(Alert::ERROR, __('auth.alerts.registration_not_allowed'));
+
+            return view('auth.github-callback');
+        }
 
         /*
          * In theory, this shouldn't happen. However, if for some reason
@@ -52,6 +57,8 @@ final class GitHubSocialiteController
          * the same GitHub account.
          */
         if ($this->accountAlreadyTaken($user, $githubUser)) {
+            Session::flash(Alert::ERROR, __('auth.socialite.alerts.already_linked'));
+
             return view('auth.github-callback');
         }
 
@@ -61,12 +68,14 @@ final class GitHubSocialiteController
             'avatar_path' => $user->avatar_path ?: $githubUser->getAvatar(), // Only update avatar if user doesn't have already have one.
         ]);
 
-        if ($user->wasRecentlyCreated && $this->newUserPassword) {
+        // if ($user->wasRecentlyCreated && $this->newUserPassword) {
+        // }
+
+        if (! Auth::check()) {
+            Auth::login($user, true);
+
+            Session::flash(Alert::SUCCESS, __('auth.socialite.alerts.login_success'));
         }
-
-        Auth::login($user, true);
-
-        Session::flash(Alert::SUCCESS, __('auth.socialite.alerts.login_success'));
 
         return view('auth.github-callback');
     }
@@ -99,16 +108,22 @@ final class GitHubSocialiteController
             return $user;
         }
 
-        $name = Name::from($githubUser->name() ?? $githubUser->getNickname());
+        return User::where('github_id', $githubUser->getId())->firstOrFail();
 
-        return User::firstOrCreate([
-            'github_id' => $githubUser->getId(),
-        ], [
-            'password' => $this->newUserPassword = Str::random(),
-            'email' => $githubUser->email(),
-            'first_name' => $name->first,
-            'last_name' => $name->last,
-            'timezone' => appTimezone(),
-        ]);
+        /*
+         * TODO: allow user creation again.
+         */
+
+        // $name = Name::from($githubUser->name() ?? $githubUser->getNickname());
+        //
+        // return User::firstOrCreate([
+        //     'github_id' => $githubUser->getId(),
+        // ], [
+        //     'password' => $this->newUserPassword = Str::random(),
+        //     'email' => $githubUser->email(),
+        //     'first_name' => $name->first,
+        //     'last_name' => $name->last,
+        //     'timezone' => appTimezone(),
+        // ]);
     }
 }

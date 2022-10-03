@@ -36,6 +36,8 @@ final class RouteServiceProvider extends ServiceProvider
                 ->middleware(['web', 'admin'])
                 ->group(base_path('routes/admin.php'));
         });
+
+        $this->mapRedirects();
     }
 
     protected function configureRateLimiting(): void
@@ -43,5 +45,12 @@ final class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+
+    private function mapRedirects(): self
+    {
+        require base_path('routes/redirects.php');
+
+        return $this;
     }
 }

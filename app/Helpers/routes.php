@@ -14,6 +14,10 @@ if (! function_exists('defaultLoginRedirect')) {
 if (! function_exists('homeRoute')) {
     function homeRoute(): string
     {
+        if (auth()->check() && auth()->user()->isSuperAdmin()) {
+            return route('admin.dashboard');
+        }
+
         return '/';
     }
 }

@@ -26,6 +26,7 @@ final class AdminMenuItems
     public function register(): Menu
     {
         $this->addDashboard()
+            ->addRepositories()
             ->addUserManagement();
 
         return $this->menu;
@@ -44,6 +45,20 @@ final class AdminMenuItems
         return $this;
     }
 
+    private function addRepositories(): self
+    {
+        $this->menu->addIfCan(
+            PermissionEnum::REPOSITORIES_MANAGE->value,
+            View::create($this->iconView, [
+                'label' => __('repos.title'),
+                'url' => route('admin.repositories.index'),
+                'icon' => 'css-git-branch',
+            ])
+        );
+
+        return $this;
+    }
+
     private function addUserManagement(): self
     {
         $rolePermissions = [
@@ -56,17 +71,17 @@ final class AdminMenuItems
         $this->menu->submenuIf(
             $this->user->canAny([...$rolePermissions, ...$userPermissions]),
             View::create($this->submenuView, [
-                'label' => __('laravel-base::users.user_management'),
+                'label' => __('base::users.user_management'),
                 'icon' => 'heroicon-o-users',
             ]),
             function (Menu $menu) use ($rolePermissions, $userPermissions) {
                 return $menu->expandable(function (Menu $menu) use ($rolePermissions, $userPermissions) {
                     $menu->viewIf($this->user->canAny($rolePermissions), $this->submenuItemView, [
-                        'label' => __('laravel-base::roles.index.title'),
+                        'label' => __('base::roles.index.title'),
                         'url' => route('admin.roles.index'),
                     ])
                     ->viewIf($this->user->canAny($userPermissions), $this->submenuItemView, [
-                        'label' => __('laravel-base::users.index.title'),
+                        'label' => __('base::users.index.title'),
                         'url' => route('admin.users.index'),
                     ]);
                 });

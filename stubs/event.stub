@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ namespace }};
+declare(strict_types=1);
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -12,7 +12,9 @@ use Illuminate\Queue\SerializesModels;
 
 final class {{ class }}
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public function __construct()
     {

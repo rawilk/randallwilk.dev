@@ -1,10 +1,9 @@
 <x-admin-app title="{{ __('dashboard.title') }}" :show-title="false">
-
     {{-- main 3 column grid --}}
     <div class="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
 
         {{-- left column --}}
-        <div class="grid grid-cols-1 gap-4 lg:col-span-2">
+        <div class="grid grid-cols-1 gap-4 lg:col-span-3">
 
             {{-- welcome panel --}}
             <section aria-labelledby="profile-overview-title">
@@ -39,6 +38,16 @@
                     </div>
                 </div>
             </section>
+
+            {{-- widgets --}}
+            <div class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                {{-- user count --}}
+                <x-admin.dashboard.user-count />
+
+                {{-- visible repository count --}}
+                <x-admin.dashboard.visible-repo-count />
+            </div>
+
 
         </div>
 

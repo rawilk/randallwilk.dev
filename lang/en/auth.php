@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'alerts' => ['registration_not_allowed' => 'User registration is not allowed at this time.'],
     'failed' => 'These credentials do not match our records.',
     'login' => [
         'app_login_title' => 'Or continue with',
@@ -30,6 +31,7 @@ return [
     ],
     'socialite' => [
         'alerts' => [
+            'already_linked' => 'This social account has already been linked to another user account.',
             'github_auth_process_failed' => 'Something went wrong with the GitHub authentication process.',
             'login_success' => 'You have been logged in.',
         ],

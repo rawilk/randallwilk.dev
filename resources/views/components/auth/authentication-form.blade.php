@@ -5,8 +5,8 @@
 
 <div class="mx-auto w-full lg:max-w-lg">
     <div>
-        <x-link :app-link="false" href="{!! route('home') !!}">
-            <x-logo class="h-12 w-auto" />
+        <x-link :app-link="false" href="{!! route('home') !!}" title="Home">
+            <x-logo type="dual" class="h-12 w-auto text-slate-800" />
         </x-link>
 
         @if ($title)

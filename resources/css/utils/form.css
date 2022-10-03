@@ -11,4 +11,12 @@
     input:invalid, textarea:invalid, select:invalid {
         box-shadow: none;
     }
+
+    .switch-toggle--green .switch-toggle-short-bg.pressed {
+        @apply bg-green-400;
+    }
+
+    .switch-toggle--green {
+        @apply focus:ring-green-500;
+    }
 }

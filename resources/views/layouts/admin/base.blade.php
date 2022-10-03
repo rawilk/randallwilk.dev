@@ -19,6 +19,7 @@
 
             <main class="flex-1 relative focus:outline-none" id="main-content-wrapper" tabindex="0">
                 {{-- impersonation notice --}}
+                @include('laravel-base::partials.auth.impersonate-banner')
 
                 <div class="py-6">
                     {{-- title area --}}

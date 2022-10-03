@@ -92,6 +92,15 @@ return [
             'driver' => 'octane',
         ],
 
+        /*
+         * Custom stores...
+         */
+
+        'docs' => [
+            'driver' => 'file',
+            'path' => storage_path('framework/cache/docs'),
+        ],
+
     ],
 
     /*
