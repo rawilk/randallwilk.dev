@@ -42,7 +42,7 @@ module.exports = {
                 indigo: colors.indigo,
                 pink: colors.pink,
                 yellow: colors.yellow,
-                brand: '#0088CC',
+                brand: '#0088CC', // If updating, be sure to update `views/vendor/mail/html/layout.blade.php` files logo colors
             },
 
             fontFamily: {

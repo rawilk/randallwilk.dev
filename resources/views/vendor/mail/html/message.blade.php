@@ -2,7 +2,7 @@
 {{-- Header --}}
 @slot('header')
 @component('mail::header', ['url' => config('app.url')])
-{{ appName() }}
+<x-logo type="dual" />
 @endcomponent
 @endslot
 
@@ -28,7 +28,7 @@
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-© {{ date('Y') }} {{ appName() }}. @lang('All rights reserved.')
+© 2015 - {{ date('Y') }} Randall Wilk. @lang('All rights reserved.')
 @endcomponent
 @endslot
 @endcomponent

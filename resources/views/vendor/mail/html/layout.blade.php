@@ -18,6 +18,13 @@ width: 100% !important;
 }
 }
 
+.logo {
+    width: 170px !important;
+    height: 50px !important;
+    --logo-bracket-fill: #0088CC;
+    color: #3d4852;
+}
+
 @media only screen and (max-width: 500px) {
 .button {
 width: 100% !important;

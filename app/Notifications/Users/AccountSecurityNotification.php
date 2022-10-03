@@ -4,10 +4,11 @@ namespace App\Notifications\Users;
 
 use App\Enums\QueuesEnum;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-abstract class AccountSecurityNotification extends Notification
+abstract class AccountSecurityNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
