@@ -1,20 +1,19 @@
 import Alpine from 'alpinejs';
-import flatpickr from 'flatpickr';
+import collapse from '@alpinejs/collapse';
+import intersect from '@alpinejs/intersect';
 import Clipboard from '@ryangjchandler/alpine-clipboard';
 import { createPopper } from '@popperjs/core';
-import components from './components';
-import $root from './magics/$root';
+import flatpickr from 'flatpickr';
+import frontHeader from './components/front-header';
 
+Alpine.plugin(intersect);
+Alpine.plugin(collapse);
 Alpine.plugin(Clipboard);
 
-Object.keys(components).forEach(key => {
-    Alpine.data(key, components[key]);
-});
-
-Alpine.magic('root', $root);
+Alpine.data('frontHeader', frontHeader);
 
 window.Alpine = Alpine;
-window.flatpickr = flatpickr;
 window.createPopper = createPopper;
+window.flatpickr = flatpickr;
 
 window.Alpine.start();

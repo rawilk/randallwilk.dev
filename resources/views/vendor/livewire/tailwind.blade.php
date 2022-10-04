@@ -38,7 +38,7 @@
     <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
             @if ($paginator->total() > 0)
-                <p class="text-sm text-blue-gray-700">
+                <p class="text-sm text-slate-700">
                     {!! __('pagination.showing', [
                         'from' => $paginator->firstItem(),
                         'to' => $paginator->lastItem(),
@@ -70,7 +70,7 @@
                         {{-- "Three Dots" Separator --}}
                         @if (is_string($element))
                             <span aria-disabled="true">
-                                <span class="button button--white button--md rounded-none bg-blue-gray-100 button--disabled h-full flex items-start">{{ $element }}</span>
+                                <span class="button button--white button--md rounded-none bg-slate-100 button--disabled h-full flex items-start">{{ $element }}</span>
                             </span>
                         @endif
 
@@ -80,7 +80,7 @@
                                 <span wire:key="paginator-page-{{ $page }}">
                                     @if ($page === $paginator->currentPage())
                                         <span aria-current="page">
-                                            <span class="h-full button button--white button--md button--disabled rounded-none bg-blue-gray-100 hover:bg-blue-gray-100">
+                                            <span class="h-full button button--white button--md button--disabled rounded-none bg-slate-100 hover:bg-slate-100">
                                                 {{ $page }}
                                             </span>
                                         </span>

@@ -1,23 +1,25 @@
-<x-page title="Server Error">
-    <section id="banner" class="banner" role="banner">
-        <div class="wrap">
-            <h1 class="banner-slogan">We've encountered an error</h1>
-            <p class="banner-intro">
-                My server seems to have a little trouble building this page...<br>
-                I'll get to the bottom of this asap!
-            </p>
-        </div>
-    </section>
+<x-page title="{{ __('errors.500.title') }}">
+    <x-front.page-banner>
+        500
 
-    <div class="section pt-0">
+        <x-slot:content>
+            <p class="banner-intro">{{ $exception->getMessage() ?: __('errors.500.title') }}</p>
+
+            {{-- if we don't have an exception message, we're probably on the front-end --}}
+            @unless ($exception->getMessage())
+                <p class="text-lg mt-4">
+                    {!! Str::inlineMarkdown(__('errors.500.description')) !!}
+                </p>
+            @endunless
+        </x-slot:content>
+    </x-front.page-banner>
+
+    <div class="section section-group pt-0">
         @include('errors.partials.suggestions')
 
-        <section class="section pt-0">
-            <div class="wrap">
-                <p class="text-2xl">
-                    If you still need help, just contact me so I can help you out.
-                </p>
-
+        <section class="section">
+            <div class="wrap markup">
+                <p class="text-lg !mb-2">{{ __('errors.contact_title') }}</p>
                 @include('errors.partials.contact')
             </div>
         </section>

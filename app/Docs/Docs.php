@@ -1,72 +1,63 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Docs;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
-use RuntimeException;
 use Spatie\Sheets\Sheets;
+use Throwable;
 
-class Docs
+final class Docs
 {
-    private Collection $pages;
-
-    public function __construct(Sheets $sheets)
+    public function getRepository(string $slug): ?Repository
     {
-        $pages = Cache::store('docs')->get('docs');
+        $pages = cache()->store('docs')->rememberForever($slug, function () use ($slug) {
+            return app(Sheets::class)->collection($slug)->all()->sortBy('weight');
+        });
 
-        if (is_null($pages)) {
-            throw new RuntimeException('Docs cache is invalid.');
-        }
+        $aliases = $pages
+            ->whereNotNull('alias')
+            ->groupBy(fn (DocumentationPage $page) => $page->alias)
+            ->map(function (Collection $pages) use ($slug) {
+                $index = $pages->firstWhere('slug', '_index');
+                $pages = $pages
+                    ->where('slug', '<>', '_index')
+                    ->sortBy(fn (DocumentationPage $page): int => $page->sort ?? PHP_INT_MAX)
+                    ->map(function (DocumentationPage $page) use ($slug) {
+                        $page->repository = $slug;
 
-        $this->pages = $pages;
-    }
+                        return $page;
+                    });
 
-    public function pages(): Collection
-    {
-        return $this->pages;
-    }
+                if (! $index) {
+                    return null;
+                }
 
-    public function getRepository(string $slug): Repository
-    {
-        return $this->getRepositories()->firstWhere('slug', $slug);
+                return Alias::fromDocumentationPage($index, $pages);
+            })
+            ->filter()
+            ->sortBy('versionNumber', SORT_NATURAL, true);
+
+        $index = $pages
+            ->whereNull('alias')
+            ->firstWhere('slug', '_index');
+
+        return new Repository($slug, $aliases, $index);
     }
 
     public function getRepositories(): Collection
     {
-        return $this->pages
-            ->pluck('repository')
-            ->unique()
-            ->filter()
-            ->map(function (string $repository) {
-                $aliases = $this->pages
-                    ->where('repository', $repository)
-                    ->whereNotNull('alias')
-                    ->groupBy(fn (DocumentationPage $page) => $page->alias)
-                    ->map(static function (Collection $pages) use ($repository) {
-                        $index = $pages->firstWhere('slug', '_index');
-                        $pages = $pages
-                            ->where('slug', '<>', '_index')
-                            ->sortBy(fn (DocumentationPage $page) => $page->sort ?? PHP_INT_MAX);
+        return collect(config('docs.repositories'))
+            ->pluck('name')
+            ->map(function (string $repositoryName) {
+                try {
+                    return $this->getRepository($repositoryName);
+                } catch (Throwable $e) {
+                    report("Error while loading {$repositoryName} docs: {$e->getMessage()}");
 
-                        return new Alias(
-                            $index->title,
-                            $index->slogan,
-                            $index->branch,
-                            $index->githubUrl,
-                            $pages,
-                            $repository,
-                        );
-                    })
-                    ->sortBy('slug');
-
-                $index = $this->pages
-                    ->where('repository', $repository)
-                    ->whereNull('alias')
-                    ->firstWhere('slug', '_index');
-
-                return new Repository($repository, $aliases, $index);
-            })
-            ->sortBy('slug');
+                    return null;
+                }
+            })->filter();
     }
 }

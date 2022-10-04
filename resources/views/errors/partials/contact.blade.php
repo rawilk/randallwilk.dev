@@ -1,13 +1,11 @@
-<p class="text-2xl mt-4 grid col-gap-16 row-gap-4 md:grid-flow-col justify-start items-start">
+<p class="text-lg">
     <span>
-        <a href="mailto:{!! config('site.contact.email') !!}" class="link link-black">{!! config('site.contact.email') !!}</a>
+        <x-link class="link link-gray" href="mailto:{{ config('site.contact.email') }}">
+            {{ config('site.contact.email') }}
+        </x-link>
         <br>
-        <a href="https://twitter.com/intent/tweet?text=Dear+@wilkrandall+..."
-           class="link link-black italic"
-           target="_blank"
-           rel="noreferrer noopener"
-        >
+        <x-link class="link link-gray" href="https://twitter.com/intent/tweet?text=Dear+@wilkrandall+..." target="_blank">
             @wilkrandall
-        </a>
+        </x-link>
     </span>
 </p>

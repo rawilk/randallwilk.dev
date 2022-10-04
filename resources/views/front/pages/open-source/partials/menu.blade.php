@@ -1,15 +1,5 @@
-<x-slot name="nav">
-    <x-inner-nav-item href="{{ route('open-source.packages') }}"
-                      icon="heroicon-o-tag"
-                      :active="request()->route()->named('open-source.packages')"
-    >
-        {{ __('front.repositories.packages_tab') }}
-    </x-inner-nav-item>
-
-    <x-inner-nav-item href="{{ route('open-source.projects') }}"
-                      icon="heroicon-o-terminal"
-                      :active="request()->route()->named('open-source.projects')"
-    >
-        {{ __('front.repositories.projects_tab') }}
-    </x-inner-nav-item>
-</x-slot>
+<div class="wrap relative flex | print:hidden | sm:sticky sm:top-[5.5rem] sm:z-50 self-start">
+    <nav class="px-6 py-4 inline-flex w-auto mx-auto space-x-4 from-slate-200 bg-gradient-to-r to-slate-300 rounded-lg shadow-sm">
+        {!! Menu::openSource()->withoutWrapperTag()->withoutParentTag() !!}
+    </nav>
+</div>

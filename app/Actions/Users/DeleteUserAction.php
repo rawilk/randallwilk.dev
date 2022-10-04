@@ -4,13 +4,23 @@ declare(strict_types=1);
 
 namespace App\Actions\Users;
 
-use App\Models\User;
+use App\Events\Users\UserWasDeleted;
+use Illuminate\Support\Facades\DB;
+use Rawilk\LaravelBase\Contracts\Profile\DeletesUsers;
+use Rawilk\LaravelBase\Features;
 
-final class DeleteUserAction
+final class DeleteUserAction implements DeletesUsers
 {
-    public function execute(User $user): void
+    public function delete($user): void
     {
-        // User avatar will be deleted in the user observer.
-        $user->delete();
+        DB::transaction(function () use ($user) {
+            if (Features::managesAvatars()) {
+                $user->deleteAvatar();
+            }
+
+            $user->delete();
+
+            event(new UserWasDeleted($user));
+        });
     }
 }

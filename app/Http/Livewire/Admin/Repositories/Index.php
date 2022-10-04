@@ -4,33 +4,47 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Admin\Repositories;
 
-use App\Console\Commands\Github\ImportGithubIssuesCommand;
-use App\Console\Commands\Github\ImportGithubRepositoriesCommand;
-use App\Console\Commands\Github\ImportPackagistDownloadsCommand;
-use App\Console\Commands\Npm\ImportNpmDownloadsCommand;
-use App\Http\Livewire\DataTable\WithFiltering;
-use App\Http\Livewire\DataTable\WithPerPagePagination;
-use App\Jobs\ImportDocsJob;
-use App\Models\Repository;
+use App\Actions\Repositories\DeleteRepositoryAction;
+use App\Actions\Repositories\ToggleVisibilityAction;
+use App\Actions\Repositories\UpdateRepositoryAction;
+use App\Enums\PermissionEnum;
+use App\Jobs\Docs\CleanupDocsImportJob;
+use App\Jobs\Docs\CleanupRepositoryFoldersJob;
+use App\Jobs\Repositories\ImportDocsFromRepositoryJob;
+use App\Jobs\Repositories\ImportNpmDownloadsJob;
+use App\Jobs\Repositories\ImportPackagistDownloadsJob;
+use App\Jobs\Repositories\ImportRepositoriesJob;
+use App\Models\GitHub\Repository;
+use App\Notifications\Repositories\ManualDocSyncFinished;
+use App\Notifications\Repositories\ManualSyncFinished;
+use Illuminate\Bus\Batch;
+use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Validation\Rule;
+use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Bus;
 use Livewire\Component;
+use Rawilk\LaravelBase\Http\Livewire\DataTable\HasDataTable;
+use Rawilk\LaravelBase\Http\Livewire\DataTable\WithCachedRows;
 
 final class Index extends Component
 {
     use AuthorizesRequests;
-    use WithPerPagePagination, WithFiltering;
+    use HasDataTable;
+    use WithCachedRows;
 
     public bool $showDelete = false;
-    public bool $showEdit = false;
-    public null | Repository $deleting = null;
-    public null | Repository $editing = null;
-    public string $sortBy = 'name';
-    public string $sortDirection = 'asc';
 
-    public $filters = [
+    public bool $showEdit = false;
+
+    public array $state = [];
+
+    public ?Repository $deleting = null;
+
+    public ?Repository $editing = null;
+
+    public array $filters = [
         'search' => '',
         'visible' => '',
         'type' => '',
@@ -40,26 +54,40 @@ final class Index extends Component
         'blogpost' => '',
     ];
 
-    public function rules(): array
+    public function getRowsQueryProperty()
     {
-        return [
-            'editing.visible' => ['sometimes', 'boolean'],
-            'editing.type' => ['required', Rule::in(array_keys(Repository::TYPES))],
-            'editing.documentation_url' => ['nullable', 'string', 'max:255'],
-            'editing.blogpost_url' => ['nullable', 'string', 'max:255'],
-            'editing.new' => ['sometimes', 'boolean'],
-            'editing.highlighted' => ['sometimes', 'boolean'],
-        ];
+        $query = Repository::query()
+            ->when($this->filters['search'], fn ($query, $search) => $query->modelSearch(['name', 'description'], $search))
+            ->byType($this->filters['type'])
+            ->when(! blank($this->filters['visible']), fn ($query) => $query->where('visible', (int) $this->filters['visible'] === 1))
+            ->when(! blank($this->filters['new']), fn ($query) => $query->where('new', (int) $this->filters['new'] === 1))
+            ->when(! blank($this->filters['highlighted']), fn ($query) => $query->where('highlighted', (int) $this->filters['highlighted'] === 1))
+            ->when(! blank($this->filters['docs']), function ($query) {
+                $queryMethod = (int) $this->filters['docs'] === 1 ? 'whereNotNull' : 'whereNull';
+
+                $query->{$queryMethod}('documentation_url');
+            })
+            ->when(! blank($this->filters['blogpost']), function ($query) {
+                $queryMethod = (int) $this->filters['blogpost'] === 1 ? 'whereNotNull' : 'whereNull';
+
+                $query->{$queryMethod}('blogpost_url');
+            });
+
+        return $this->applySorting($query);
+    }
+
+    public function getRowsProperty()
+    {
+        return $this->cache(fn () => $this->applyPagination($this->rowsQuery));
     }
 
     public function confirmDelete(Repository $repository): void
     {
         $this->deleting = $repository;
-
         $this->showDelete = true;
     }
 
-    public function deleteRepository(): void
+    public function deleteRepository(DeleteRepositoryAction $deleter): void
     {
         if (! $this->deleting) {
             return;
@@ -67,40 +95,29 @@ final class Index extends Component
 
         $this->authorize('delete', $this->deleting);
 
-        $this->deleting->delete();
+        $deleter($this->deleting);
 
-        $this->notify(__(':name was deleted!', ['name' => $this->deleting->name]));
+        $this->notify(__('repos.alerts.deleted', ['name' => $this->deleting->name]));
 
-        $this->showDelete = false;
-    }
-
-    public function toggleVisible(Repository $repository): void
-    {
-        $this->authorize('edit', $repository);
-
-        $repository->visible = ! $repository->visible;
-        $repository->save();
-
-        if ($this->editing && $this->editing->is($repository)) {
-            $this->editing->visible = $repository->visible;
+        if ($this->deleting->is($this->editing)) {
+            $this->editing = null;
         }
+
+        $this->deleting = null;
+        $this->showDelete = false;
     }
 
     public function edit(Repository $repository): void
     {
-        if (! $this->editing || $this->editing->isNot($repository)) {
+        if ($repository->isNot($this->editing)) {
             $this->editing = $repository;
-            $this->resetErrorBag();
-
-            if (is_null($this->editing->type)) {
-                $this->editing->type = '';
-            }
+            $this->state = $repository->withoutRelations()->toArray();
         }
 
         $this->showEdit = true;
     }
 
-    public function save(): void
+    public function save(UpdateRepositoryAction $updater): void
     {
         if (! $this->editing) {
             return;
@@ -108,73 +125,91 @@ final class Index extends Component
 
         $this->authorize('edit', $this->editing);
 
-        $this->validate();
+        $updater($this->editing, $this->state);
 
-        $this->editing->save();
-
-        $this->notify(__(':name was updated!', ['name' => $this->editing->name]));
+        $this->notify(__('repos.alerts.updated', ['name' => $this->editing->name]));
 
         $this->showEdit = false;
     }
 
+    public function toggleVisible(Repository $repository, ToggleVisibilityAction $toggler): void
+    {
+        $this->authorize('edit', $repository);
+
+        $toggler($repository);
+
+        if ($repository->is($this->editing)) {
+            $this->state['visible'] = $repository->visible;
+        }
+    }
+
     public function syncRepos(): void
     {
-        $commands = [
-            ImportGithubRepositoriesCommand::class,
-            ImportGithubIssuesCommand::class,
-            ImportPackagistDownloadsCommand::class,
-            ImportNpmDownloadsCommand::class,
-        ];
+        abort_unless(Auth::user()->can(PermissionEnum::REPOSITORIES_MANAGE->value), Response::HTTP_FORBIDDEN);
 
-        foreach ($commands as $command) {
-            Artisan::call($command);
-        }
+        $username = config('services.github.username');
+        $user = Auth::user()->withoutRelations();
+        Bus::batch([
+            new ImportRepositoriesJob($username),
+            new ImportPackagistDownloadsJob($username),
+            new ImportNpmDownloadsJob,
+        ])->finally(function (Batch $batch) use ($user) {
+            $user->notify(new ManualSyncFinished($batch->id, $batch->name));
+        })->name('manual_repo_sync:all')->dispatch();
 
-        $this->notify(__('Repositories were synced!'));
+        $this->notify(__('repos.alerts.repos_synced'));
     }
 
     public function syncDocs(): void
     {
-        $repositoryNames = collect(Config::get('docs.repositories'))->keyBy('repository')->keys()->toArray();
+        abort_unless(Auth::user()->can(PermissionEnum::REPOSITORIES_MANAGE->value), Response::HTTP_FORBIDDEN);
 
-        /*
-         * Dispatching a job for each of them individually because for some reason the job doesn't import them all
-         * if done in one batch...
-         *
-         * Also, this should really only be called on a fresh install of the app...
-         */
-        foreach ($repositoryNames as $name) {
-            ImportDocsJob::dispatch([$name]);
-        }
+        $jobs = [
+            new CleanupRepositoryFoldersJob,
+            ...$this->convertRepositoriesToDocImportJobs(),
+        ];
 
-        $this->notify(__('Docs have been queued to sync!'));
+        $user = Auth::user()->withoutRelations();
+        Bus::batch([$jobs])
+            ->finally(function (Batch $batch) use ($user) {
+                CleanupDocsImportJob::dispatch();
+
+                $user->notify(new ManualDocSyncFinished($batch->id, $batch->name));
+            })
+            ->name('manual_doc_sync:all')
+            ->dispatch();
+
+        $this->notify(__('repos.alerts.docs_synced'));
     }
 
-    public function getRowsQueryProperty()
+    public function render(): View
     {
-        $query = Repository::query()
-            ->when($this->filters['search'], fn ($query, $search) => $query->search(['name', 'description'], $search))
-            ->when($this->filters['type'], fn ($query, $type) => $query->where('type', $type))
-            ->when(! blank($this->filters['visible']), fn ($query) => $query->where('visible', (int) $this->filters['visible'] === 1))
-            ->when(! blank($this->filters['new']), fn ($query) => $query->where('new', (int) $this->filters['new'] === 1))
-            ->when(! blank($this->filters['highlighted']), fn ($query) => $query->where('highlighted', (int) $this->filters['highlighted'] === 1))
-            ->when((int) $this->filters['docs'] === 1, fn ($query) => $query->whereNotNull('documentation_url'))
-            ->when(! blank($this->filters['docs']) && (int) $this->filters['docs'] === 0, fn ($query) => $query->whereNull('documentation_url'))
-            ->when((int) $this->filters['blogpost'] === 1, fn ($query) => $query->whereNotNull('blogpost_url'))
-            ->when(! blank($this->filters['blogpost']) && (int) $this->filters['blogpost'] === 0, fn ($query) => $query->whereNull('blogpost_url'));
+        // Tell any dropdowns to close
+        $this->dispatchBrowserEvent('modal-shown');
 
-        return $query->orderBy($this->sortBy, $this->sortDirection);
-    }
-
-    public function getRowsProperty()
-    {
-        return $this->applyPagination($this->rowsQuery);
-    }
-
-    public function render()
-    {
         return view('livewire.admin.repositories.index.index', [
             'repositories' => $this->rows,
-        ])->layout('layouts.admin.base', ['title' => __('repositories.page_title')]);
+        ]);
+    }
+
+    private function mapFilterValue($key, $value)
+    {
+        return match ($value) {
+            '1', 1 => 'yes',
+            '0', 0 => 'no',
+            default => $value,
+        };
+    }
+
+    private function convertRepositoriesToDocImportJobs(): array
+    {
+        return $this->getRepositoriesWithDocs()
+            ->map(fn (array $repository) => new ImportDocsFromRepositoryJob($repository))
+            ->toArray();
+    }
+
+    private function getRepositoriesWithDocs(): Collection
+    {
+        return collect(config('docs.repositories'))->keyBy('repository');
     }
 }

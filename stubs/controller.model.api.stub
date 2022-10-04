@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ namespacedRequests }}
+
+final class {{ class }}
+{
+    public function index()
+    {
+    }
+
+    public function store({{ storeRequest }} $request)
+    {
+    }
+
+    public function show({{ model }} ${{ modelVariable }})
+    {
+    }
+
+    public function update({{ updateRequest }} $request, {{ model }} ${{ modelVariable }})
+    {
+    }
+
+    public function destroy({{ model }} ${{ modelVariable }})
+    {
+    }
+}

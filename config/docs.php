@@ -2,6 +2,12 @@
 
 return [
     'repositories' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Laravel Packages
+        |--------------------------------------------------------------------------
+        |
+        */
         [
             'name' => 'laravel-app-key-rotator',
             'repository' => 'rawilk/laravel-app-key-rotator',
@@ -24,37 +30,6 @@ return [
             'category' => 'Laravel',
         ],
         [
-            'name' => 'laravel-settings',
-            'repository' => 'rawilk/laravel-settings',
-            'branches' => [
-                'main' => 'v2',
-                'v1' => 'v1',
-            ],
-            'main_branch' => 'main',
-            'category' => 'Laravel',
-        ],
-        [
-            'name' => 'laravel-printing',
-            'repository' => 'rawilk/laravel-printing',
-            'branches' => [
-                'main' => 'v3',
-                'v2' => 'v2',
-                'v1' => 'v1',
-            ],
-            'main_branch' => 'main',
-            'category' => 'Laravel',
-        ],
-        [
-            'name' => 'vue-context',
-            'repository' => 'rawilk/vue-context',
-            'branches' => [
-                'master' => 'v6',
-            ],
-            'category' => 'Vue',
-            'main_branch' => 'master',
-            'archived' => true,
-        ],
-        [
             'name' => 'laravel-casters',
             'repository' => 'rawilk/laravel-casters',
             'branches' => [
@@ -74,6 +49,27 @@ return [
                 'v4' => 'v4',
                 'v3' => 'v3',
                 'v2' => 'v2',
+                'v1' => 'v1',
+            ],
+            'main_branch' => 'main',
+            'category' => 'Laravel',
+        ],
+        [
+            'name' => 'laravel-printing',
+            'repository' => 'rawilk/laravel-printing',
+            'branches' => [
+                'main' => 'v3',
+                'v2' => 'v2',
+                'v1' => 'v1',
+            ],
+            'main_branch' => 'main',
+            'category' => 'Laravel',
+        ],
+        [
+            'name' => 'laravel-settings',
+            'repository' => 'rawilk/laravel-settings',
+            'branches' => [
+                'main' => 'v2',
                 'v1' => 'v1',
             ],
             'main_branch' => 'main',
@@ -106,6 +102,23 @@ return [
             ],
             'main_branch' => 'main',
             'category' => 'Laravel',
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Vue Packages
+        |--------------------------------------------------------------------------
+        |
+        */
+        [
+            'name' => 'vue-context',
+            'repository' => 'rawilk/vue-context',
+            'branches' => [
+                'master' => 'v6',
+            ],
+            'category' => 'Vue',
+            'main_branch' => 'master',
+            'archived' => true,
         ],
     ],
 ];

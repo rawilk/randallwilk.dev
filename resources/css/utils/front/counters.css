@@ -1,0 +1,36 @@
+.counters {
+    --counter-reset: level-0 level-1 level-2;
+    --counter-style: decimal;
+
+    counter-reset: var(--counter-reset);
+}
+
+.counters h2 {
+    --counter-increment: level-1;
+    --counter-reset: level-2 level-3;
+    --counter-content: counter(var(--counter-increment), var(--counter-style)) '.';
+
+    counter-reset: var(--counter-reset);
+    counter-increment: var(--counter-increment);
+    padding-left: 2.5rem;
+}
+
+.counters h2:before {
+    @apply left-0 absolute;
+    content: var(--counter-content);
+}
+
+.counters h3 {
+    --counter-parent: level-1;
+    --counter-increment: level-2;
+    --counter-content: counter(var(--counter-parent), var(--counter-style)) '.' counter(var(--counter-increment), var(--counter-style)) '.' !important;
+    --counter-content: counter(var(--counter-increment), var(--counter-style)) '.';
+
+    counter-increment: var(--counter-increment);
+    padding-left: 2.5rem;
+}
+
+.counters h3:before {
+    @apply left-0 absolute;
+    content: var(--counter-content);
+}

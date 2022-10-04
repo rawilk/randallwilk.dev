@@ -1,2 +1,3 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Sitemap: https://randallwilk.dev/sitemap.xml

@@ -8,12 +8,12 @@ fi
 composer install
 php artisan migrate
 
-# Pull in repo info and docs
+npm install
+npm run build
+
+# Pull in repo info
 php artisan import:github-repositories
-php artisan import:github-issues
 php artisan import:packagist-downloads
 php artisan import:npm-downloads
-source "${dirname "$0"}/checkout_latest_docs.sh"
 
-npm install
-npx mix
+echo 'Update complete. For updated docs, start queue worker and then run: php artisan import:docs --all'

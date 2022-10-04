@@ -1,164 +1,152 @@
-<x-page title="Disclaimer"
-        description="My disclaimer. Yes, I have one too."
+<x-page title="{{ __('front.legal.disclaimer_title') }}"
+        description="{{ __('front.legal.disclaimer_description', ['url' => url('/')]) }}"
 >
-    <section id="banner" class="banner" role="banner">
-        <div class="wrap">
-            <h1 class="banner-slogan">Disclaimer</h1>
+    <x-front.page-banner>
+        {{ __('front.legal.disclaimer_title') }}
 
-            <p class="mt-4 print:hidden">
-                <a href="{!! route('legal.index') !!}"
-                   class="link-underline link-black inline-flex items-center space-x-1"
-                >
-                    <x-heroicon-s-chevron-left class="h-4 w-4" />
-
-                    <span>Legal overview</span>
-                </a>
-            </p>
-        </div>
-    </section>
-
-    <section class="section pt-0">
-        <div class="wrap">
-            <div class="markup markup-titles markup-lists counters links-underline links-black">
-                <p>
-                    The use of my website should always be done in accordance with the rights and obligations which
-                    are clearly listed on the website and the rights and obligations defined in the disclaimer and
-                    the privacy statement. The whole of these texts are my terms and conditions.
-                </p>
-                <p>
-                    These general terms and conditions apply to both me, RANDALL WILK, as well as for you, the User.
-                    Once you use my website you expressly acknowledge and accept that our general terms and conditions
-                    apply and that you completely renounce the application of your own general terms and conditions.
-                </p>
-                <p>
-                    I may, in exceptional cases deviate from the general conditions, as far as these deviations are
-                    established in writing and accepted by all parties. These deviations shall apply only to replace
-                    or supplement the clauses where they relate to and have no effect on the application of other
-                    provisions of the general terms and conditions.
-                </p>
-
-                <h2>Who am I?</h2>
-
-                <p>This website is an initiative of:</p>
-                <address>
-                    RANDALL WILK<br>
-                    Email: <a href="mailto:{!! config('site.contact.email') !!}">{!! config('site.contact.email') !!}</a>
-                </address>
-                <p>
-                    Please feel free to contact me if you have further questions or comments.
-                </p>
-
-                <h2>My website</h2>
-                <h3>Good operation, safety and accessibility</h3>
-                <p>
-                    You can rest assured, I offer an easy-to-use website that is safe for each User. I take all
-                    reasonable measures necessary to ensure the proper operation, safety and accessibility of my
-                    website. However, I can give you no absolute guarantees, and you must regard my measures as
-                    an obligation of means.
-                </p>
-                <p>
-                    Any use of the website is always at your own risk. This means that I carry no liability for
-                    damages resulting from malfunctions, interruptions, defects or harmful elements to the website,
-                    regardless of the existence of a strange cause.
-                </p>
-                <p>
-                    I have the right to limit access to my website at any time and/or suspend it in whole or in
-                    part, without prior warning. I do this in principle only where the circumstances justify this,
-                    but this is not an absolute condition.
-                </p>
-
-                <h3>Site content</h3>
-                <p>
-                    The content of the website is solely determined by me and I take great care in this content.
-                    This means that I take the necessary measures to ensure that my website is as complete,
-                    accurate and up to date as possible, even when the content is provided by third parties. The
-                    content on my website can always be amended, supplemented or deleted.
-                </p>
-                <p>
-                    However, I can give no guarantees about the quality of the information on my website. It is
-                    possible that the information is not complete, sufficiently accurate and/or useful. I am
-                    therefore not liable for (direct and indirect) damage the User suffers as a result of the
-                    information on my website.
-                </p>
-                <p>
-                    In case certain content on my website is a violation of applicable law and/or a violation of
-                    the rights of third parties and/or simply is unacceptable, I ask you to report this to me as
-                    soon as possible so that I can take appropriate measures, so that I can proceed to a partial
-                    or entire removal and/or adaptation of the content.
-                </p>
-
-                <h3>What I expect from you as a User</h3>
-                <p>
-                    The User also bears a certain responsibility when using my website. the User should always
-                    refrain from actions which may have a harmful impact on the proper functioning and security of
-                    the website. As such my website may not be used to circumvent my business model and/or to
-                    collect information from other Users on a large scale.
-                </p>
-                <p>
-                    It is therefore not allowed to use my website for the distribution of content that can cause
-                    damage to other Users of the website, such as spreading of malicious software such as
-                    computer viruses, malware, worms, Trojans and cancel bots. The distribution of unsolicited
-                    and/or commercial messages via the website, such as chain letters, junk email, spamming is also
-                    included in this.
-                </p>
-                <p>
-                    I reserve the right to take all the necessary actions that can produce recovery for me and
-                    for my Users, both at the judicial and extrajudicial level. The User is personally and solely
-                    responsible if their actions and behavior can cause effective damage to the website and other
-                    Users. In that case they must hold RANDALL WILK harmless from any damage claim that follows.
-                </p>
-
-                <h2>Links to other websites</h2>
-                <p>
-                    The content of my website can contain a link, hyperlink or framed link to external websites or
-                    other forms of electronic portals. A link does not automatically mean that there is a link
-                    between us and the external website, nor that we (implicitly) agree with the content of these
-                    websites.
-                </p>
-                <p>
-                    I keep no check on these external websites and am not responsible for the safe and correct
-                    operation of the link and the final destination. As soon as you click on the link, you will
-                    leave my website and one can no longer hold us liable for any damage.
-                </p>
-                <p>
-                    It is possible that the external websites do not offer the same guarantees as I do. Therefore,
-                    I recommend to read carefully the general terms and conditions and the privacy statement of
-                    these websites.
-                </p>
-
-                <h2>Intellectual property</h2>
-                <p>
-                    Creativity deserves protection, as well as my website and its content. The protection is
-                    provided for by intellectual property rights and belongs to all beneficiary parties, being
-                    RANDALL WILK and third parties. Under content, one means the very side category of photos, video,
-                    audio, text, ideas, notes, drawings, articles, etc. All such content is protected by copyright
-                    law, software law, database rights, drawings and design law and other applicable (intellectual)
-                    property rights. The technical nature of my website itself is protected by copyright, the software
-                    and database law. Each trade name that I use on my websites is also protected
-                    by the trade names law or applicable trademark law.
-                </p>
-                <p>
-                    Each User gets a limited right to access, use and display of my web sites and its content. This
-                    granted right is non-exclusive, non-transferable and may be used in a personal,
-                    non-commercial context. I ask my Users not to use and/or to make changes to the rights
-                    protected business, without the consent of the beneficiary. RANDALL WILK attaches great importance to its
-                    intellectual property rights and has taken all possible measures to ensure the protection.
-                    Any breach of the existing intellectual property rights will be pursued.
-                </p>
-
-                <h2>General provisions concerning the general terms and conditions</h2>
-                <p>
-                    I retain the freedom to make changes to my website and related services at any time, to
-                    expand, limit or stop them. This can be done without prior notifications of the User adn neither
-                    gives rise to any form of compensation.
-                </p>
-                <p>
-                    If the operation or validity of one or more of the above provisions of these general terms and
-                    conditions will be in jeopardy, this will have no effect on the validity of the remaining
-                    provisions of this agreement. In such case I have the right to change the provision concerned
-                    with a valid provision of similar effect.
-                </p>
+        <x-slot:content>
+            <div class="mt-4 | print:hidden">
+                <x-front.link>
+                    <div class="flex items-center">
+                        <x-heroicon-s-chevron-left class="h-3 w-3 mr-2" />
+                        <a href="{!! route('legal.index') !!}" class="text-sm">
+                            <span>{{ __('front.legal.back_link') }}</span>
+                        </a>
+                    </div>
+                </x-front.link>
             </div>
-        </div>
-    </section>
+        </x-slot:content>
+    </x-front.page-banner>
+
+    <div class="section section-group pt-0">
+        <section>
+            <x-front.content-area
+                :indent-lists="false"
+                :large-text="false"
+                headings-as-bullets
+            >
+                <h2>Definitions</h2>
+                <p>
+                    The following definitions apply to this Disclaimer and shall have the same meaning
+                    regardless of whether they appear in singular or in plural:
+                </p>
+                <ul>
+                    <li>
+                        <span class="font-bold">You:</span>
+                        the individual accessing the Site, or the company, or
+                        other legal entity on behalf of which such individual is
+                        accessing or using the Site, as applicable;
+                    </li>
+                    <li>
+                        <span class="font-bold">Randall:</span>
+                        (also referred to as "I", "me" or "my" in this Agreement) refers to Randall Wilk, the owner
+                        of the site;
+                    </li>
+                    <li>
+                        <span class="font-bold">Site:</span>
+                        this website or any associated sites of
+                        <x-front.legal-link url="{{ url('/') }}" after="." />
+                    </li>
+                </ul>
+
+                <h2>Disclaimer</h2>
+                <p>
+                    The information collected on the Site is for general information purposes only. Randall assumes
+                    no responsibility for errors or omissions in the contents of the Site. In no event shall Randall
+                    be liable for any special, direct, indirect, consequential, or incidental damages or any damages
+                    whatsoever, whether in an action of contract, negligence or other tort, arising out of or in
+                    connection with the use of the Site or the contents of the Site. Randall reserves the right to
+                    make additions, deletions, or modifications to the contents of the Site at any time without
+                    prior notice. Randall does not warrant that the Site is free of viruses or other harmful
+                    components.
+                </p>
+
+                <h2>External Links Disclaimer</h2>
+                <p>
+                    The Site may contain links to external websites that are not provided or maintained by or in any
+                    way affiliated with Randall.
+                </p>
+                <p>
+                    Please note that Randall does not guarantee the accuracy, relevance, timeliness, or completeness
+                    of any information on these external sites.
+                </p>
+
+                <h2>Errors and Omissions Disclaimer</h2>
+                <p>
+                    The information given by the Site is for general guidance on matters of interest only. Even if
+                    Randall takes every precaution to insure that the content of the Site is both current and
+                    accurate, errors can occur. Plus, given the changing nature of laws, rules and regulations,
+                    there may be delays, omissions or inaccuracies in the information contained on the Site.
+                </p>
+                <p>
+                    Randall is not responsible for any errors or omissions, or for the results obtained from the use
+                    of this information.
+                </p>
+
+                <h2>Views Express Disclaimer</h2>
+                <p>
+                    The Site may contain views and opinions which are those of the authors and do not necessarily
+                    reflect the official policy or position of any author, agency, organization, employer or
+                    company, including Randall.
+                </p>
+                <p>
+                    Any views expressed on the Site by Randall himself are his views only, and not a reflection of
+                    any employer Randall may currently be working for.
+                </p>
+
+                <h2>Affiliate Links Disclaimer</h2>
+                <p>
+                    The Site may sometimes contain affiliate links for third party products on external websites. I may
+                    earn a small commission when you click on the links at no additional cost to you. I only recommend
+                    products I would use myself and all opinions expressed are my own.
+                </p>
+                <p>
+                    I cannot and will not guarantee the availability, quality, or authenticity of any products or
+                    services you purchase from the use of affiliate links.
+                </p>
+
+                <h2>No Responsibility Disclaimer</h2>
+                <p>
+                    The information on the Site is provided with the understanding that Randall is not herein
+                    engaged in rendering legal, accounting, tax, or other professional advice and services. As such,
+                    it should not be used as a substitute for consultation with professional accounting, tax, legal
+                    or other competent advisors.
+                </p>
+                <p>
+                    In no event shall Randall or his suppliers be liable for any special, incidental, indirect, or
+                    consequential damages whatsoever arising out of or in connection with your access or use or
+                    inability to access or use the Site.
+                </p>
+
+                <h2>"Use at Your Own Risk" Disclaimer</h2>
+                <p>
+                    All information in the Site is provided "as is", with no guarantee of completeness, accuracy,
+                    timeliness or of the results obtained from the use of this information, and without warranty of
+                    any kind, express or implied, including, but no limited to warranties of performance,
+                    merchantability and fitness for a particular purpose.
+                </p>
+                <p>
+                    Randall will not be liable to you or anyone else for any decision made or action taken in
+                    reliance on the information given by the Site or for any consequential, special or similar
+                    damages, even if advised of the possibility of such damages.
+                </p>
+
+                <h2>Contact</h2>
+                <p>
+                    If you have any questions about this Disclaimer, you can contact me:
+                </p>
+                <ul>
+                    <li>
+                        By email:
+                        <a href="mailto:{{ config('site.contact.email') }}">{{ config('site.contact.email') }}</a>
+                    </li>
+                </ul>
+
+                <h2>Effective Date</h2>
+                <p>
+                    This Disclaimer became effective on: August 25, 2022.
+                </p>
+            </x-front.content-area>
+        </section>
+    </div>
 </x-page>

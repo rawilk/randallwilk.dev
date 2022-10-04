@@ -19,7 +19,7 @@ final class BreadcrumbsServiceProvider extends ServiceProvider
             : 'admin.dashboard';
 
         Breadcrumbs::before(
-            fn (Generator $trail) => $trail->push(title: __('Home'), url: route($home))
+            fn (Generator $trail) => $trail->push(__('Home'), route($home))
         );
     }
 

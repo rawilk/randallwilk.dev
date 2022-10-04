@@ -1,18 +1,14 @@
-<x-page title="Projects"
-        description="Search in my open source projects, written in Laravel & JavaScript."
+<x-page
+    title="{{ __('front.open_source.projects.title') }}"
+    description="{{ __('front.open_source.projects.description') }}"
 >
     @include('front.pages.open-source.partials.banner-projects')
 
-    <div class="wrap pb-10 py-12 lg:px-8">
-        <x-inner-nav aside-class="lg:px-0 lg:py-0 py-6"
-                     nav-class="md:sticky md:top-2"
-                     content-class="lg:px-0 space-y-6"
-        >
-            @include('front.pages.open-source.partials.menu')
+    <div class="section section-group pt-0">
+        @include('front.pages.open-source.partials.projects-intro')
 
-            <section>
-                <livewire:repositories type="projects" />
-            </section>
-        </x-inner-nav>
+        <livewire:front.repositories type="project" />
     </div>
+
+    @include('layouts.front.partials.support')
 </x-page>

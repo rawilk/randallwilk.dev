@@ -1,6 +1,6 @@
 .wrap {
-    @apply max-w-columns
-    mx-auto
-    px-4
-    sm:px-6;
+    @apply px-8;
+    @apply lg:px-16;
+    @apply mx-auto;
+    max-width: 72rem;
 }

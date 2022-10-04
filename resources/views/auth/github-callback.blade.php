@@ -4,12 +4,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>{{ __('Logged in using GitHub!') }}</title>
+        <title>Logged in using GitHub!</title>
     </head>
     <body>
-        <h1>{{ __('Redirecting...') }}</h1>
+        <h1>Redirecting...</h1>
 
         <script>
+            @if (session()->has(\Rawilk\LaravelBase\Components\Alerts\Alert::ERROR))
+                try {
+                window.localStorage.setItem('socialite.error', {{ Js::from(session()->pull(\Rawilk\LaravelBase\Components\Alerts\Alert::ERROR)) }});
+            } catch {
+            }
+            @endif
+
             if (window.opener && window.opener !== window) {
                 // This is an auth popup. We can close this window and
                 // the parent window will take care of the user.

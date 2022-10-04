@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Actions\Users;
 
-use App\Actions\Concerns\PasswordValidationRules;
-use App\Models\User;
+use App\Actions\LaravelBase\PasswordValidationRules;
+use App\Models\User\User;
 use App\Notifications\Users\WelcomeNotification;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
+use Rawilk\LaravelCasters\Support\Name;
 
 final class CreateUserAction
 {
@@ -19,19 +20,23 @@ final class CreateUserAction
     /** @var int */
     private const RANDOM_PASSWORD_LENGTH = 16;
 
-    public function execute(array $input): User
+    public function __invoke(array $input, ?User $authenticatedUser = null, bool $skipPermissionsValidation = false): void
     {
-        $data = $this->validate($input);
+        $data = convertEmptyStringsToNull(
+            $this->validate($input)
+        );
 
         $newPassword = $data['password'] ?? $this->generateRandomPassword();
 
-        $user = tap(User::make(), static function (User $user) use ($data, $newPassword) {
+        $user = tap(User::make(), function (User $user) use ($data, $newPassword) {
+            $name = Name::from($data['name']);
+
             $user->forceFill([
-                'name' => $data['name'],
+                'first_name' => $name->first,
+                'last_name' => $name->last,
                 'email' => $data['email'],
                 'timezone' => $data['timezone'],
                 'password' => $newPassword,
-                'is_admin' => $data['is_admin'] ?? false,
             ])->save();
         });
 
@@ -39,15 +44,20 @@ final class CreateUserAction
             $user->updateAvatar($data['photo']);
         }
 
-        $this->sendWelcomeEmail($user, $newPassword);
+        $this->setAbilities($user, [
+            'permissions' => $input['permissions'] ?? null,
+            'roles' => $input['roles'] ?? null,
+            $authenticatedUser,
+            $skipPermissionsValidation,
+        ]);
 
-        return $user;
+        $this->sendWelcomeEmail($user, $newPassword);
     }
 
     private function validate(array $input): array
     {
-        $rules = collect([
-            'name' => ['required', 'string', 'max:100'],
+        return Validator::make($input, [
+            'name' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -55,13 +65,22 @@ final class CreateUserAction
                 'max:255',
                 Rule::unique('users'),
             ],
-            'password' => $this->passwordRules(needsConfirm: false, optional: true),
+            'password' => $this->passwordRules(true, false),
             'timezone' => ['required', 'string'],
-            'photo' => ['nullable', 'image', 'max:1024'],
-            'is_admin' => $this->isAdmin() ? ['sometimes', 'boolean'] : null,
-        ])->filter()->toArray();
+            'photo' => [
+                'nullable',
+                File::image()->max(1024),
+            ],
+        ])->validate();
+    }
 
-        return Validator::make($input, $rules)->validate();
+    private function setAbilities(User $user, array $input, ?User $authenticatedUser = null, bool $skipPermissionsValidation = false): void
+    {
+        /*
+         * A default role will be assigned in the action if the authenticated
+         * user is not allowed to assign roles.
+         */
+        app(UpdateAbilitiesAction::class)($user, $input, $authenticatedUser, $skipPermissionsValidation);
     }
 
     private function generateRandomPassword(): string
@@ -72,10 +91,5 @@ final class CreateUserAction
     private function sendWelcomeEmail(User $user, string $password): void
     {
         $user->notify(new WelcomeNotification($password));
-    }
-
-    private function isAdmin(): bool
-    {
-        return Auth::hasUser() && Auth::user()->is_admin;
     }
 }

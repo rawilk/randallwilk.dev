@@ -1,36 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Docs;
 
 use Illuminate\Support\Str;
 use Spatie\Sheets\PathParser;
 
-class DocumentationPathParser implements PathParser
+final class DocumentationPathParser implements PathParser
 {
     public function parse(string $path): array
     {
         $parts = explode('/', $path);
 
-        $repository = $parts[0];
+        $alias = $parts[0];
 
-        $alias = $parts[1];
-
-        if (count($parts) <= 2) {
+        if (count($parts) <= 1) {
             $slug = Str::before($alias, '.md');
 
             return [
                 'slug' => $slug,
-                'repository' => $repository,
                 'alias' => null,
             ];
         }
 
-        $slug = Str::before(implode('/', array_slice($parts, 2)), '.md');
+        $slug = Str::before(implode('/', array_slice($parts, 1)), '.md');
 
-        return [
-            'slug' => $slug,
-            'repository' => $repository,
-            'alias' => $alias,
-        ];
+        return compact('slug', 'alias');
     }
 }

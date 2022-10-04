@@ -1,34 +1,14 @@
 @charset "UTF-8";
 
-@import 'utils/bootstrap.css';
+@import 'build/admin-config.css';
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
 @import 'vendor/vendor.css';
+@import 'utils/logo.css';
+@import '../../vendor/rawilk/laravel-base/resources/css/components/index.css';
+@import 'utils/form.css';
 
-@layer components {
-    @import 'utils/alert.css';
-    @import 'utils/button.css';
-    @import 'utils/dropdown.css';
-    @import 'utils/form.css';
-    @import 'utils/links.css';
-    @import 'utils/modal.css';
-    @import 'utils/table.css';
-    @import 'utils/tooltip.css';
-
-    /* front utils */
-    @import 'utils/front/actions.css';
-    @import 'utils/front/algolia.css';
-    @import 'utils/front/banner.css';
-    @import 'utils/front/char.css';
-    @import 'utils/front/counter.css';
-    @import 'utils/front/docs.css';
-    @import 'utils/front/docs-nav.css';
-    @import 'utils/front/line.css';
-    @import 'utils/front/links.css';
-    @import 'utils/front/markup.css';
-    @import 'utils/front/section.css';
-    @import 'utils/front/title.css';
-    @import 'utils/front/wrap.css';
-}
-
-@layer utilities {
-    @import 'utils/app.css';
-}
+@import 'tailwindcss/utilities';
+@import '../../vendor/rawilk/laravel-base/resources/css/utils/app.css';
+@import 'utils/app.css';

@@ -1,46 +1,45 @@
-<x-two-column-card-form title="{{ __('users.labels.profile_info_title') }}">
-    <x-slot name="description">{{ __('users.labels.profile_info_sub_title') }}</x-slot>
+<x-card>
+    <x-slot:header>
+        <h2>{{ __('Profile Information') }}</h2>
+        <p class="text-sm text-gray-500">{{ __("Specify the user's profile information and email address.") }}</p>
+    </x-slot:header>
 
-    <x-card>
-        <div class="space-y-6">
+    {{-- avatar --}}
+    @includeWhen(\Rawilk\LaravelBase\Features::managesAvatars(), 'livewire.admin.users.partials.avatar-upload')
 
-            {{-- avatar --}}
-            @include('livewire.admin.users.partials.user-avatar-upload')
+    {{-- name --}}
+    <x-form-group label="{{ __('Name') }}" name="name" inline>
+        <x-input
+            wire:model.defer="state.name"
+            name="name"
+            required
+            maxlength="255"
+            autofocus
+            max-width=" sm:max-w-xs"
+            placeholder="{{ __('Tom Cooke') }}"
+        />
+    </x-form-group>
 
-            {{-- name --}}
-            <x-form-group name="name" label="{{ __('users.form.labels.name') }}" inline border>
-                <x-input wire:model.defer="user.name"
-                         name="name"
-                         required
-                         maxlength="100"
-                         autofocus
-                         max-width=" sm:max-w-xs"
-                         placeholder="{{ __('users.form.labels.name_placeholder') }}"
-                />
-            </x-form-group>
+    {{-- email --}}
+    <x-form-group label="{{ __('Email address') }}" name="email" inline>
+        <x-email
+            wire:model.defer="state.email"
+            name="email"
+            required
+            maxlength="255"
+            placeholder="{{ __('tom.cooke@:domain', ['domain' => request()->getHost()]) }}"
+        />
+    </x-form-group>
 
-            {{-- email --}}
-            <x-form-group name="email" label="{{ __('users.form.labels.email') }}" inline border>
-                <x-email wire:model.defer="user.email"
-                         name="email"
-                         required
-                         max-width=" sm:max-w-lg"
-                         placeholder="{{ __('users.form.labels.email_placeholder', ['domain' => request()->getHost()]) }}"
-                />
-            </x-form-group>
-
-            {{-- timezone --}}
-            <x-form-group name="timezone" label="{{ __('users.form.labels.timezone') }}" inline border>
-                <x-timezone-select wire:model.defer="user.timezone"
-                                   name="timezone"
-                                   required
-                                   max-width=" sm:max-w-lg"
-                                   :only="['America', 'General']"
-                                   use-custom-select
-                                   fixed-position
-                />
-            </x-form-group>
-
-        </div>
-    </x-card>
-</x-two-column-card-form>
+    {{-- timezone --}}
+    <x-form-group label="{{ __('Timezone') }}" name="timezone" inline>
+        <x-timezone-select
+            wire:model.defer="state.timezone"
+            name="timezone"
+            required
+            use-custom-select
+            fixed-position
+            :only="timezoneSubsets()"
+        />
+    </x-form-group>
+</x-card>

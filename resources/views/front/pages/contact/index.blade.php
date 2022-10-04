@@ -1,15 +1,13 @@
-<x-page title="Contact">
-    <x-slot name="description">
-        Contact me on {!! config('site.contact.email') !!}, or on one of my social media profiles.
-    </x-slot>
+<x-page title="{{ __('front.contact.title') }}">
+    <x-slot:description>
+        {{ __('front.contact.description', ['email' => config('site.contact.email')]) }}
+    </x-slot:description>
 
-    <section id="banner" class="banner" role="banner">
-        <div class="wrap">
-            <h1 class="banner-slogan">Contact</h1>
-        </div>
-    </section>
+    @include('front.pages.contact.partials.banner')
 
-    <div class="section pt-0">
+    <div class="mt-4 section section-group">
         @include('front.pages.contact.partials.contact')
     </div>
+
+    @include('layouts.front.partials.support')
 </x-page>

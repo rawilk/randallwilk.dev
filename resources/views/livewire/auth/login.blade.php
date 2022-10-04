@@ -1,19 +1,21 @@
 <div>
-    <x-authentication-form :title="__('Sign in to your account')">
+    <x-auth.authentication-form title="{{ __('auth.login.title') }}">
         <div>
-            <p class="text-sm font-medium text-blue-gray-700">
-                {{ __('Sign in with') }}
+            <p class="text-sm font-medium text-slate-700">
+                {{ __('auth.login.social_login_title') }}
             </p>
 
             <div class="mt-1 grid grid-cols-1">
                 <div>
-                    <a href="{{ route('login.github') }}"
-                       onclick="event.preventDefault(); showGithubAuthWindow();"
-                       class="w-full inline-flex justify-center py-2 px-4 border border-blue-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-blue-gray-500 hover:bg-blue-gray-50"
+                    <x-button
+                        variant="white"
+                        block
+                        onclick="event.preventDefault(); showGitHubAuthWindow();"
+                        href="{!! route('login.github') !!}"
                     >
-                        <span class="sr-only">{{ __('Sign in with GitHub') }}</span>
-                        <span class="h-6 w-6">{{ renderSvg('github') }}</span>
-                    </a>
+                        <span class="sr-only">{{ __('auth.socialite.login_via_github') }}</span>
+                        <x-svg-github class="h-6 w-6 fill-current text-slate-600" />
+                    </x-button>
                 </div>
             </div>
 
@@ -21,31 +23,36 @@
                 <div class="absolute inset-0 flex items-center" aria-hidden="true">
                     <div class="w-full border-t border-gray-300"></div>
                 </div>
+
                 <div class="relative flex justify-center text-sm">
                     <span class="px-2 bg-white text-gray-500">
-                        {{ __('Or continue with') }}
+                        {{ __('auth.login.app_login_title') }}
                     </span>
                 </div>
             </div>
         </div>
 
-        <x-session-alert type="error" class="alert alert--danger alert--border mb-6" />
+        <div class="space-y-6" id="form-wrapper">
+            @include('layouts.partials.session-alert')
 
-        <x-form wire:submit.prevent="login">
-            <div class="space-y-6">
-
-                <x-form-group :label="__('Email address')" name="email">
-                    <x-email wire:model.defer="email"
-                             name="email"
-                             autofocus
-                             required
+            <x-form wire:submit.prevent="login">
+                {{-- email --}}
+                <x-form-group label="{{ __('Email address') }}" name="email">
+                    <x-email
+                        wire:model.defer="email"
+                        name="email"
+                        autofocus
+                        autocomplete="email"
+                        required
                     />
                 </x-form-group>
 
-                <x-form-group :label="__('Password')" name="password">
-                    <x-password wire:model.defer="password"
-                                name="password"
-                                required
+                {{-- password --}}
+                <x-form-group label="{{ __('Password') }}" name="password">
+                    <x-password
+                        wire:model.defer="password"
+                        name="password"
+                        required
                     />
                 </x-form-group>
 
@@ -56,36 +63,42 @@
                         </x-checkbox>
                     </div>
 
-                    <div class="text-sm leading-5">
-                        <a href="{{ route('password.request') }}" class="app-link">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    </div>
+                    @if (Route::has('password.request'))
+                        <div class="text-sm leading-5">
+                            <x-link href="{!! route('password.request') !!}" hide-external-indicator>
+                                {{ __('auth.login.forgot_password_link') }}
+                            </x-link>
+                        </div>
+                    @endif
                 </div>
 
-                <div>
-                    <x-button type="submit" block variant="blue" wire:target="login">
-                        {{ __('Sign in') }}
+                <div class="mt-6">
+                    <x-button variant="blue" type="submit" block wire:target="login">
+                        {{ __('auth.login.login_button') }}
                     </x-button>
                 </div>
+            </x-form>
+        </div>
 
+        @env('local')
+            <div class="mt-10 text-center rounded-lg bg-gray-100 p-3 text-sm">
+                <div class="text-lg text-slate-600 font-semibold mb-3">Development Logins</div>
+                <x-login-link
+                    email="randall@randallwilk.dev"
+                    label="Login as super admin"
+                    redirect-url="{{ route('admin.dashboard') }}"
+                />
             </div>
-        </x-form>
-    </x-authentication-form>
+        @endenv
+    </x-auth.authentication-form>
 
     @push('js')
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                if (window.opener && window.opener !== window) {
-                    // This is an auth popup. We can close this window and
-                    // the parent window will take care of the user.
-                    window.close();
-                }
-            });
+        @include('layouts.partials.socialite-error-notification', ['errorWrapper' => 'form-wrapper'])
 
-            function showGithubAuthWindow() {
+        <script>
+            function showGitHubAuthWindow() {
                 const authWindow = window.open(
-                    '{{ route('login.github') }}',
+                    '{!! route('login.github') !!}',
                     null,
                     'location=0,status=0,width=800,height=400',
                 );
@@ -93,7 +106,7 @@
                 const authCheckInterval = window.setInterval(() => {
                     if (authWindow.closed) {
                         window.clearInterval(authCheckInterval);
-                        window.location.replace('{{ defaultLoginRedirect() }}');
+                        window.location.replace('{{ session('next', defaultLoginRedirect()) }}');
                     }
                 }, 500);
             }

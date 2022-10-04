@@ -12,8 +12,6 @@ final class HorizonServiceProvider extends HorizonApplicationServiceProvider
 {
     public function gate(): void
     {
-        Gate::define('viewHorizon', function ($user) {
-            return $user->email === Config::get('services.horizon.email');
-        });
+        Gate::define('viewHorizon', fn ($user) => $user->email === Config::get('services.horizon.email'));
     }
 }

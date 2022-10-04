@@ -1,19 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Docs;
 
-use App\Http\Controllers\DocsController;
+use App\Http\Controllers\Docs\DocsController;
 use Illuminate\Support\Str;
 use Spatie\Sheets\Sheet;
 
 /**
- * @property-read string $slug
- * @property-read string $section
- * @property-read string|null $url
- * @property-read string $repository
- * @property-read string $alias
+ * @property string $alias
+ * @property string $branch
+ * @property null|string $category
+ * @property string $githubUrl
+ * @property string $repository
+ * @property string $section
+ * @property string $slogan
+ * @property string $slug
+ * @property string $title
+ * @property null|string $url
  */
-class DocumentationPage extends Sheet
+final class DocumentationPage extends Sheet
 {
     public function isIndex(): bool
     {
@@ -36,7 +43,7 @@ class DocumentationPage extends Sheet
         return $parts[0];
     }
 
-    public function getUrlAttribute(): string
+    public function getUrlAttribute(): ?string
     {
         return action([DocsController::class, 'show'], [
             'repository' => $this->repository,

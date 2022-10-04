@@ -4,21 +4,30 @@ declare(strict_types=1);
 
 namespace App\Services\Menus;
 
+use App\Enums\PermissionEnum;
+use Illuminate\Contracts\Auth\Authenticatable as User;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Menu\Laravel\Menu;
 use Spatie\Menu\Laravel\View;
 
 final class AdminMenuItems
 {
-    public function __construct(private Menu $menu, private string $iconView, private string $submenuView)
-    {
+    private ?User $user;
+
+    public function __construct(
+        private readonly Menu $menu,
+        private readonly string $iconView,
+        private readonly string $submenuView,
+        private readonly string $submenuItemView,
+    ) {
+        $this->user = Auth::user();
     }
 
     public function register(): Menu
     {
-        $this
-            ->addDashboard()
+        $this->addDashboard()
             ->addRepositories()
-            ->addUsers();
+            ->addUserManagement();
 
         return $this->menu;
     }
@@ -27,7 +36,7 @@ final class AdminMenuItems
     {
         $this->menu->add(
             View::create($this->iconView, [
-                'label' => __('Dashboard'),
+                'label' => __('dashboard.title'),
                 'url' => route('admin.dashboard'),
                 'icon' => 'heroicon-o-home',
             ])
@@ -38,25 +47,45 @@ final class AdminMenuItems
 
     private function addRepositories(): self
     {
-        $this->menu->add(
+        $this->menu->addIfCan(
+            PermissionEnum::REPOSITORIES_MANAGE->value,
             View::create($this->iconView, [
-                'label' => __('repositories.page_title'),
-                'url' => route('admin.repositories'),
-                'icon' => 'heroicon-s-code',
+                'label' => __('repos.title'),
+                'url' => route('admin.repositories.index'),
+                'icon' => 'css-git-branch',
             ])
         );
 
         return $this;
     }
 
-    private function addUsers(): self
+    private function addUserManagement(): self
     {
-        $this->menu->add(
-            View::create($this->iconView, [
-                'label' => __('users.page_title'),
-                'url' => route('admin.users'),
-                'icon' => 'css-user-list',
-            ])
+        $rolePermissions = [
+            PermissionEnum::ROLES_CREATE->value, PermissionEnum::ROLES_EDIT->value, PermissionEnum::ROLES_DELETE->value,
+        ];
+        $userPermissions = [
+            PermissionEnum::USERS_CREATE->value, PermissionEnum::USERS_EDIT->value, PermissionEnum::USERS_DELETE->value,
+        ];
+
+        $this->menu->submenuIf(
+            $this->user->canAny([...$rolePermissions, ...$userPermissions]),
+            View::create($this->submenuView, [
+                'label' => __('base::users.user_management'),
+                'icon' => 'heroicon-o-users',
+            ]),
+            function (Menu $menu) use ($rolePermissions, $userPermissions) {
+                return $menu->expandable(function (Menu $menu) use ($rolePermissions, $userPermissions) {
+                    $menu->viewIf($this->user->canAny($rolePermissions), $this->submenuItemView, [
+                        'label' => __('base::roles.index.title'),
+                        'url' => route('admin.roles.index'),
+                    ])
+                    ->viewIf($this->user->canAny($userPermissions), $this->submenuItemView, [
+                        'label' => __('base::users.index.title'),
+                        'url' => route('admin.users.index'),
+                    ]);
+                });
+            }
         );
 
         return $this;

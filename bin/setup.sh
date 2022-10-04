@@ -11,18 +11,21 @@ php artisan key:generate
 
 # Create database if not exists...
 if ! mysql -u root -e "use randallwilk"; then
-    # Database does not exist, create it now...
+    echo "Creating randallwilk database"
     mysql -u root -e "create database randallwilk"
 fi
 
-php artisan migrate
+# Create test database if not exists...
+if ! mysql -u root -e "use randallwilk_test"; then
+    echo "Creating randallwilk_test database"
+    mysql -u root -e "create database randallwilk_test"
+fi
 
-# Pull in repo info and docs
-php artisan import:github-repositories
-php artisan import:github-issues
-php artisan import:packagist-downloads
-php artisan import:npm-downloads
-source "${dirname "$0"}/checkout_latest_docs.sh"
+php artisan migrate
+php artisan db:seed
+php artisan storage:link
+php artisan ide-helper:meta
+php artisan ide-helper:generate
 
 npm install
-npx mix
+npm run build

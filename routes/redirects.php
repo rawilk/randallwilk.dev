@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::permanentRedirect('projects', '/open-source');
+Route::permanentRedirect('/projects', '/open-source');

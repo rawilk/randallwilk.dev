@@ -1,22 +1,25 @@
-<x-page title="Page not found">
-    <section id="banner" class="banner" role="banner">
-        <div class="wrap">
-            <h1 class="banner-slogan">Page not found</h1>
-            <p class="banner-intro">
-                There could be a typo in your url, or the link you are using could be deprecated...
-            </p>
-        </div>
-    </section>
+<x-page title="{{ __('errors.404.title') }}">
+    <x-front.page-banner>
+        404
 
-    <div class="section pt-0">
+        <x-slot:content>
+            <p class="banner-intro">{{ $exception->getMessage() ?: __('errors.404.title') }}</p>
+
+            {{-- if we don't have an exception message, we're probably on the front-end --}}
+            @unless ($exception->getMessage())
+                <p class="text-lg mt-4">
+                    {{ __('errors.404.description') }}
+                </p>
+            @endunless
+        </x-slot:content>
+    </x-front.page-banner>
+
+    <div class="section section-group pt-0">
         @include('errors.partials.suggestions')
 
-        <section class="section pt-0">
-            <div class="wrap">
-                <p class="text-2xl">
-                    If you still need help, just contact me so I can help you out.
-                </p>
-
+        <section class="section">
+            <div class="wrap markup">
+                <p class="text-lg !mb-2">{{ __('errors.contact_title') }}</p>
                 @include('errors.partials.contact')
             </div>
         </section>

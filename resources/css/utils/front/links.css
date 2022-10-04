@@ -1,57 +1,20 @@
-:root {
-    --link-border-color: currentcolor;
-    --link-border-color-hover: currentcolor;
+.link-gray2 {
+    @apply prose;
+    @apply max-w-none;
+    @apply prose-a:text-slate-500;
+    @apply prose-a:no-underline;
 }
 
-.link-base {
-    @apply cursor-pointer
-    text-current;
+/*.link-gray,*/
+/*a.link-gray,*/
+/*.links-gray a {*/
+/*    @apply text-slate-500;*/
+/*    --link-border-color: theme(colors.slate.500) 40;*/
+/*}*/
 
-    transition: color .1s ease, text-decoration-color .1s ease;
-}
-
-.link-underline,
-a.link-underline,
-.links-underline a {
-    @apply cursor-pointer
-        text-current;
-    @apply underline focus:outline-blue-gray;
-
-    transition: color .1s ease, text-decoration-color .1s ease;
-    text-decoration-skip-ink: auto;
-    text-decoration-color: var(--link-border-color);
-}
-
-.link-underline:active,
-a.link-underline:active,
-.links-underline a:active {
-    top: 1px;
-}
-
-.link-black,
-a.link-black,
-.links-black a {
-    @apply text-black;
-    --link-border-color: theme(colors.black) 40;
-}
-
-.link-black:hover,
-a.link-black:hover,
-.links-black a:hover {
-    @apply text-opacity-75;
-    --link-border-color: theme(colors.black) 80;
-}
-
-.link-gray,
-a.link-gray,
-.links-gray a {
-    @apply text-blue-gray-500;
-    --link-border-color: theme(colors['blue-gray'].500) 40;
-}
-
-.link-gray:hover,
-a.link-gray:hover,
-.links-gray a:hover {
-    @apply text-blue-gray-700;
-    --link-border-color: theme(colors['blue-gray'].500) 80;
-}
+/*.link-gray:hover,*/
+/*a.link-gray:hover,*/
+/*.links-gray a:hover {*/
+/*    @apply text-slate-700;*/
+/*    --link-border-color: theme(colors.slate.500) 80;*/
+/*}*/

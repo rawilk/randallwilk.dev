@@ -1,7 +1,7 @@
-<x-admin-app title="{{ formatPageTitle($repository->name, __('repositories.page_title')) }}">
-    <x-slot name="pageTitle">
-        <x-admin-page-title>{{ $repository->name }}</x-admin-page-title>
-    </x-slot>
+<x-admin-app title="{{ pageTitle($repository->name, __('repos.title')) }}">
+    <x-slot:pageTitle>
+        <x-layout.page-title>{{ $repository->name }}</x-layout.page-title>
+    </x-slot:pageTitle>
 
-    <livewire:admin.repositories.details :repository="$repository" />
+    <livewire:admin.repositories.show :repository="$repository" />
 </x-admin-app>

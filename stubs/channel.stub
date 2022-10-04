@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use {{ namespacedUserModel }};
+
+final class {{ class }}
+{
+    public function __construct()
+    {
+    }
+
+    public function join({{ userModel }} $user): array|bool
+    {
+    }
+}

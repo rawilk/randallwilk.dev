@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Notifications\Users;
 
+use App\Enums\QueuesEnum;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -15,9 +14,10 @@ final class WelcomeNotification extends Notification implements ShouldQueue
 
     public function __construct(public string $password)
     {
+        $this->onQueue(QueuesEnum::MAIL->value);
     }
 
-    public function via(): array
+    public function via($notifiable): array
     {
         return ['mail'];
     }
@@ -25,16 +25,16 @@ final class WelcomeNotification extends Notification implements ShouldQueue
     public function toMail($notifiable): MailMessage
     {
         $message = (new MailMessage)
-            ->subject('New user account for randallwilk.dev')
-            ->greeting("Hello {$notifiable->name->first}!")
+            ->subject(__('New user account for randallwilk.dev'))
+            ->greeting(__('Hello :name!', ['name' => $notifiable->name->first]))
             ->salutation(false)
-            ->line('A user account has been created for you at [' . url('/') . '](' . url('/') . ').')
-            ->line("You may login with your email address and the password we have created for you: **{$this->password}**")
+            ->line(__('A new user account has been created for you at [:url](:url).', ['url' => url('/')]))
+            ->line(__('You may login with your email address and the password we have created for you: **:password**', ['password' => $this->password]))
             ->action(__('Login'), route('login'))
-            ->line(__('Please note: We strongly recommend changing your password after you login.'));
+            ->line(__('Please note: We strongly recommend changing your password after login for the first time.'));
 
         if ($notifiable->github_id) {
-            $message->line('You may also login using your linked GitHub account as well: ' . $notifiable->github_username);
+            $message->line(__('You may also login using your linked GitHub account as well: :username', ['username' => $notifiable->github_username]));
         }
 
         return $message;

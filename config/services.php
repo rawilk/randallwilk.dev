@@ -18,6 +18,7 @@ return [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
     ],
 
     'postmark' => [
@@ -40,13 +41,12 @@ return [
         'redirect' => env('GITHUB_CALLBACK_URL'),
     ],
 
-    'algolia' => [
-        'key' => env('ALGOLIA_API_KEY'),
-        'index' => env('ALGOLIA_INDEX_NAME'),
-    ],
-
     'horizon' => [
         'email' => env('HORIZON_EMAIL'),
+    ],
+
+    'algolia' => [
+        'app_id' => env('ALGOLIA_APP_ID'),
     ],
 
 ];

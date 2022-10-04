@@ -1,72 +1,72 @@
 <div>
     <x-card>
-        <x-slot name="header">
-            <h2 class="card__title">
-                {{ __('users.labels.profile_info_title') }}
-            </h2>
-            <p class="text-sm text-cool-gray-500">
-                {{ __('users.labels.profile_info_update_sub_title') }}
-            </p>
-        </x-slot>
+        <x-slot:header>
+            <h2>{{ __('users.labels.profile_info_title') }}</h2>
+            <p class="text-sm text-gray-500">{{ __('users.labels.profile_info_update_subtitle') }}</p>
+        </x-slot:header>
 
         <x-form wire:submit.prevent="save" id="user-details-form">
-            <div class="space-y-6">
-
+            <div>
                 {{-- avatar --}}
-                @include('livewire.admin.users.partials.user-avatar-upload')
+                @includeWhen(\Rawilk\LaravelBase\Features::managesAvatars(), 'livewire.admin.users.partials.avatar-upload')
 
                 {{-- name --}}
-                <x-form-group name="name" label="{{ __('users.form.labels.name') }}" inline border>
-                    <x-input wire:model.defer="state.name"
-                             name="name"
-                             required
-                             maxlength="100"
-                             max-width=" sm:max-w-xs"
-                             placeholder="{{ __('users.form.labels.name_placeholder') }}"
+                <x-form-group label="{{ __('Name') }}" name="name" inline>
+                    <x-input
+                        wire:model.defer="state.name"
+                        name="name"
+                        required
+                        maxlength="255"
+                        max-width=" sm:max-w-xs"
+                        placeholder="{{ $user->name }}"
+                        autocomplete="off"
                     />
                 </x-form-group>
 
                 {{-- email --}}
-                <x-form-group name="email" label="{{ __('users.form.labels.email') }}" inline border>
-                    <x-email wire:model.defer="state.email"
-                             name="email"
-                             required
-                             max-width=" sm:max-w-lg"
-                             placeholder="{{ __('users.form.labels.email_placeholder') }}"
+                <x-form-group name="email" label="{{ __('Email') }}" inline>
+                    <x-email
+                        wire:model.defer="state.email"
+                        name="email"
+                        required
+                        placeholder="{{ $user->email }}"
+                        autocomplete="off"
                     />
                 </x-form-group>
 
                 {{-- timezone --}}
-                <x-form-group name="timezone" label="{{ __('users.form.labels.timezone') }}" inline border>
-                    <x-timezone-select wire:model.defer="state.timezone"
-                                       name="timezone"
-                                       required
-                                       max-width=" sm:max-w-lg"
-                                       :only="['America', 'General']"
-                                       use-custom-select
-                                       fixed-position
+                <x-form-group name="timezone" label="{{ __('Timezone') }}" inline>
+                    <x-timezone-select
+                        wire:model.defer="state.timezone"
+                        name="timezone"
+                        required
+                        :only="timezoneSubsets()"
+                        use-custom-select
                     />
                 </x-form-group>
-
             </div>
         </x-form>
 
-        <x-slot name="footer">
+        <x-slot:footer>
             <div class="flex justify-end items-center space-x-4">
                 <x-action-message on="profile.updated" />
 
-                <x-button type="submit" form="user-details-form" wire:target="save" variant="blue">
-                    <span>{{ __('labels.forms.save_button') }}</span>
-
+                <x-button
+                    variant="blue"
+                    type="submit"
+                    form="user-details-form"
+                    wire:target="save"
+                >
+                    <span>{{ __('base::messages.save_button') }}</span>
                     <x-heroicon-s-check />
                 </x-button>
             </div>
-        </x-slot>
+        </x-slot:footer>
     </x-card>
 
-    <x-update-title-script function="userInfo" action="profile.updated">
+    <x-laravel-base::misc.update-title-script action="profile.updated">
         const newTitle = @this.state['name'];
 
         updateBreadcrumb(newTitle);
-    </x-update-title-script>
+    </x-laravel-base::misc.update-title-script>
 </div>

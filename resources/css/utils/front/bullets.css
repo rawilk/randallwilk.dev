@@ -1,0 +1,22 @@
+:root {
+    --bullet-color: inherit;
+}
+
+.bullets li {
+    padding-left: 1em;
+}
+
+.bullets li .icon {
+    @apply pr-2;
+    fill: var(--bullet-color);
+    left: 0;
+    position: absolute;
+}
+
+.bullets li:not(:last-child) {
+    margin-bottom: .35em;
+}
+
+.bullets-gray {
+    --bullet-color: theme(colors.slate.500);
+}

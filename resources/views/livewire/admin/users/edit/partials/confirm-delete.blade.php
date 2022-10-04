@@ -1,30 +1,30 @@
 <x-dialog-modal wire:model.defer="showDelete" max-width="md">
-    <x-slot name="title">
-        {{ __('users.labels.delete_modal_title') }}
-    </x-slot>
+    <x-slot:title>
+        {{ __('users.delete_modal_title') }}
+    </x-slot:title>
 
-    <x-slot name="content">
-        <p class="modal-text">
+    <x-slot:content>
+        <p>
             {!! __(
-                'users.labels.delete_modal_text',
-                ['name' => $user->name->full]
+                'users.delete_modal_text',
+                ['name' => $user?->name->full]
             ) !!}
         </p>
-    </x-slot>
+    </x-slot:content>
 
-    <x-slot name="footer">
+    <x-slot:footer>
         <x-button wire:click="deleteUser"
                   wire:target="deleteUser"
                   variant="red"
         >
-            {{ __('users.labels.delete_modal_button') }}
+            {{ __('base::messages.delete_button') }}
         </x-button>
 
         <x-button wire:click="$set('showDelete', false)"
                   wire:loading.attr="disabled"
                   variant="white"
         >
-            {{ __('labels.confirm_modal_cancel') }}
+            {{ __('base::messages.confirm_modal_cancel') }}
         </x-button>
-    </x-slot>
+    </x-slot:footer>
 </x-dialog-modal>

@@ -1,2 +1,0 @@
-<?php
-return ["saved" => "Saved."];

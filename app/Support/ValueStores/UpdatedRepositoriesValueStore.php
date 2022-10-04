@@ -9,16 +9,16 @@ use Spatie\Valuestore\Valuestore;
 
 final class UpdatedRepositoriesValueStore
 {
-    protected Valuestore $valueStore;
-
-    public static function make(): self
-    {
-        return new static;
-    }
+    private Valuestore $valueStore;
 
     public function __construct()
     {
         $this->valueStore = Valuestore::make(storage_path('app/updatedRepositories.json'));
+    }
+
+    public static function make(): self
+    {
+        return new self;
     }
 
     public function getNames(): array
@@ -28,7 +28,6 @@ final class UpdatedRepositoriesValueStore
 
     public function store(string $name): self
     {
-        /** @var array $updatedRepositoryNames */
         $updatedRepositoryNames = $this->valueStore->get('updatedRepositoryNames', []);
 
         $updatedRepositoryNames[] = $name;

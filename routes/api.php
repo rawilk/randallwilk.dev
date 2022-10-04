@@ -1,8 +1,8 @@
 <?php
 
-use App\Api\HandleGitHubWebhookController;
+use App\Http\Controllers\Api\Webhooks\HandleGitHubRepositoryWebhookController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('webhooks')->group(static function () {
-    Route::post('github', HandleGitHubWebhookController::class);
+Route::prefix('webhooks')->group(function () {
+    Route::post('github', HandleGitHubRepositoryWebhookController::class);
 });

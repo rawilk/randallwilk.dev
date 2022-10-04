@@ -1,24 +1,26 @@
-.banner {
-    @apply py-8
-    md:py-12
-    lg:py-16;
-}
+@layer components {
+    .banner {
+        @apply py-8;
+        @apply md:py-12;
+        @apply lg:py-16;
+    }
 
-.banner-slogan {
-    @apply font-serif
-    font-bold
-    text-4xl
-    leading-tight
-    sm:text-5xl
-    md:text-6xl;
-}
+    .banner-slogan {
+        @apply font-serif;
+        @apply font-bold;
+        @apply text-4xl;
+        @apply leading-tight;
+        @apply sm:text-5xl;
+        @apply md:text-6xl;
+    }
 
-.banner-intro {
-    @apply hidden
-    md:block
-    md:text-3xl
-    md:mt-5
-    print:block
-    print:text-xl
-    print:mt-5;
+    .banner-intro {
+        @apply hidden;
+        @apply md:block;
+        @apply md:text-3xl;
+        @apply md:mt-5;
+        @apply print:block;
+        @apply print:text-xl;
+        @apply print:mt-5;
+    }
 }

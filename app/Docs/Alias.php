@@ -1,39 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Docs;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Config;
 
-class Alias
+final class Alias
 {
-    protected null|Collection $navigation = null;
-    public string $mainBranchName;
+    private ?Collection $navigation = null;
 
     public function __construct(
         public string $slug,
         public string $slogan,
         public string $branch,
+        public int $versionNumber,
         public string $githubUrl,
         public Collection $pages,
-        public null|string $repository = null,
     ) {
-        $this->mainBranchName = $this->getMainBranchName();
     }
 
-    public function isMainBranch(): bool
+    public static function fromDocumentationPage(DocumentationPage $page, Collection $pages): self
     {
-        return $this->branch === $this->mainBranchName;
-    }
-
-    private function getMainBranchName(): string
-    {
-        $config = collect(Config::get('docs.repositories'))
-            ->where('name', $this->repository)
-            ->first();
-
-        return Arr::get($config, 'main_branch', 'main');
+        return new self(
+            slug: $page->title,
+            slogan: $page->slogan,
+            branch: $page->branch,
+            versionNumber: (int) filter_var($page->title, FILTER_SANITIZE_NUMBER_INT),
+            githubUrl: $page->githubUrl,
+            pages: $pages,
+        );
     }
 
     public function setNavigation(Collection $navigation): void
@@ -51,9 +47,7 @@ class Alias
 
         $currentIndex = $pathsByIndex->search(request()->url());
 
-        $nextIndex = $currentIndex + 1;
-
-        return $flattenedArrayOfPages[$nextIndex] ?? null;
+        return $flattenedArrayOfPages[$currentIndex + 1] ?? null;
     }
 
     public function previousPage(): ?DocumentationPage
@@ -66,19 +60,21 @@ class Alias
 
         $currentIndex = $pathsByIndex->search(request()->url());
 
-        $previousIndex = $currentIndex - 1;
-
-        return $flattenedArrayOfPages[$previousIndex] ?? null;
+        return $flattenedArrayOfPages[$currentIndex - 1] ?? null;
     }
 
-    protected function getFlattenedArrayOfPages(): ?Collection
+    private function getFlattenedArrayOfPages(): ?Collection
     {
-        if (! $this->navigation) {
-            return null;
-        }
+        return $this->navigation?->map(fn ($item) => $item['pages'] ?? [])->flatten(1);
+    }
 
-        return $this->navigation
-            ->map(fn ($item) => $item['pages'] ?? [])
-            ->flatten(1);
+    public function branchUrl(): string
+    {
+        return "{$this->githubUrl}/tree/{$this->branch}";
+    }
+
+    public function pageGitHubUrl(DocumentationPage $page): string
+    {
+        return "{$this->githubUrl}/blob/{$this->branch}/docs/{$page->slug}.md";
     }
 }

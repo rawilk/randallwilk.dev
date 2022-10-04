@@ -2,28 +2,35 @@
 
 namespace App\Providers;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Docs\DocumentationContentParser;
+use App\Docs\DocumentationPage;
+use App\Docs\DocumentationPathParser;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+final class AppServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    public function register(): void
     {
-        Builder::macro('search', function (array | string $field, string | null $search) {
-            /** @var \Illuminate\Database\Eloquent\Builder $this */
-            if (empty($search)) {
-                return $this;
-            }
+        Model::unguard();
 
-            if (is_array($field)) {
-                return $this->where(function ($query) use ($field, $search) {
-                    foreach ($field as $searchField) {
-                        $query->orWhere($searchField, 'LIKE', "%{$search}%");
-                    }
-                });
-            }
+        $this->configureDocs();
+    }
 
-            return $this->where($field, 'LIKE', "%{$search}%");
-        });
+    private function configureDocs(): void
+    {
+        foreach (config('docs.repositories') as $docsRepository) {
+            config()->set("filesystems.disks.docs_{$docsRepository['name']}", [
+                'driver' => 'local',
+                'root' => storage_path("docs/{$docsRepository['name']}"),
+            ]);
+
+            config()->set("sheets.collections.{$docsRepository['name']}", [
+                'disk' => "docs_{$docsRepository['name']}",
+                'sheet_class' => DocumentationPage::class,
+                'path_parser' => DocumentationPathParser::class,
+                'content_parser' => DocumentationContentParser::class,
+            ]);
+        }
     }
 }

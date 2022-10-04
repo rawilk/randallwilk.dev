@@ -1,24 +1,14 @@
-<x-page title="Laravel, PHP and JavaScript Packages">
-    <x-slot name="description">
-        Here are some of my open source packages I've created.
-    </x-slot>
-
+<x-page
+    title="{{ __('front.open_source.packages.title') }}"
+    description="{{ __('front.open_source.packages.description') }}"
+>
     @include('front.pages.open-source.partials.banner-packages')
 
-    <div class="wrap pb-10 lg:py-12 lg:px-8">
-        <section>
-            @include('front.pages.open-source.partials.packages-intro')
-        </section>
+    <div class="section section-group pt-0">
+        @include('front.pages.open-source.partials.packages-intro')
 
-        <x-inner-nav aside-class="lg:px-0 lg:py-0 py-6"
-                     nav-class="md:sticky md:top-2"
-                     content-class="lg:px-0 space-y-6"
-        >
-            @include('front.pages.open-source.partials.menu')
-
-            <section>
-                <livewire:repositories />
-            </section>
-        </x-inner-nav>
+        <livewire:front.repositories />
     </div>
+
+    @include('layouts.front.partials.support')
 </x-page>

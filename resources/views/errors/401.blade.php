@@ -1,20 +1,25 @@
-<x-page title="Unauthorized">
-    <section id="banner" class="banner" role="banner">
-        <div class="wrap">
-            <h1 class="banner-slogan">Entering private territory</h1>
-            <p class="banner-intro">Seems like you don't have access to this page.</p>
-        </div>
-    </section>
+<x-page title="{{ __('errors.401.title') }}">
+    <x-front.page-banner>
+        401
 
-    <div class="section pt-0">
+        <x-slot:content>
+            <p class="banner-intro">{{ $exception->getMessage() ?: __('errors.401.title') }}</p>
+
+            {{-- if we don't have an exception message, we're probably on the front-end --}}
+            @unless ($exception->getMessage())
+                <p class="text-lg mt-4">
+                    {{ __('errors.401.description') }}
+                </p>
+            @endunless
+        </x-slot:content>
+    </x-front.page-banner>
+
+    <div class="section section-group pt-0">
         @include('errors.partials.suggestions')
 
-        <section class="section pt-0">
-            <div class="wrap">
-                <p class="text-2xl">
-                    If you need to get in asap, just contact me so I can help you out.
-                </p>
-
+        <section class="section">
+            <div class="wrap markup">
+                <p class="text-lg !mb-2">{{ __('errors.contact_title') }}</p>
                 @include('errors.partials.contact')
             </div>
         </section>

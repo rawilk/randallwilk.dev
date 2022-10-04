@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ namespacedUserModel }};
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+final class {{ class }}
+{
+    use HandlesAuthorization;
+}

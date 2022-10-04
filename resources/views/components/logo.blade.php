@@ -1,1 +1,8 @@
-<img src="{!! asset('images/logo.png') !!}" alt="Randall Wilk logo" {{ $attributes }}>
+@props([
+    'type' => 'regular',
+])
+
+<x-dynamic-component
+    :component="'svg-logo.' . $type"
+    {{ $attributes->class(array_filter(['logo', $type === 'dual' ? 'logo--dual' : null])) }}
+/>

@@ -1,24 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services\Npm;
 
 use Illuminate\Support\Facades\Http;
 
-class NpmApi
+final class NpmApi
 {
-    /** @var string */
-    protected const BASE_URL = 'https://api.npmjs.org/downloads/range/1000-01-01:3000:01-01/';
+    private const BASE_URL = 'https://api.npmjs.org/downloads/range/1000-01-01:3000:01-01/';
 
     public function getTotalDownloadsForPackage(string $package): int
     {
-        $url = static::BASE_URL . $package;
+        return rescue(function () use ($package) {
+            $response = Http::get(self::BASE_URL . $package);
 
-        $response = Http::get($url);
+            if (! $response->ok()) {
+                return 0;
+            }
 
-        if (! $response->ok()) {
-            return 0;
-        }
-
-        return collect($response->json()['downloads'] ?? [])->sum('downloads');
+            return collect($response->json()['downloads'] ?? [])->sum('downloads');
+        }, 0);
     }
 }
