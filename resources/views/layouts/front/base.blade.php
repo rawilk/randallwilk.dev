@@ -21,7 +21,7 @@
         {{ $slot }}
     </main>
 
-    @include('layouts.front.partials.footer')
+    @includeWhen($showFooter ?? true, 'layouts.front.partials.footer')
 
     <x-scroll-to-top-button />
 </x-app>
