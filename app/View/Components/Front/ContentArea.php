@@ -14,6 +14,7 @@ final class ContentArea extends Component
         public bool $largeText = true,
         // Mainly for legal pages, for headings to act as <li> elements.
         public bool $headingsAsBullets = false,
+        public bool $wrap = true, // Apply "wrap" class for padding
     ) {
     }
 

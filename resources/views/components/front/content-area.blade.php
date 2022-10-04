@@ -1,4 +1,4 @@
-<div class="wrap">
+<div @class(['wrap' => $wrap])>
     <div @class([
         'prose prose-slate max-w-none',
         'sm:prose-lg' => $largeText,

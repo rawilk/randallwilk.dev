@@ -14,7 +14,9 @@
     @include('layouts.front.partials.header')
 
     <main class="flex-grow">
-        @include('laravel-base::partials.auth.impersonate-banner')
+        @if (request()->hasSession())
+            @include('laravel-base::partials.auth.impersonate-banner')
+        @endif
 
         {{ $slot }}
     </main>
