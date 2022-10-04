@@ -93,7 +93,7 @@ final class ImportDocsFromRepositoryJob implements ShouldQueue
             && cp -r docs/* ../../../docs/{$repository['name']}/{$alias} \
             && echo "---\ntitle: {$repository['name']}\ncategory: {$repository['category']}\n---" > ../../../docs/{$repository['name']}/_index.md \
             && cd docs/ \
-            && find . -not '*.md' | cpio -pdm {$publicDocsAssetPath}/{$repository['name']}/{$alias}/
+            && find . -not -name '*.md' | cpio -pdm {$publicDocsAssetPath}/{$repository['name']}/{$alias}/
             BASH,
             base_path()
         );

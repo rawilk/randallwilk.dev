@@ -1,3 +1,5 @@
+import docSearch from '@docsearch/js';
+
 export default (options = {}) => ({
     modifierKey: null,
     isOpen: false,
@@ -16,16 +18,13 @@ export default (options = {}) => ({
             hitsPerPage: this.hitsPerPage,
         };
 
-        // docSearch({
-        //     container: '#docsearch',
-        //     // appId: 'R2IYF7ETH7',
-        //     // apiKey: '599cec31baffa4868cae4e79f180729b',
-        //     // indexName: 'docsearch',
-        //     appId: import.meta.env.VITE_ALGOLIA_APP_ID,
-        //     indexName: import.meta.env.VITE_ALGOLIA_INDEX_NAME,
-        //     apiKey: import.meta.env.VITE_ALGOLIA_API_KEY,
-        //     searchParameters,
-        // });
+        docSearch({
+            container: '#docsearch',
+            appId: import.meta.env.VITE_ALGOLIA_APP_ID,
+            indexName: import.meta.env.VITE_ALGOLIA_INDEX_NAME,
+            apiKey: import.meta.env.VITE_ALGOLIA_API_KEY,
+            searchParameters,
+        });
     },
 
     setModifierKey() {
