@@ -2,7 +2,6 @@
 
 namespace App\Jobs\Repositories;
 
-use App\Docs\Docs;
 use App\Exceptions\Docs\DocsImportException;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
@@ -66,7 +65,6 @@ final class ImportDocsFromRepositoryJob implements ShouldQueue
                     Log::channel('docs')->info("Import process finished for {$repository['name']} {$branch}");
 
                     cache()->store('docs')->forget($repository['name']);
-                    ray(app(Docs::class)->getRepository($repository['name']));
                 };
             })
             ->toArray();
