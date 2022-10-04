@@ -25,7 +25,7 @@ final class CleanupRepositoryFoldersJob implements ShouldQueue
             return;
         }
 
-        $publicDocsPath = public_path('docs');
+        $publicDocsPath = public_path('doc-files');
         $storageDocsPath = storage_path('docs');
 
         File::ensureDirectoryExists($publicDocsPath);

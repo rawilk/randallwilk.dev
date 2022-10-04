@@ -73,7 +73,7 @@ final class ImportDocsFromRepositoryJob implements ShouldQueue
     private function createProcessComponent(array $repository, string $branch, string $alias): Process
     {
         $accessToken = config('services.github.docs_access_token');
-        $publicDocsAssetPath = public_path('docs');
+        $publicDocsAssetPath = public_path('doc-files');
         $username = config('services.github.username');
 
         return Process::fromShellCommandline(
