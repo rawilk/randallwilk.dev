@@ -11,7 +11,7 @@
         @include('layouts.front.partials.assets')
     </x-slot:head>
 
-    @include('layouts.front.partials.header')
+    @includeWhen($showHeader ?? true, 'layouts.front.partials.header')
 
     <main class="flex-grow">
         @if (request()->hasSession())

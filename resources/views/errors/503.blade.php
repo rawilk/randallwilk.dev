@@ -1,4 +1,4 @@
-<x-page title="{{ __('errors.503.title') }}" :show-footer="false">
+<x-page title="{{ __('errors.503.title') }}" :show-header="false" :show-footer="false">
     <x-front.page-banner>
         {!! Str::inlineMarkdown(__('errors.503.slogan')) !!}
 
