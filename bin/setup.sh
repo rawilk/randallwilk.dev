@@ -9,6 +9,24 @@ composer install
 cp .env.example .env
 php artisan key:generate
 
+read -p "Decrypt .env.local? [y/n] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    read -p "Enter encryption key: " ENCRYPTION_KEY
+    read -p "Overwrite .env file? [y/n] " -n 1 -r
+    echo
+
+    php artisan env:decrypt --key=$ENCRYPTION_KEY --env=local --force
+    echo "Decrypted to .env.local"
+
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        php artisan env:decrypt --key=$ENCRYPTION_KEY --env=local --filename=.env --force
+        echo "Overwrite decrypted environment to .env"
+    fi
+fi
+
 # Create database if not exists...
 if ! mysql -u root -e "use randallwilk"; then
     echo "Creating randallwilk database"

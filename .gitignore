@@ -1,5 +1,7 @@
 .env
 .env.backup
+.env.local
+.env.production
 .envault.json
 .phpstorm.meta.php
 .phpunit.result.cache
