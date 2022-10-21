@@ -1,19 +1,19 @@
 <div class="-my-2 -mr-2 md:hidden"
      x-data="{ open: false }"
-     x-cloak
      x-on:keydown.escape.window="open = false"
 >
     <button type="button"
             class="inline-flex items-center justify-center rounded-md bg-white p-2 text-slate-400 hover:bg-gray-100 hover:text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             x-on:click="open = true"
     >
-        <span class="sr-only">Open menu</span>
+        <span class="sr-only">{{ __('Open menu') }}</span>
         <x-heroicon-s-bars-3 class="h-6 w-6" />
     </button>
 
     <template x-teleport="#header">
         <div class="fixed z-[999] inset-0 md:hidden backdrop-blur bg-slate-600/50"
              x-show="open"
+             x-cloak
              x-on:click="open = false"
         >
         </div>
@@ -22,6 +22,7 @@
     <template x-teleport="#header">
         <div class="absolute z-[1000] inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
              x-show="open"
+             x-cloak
              x-transition:enter="duration-200 ease-out"
              x-transition:enter-start="opacity-0 scale-95"
              x-transition:enter-end="opacity-100 scale-100"

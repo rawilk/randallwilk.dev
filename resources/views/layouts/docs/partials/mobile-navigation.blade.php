@@ -15,6 +15,7 @@
              role="dialog"
              aria-modal="true"
              aria-label="{{ __('labels.mobile_navigation') }}"
+             x-cloak
              x-show="open"
              x-on:click.away="open = false"
              x-on:keydown.esc.window="open = false"
