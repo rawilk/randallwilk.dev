@@ -14,7 +14,6 @@ final class FlyoutMenu implements MenuMacro
             /** @var \Spatie\Menu\Laravel\Menu $this */
             $this->wrap('div', [
                 'x-data' => '{ open: false }',
-                'x-cloak' => '',
                 'x-on:click.outside' => 'open = false',
                 'x-on:keydown.esc.window' => 'open = false',
             ])
