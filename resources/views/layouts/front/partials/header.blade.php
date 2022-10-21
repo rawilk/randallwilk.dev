@@ -3,14 +3,13 @@
         x-data="frontHeader"
         x-on:scroll.window.passive="handleScroll"
         x-bind:class="{ 'shadow-lg bg-white': scrolled, 'bg-transparent': ! scrolled }"
-        x-cloak
 >
     <div class="wrap">
         <div class="flex items-center justify-between py-6 | md:justify-start md:space-x-10">
             {{-- logo --}}
             <div class="flex justify-start lg:w-0 lg:flex-1">
                 <a href="{!! route('home') !!}" class="flex h-8 w-40 sm:h-10" title="{{ __('front.home_link_title') }}">
-                    <span class="sr-only">Randall Wilk</span>
+                    <span class="sr-only">{{ appName() }}</span>
                     <x-logo
                         type="dual"
                         class="h-full w-full max-w-full text-slate-600"
