@@ -24,7 +24,7 @@
         "livewire/livewire": "^2.10",
         "predis/predis": "^2.0",
         "rawilk/laravel-base": "^0.4.9",
-        "rawilk/laravel-breadcrumbs": "^3.0",
+        "rawilk/laravel-breadcrumbs": "^4.0",
         "rawilk/laravel-casters": "^2.0",
         "rawilk/laravel-form-components": "^7.1",
         "spatie/fork": "^1.1",
