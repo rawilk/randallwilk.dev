@@ -12,7 +12,8 @@ return [
             'name' => 'laravel-app-key-rotator',
             'repository' => 'rawilk/laravel-app-key-rotator',
             'branches' => [
-                'main' => 'v2',
+                'main' => 'v3',
+                'v2' => 'v2',
                 'v1' => 'v1',
             ],
             'main_branch' => 'main',

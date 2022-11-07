@@ -62,16 +62,16 @@
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blade-ui-kit/blade-heroicons.git",
-                "reference": "b1c5f43971554dfe6a80e2b1937a0aba560a51ca"
+                "reference": "36bbf7386d600706f96e83ec4ca75d3817c46f3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blade-heroicons/zipball/b1c5f43971554dfe6a80e2b1937a0aba560a51ca",
-                "reference": "b1c5f43971554dfe6a80e2b1937a0aba560a51ca",
+                "url": "https://api.github.com/repos/blade-ui-kit/blade-heroicons/zipball/36bbf7386d600706f96e83ec4ca75d3817c46f3d",
+                "reference": "36bbf7386d600706f96e83ec4ca75d3817c46f3d",
                 "shasum": ""
             },
             "require": {
@@ -115,7 +115,7 @@
             ],
             "support": {
                 "issues": "https://github.com/blade-ui-kit/blade-heroicons/issues",
-                "source": "https://github.com/blade-ui-kit/blade-heroicons/tree/2.0.4"
+                "source": "https://github.com/blade-ui-kit/blade-heroicons/tree/2.0.5"
             },
             "funding": [
                 {
@@ -127,7 +127,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-06T09:48:47+00:00"
+            "time": "2022-11-02T12:52:36+00:00"
         },
         {
             "name": "blade-ui-kit/blade-icons",
@@ -2429,16 +2429,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.6",
+            "version": "2.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "857afc47ce113454bd629037213378ba3219dd40"
+                "reference": "a36bd2be4f5387c0f3a8792a0d76b7d68865abbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/857afc47ce113454bd629037213378ba3219dd40",
-                "reference": "857afc47ce113454bd629037213378ba3219dd40",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/a36bd2be4f5387c0f3a8792a0d76b7d68865abbf",
+                "reference": "a36bd2be4f5387c0f3a8792a0d76b7d68865abbf",
                 "shasum": ""
             },
             "require": {
@@ -2531,7 +2531,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-30T16:45:38+00:00"
+            "time": "2022-11-03T17:29:46+00:00"
         },
         {
             "name": "league/config",
@@ -5418,16 +5418,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.8",
+            "version": "v0.11.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "f455acf3645262ae389b10e9beba0c358aa6994e"
+                "reference": "1acec99d6684a54ff92f8b548a4e41b566963778"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/f455acf3645262ae389b10e9beba0c358aa6994e",
-                "reference": "f455acf3645262ae389b10e9beba0c358aa6994e",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/1acec99d6684a54ff92f8b548a4e41b566963778",
+                "reference": "1acec99d6684a54ff92f8b548a4e41b566963778",
                 "shasum": ""
             },
             "require": {
@@ -5488,9 +5488,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.8"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.9"
             },
-            "time": "2022-07-28T14:25:11+00:00"
+            "time": "2022-11-06T15:29:46+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -5617,21 +5617,20 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.5.1",
+            "version": "4.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "a161a26d917604dc6d3aa25100fddf2556e9f35d"
+                "reference": "ad63bc700e7d021039e30ce464eba384c4a1d40f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a161a26d917604dc6d3aa25100fddf2556e9f35d",
-                "reference": "a161a26d917604dc6d3aa25100fddf2556e9f35d",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/ad63bc700e7d021039e30ce464eba384c4a1d40f",
+                "reference": "ad63bc700e7d021039e30ce464eba384c4a1d40f",
                 "shasum": ""
             },
             "require": {
                 "brick/math": "^0.8.8 || ^0.9 || ^0.10",
-                "ext-ctype": "*",
                 "ext-json": "*",
                 "php": "^8.0",
                 "ramsey/collection": "^1.0"
@@ -5663,7 +5662,6 @@
             },
             "suggest": {
                 "ext-bcmath": "Enables faster math with arbitrary-precision integers using BCMath.",
-                "ext-ctype": "Enables faster processing of character classification using ctype functions.",
                 "ext-gmp": "Enables faster math with arbitrary-precision integers using GMP.",
                 "ext-uuid": "Enables the use of PeclUuidTimeGenerator and PeclUuidRandomGenerator.",
                 "paragonie/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
@@ -5695,7 +5693,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.5.1"
+                "source": "https://github.com/ramsey/uuid/tree/4.6.0"
             },
             "funding": [
                 {
@@ -5707,7 +5705,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-16T03:22:46+00:00"
+            "time": "2022-11-05T23:03:38+00:00"
         },
         {
             "name": "rawilk/laravel-base",
@@ -10662,16 +10660,16 @@
         },
         {
             "name": "web-auth/metadata-service",
-            "version": "4.3.0",
+            "version": "4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-auth/webauthn-metadata-service.git",
-                "reference": "af8c413d00f1e5f2074f0156c4d51c3217290efa"
+                "reference": "2040c9cff5aa3dec58548ac2cc41052e7c9d84ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-auth/webauthn-metadata-service/zipball/af8c413d00f1e5f2074f0156c4d51c3217290efa",
-                "reference": "af8c413d00f1e5f2074f0156c4d51c3217290efa",
+                "url": "https://api.github.com/repos/web-auth/webauthn-metadata-service/zipball/2040c9cff5aa3dec58548ac2cc41052e7c9d84ef",
+                "reference": "2040c9cff5aa3dec58548ac2cc41052e7c9d84ef",
                 "shasum": ""
             },
             "require": {
@@ -10681,7 +10679,7 @@
                 "php": ">=8.1",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
-                "psr/log": "^3.0",
+                "psr/log": "^1.0|^2.0|^3.0",
                 "spomky-labs/pki-framework": "^1.0"
             },
             "suggest": {
@@ -10717,7 +10715,7 @@
                 "webauthn"
             ],
             "support": {
-                "source": "https://github.com/web-auth/webauthn-metadata-service/tree/4.3.0"
+                "source": "https://github.com/web-auth/webauthn-metadata-service/tree/4.3.1"
             },
             "funding": [
                 {
@@ -10729,20 +10727,20 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-10-04T13:12:23+00:00"
+            "time": "2022-11-07T20:25:44+00:00"
         },
         {
             "name": "web-auth/webauthn-lib",
-            "version": "4.3.0",
+            "version": "4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-auth/webauthn-lib.git",
-                "reference": "3f5c41d629f20ce36cabb97be78b7cb4954d0dd8"
+                "reference": "460029c9028a205d93ad35a1b3a40b62a3c6ae80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-auth/webauthn-lib/zipball/3f5c41d629f20ce36cabb97be78b7cb4954d0dd8",
-                "reference": "3f5c41d629f20ce36cabb97be78b7cb4954d0dd8",
+                "url": "https://api.github.com/repos/web-auth/webauthn-lib/zipball/460029c9028a205d93ad35a1b3a40b62a3c6ae80",
+                "reference": "460029c9028a205d93ad35a1b3a40b62a3c6ae80",
                 "shasum": ""
             },
             "require": {
@@ -10754,7 +10752,7 @@
                 "php": ">=8.1",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0",
-                "psr/log": "^3.0",
+                "psr/log": "^1.0|^2.0|^3.0",
                 "spomky-labs/cbor-php": "^3.0",
                 "symfony/uid": "^6.1",
                 "web-auth/cose-lib": "^4.0.12",
@@ -10799,7 +10797,7 @@
                 "webauthn"
             ],
             "support": {
-                "source": "https://github.com/web-auth/webauthn-lib/tree/4.3.0"
+                "source": "https://github.com/web-auth/webauthn-lib/tree/4.3.1"
             },
             "funding": [
                 {
@@ -10811,7 +10809,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-10-06T11:15:37+00:00"
+            "time": "2022-11-07T20:25:44+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -11113,16 +11111,16 @@
         },
         {
             "name": "composer/pcre",
-            "version": "3.0.0",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/pcre.git",
-                "reference": "e300eb6c535192decd27a85bc72a9290f0d6b3bd"
+                "reference": "4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/pcre/zipball/e300eb6c535192decd27a85bc72a9290f0d6b3bd",
-                "reference": "e300eb6c535192decd27a85bc72a9290f0d6b3bd",
+                "url": "https://api.github.com/repos/composer/pcre/zipball/4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb",
+                "reference": "4482b6409ca6bfc2af043a5711cd21ac3e7a8dfb",
                 "shasum": ""
             },
             "require": {
@@ -11164,7 +11162,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/pcre/issues",
-                "source": "https://github.com/composer/pcre/tree/3.0.0"
+                "source": "https://github.com/composer/pcre/tree/3.0.2"
             },
             "funding": [
                 {
@@ -11180,7 +11178,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-25T20:21:48+00:00"
+            "time": "2022-11-03T20:24:16+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -11659,16 +11657,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.14.5",
+            "version": "2.14.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "a63e5e8f26ebbebf8ed3c5c691637325512eb0dc"
+                "reference": "f7948baaa0330277c729714910336383286305da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/a63e5e8f26ebbebf8ed3c5c691637325512eb0dc",
-                "reference": "a63e5e8f26ebbebf8ed3c5c691637325512eb0dc",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/f7948baaa0330277c729714910336383286305da",
+                "reference": "f7948baaa0330277c729714910336383286305da",
                 "shasum": ""
             },
             "require": {
@@ -11718,7 +11716,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.14.5"
+                "source": "https://github.com/filp/whoops/tree/2.14.6"
             },
             "funding": [
                 {
@@ -11726,7 +11724,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-01-07T12:00:00+00:00"
+            "time": "2022-11-02T16:23:29+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -13250,16 +13248,16 @@
         },
         {
             "name": "rawilk/laravel-stubs",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rawilk/laravel-stubs.git",
-                "reference": "5781779eab9947a1008b5b64abe05db00d37dd8e"
+                "reference": "af496d03201d8cde2a5468988f283a50edea8c83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rawilk/laravel-stubs/zipball/5781779eab9947a1008b5b64abe05db00d37dd8e",
-                "reference": "5781779eab9947a1008b5b64abe05db00d37dd8e",
+                "url": "https://api.github.com/repos/rawilk/laravel-stubs/zipball/af496d03201d8cde2a5468988f283a50edea8c83",
+                "reference": "af496d03201d8cde2a5468988f283a50edea8c83",
                 "shasum": ""
             },
             "require": {
@@ -13307,7 +13305,7 @@
                 "stubs"
             ],
             "support": {
-                "source": "https://github.com/rawilk/laravel-stubs/tree/v1.1.0"
+                "source": "https://github.com/rawilk/laravel-stubs/tree/v1.1.1"
             },
             "funding": [
                 {
@@ -13315,7 +13313,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-30T19:54:30+00:00"
+            "time": "2022-11-03T15:49:25+00:00"
         },
         {
             "name": "sebastian/cli-parser",
