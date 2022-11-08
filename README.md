@@ -1,6 +1,7 @@
 # The source code of randallwilk.dev
 
 [![Tests](https://github.com/rawilk/randallwilk.dev/actions/workflows/run-tests.yml/badge.svg)](https://github.com/rawilk/randallwilk.dev/actions/workflows/run-tests.yml)
+[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2F494b8011-60bc-42e4-9d64-965b10a28182%3Fdate%3D1%26commit%3D1&style=flat-square)](https://forge.laravel.com)
 
 This repo contains the source code of [my personal website](https://randallwilk.dev).
 
