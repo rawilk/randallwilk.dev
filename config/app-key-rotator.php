@@ -48,6 +48,10 @@ return [
         \App\Support\AppKeyRotatorActions\CommitEnvToGitHubAction::class => [
             'environment' => env('ENV_ENCRYPTED_ENVIRONMENT'),
         ],
+
+        \App\Support\AppKeyRotatorActions\RestoreEncryptedEnvAction::class => [
+            'environment' => env('ENV_ENCRYPTED_ENVIRONMENT'),
+        ],
     ],
 
     /*
@@ -66,5 +70,6 @@ return [
     */
     'before_actions' => [
         \Rawilk\AppKeyRotator\Actions\BackupEnvAction::class => ['filename' => env('ENV_BACKUP_FILENAME', '.env.backup')],
+        \App\Support\AppKeyRotatorActions\BackupEnvEncryptedFileAction::class => ['environment' => env('ENV_ENCRYPTED_ENVIRONMENT')],
     ],
 ];
