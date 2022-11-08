@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "61e1b3d562ee9303c2ac9693493ecec6",
+    "content-hash": "c234eac2f72185fee85d88e0f026c66e",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1623,6 +1623,119 @@
             "time": "2022-05-21T17:30:32+00:00"
         },
         {
+            "name": "jackiedo/dotenv-editor",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JackieDo/Laravel-Dotenv-Editor.git",
+                "reference": "0971d876567b4bcf96078f8e55700b4726431704"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JackieDo/Laravel-Dotenv-Editor/zipball/0971d876567b4bcf96078f8e55700b4726431704",
+                "reference": "0971d876567b4bcf96078f8e55700b4726431704",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^9.0|^8.0|7.0|^6.0|^5.8",
+                "illuminate/contracts": "^9.0|^8.0|7.0|^6.0|^5.8",
+                "illuminate/support": "^9.0|^8.0|7.0|^6.0|^5.8",
+                "jackiedo/path-helper": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Jackiedo\\DotenvEditor\\DotenvEditorServiceProvider"
+                    ],
+                    "aliases": {
+                        "DotenvEditor": "Jackiedo\\DotenvEditor\\Facades\\DotenvEditor"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jackiedo\\DotenvEditor\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jackie Do",
+                    "email": "anhvudo@gmail.com"
+                }
+            ],
+            "description": "The .env file editor tool for Laravel 5.8+",
+            "keywords": [
+                "dotenv",
+                "dotenv-editor",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/JackieDo/Laravel-Dotenv-Editor/issues",
+                "source": "https://github.com/JackieDo/Laravel-Dotenv-Editor/tree/2.0.1"
+            },
+            "time": "2022-03-10T17:04:52+00:00"
+        },
+        {
+            "name": "jackiedo/path-helper",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JackieDo/Path-Helper.git",
+                "reference": "43179cfa17d01f94f4889f286430c2cec1071fb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JackieDo/Path-Helper/zipball/43179cfa17d01f94f4889f286430c2cec1071fb2",
+                "reference": "43179cfa17d01f94f4889f286430c2cec1071fb2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Jackiedo\\PathHelper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jackie Do",
+                    "email": "anhvudo@gmail.com"
+                }
+            ],
+            "description": "Helper class for working with local paths in PHP",
+            "homepage": "https://github.com/JackieDo/path-helper",
+            "keywords": [
+                "helper",
+                "helpers",
+                "library",
+                "path",
+                "paths",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/JackieDo/Path-Helper/issues",
+                "source": "https://github.com/JackieDo/Path-Helper/tree/v1.0.0"
+            },
+            "time": "2022-03-07T20:28:08+00:00"
+        },
+        {
             "name": "jaybizzle/crawler-detect",
             "version": "v1.2.112",
             "source": {
@@ -1908,16 +2021,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.38.0",
+            "version": "v9.39.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "abf198e443e06696af3f356b44de67c0fa516107"
+                "reference": "67e674709e1e7db14f304a871481f310822d68c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/abf198e443e06696af3f356b44de67c0fa516107",
-                "reference": "abf198e443e06696af3f356b44de67c0fa516107",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/67e674709e1e7db14f304a871481f310822d68c5",
+                "reference": "67e674709e1e7db14f304a871481f310822d68c5",
                 "shasum": ""
             },
             "require": {
@@ -2090,7 +2203,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-11-01T14:05:55+00:00"
+            "time": "2022-11-08T14:47:39+00:00"
         },
         {
             "name": "laravel/horizon",
@@ -5706,6 +5819,77 @@
                 }
             ],
             "time": "2022-11-05T23:03:38+00:00"
+        },
+        {
+            "name": "rawilk/laravel-app-key-rotator",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rawilk/laravel-app-key-rotator.git",
+                "reference": "b8c24c2c5d6c2f815a03ebe7b18f7f5fc34a6afb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rawilk/laravel-app-key-rotator/zipball/b8c24c2c5d6c2f815a03ebe7b18f7f5fc34a6afb",
+                "reference": "b8c24c2c5d6c2f815a03ebe7b18f7f5fc34a6afb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^9.0",
+                "jackiedo/dotenv-editor": "^2.0",
+                "php": "^8.0|^8.1",
+                "spatie/laravel-package-tools": "^1.13"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.2",
+                "orchestra/testbench": "^7.0",
+                "pestphp/pest": "^1.22",
+                "pestphp/pest-plugin-laravel": "^1.3",
+                "spatie/laravel-ray": "^1.31"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rawilk\\AppKeyRotator\\AppKeyRotatorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rawilk\\AppKeyRotator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Randall Wilk",
+                    "email": "randall@randallwilk.dev",
+                    "homepage": "https://randallwilk.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Rotate app keys around while re-encrypting data.",
+            "homepage": "https://github.com/rawilk/laravel-app-key-rotator",
+            "keywords": [
+                "app key",
+                "laravel-app-key-rotator",
+                "rawilk"
+            ],
+            "support": {
+                "issues": "https://github.com/rawilk/laravel-app-key-rotator/issues",
+                "source": "https://github.com/rawilk/laravel-app-key-rotator/tree/v3.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/rawilk",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-11-08T14:25:02+00:00"
         },
         {
             "name": "rawilk/laravel-base",
@@ -10660,16 +10844,16 @@
         },
         {
             "name": "web-auth/metadata-service",
-            "version": "4.3.1",
+            "version": "4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-auth/webauthn-metadata-service.git",
-                "reference": "2040c9cff5aa3dec58548ac2cc41052e7c9d84ef"
+                "reference": "bd2a01cd94b98c42bbde47ec37b1a308256a041d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-auth/webauthn-metadata-service/zipball/2040c9cff5aa3dec58548ac2cc41052e7c9d84ef",
-                "reference": "2040c9cff5aa3dec58548ac2cc41052e7c9d84ef",
+                "url": "https://api.github.com/repos/web-auth/webauthn-metadata-service/zipball/bd2a01cd94b98c42bbde47ec37b1a308256a041d",
+                "reference": "bd2a01cd94b98c42bbde47ec37b1a308256a041d",
                 "shasum": ""
             },
             "require": {
@@ -10715,7 +10899,7 @@
                 "webauthn"
             ],
             "support": {
-                "source": "https://github.com/web-auth/webauthn-metadata-service/tree/4.3.1"
+                "source": "https://github.com/web-auth/webauthn-metadata-service/tree/4.4.0"
             },
             "funding": [
                 {
@@ -10727,20 +10911,20 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-11-07T20:25:44+00:00"
+            "time": "2022-11-07T21:45:07+00:00"
         },
         {
             "name": "web-auth/webauthn-lib",
-            "version": "4.3.1",
+            "version": "4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-auth/webauthn-lib.git",
-                "reference": "460029c9028a205d93ad35a1b3a40b62a3c6ae80"
+                "reference": "2cc0aabe6f93c4d680dd507490fc5699841c7490"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-auth/webauthn-lib/zipball/460029c9028a205d93ad35a1b3a40b62a3c6ae80",
-                "reference": "460029c9028a205d93ad35a1b3a40b62a3c6ae80",
+                "url": "https://api.github.com/repos/web-auth/webauthn-lib/zipball/2cc0aabe6f93c4d680dd507490fc5699841c7490",
+                "reference": "2cc0aabe6f93c4d680dd507490fc5699841c7490",
                 "shasum": ""
             },
             "require": {
@@ -10797,7 +10981,7 @@
                 "webauthn"
             ],
             "support": {
-                "source": "https://github.com/web-auth/webauthn-lib/tree/4.3.1"
+                "source": "https://github.com/web-auth/webauthn-lib/tree/4.4.0"
             },
             "funding": [
                 {
@@ -10809,7 +10993,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-11-07T20:25:44+00:00"
+            "time": "2022-11-07T21:45:07+00:00"
         },
         {
             "name": "webmozart/assert",

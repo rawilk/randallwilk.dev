@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\GitHub;
 
+use Exception;
 use Github\Client as GitHubClient;
 use Github\ResultPager;
 use Illuminate\Support\Collection;
@@ -40,5 +41,22 @@ final class GitHubApi
         $api = $this->client->api('repository');
 
         return collect($api->topics($username, $repository)['names'] ?? []);
+    }
+
+    public function updateFile(string $username, string $repository, string $path, ?string $content, string $message): array
+    {
+        /** @var \Github\Api\Repository\Contents $api */
+        $api = $this->client->api('repo')->contents();
+
+        // We need the sha to update a file.
+        $sha = rescue(function () use ($api, $username, $repository, $path) {
+            $file = $api->show($username, $repository, $path);
+
+            return $file['sha'];
+        });
+
+        throw_unless($sha, Exception::class, 'File not found in repository.');
+
+        return $api->update($username, $repository, $path, $content, $message, $sha);
     }
 }

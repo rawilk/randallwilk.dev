@@ -24,6 +24,7 @@
         "league/commonmark": "^2.3",
         "livewire/livewire": "^2.10",
         "predis/predis": "^2.0",
+        "rawilk/laravel-app-key-rotator": "^3.0",
         "rawilk/laravel-base": "^0.4.9",
         "rawilk/laravel-breadcrumbs": "^4.0",
         "rawilk/laravel-casters": "^3.0",
