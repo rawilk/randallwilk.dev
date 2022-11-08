@@ -65,6 +65,6 @@ return [
     |
     */
     'before_actions' => [
-        \Rawilk\AppKeyRotator\Actions\BackupEnvAction::class => ['filename' => env('ENV_BACKUP_FILENAME', '.env.backup')]
+        \Rawilk\AppKeyRotator\Actions\BackupEnvAction::class => ['filename' => env('ENV_BACKUP_FILENAME', '.env.backup')],
     ],
 ];
