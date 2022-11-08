@@ -5,7 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@alpinejs/collapse": "^3.10.4",
+        "@alpinejs/collapse": "^3.10.5",
         "@alpinejs/intersect": "^3.10.4",
         "@babel/preset-env": "^7.20.2",
         "@docsearch/js": "^3.3.0",
