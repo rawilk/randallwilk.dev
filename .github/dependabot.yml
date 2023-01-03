@@ -8,6 +8,8 @@ updates:
         directory: "/"
         schedule:
             interval: "weekly"
+        commit-message:
+            prefix: "Action"
         labels:
             - "dependencies"
 
