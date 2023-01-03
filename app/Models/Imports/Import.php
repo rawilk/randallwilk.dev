@@ -32,6 +32,7 @@ use Rawilk\LaravelBase\Contracts\Models\Import as ImportContract;
  * @method static Builder|Import newQuery()
  * @method static Builder|Import notCompleted()
  * @method static Builder|Import query()
+ *
  * @mixin \Eloquent
  */
 final class Import extends Model implements ImportContract

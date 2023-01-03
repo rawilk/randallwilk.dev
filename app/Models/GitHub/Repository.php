@@ -58,6 +58,7 @@ use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
  * @method static Builder|Repository visible()
  * @method static \Illuminate\Database\Query\Builder|Repository withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Repository withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 final class Repository extends Model
