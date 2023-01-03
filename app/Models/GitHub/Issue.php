@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|Issue newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Issue newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Issue query()
+ *
  * @mixin \Eloquent
  */
 final class Issue extends Model
