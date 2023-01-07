@@ -8,7 +8,6 @@ use App\Enums\RepositoryTypeEnum;
 use App\Models\GitHub\Repository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Rawilk\LaravelBase\Rules\EnumRule;
 
 final class UpdateRepositoryAction
 {

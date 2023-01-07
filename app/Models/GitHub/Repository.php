@@ -10,7 +10,6 @@ use App\Enums\RepositoryTypeEnum;
 use App\Support\Formatting\ShortNumberFormatter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -49,6 +48,7 @@ use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
  * @property-read string $type_background_color
  * @property-read string|null $updated_at_for_humans
  * @property-read string $url
+ *
  * @method static Builder|Repository applySort(?string $sort = null)
  * @method static Builder|Repository byType(?string $type)
  * @method static Builder|Repository newModelQuery()
@@ -58,6 +58,7 @@ use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
  * @method static Builder|Repository visible()
  * @method static \Illuminate\Database\Query\Builder|Repository withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Repository withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 final class Repository extends Model

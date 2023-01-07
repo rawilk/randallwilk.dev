@@ -24,6 +24,7 @@ use Rawilk\LaravelBase\Contracts\Models\Import as ImportContract;
  * @property \Carbon\CarbonImmutable|null $completed_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Database\Factories\ImportFactory factory(...$parameters)
  * @method static Builder|Import forImport(string $import)
  * @method static Builder|Import forModel(string $model)
@@ -31,6 +32,7 @@ use Rawilk\LaravelBase\Contracts\Models\Import as ImportContract;
  * @method static Builder|Import newQuery()
  * @method static Builder|Import notCompleted()
  * @method static Builder|Import query()
+ *
  * @mixin \Eloquent
  */
 final class Import extends Model implements ImportContract
