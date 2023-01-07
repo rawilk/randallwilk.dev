@@ -138,7 +138,7 @@ final class Show extends Component
         }
 
         if ($this->repository->isNpmPackage()) {
-            return new ImportNpmDownloadsJob($this->repository->name);
+            return new ImportNpmDownloadsJob($this->repository->nameForNpm());
         }
 
         return new ImportPackagistDownloadsJob(config('services.github.username'), $this->repository->name);

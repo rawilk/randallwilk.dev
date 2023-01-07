@@ -60,7 +60,7 @@
                                class="static"
                             >
                                 <span class="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
-                                <span class="relative z-10 group-hover:text-brand">{{ $repository->name }}</span>
+                                <span class="relative z-10 group-hover:text-brand">{{ $repository->display_name }}</span>
                             </a>
                         </h2>
 

@@ -22,6 +22,7 @@ use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
  *
  * @property int $id
  * @property string $name
+ * @property string|null $scoped_name The name of the repo with the owner's username prefixed.
  * @property string|null $description
  * @property array|null $topics
  * @property string|null $documentation_url
@@ -38,6 +39,7 @@ use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read string|null $created_at_for_humans
+ * @property-read string $display_name
  * @property-read string $downloads_for_front
  * @property-read string $downloads_for_humans
  * @property-read string $full_name
@@ -47,8 +49,6 @@ use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
  * @property-read string $type_background_color
  * @property-read string|null $updated_at_for_humans
  * @property-read string $url
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\GitHub\Issue[] $issues
- *
  * @method static Builder|Repository applySort(?string $sort = null)
  * @method static Builder|Repository byType(?string $type)
  * @method static Builder|Repository newModelQuery()
@@ -58,7 +58,6 @@ use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
  * @method static Builder|Repository visible()
  * @method static \Illuminate\Database\Query\Builder|Repository withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Repository withoutTrashed()
- *
  * @mixin \Eloquent
  */
 final class Repository extends Model
@@ -79,24 +78,14 @@ final class Repository extends Model
         'visible' => 'boolean',
     ];
 
-    public function issues(): HasMany
-    {
-        return $this->hasMany(Issue::class);
-    }
-
-    public function hasIssues(): bool
-    {
-        return count($this->issues) > 0;
-    }
-
-    public function getSlug(): string
-    {
-        return Str::slug($this->name);
-    }
-
     public function getUrlAttribute(): string
     {
         return "https://github.com/rawilk/{$this->name}";
+    }
+
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->scoped_name ?? $this->name;
     }
 
     public function getShowUrlAttribute(): string
@@ -199,6 +188,16 @@ final class Repository extends Model
     public function getTypeBackgroundColorAttribute(): string
     {
         return $this->type?->bgColor() ?? 'bg-gray-200';
+    }
+
+    /**
+     * If the package has a scoped namespace, we need to use that instead.
+     *
+     * @return string
+     */
+    public function nameForNpm(): string
+    {
+        return $this->scoped_name ?? $this->name;
     }
 
     protected static function booted(): void

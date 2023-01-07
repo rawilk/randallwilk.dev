@@ -32,6 +32,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $email
  * @property string $timezone
  * @property Password $password
+ * @property string|null $two_factor_recovery_codes
+ * @property bool $two_factor_enabled
  * @property string|null $avatar_path
  * @property int|null $github_id
  * @property string|null $github_username
@@ -39,6 +41,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property Name $name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Rawilk\LaravelBase\Models\AuthenticatorApp[] $authenticatorApps
  * @property-read string $abilities_url
  * @property-read string $avatar_url
  * @property-read string|null $created_at_for_humans
@@ -49,14 +52,12 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection|\Rawilk\LaravelBase\Models\Permission[] $permissions
  * @property-read \Illuminate\Database\Eloquent\Collection|Role[] $roles
- *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
- *
  * @mixin \Eloquent
  */
 final class User extends Authenticatable

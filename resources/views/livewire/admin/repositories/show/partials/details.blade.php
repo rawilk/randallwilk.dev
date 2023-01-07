@@ -6,6 +6,18 @@
         </x-link>
     </x-info-list-item>
 
+    {{-- scoped name --}}
+    <x-info-list-item>
+        <x-slot:label>
+            <div class="flex items-center">
+                <span class="mr-1">{{ __('repos.labels.scoped_name') }}</span>
+                <x-laravel-base::elements.tooltip-help title="{{ __('repos.labels.scoped_name_help') }}" />
+            </div>
+        </x-slot:label>
+
+        <span>{{ $repository->scoped_name }}</span>
+    </x-info-list-item>
+
     {{-- description --}}
     <x-info-list-item label="{{ __('repos.labels.description') }}">
         {{ $repository->description }}

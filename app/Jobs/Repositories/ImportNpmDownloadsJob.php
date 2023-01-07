@@ -35,7 +35,7 @@ final class ImportNpmDownloadsJob implements ShouldQueue
 
         $this->getNpmPackages()
             ->each(function (Repository $repository) use ($api) {
-                $repository->forceFill(['downloads' => $api->getTotalDownloadsForPackage($repository->name)])->save();
+                $repository->forceFill(['downloads' => $api->getTotalDownloadsForPackage($repository->nameForNpm())])->save();
             });
     }
 
@@ -43,7 +43,7 @@ final class ImportNpmDownloadsJob implements ShouldQueue
     {
         return Repository::query()
             ->where('language', ProgrammingLanguageEnum::JAVASCRIPT->value)
-            ->when($this->package, fn ($query, $name) => $query->where('name', $name))
+            ->when($this->package, fn ($query, $name) => $query->where('name', $name)->orWhere('scoped_name', $name))
             ->get();
     }
 }

@@ -1,3 +1,2 @@
 <?php
-
-return ['title' => 'Dashboard'];
+return ["title" => "Dashboard"];
