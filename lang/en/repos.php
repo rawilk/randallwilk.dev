@@ -45,6 +45,8 @@ return [
         'not_new' => 'Not new',
         'repo_created_at' => 'Repository Created At',
         'repo_created_at_help' => 'Date repository was created on GitHub.',
+        'scoped_name' => 'Scoped Name',
+        'scoped_name_help' => 'Mostly for NPM packages, this allows us to query for downloads based on a scoped namespace.',
         'search_placeholder' => 'Search in Name, Description',
         'see_blogpost' => 'Visit blog post',
         'see_docs' => 'Visit docs',

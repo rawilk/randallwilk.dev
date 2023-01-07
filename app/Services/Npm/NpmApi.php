@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services\Npm;
 
+use function collect;
 use Illuminate\Support\Facades\Http;
 
 final class NpmApi

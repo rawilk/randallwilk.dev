@@ -18,11 +18,22 @@
                             required
                             focus
                         >
-                            <option value="" disabled>{{ __('Select a type...') }}</option>
+                            <option value="" @disabled($repository->type)>{{ __('Select a type...') }}</option>
                             @foreach (\App\Enums\RepositoryTypeEnum::cases() as $case)
                                 <option value="{{ $case->value }}">{{ $case->label() }}</option>
                             @endforeach
                         </x-select>
+                    </x-form-group>
+
+                    {{-- scoped name --}}
+                    <x-form-group label="{{ __('repos.labels.scoped_name') }}" name="scoped_name" inline>
+                        <x-input
+                            wire:model.defer="state.scoped_name"
+                            name="scoped_name"
+                            maxlength="255"
+                        />
+
+                        <x-slot:help-text>{{ __('repos.labels.scoped_name_help') }}</x-slot:help-text>
                     </x-form-group>
 
                     {{-- docs url --}}

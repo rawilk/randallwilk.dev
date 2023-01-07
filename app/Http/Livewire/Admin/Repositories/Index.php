@@ -57,7 +57,7 @@ final class Index extends Component
     public function getRowsQueryProperty()
     {
         $query = Repository::query()
-            ->when($this->filters['search'], fn ($query, $search) => $query->modelSearch(['name', 'description'], $search))
+            ->when($this->filters['search'], fn ($query, $search) => $query->modelSearch(['name', 'description', 'scoped_name'], $search))
             ->byType($this->filters['type'])
             ->when(! blank($this->filters['visible']), fn ($query) => $query->where('visible', (int) $this->filters['visible'] === 1))
             ->when(! blank($this->filters['new']), fn ($query) => $query->where('new', (int) $this->filters['new'] === 1))

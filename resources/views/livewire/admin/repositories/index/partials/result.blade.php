@@ -24,6 +24,12 @@
                 </x-badge>
             </div>
 
+            @if ($repository->scoped_name)
+                <p class="mt-1 text-slate-500 text-sm truncate italic">
+                    {{ $repository->scoped_name }}
+                </p>
+            @endif
+
             <p class="mt-1 text-slate-500 text-sm truncate">{{ $repository->description }}</p>
 
             <div class="mt-5 grid md:grid-cols-2 gap-4 text-xs">

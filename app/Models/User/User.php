@@ -32,6 +32,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @property string $email
  * @property string $timezone
  * @property Password $password
+ * @property string|null $two_factor_recovery_codes
+ * @property bool $two_factor_enabled
  * @property string|null $avatar_path
  * @property int|null $github_id
  * @property string|null $github_username
@@ -39,6 +41,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property Name $name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Rawilk\LaravelBase\Models\AuthenticatorApp[] $authenticatorApps
  * @property-read string $abilities_url
  * @property-read string $avatar_url
  * @property-read string|null $created_at_for_humans

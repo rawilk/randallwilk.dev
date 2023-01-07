@@ -48,7 +48,7 @@ final class Repositories extends Component
     public function getRowsQueryProperty()
     {
         $query = Repository::visible()
-            ->when($this->search, fn ($query, $search) => $query->modelSearch('name', $search))
+            ->when($this->search, fn ($query, $search) => $query->modelSearch(['name', 'scoped_name'], $search))
             ->byType($this->type);
 
         $query->applySort($this->sort);

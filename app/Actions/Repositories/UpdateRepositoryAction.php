@@ -7,7 +7,7 @@ namespace App\Actions\Repositories;
 use App\Enums\RepositoryTypeEnum;
 use App\Models\GitHub\Repository;
 use Illuminate\Support\Facades\Validator;
-use Rawilk\LaravelBase\Rules\EnumRule;
+use Illuminate\Validation\Rule;
 
 final class UpdateRepositoryAction
 {
@@ -15,7 +15,8 @@ final class UpdateRepositoryAction
     {
         $data = Validator::make($input, [
             'visible' => ['boolean'],
-            'type' => ['required', new EnumRule(RepositoryTypeEnum::class)],
+            'type' => ['required', Rule::enum(RepositoryTypeEnum::class)],
+            'scoped_name' => ['nullable', 'string', 'max:255'],
             'documentation_url' => ['nullable', 'string', 'max:255'],
             'blogpost_url' => ['nullable', 'string', 'max:255'],
             'new' => ['boolean'],
