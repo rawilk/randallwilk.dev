@@ -193,8 +193,6 @@ final class Repository extends Model
 
     /**
      * If the package has a scoped namespace, we need to use that instead.
-     *
-     * @return string
      */
     public function nameForNpm(): string
     {

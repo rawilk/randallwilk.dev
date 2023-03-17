@@ -86,7 +86,6 @@ final class TableOfContentsBuilder
     }
 
     /**
-     * @param  \DOMElement  $node
      * @return \Generator<\DOMElement>
      */
     private function htmlChildren(DOMElement $node): Generator
