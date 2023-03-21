@@ -16,9 +16,6 @@ final class WebauthnKeyDeletedListener
      * Mark a user's 2fa status as inactive if they don't have any other security keys registered
      * or have an authenticator app registered. Also remove recovery codes as they are not needed
      * anymore.
-     *
-     * @param  \Rawilk\LaravelBase\Events\Webauthn\WebauthnKeyWasDeleted  $event
-     * @return void
      */
     public function handle(WebauthnKeyWasDeleted $event): void
     {

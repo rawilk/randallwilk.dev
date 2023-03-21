@@ -144,9 +144,6 @@ final class GenerateSitemapCommand extends Command
      * We want to try and be as accurate as we can with last mod dates.
      * To do this, we will store the last modified date in a `last_mod.json`
      * file, and parse it here.
-     *
-     * @param  \Spatie\Sitemap\Tags\Url  $url
-     * @return \Carbon\Carbon
      */
     private function getLastModificationDate(Url $url): Carbon
     {

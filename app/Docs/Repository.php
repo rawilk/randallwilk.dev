@@ -15,7 +15,6 @@ final class Repository
     private ?array $config;
 
     /**
-     * @param  string  $slug
      * @param  \Illuminate\Support\Collection<int, \App\Docs\Alias>  $aliases
      * @param  \App\Docs\DocumentationPage|null  $index
      */

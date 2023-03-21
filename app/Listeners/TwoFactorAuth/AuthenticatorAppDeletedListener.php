@@ -15,9 +15,6 @@ final class AuthenticatorAppDeletedListener
     /**
      * Mark a user's 2fa status as inactive if they don't have any other authenticator apps
      * or security keys registered. Also remove recovery codes as they are not needed anymore.
-     *
-     * @param  \Rawilk\LaravelBase\Events\TwoFactorAuth\AuthenticatorAppWasDeleted  $event
-     * @return void
      */
     public function handle(AuthenticatorAppWasDeleted $event): void
     {
