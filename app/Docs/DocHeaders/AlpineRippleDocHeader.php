@@ -26,7 +26,7 @@ final class AlpineRippleDocHeader implements DocHeader
                 x-data
                 x-ripple
         >
-            Click m
+            Click me
         </button>
         HTML;
     }
