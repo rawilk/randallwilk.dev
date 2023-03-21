@@ -15,6 +15,7 @@ final class DocHeaderFactory
         'laravel-settings' => LaravelSettingsDocHeader::class,
         'laravel-ups' => LaravelUPSDocHeader::class,
         'laravel-webauthn' => LaravelWebauthnDocHeader::class,
+        'alpine-ripple' => AlpineRippleDocHeader::class,
         'vue-context' => VueContextDocHeader::class,
     ];
 
