@@ -14,7 +14,7 @@ final class UpdatePasswordAction implements UpdatesUserPasswords
 {
     use PasswordValidationRules;
 
-    public function update($user, array $input, bool $updatingOtherUser = false)
+    public function update($user, array $input, bool $updatingOtherUser = false): void
     {
         /*
          * We'll only require a password confirmation when a user is updating their own password

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use function App\Helpers\defaultLoginRedirect;
+use function App\Helpers\homeRoute;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Auth;
 use function Pest\Laravel\actingAs;

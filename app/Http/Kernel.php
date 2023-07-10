@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-final class Kernel extends HttpKernel
+class Kernel extends HttpKernel
 {
     /**
      * @var array<int, class-string|string>

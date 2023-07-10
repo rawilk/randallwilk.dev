@@ -8,10 +8,10 @@ use App\Docs\Docs;
 use App\Docs\DocumentationPage;
 use App\Support\CommonMark\TableOfContentsBuilder;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use RuntimeException;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 final class DocsController
 {
@@ -27,10 +27,10 @@ final class DocsController
         try {
             $repository = $docs->getRepository($repository);
         } catch (RuntimeException) {
-            abort(Response::HTTP_NOT_FOUND, __('front.docs.alerts.repo_not_found'));
+            abort(SymfonyResponse::HTTP_NOT_FOUND, __('front.docs.alerts.repo_not_found'));
         }
 
-        abort_if(is_null($repository), Response::HTTP_NOT_FOUND, __('front.docs.alerts.repo_not_found'));
+        abort_if(is_null($repository), SymfonyResponse::HTTP_NOT_FOUND, __('front.docs.alerts.repo_not_found'));
 
         if ($alias) {
             preg_match('/v\d+/', $alias, $matches);
@@ -45,7 +45,7 @@ final class DocsController
 
             $alias = $repository->getAlias($alias);
 
-            abort_if(is_null($alias), Response::HTTP_NOT_FOUND, __('front.docs.alerts.alias_not_found'));
+            abort_if(is_null($alias), SymfonyResponse::HTTP_NOT_FOUND, __('front.docs.alerts.alias_not_found'));
         } else {
             $alias = $repository->aliases->first();
         }
@@ -62,10 +62,10 @@ final class DocsController
         try {
             $repository = $docs->getRepository($repository);
         } catch (RuntimeException) {
-            abort(Response::HTTP_NOT_FOUND, __('front.docs.alerts.repo_not_found'));
+            abort(SymfonyResponse::HTTP_NOT_FOUND, __('front.docs.alerts.repo_not_found'));
         }
 
-        abort_if(is_null($repository), Response::HTTP_NOT_FOUND, __('front.docs.alerts.repo_not_found'));
+        abort_if(is_null($repository), SymfonyResponse::HTTP_NOT_FOUND, __('front.docs.alerts.repo_not_found'));
 
         preg_match('/v\d+/', $alias, $matches);
 

@@ -39,7 +39,7 @@
             required
             use-custom-select
             fixed-position
-            :only="timezoneSubsets()"
+            :only="\App\Helpers\timezoneSubsets()"
         />
     </x-form-group>
 </x-card>

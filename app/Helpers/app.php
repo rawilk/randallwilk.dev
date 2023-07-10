@@ -2,19 +2,14 @@
 
 declare(strict_types=1);
 
-use Rawilk\FormComponents\Support\TimeZoneRegion;
+namespace App\Helpers;
 
-if (! function_exists('timezoneSubsets')) {
-    /**
-     * The timezone regions we normally need to include.
-     *
-     * @return array<int, string>
-     */
-    function timezoneSubsets(): array
-    {
-        return [
-            TimeZoneRegion::GENERAL,
-            TimeZoneRegion::AMERICA,
-        ];
-    }
+use Rawilk\FormComponents\Support\TimeZoneRegionEnum;
+
+function timezoneSubsets(): array
+{
+    return [
+        TimeZoneRegionEnum::General->value,
+        TimeZoneRegionEnum::America->value,
+    ];
 }

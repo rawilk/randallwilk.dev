@@ -107,7 +107,7 @@
                 const authCheckInterval = window.setInterval(() => {
                     if (authWindow.closed) {
                         window.clearInterval(authCheckInterval);
-                        window.location.replace('{{ session('next', defaultLoginRedirect()) }}');
+                        window.location.replace('{{ session('next', \App\Helpers\defaultLoginRedirect()) }}');
                     }
                 }, 500);
             }

@@ -38,7 +38,7 @@
                     name="timezone"
                     required
                     use-custom-select
-                    :only="timezoneSubsets()"
+                    :only="\App\Helpers\timezoneSubsets()"
                 />
             </x-form-group>
         </x-form>

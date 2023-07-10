@@ -12,7 +12,7 @@ final class ResetUserPasswordAction implements ResetsUserPasswords
 {
     use PasswordValidationRules;
 
-    public function reset($user, array $input)
+    public function reset($user, array $input): void
     {
         Validator::make($input, [
             'password' => $this->passwordRules(needsConfirm: false),

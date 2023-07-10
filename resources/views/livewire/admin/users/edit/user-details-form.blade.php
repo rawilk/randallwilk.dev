@@ -40,7 +40,7 @@
                         wire:model.defer="state.timezone"
                         name="timezone"
                         required
-                        :only="timezoneSubsets()"
+                        :only="\App\Helpers\timezoneSubsets()"
                         use-custom-select
                     />
                 </x-form-group>

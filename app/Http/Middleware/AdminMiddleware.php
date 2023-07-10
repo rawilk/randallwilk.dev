@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-final class AdminMiddleware
+class AdminMiddleware
 {
     /*
      * Certain "admin" routes need to always be accessible

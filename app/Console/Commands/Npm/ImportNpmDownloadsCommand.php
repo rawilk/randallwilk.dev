@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands\Npm;
 
 use App\Jobs\Repositories\ImportNpmDownloadsJob;
