@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use App\Enums\PermissionEnum;
+use App\Models\Access\Permission;
+use App\Models\Access\Role;
 use Illuminate\Database\Seeder;
-use Rawilk\LaravelBase\Models\Permission;
-use Rawilk\LaravelBase\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 final class NewPermissionSeeder extends Seeder

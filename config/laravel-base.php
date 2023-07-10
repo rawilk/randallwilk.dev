@@ -86,7 +86,7 @@ return [
          * own model, it must implement the \Rawilk\LaravelBase\Contracts\Models\AuthenticatorApp
          * contract.
          */
-        'model' => \Rawilk\LaravelBase\Models\AuthenticatorApp::class,
+        'model' => \App\Models\User\AuthenticatorApp::class,
 
         /*
          * You may restrict the amount of authenticator apps a user may register to their account.
@@ -111,6 +111,6 @@ return [
         'max_internal_keys_per_user' => env('WEBAUTHN_MAX_INTERNAL_KEYS'),
     ],
 
-    'user_route_key' => 'id',
+    'user_route_key' => 'h_key',
 
 ];

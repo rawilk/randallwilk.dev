@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e128437da64c49ff8bde4c0df07859b",
+    "content-hash": "2f4c5636592de456dd6d71e316984c5b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -5959,6 +5959,90 @@
             "time": "2023-04-20T14:11:43+00:00"
         },
         {
+            "name": "rawilk/human-keys",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rawilk/human-keys.git",
+                "reference": "0020b9eea9123da7b96ee66c65c061c2267a99ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rawilk/human-keys/zipball/0020b9eea9123da7b96ee66c65c061c2267a99ad",
+                "reference": "0020b9eea9123da7b96ee66c65c061c2267a99ad",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0",
+                "php": "^8.1|^8.2",
+                "spatie/laravel-package-tools": "^1.14"
+            },
+            "require-dev": {
+                "godruoyi/php-snowflake": "^2.2",
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.9",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0",
+                "pestphp/pest-plugin-arch": "^2.0",
+                "pestphp/pest-plugin-laravel": "^2.0",
+                "spatie/laravel-ray": "^1.31",
+                "tuupola/ksuid": "^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rawilk\\HumanKeys\\HumanKeysServiceProvider"
+                    ],
+                    "aliases": {
+                        "HumanKeys": "Rawilk\\HumanKeys\\Facades\\HumanKeys"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rawilk\\HumanKeys\\": "src/",
+                    "Rawilk\\HumanKeys\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Randall Wilk",
+                    "email": "randall@randallwilk.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Use Stripe-like IDs for your models.",
+            "homepage": "https://github.com/rawilk/human-keys",
+            "keywords": [
+                "human-keys",
+                "keys",
+                "ksuid",
+                "laravel",
+                "laravel-human-keys",
+                "rawilk",
+                "snowflake",
+                "stripe",
+                "ulid",
+                "uuid"
+            ],
+            "support": {
+                "issues": "https://github.com/rawilk/human-keys/issues",
+                "source": "https://github.com/rawilk/human-keys/tree/v1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/rawilk",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-05-08T19:58:28+00:00"
+        },
+        {
             "name": "rawilk/laravel-app-key-rotator",
             "version": "v3.1.1",
             "source": {
@@ -10699,6 +10783,127 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.6"
             },
             "time": "2023-01-03T09:29:04+00:00"
+        },
+        {
+            "name": "tuupola/base62",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tuupola/base62.git",
+                "reference": "7406145a9cf8c567cd35ad7358d1b24828cbcfdb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tuupola/base62/zipball/7406145a9cf8c567cd35ad7358d1b24828cbcfdb",
+                "reference": "7406145a9cf8c567cd35ad7358d1b24828cbcfdb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "overtrue/phplint": "^1.0",
+                "phpbench/phpbench": "^0.15.0",
+                "phpstan/phpstan": "^0.12.38",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "suggest": {
+                "ext-gmp": "GMP extension provides the fastest encoding and decoding."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tuupola\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mika Tuupola",
+                    "email": "tuupola@appelsiini.net",
+                    "homepage": "https://appelsiini.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Base62 encoder and decoder for arbitrary data",
+            "homepage": "https://github.com/tuupola/base62",
+            "keywords": [
+                "base62"
+            ],
+            "support": {
+                "issues": "https://github.com/tuupola/base62/issues",
+                "source": "https://github.com/tuupola/base62/tree/2.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/tuupola",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-09T15:05:36+00:00"
+        },
+        {
+            "name": "tuupola/ksuid",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tuupola/ksuid.git",
+                "reference": "a4f7e7f6e12f6757af56c6787f4f80ad06413148"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tuupola/ksuid/zipball/a4f7e7f6e12f6757af56c6787f4f80ad06413148",
+                "reference": "a4f7e7f6e12f6757af56c6787f4f80ad06413148",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8.0",
+                "tuupola/base62": "^1.0|^2.0"
+            },
+            "require-dev": {
+                "overtrue/phplint": "^1.0",
+                "phpstan/phpstan": "^0.12.42",
+                "phpunit/phpunit": "^7.0|^8.0|^9.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tuupola\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mika Tuupola",
+                    "email": "tuupola@appelsiini.net",
+                    "homepage": "https://appelsiini.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "K-Sortable Globally Unique IDs",
+            "homepage": "https://github.com/tuupola/ksuid",
+            "keywords": [
+                "base62"
+            ],
+            "support": {
+                "issues": "https://github.com/tuupola/ksuid/issues",
+                "source": "https://github.com/tuupola/ksuid/tree/2.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/tuupola",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-09-10T11:13:21+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

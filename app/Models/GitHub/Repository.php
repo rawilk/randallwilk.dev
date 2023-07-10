@@ -9,17 +9,21 @@ use App\Enums\RepositorySortEnum;
 use App\Enums\RepositoryTypeEnum;
 use App\Support\Formatting\ShortNumberFormatter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Rawilk\HumanKeys\Concerns\HasHumanKey;
 use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
 
 class Repository extends Model
 {
     use SoftDeletes;
     use HasDatesForHumans;
+    use HasUuids;
+    use HasHumanKey;
 
     protected $guarded = ['id'];
 
@@ -152,6 +156,21 @@ class Repository extends Model
     public function nameForNpm(): string
     {
         return $this->scoped_name ?? $this->name;
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'h_key';
+    }
+
+    public function humanKeys(): array
+    {
+        return ['h_key'];
+    }
+
+    public static function humanKeyPrefix(): string
+    {
+        return 'repo';
     }
 
     protected static function booted(): void

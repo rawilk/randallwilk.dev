@@ -1,6 +1,6 @@
 <ul class="grid grid-cols-1 gap-6 xl:grid-cols-2">
     @forelse ($repositories as $repository)
-        <li class="col-span-1" wire:key="repo{{ $repository->getKey() }}">
+        <li class="col-span-1" wire:key="repo{{ $repository->h_key }}">
             @include('livewire.admin.repositories.index.partials.result', ['repository' => $repository])
         </li>
     @empty

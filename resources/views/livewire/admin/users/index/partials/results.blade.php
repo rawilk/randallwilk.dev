@@ -25,13 +25,13 @@
     />
 
     @forelse ($users as $user)
-        <x-tr row-index="{{ $user->id }}"
-              wire:key="row-{{ $user->id }}"
-              :selected="$this->isSelected($user->id)"
+        <x-tr row-index="{{ $user->h_key }}"
+              wire:key="row-{{ $user->h_key }}"
+              :selected="$this->isSelected($user->h_key)"
               wire-loads
         >
             <x-td class="pr-0">
-                <x-checkbox wire:model="selected" value="{{ $user->id }}" />
+                <x-checkbox wire:model="selected" value="{{ $user->h_key }}" />
             </x-td>
 
             <x-td class="table-actions">
@@ -54,7 +54,7 @@
 
                     @can('delete', $user)
                         <x-dropdown-divider />
-                        <x-dropdown-item wire:click="confirmDelete('{{ $user->id }}')">
+                        <x-dropdown-item wire:click="confirmDelete('{{ $user->h_key }}')">
                             <x-css-trash />
                             <span>{{ __('base::messages.delete_button') }}</span>
                         </x-dropdown-item>
@@ -62,7 +62,7 @@
                 </x-action-menu>
             </x-td>
 
-            <x-td :hidden="$this->isHidden('id')">{{ $user->id }}</x-td>
+            <x-td :hidden="$this->isHidden('id')">{{ $user->h_key }}</x-td>
             <x-td :hidden="$this->isHidden('name')">
                 <div class="flex items-center space-x-2">
                     <img class="h-8 w-8 rounded-full" src="{{ $user->avatar_url }}" alt="{{ $user->name->full }}">

@@ -6,6 +6,7 @@ namespace App\Models\Imports;
 
 use Database\Factories\ImportFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Rawilk\LaravelBase\Contracts\Models\Import as ImportContract;
@@ -13,6 +14,7 @@ use Rawilk\LaravelBase\Contracts\Models\Import as ImportContract;
 class Import extends Model implements ImportContract
 {
     use HasFactory;
+    use HasUuids;
 
     protected $guarded = ['id'];
 

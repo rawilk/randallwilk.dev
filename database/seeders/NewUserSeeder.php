@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\Access\Role;
 use App\Models\User\User;
 use Illuminate\Database\Seeder;
-use Rawilk\LaravelBase\Models\Role;
 
 final class NewUserSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ final class NewUserSeeder extends Seeder
     private function createSuperAdminUser(): void
     {
         // We've already seeded the admin user, no need to do it again.
-        if (User::withoutGlobalScopes()->whereId(1)->exists()) {
+        if (User::withoutGlobalScopes()->exists()) {
             return;
         }
 

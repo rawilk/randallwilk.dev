@@ -7,10 +7,10 @@ namespace App\imports\Users;
 use App\Actions\Users\CreateUserAction;
 use App\Actions\Users\UpdateUserAction;
 use App\Enums\PermissionEnum;
+use App\Models\Access\Role;
 use App\Models\User\User;
 use Illuminate\Support\Arr;
 use Rawilk\LaravelBase\Imports\GeneralImport;
-use Rawilk\LaravelBase\Models\Role;
 
 final class UsersImport extends GeneralImport
 {

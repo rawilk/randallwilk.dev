@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('imports', static function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->nullable()->constrained();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->nullable()->constrained();
             $table->string('model');
             $table->string('import');
             $table->string('file_path');

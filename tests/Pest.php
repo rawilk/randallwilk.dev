@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\Access\Role;
 use App\Models\User\User;
-use Rawilk\LaravelBase\Models\Role;
 use Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

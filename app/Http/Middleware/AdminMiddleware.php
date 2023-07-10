@@ -6,7 +6,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class AdminMiddleware
 {
@@ -29,13 +29,13 @@ class AdminMiddleware
             return $next($request);
         }
 
-        abort(Response::HTTP_NOT_FOUND);
+        abort(SymfonyResponse::HTTP_NOT_FOUND);
     }
 
     private function shouldAllowThrough(Request $request): bool
     {
         return rescue(function () use ($request) {
-            $exception = self::$except[$request->route()->getName()] ?? null;
+            $exception = self::$except[$request->route()?->getName()] ?? null;
 
             return $exception === $request->getMethod();
         }, false);

@@ -3,8 +3,8 @@
 return [
 
     'models' => [
-        'permission' => \Rawilk\LaravelBase\Models\Permission::class,
-        'role' => \Rawilk\LaravelBase\Models\Role::class,
+        'permission' => \App\Models\Access\Permission::class,
+        'role' => \App\Models\Access\Role::class,
     ],
 
 ];

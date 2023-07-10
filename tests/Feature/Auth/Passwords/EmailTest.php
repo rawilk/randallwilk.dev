@@ -37,7 +37,7 @@ it('sends an email for existing application users', function () {
         ->call('sendPasswordResetLink')
         ->assertSet('emailSent', true);
 
-    $this->assertDatabaseHas('password_resets', [
+    $this->assertDatabaseHas('password_reset_tokens', [
         'email' => $user->email,
     ]);
 });
