@@ -19,7 +19,6 @@ use Rawilk\LaravelBase\Concerns\Impersonatable;
 use Rawilk\LaravelBase\Concerns\TwoFactorAuthenticatable;
 use Rawilk\LaravelBase\Models\Role;
 use Rawilk\LaravelBase\Scopes\SuperAdminScope;
-use Rawilk\LaravelCasters\Casts\Password;
 use Rawilk\LaravelCasters\Support\Name;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -46,7 +45,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'password' => Password::class,
+        'password' => 'hashed',
         'name' => Name::class,
         'two_factor_enabled' => 'boolean',
     ];
