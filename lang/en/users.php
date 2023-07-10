@@ -2,7 +2,7 @@
 
 return [
     'abilities' => ['page_title' => 'User Abilities'],
-    'delete_modal_text' => 'This will permanently delete <strong>:name</strong>! You will not be able to recover any data associated with this user.',
+    'delete_modal_text' => 'This will permanently delete **:name**! You will not be able to recover any data associated with this user.',
     'delete_modal_title' => 'Delete User',
     'form' => [
         'labels' => [

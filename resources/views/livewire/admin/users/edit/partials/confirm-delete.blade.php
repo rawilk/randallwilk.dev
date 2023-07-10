@@ -4,25 +4,20 @@
     </x-slot:title>
 
     <x-slot:content>
-        <p>
-            {!! __(
-                'users.delete_modal_text',
-                ['name' => $user?->name->full]
-            ) !!}
-        </p>
+        {!! Str::markdown(__('users.delete_modal_text', ['name' => $user?->name->full])) !!}
     </x-slot:content>
 
     <x-slot:footer>
         <x-button wire:click="deleteUser"
-                  wire:target="deleteUser"
-                  variant="red"
+                  text="red"
         >
             {{ __('base::messages.delete_button') }}
         </x-button>
 
         <x-button wire:click="$set('showDelete', false)"
                   wire:loading.attr="disabled"
-                  variant="white"
+                  color="slate"
+                  variant="text"
         >
             {{ __('base::messages.confirm_modal_cancel') }}
         </x-button>
