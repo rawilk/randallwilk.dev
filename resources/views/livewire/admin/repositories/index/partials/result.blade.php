@@ -14,7 +14,7 @@
         <div class="flex-1 truncate">
             <div class="flex items-center space-x-3">
                 <h3 class="text-slate-900 text-sm font-medium truncate">
-                    <x-link dark href="{{ $repository->show_url }}">
+                    <x-link dark :href="$repository->show_url">
                         {{ $repository->name }}
                     </x-link>
                 </h3>
@@ -36,8 +36,8 @@
                 {{-- documentation --}}
                 <x-admin.repo-stat
                     icon="heroicon-o-document-text"
-                    action-url="{{ $repository->documentation_url }}"
-                    missing-text="{{ __('repos.labels.missing_docs') }}"
+                    :action-url="$repository->documentation_url"
+                    :missing-text="__('repos.labels.missing_docs')"
                 >
                     {{ __('repos.labels.see_docs') }}
                 </x-admin.repo-stat>
@@ -45,8 +45,8 @@
                 {{-- blog post --}}
                 <x-admin.repo-stat
                     icon="heroicon-s-rss"
-                    action-url="{{ $repository->blogpost_url }}"
-                    missing-text="{{ __('repos.labels.missing_blogpost') }}"
+                    :action-url="$repository->blogpost_url"
+                    :missing-text="__('repos.labels.missing_blogpost')"
                 >
                     {{ __('repos.labels.see_blogpost') }}
                 </x-admin.repo-stat>
@@ -56,7 +56,7 @@
                     :condition="$repository->new"
                     icon="heroicon-s-exclamation-triangle"
                     off-icon="heroicon-o-exclamation-triangle"
-                    missing-text="{{ __('repos.labels.not_new') }}"
+                    :missing-text="__('repos.labels.not_new')"
                 >
                     {{ __('repos.labels.is_new') }}
                 </x-admin.repo-stat>
@@ -66,7 +66,7 @@
                     :condition="$repository->highlighted"
                     icon="heroicon-s-star"
                     off-icon="heroicon-o-star"
-                    missing-text="{{ __('repos.labels.not_featured') }}"
+                    :missing-text="__('repos.labels.not_featured')"
                 >
                     {{ __('repos.labels.is_featured') }}
                 </x-admin.repo-stat>
@@ -74,7 +74,12 @@
         </div>
 
         <div wire:key="repo{{ $repository->getKey() }}State{{ $repository->visible }}">
-            <x-switch-toggle short :value="$repository->visible" class="switch-toggle--green" wire:click="toggleVisible({{ $repository->getKey() }})" />
+            <x-switch-toggle
+                short
+                :value="$repository->visible"
+                color="green"
+                wire:click.prevent.stop="toggleVisible('{{ $repository->getKey() }}')"
+            />
         </div>
     </div>
 
@@ -84,7 +89,7 @@
             {{-- delete --}}
             <div class="w-0 flex-1 flex">
                 <button
-                    wire:click="confirmDelete({{ $repository->getKey() }})"
+                    wire:click="confirmDelete('{{ $repository->getKey() }}')"
                     @class([
                         'relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-slate-700 font-medium border border-transparent rounded-bl-lg',
                         'hover:text-slate-500 transition-colors focus:outline-blue-gray',
@@ -100,7 +105,7 @@
             {{-- edit --}}
             <div class="-ml-px w-0 flex-1 flex">
                 <button
-                    wire:click="edit({{ $repository->getKey() }})"
+                    wire:click="edit('{{ $repository->getKey() }}')"
                     @class([
                         'relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-slate-700 font-medium border border-transparent rounded-bl-lg',
                         'hover:text-slate-500 transition-colors focus:outline-blue-gray',

@@ -6,7 +6,7 @@ namespace {{ namespace }};
 
 use Illuminate\Foundation\Bus\Dispatchable;
 
-final class {{ class }}
+class {{ class }}
 {
     use Dispatchable;
 

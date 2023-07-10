@@ -10,15 +10,15 @@
 
         <x-slot name="footer">
             <x-button
-                variant="red"
+                color="red"
                 wire:click="deleteApp"
-                wire:target="deleteApp"
             >
                 {{ __('base::2fa.authenticator.delete_app_button') }}
             </x-button>
 
             <x-button
-                variant="white"
+                color="slate"
+                variant="text"
                 wire:click="$set('showDelete', false)"
                 wire:loading.attr="disabled"
             >

@@ -1,15 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Docs\DocumentationContentParser;
 use App\Docs\DocumentationPage;
 use App\Docs\DocumentationPathParser;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
-final class AppServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider
 {
+    public function boot(): void
+    {
+        Vite::useScriptTagAttributes([
+            'data-turbolinks-eval' => 'false',
+            'data-turbo-eval' => 'false',
+        ]);
+
+        Date::use(CarbonImmutable::class);
+    }
+
     public function register(): void
     {
         Model::unguard();

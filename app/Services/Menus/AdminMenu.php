@@ -6,7 +6,7 @@ namespace App\Services\Menus;
 
 use Spatie\Menu\Laravel\Facades\Menu;
 
-final class AdminMenu
+final readonly class AdminMenu
 {
     public function __construct(private readonly string $iconView, private readonly string $submenuView, private readonly string $submenuItemView)
     {

@@ -10,12 +10,17 @@
         </x-form>
 
         <x-slot:footer>
-            <div class="flex justify-end items-center space-x-4">
+            <div class="flex justify-end items-center space-x-4" x-data>
                 <x-action-message on="abilities.updated" />
 
-                <x-button type="submit" variant="blue" form="update-abilities-form" wire:target="updateAbilities">
-                    <span>{{ __('base::messages.save_button') }}</span>
-                    <x-heroicon-s-check />
+                <x-button
+                    type="submit"
+                    color="blue"
+                    form="update-abilities-form"
+                    wire:target="updateAbilities"
+                    right-icon="heroicon-m-check"
+                >
+                    {{ __('base::messages.save_button') }}
                 </x-button>
             </div>
         </x-slot:footer>

@@ -48,8 +48,8 @@
                     {{ __('base::webauthn.add_security_key_button') }}
                 </x-profile.two-factor-trigger>
             @else
-                <x-tooltip title="{{ __('base::webauthn.alerts.max_reached') }}">
-                    <x-button variant="blue" disabled>
+                <x-tooltip :title="__('base::webauthn.alerts.max_reached')">
+                    <x-button color="blue" disabled>
                         {{ __('base::webauthn.add_security_key_button') }}
                     </x-button>
                 </x-tooltip>
@@ -59,9 +59,9 @@
 
     @if ($canAddMore)
         <x-webauthn.register-webauthn-key-dialog
-            title="{{ __('base::webauthn.register_security_key_title') }}"
-            graphic="{{ asset('images/webauthn-key-example.png') }}"
-            instructions="{{ __('base::webauthn.register_security_key_instructions') }}"
+            :title="__('base::webauthn.register_security_key_title')"
+            :graphic="asset('images/webauthn-key-example.png')"
+            :instructions="__('base::webauthn.register_security_key_instructions')"
             prefix="securityKey"
         />
     @endif

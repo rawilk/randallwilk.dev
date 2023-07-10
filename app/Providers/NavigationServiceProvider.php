@@ -10,7 +10,7 @@ use App\Services\Menus\Macros\MenuMacroRegistrar;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Menu\Laravel\Menu;
 
-final class NavigationServiceProvider extends ServiceProvider
+class NavigationServiceProvider extends ServiceProvider
 {
     public function register(): void
     {

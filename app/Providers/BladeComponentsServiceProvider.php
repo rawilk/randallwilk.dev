@@ -8,7 +8,7 @@ use BladeUI\Icons\Factory;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 
-final class BladeComponentsServiceProvider extends ServiceProvider
+class BladeComponentsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {

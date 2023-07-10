@@ -5,7 +5,7 @@
         @endpush
     @endif
 
-    <x-auth.authentication-form title="{{ __('base::2fa.challenge.title') }}">
+    <x-auth.authentication-form :title="__('base::2fa.challenge.title')">
         <div x-data="{
                 challengeType: @entangle('currentChallengeType').defer,
                 recoveryCode: @entangle('recoveryCode').defer,
@@ -95,7 +95,7 @@
                     <div x-show="challengeType === 'backup_code'" wire:key="backup_code">
                         <div class="text-slate-600 mb-4">{{ __('base::2fa.challenge.recovery_title') }}</div>
 
-                        <x-form-group label="{{ __('base::2fa.challenge.recovery_code_label') }}" name="recoveryCode">
+                        <x-form-group :label="__('base::2fa.challenge.recovery_code_label')" name="recoveryCode">
                             <x-input
                                 x-model="recoveryCode"
                                 x-bind:required="challengeType === 'backup_code'"

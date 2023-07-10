@@ -111,4 +111,6 @@ return [
         'max_internal_keys_per_user' => env('WEBAUTHN_MAX_INTERNAL_KEYS'),
     ],
 
+    'user_route_key' => 'id',
+
 ];

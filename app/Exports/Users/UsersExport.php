@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Exports\Users;
 
 use App\Models\User\User;
-use Carbon\CarbonInterface;
+use DateTimeInterface;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -48,7 +48,7 @@ final class UsersExport implements FromQuery, WithHeadings, WithMapping, WithCol
             ->map(function ($column) use ($user) {
                 $value = $this->resolveColumn($user, $column);
 
-                if ($value instanceof CarbonInterface) {
+                if ($value instanceof DateTimeInterface) {
                     return Date::dateTimeToExcel($value);
                 }
 

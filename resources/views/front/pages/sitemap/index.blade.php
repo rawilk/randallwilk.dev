@@ -1,5 +1,5 @@
-<x-page title="{{ __('Site Map') }}"
-        description="{{ __('Use the site map to find your way around :url.', ['url' => url('/')]) }}"
+<x-page :title="__('Site Map')"
+        :description="__('Use the site map to find your way around :url.', ['url' => url('/')])"
 >
     @include('front.pages.sitemap.partials.banner')
 

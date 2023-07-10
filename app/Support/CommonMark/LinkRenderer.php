@@ -24,7 +24,7 @@ final class LinkRenderer implements NodeRendererInterface, ConfigurationAwareInt
         $this->config = $configuration;
     }
 
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): HtmlElement
     {
         if (! ($node instanceof Link)) {
             throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));

@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs\Repositories;
 
 use App\Models\GitHub\Repository;
 use App\Services\GitHub\GitHubApi;
-use Carbon\Carbon;
-use DateTime;
+use DateTimeInterface;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,6 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Date;
 
 final class ImportRepositoriesJob implements ShouldQueue
 {
@@ -45,7 +47,7 @@ final class ImportRepositoriesJob implements ShouldQueue
                 'description' => $repositoryAttributes['description'],
                 'stars' => $repositoryAttributes['stargazers_count'],
                 'language' => $repositoryAttributes['language'],
-                'repository_created_at' => Carbon::createFromFormat(DateTime::ATOM, $repositoryAttributes['created_at']),
+                'repository_created_at' => Date::createFromFormat(DateTimeInterface::ATOM, $repositoryAttributes['created_at']),
             ]);
 
             $repository->setTopics(

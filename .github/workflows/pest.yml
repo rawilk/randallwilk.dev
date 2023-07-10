@@ -1,0 +1,87 @@
+name: Tests
+
+on:
+  push:
+    paths:
+      - '**.php'
+      - 'phpunit.xml'
+      - '.github/workflows/pest.yml'
+      - 'composer.lock'
+
+jobs:
+  pest:
+    name: Run tests
+    if: |
+      github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    env:
+      extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+      php: '8.2'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup cache environment
+        id: extcache
+        uses: shivammathur/cache-extensions@v1
+        with:
+          php-version: ${{ env.php }}
+          extensions: ${{ env.extensions }}
+          key: extensions-${{ hashFiles('composer.lock') }}
+
+      - name: Cache extensions
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.extcache.outputs.dir }}
+          key: ${{ steps.extcache.outputs.key }}
+          restore-keys: ${{ steps.extcache.outputs.key }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.php }}
+          extensions: ${{ env.extensions }}
+          coverage: none
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'latest'
+
+      - name: Create database
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql
+          mysql -u root -proot -e 'CREATE DATABASE IF NOT EXISTS randallwilk_test;'
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+
+      - name: Run composer install
+        run: composer install -n --prefer-dist
+
+      - name: List Installed Dependencies
+        run: composer show -D
+
+      - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+          npm install --no-audit
+          npm run build
+
+      - name: Run pest
+        run: ./vendor/bin/pest --stop-on-failure --parallel --display-skipped --processes=10
+        env:
+          DB_PASSWORD: root
+          DB_DATABASE: randallwilk_test
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_WEBHOOK_SECRET: ${{ secrets.GH_WEBHOOK_SECRET }}
+          GITHUB_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
+          GITHUB_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}

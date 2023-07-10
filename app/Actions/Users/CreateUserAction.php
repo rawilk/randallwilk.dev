@@ -85,7 +85,7 @@ final class CreateUserAction
 
     private function generateRandomPassword(): string
     {
-        return Str::random(self::RANDOM_PASSWORD_LENGTH);
+        return Str::password(self::RANDOM_PASSWORD_LENGTH);
     }
 
     private function sendWelcomeEmail(User $user, string $password): void

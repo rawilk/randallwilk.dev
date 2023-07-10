@@ -14,9 +14,9 @@ use Illuminate\Support\Str;
  * by the commonmark package into an array so we can render a
  * "table of contents" wherever we need on the page.
  */
-final class TableOfContentsBuilder
+final readonly class TableOfContentsBuilder
 {
-    public function __construct(private readonly string $content)
+    public function __construct(private string $content)
     {
     }
 

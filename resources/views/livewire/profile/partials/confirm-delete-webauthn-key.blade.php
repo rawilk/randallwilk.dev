@@ -10,15 +10,15 @@
 
         <x-slot name="footer">
             <x-button
-                variant="red"
+                color="red"
                 wire:click="deleteKey"
-                wire:target="deleteKey"
             >
                 {{ __('base::webauthn.delete_key_button') }}
             </x-button>
 
             <x-button
-                variant="white"
+                color="slate"
+                variant="text"
                 wire:click="$set('showDelete', false)"
                 wire:loading.attr="disabled"
             >

@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace {{ namespace }};
 
-use Illuminate\Contracts\Validation\InvokableRule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-final class {{ class }} implements InvokableRule
+class {{ class }} implements ValidationRule
 {
-    public function __invoke($attribute, $value, $fail)
+    /**
+     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     */
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
     }
 }

@@ -73,9 +73,9 @@
         max-width="lg"
         :show-icon="false"
     >
-        <x-slot name="title">{{ $title }}</x-slot>
+        <x-slot:title>{{ $title }}</x-slot:title>
 
-        <x-slot name="content">
+        <x-slot:content>
             @if ($needsInstructions)
                 <div x-show="showInstructions && webAuthnSupported">
                     <p>{{ $instructions }}</p>
@@ -108,7 +108,7 @@
 
                     <div class="mt-6 text-center" x-show="webAuthnSupported">
                         <x-button
-                            variant="blue"
+                            color="blue"
                             x-on:click="register"
                         >
                             {{ __('base::webauthn.register_retry_button') }}
@@ -128,17 +128,17 @@
                             x-on:keydown.enter.prevent.stop="keyName && sendKey"
                         />
 
-                        <x-slot name="helpText">{{ __('base::webauthn.labels.key_name_help') }}</x-slot>
+                        <x-slot:help-text>{{ __('base::webauthn.labels.key_name_help') }}</x-slot:help-text>
                     </x-form-group>
                 </div>
             </div>
-        </x-slot>
+        </x-slot:content>
 
-        <x-slot name="footer">
+        <x-slot:footer>
             <x-button
                 x-show="showInstructions"
                 x-on:click="register"
-                variant="blue"
+                color="blue"
                 focus
             >
                 {{ __('base::webauthn.register_next_button') }}
@@ -149,7 +149,7 @@
                 x-bind:disabled="! keyName"
                 x-on:click="sendKey"
                 wire:target="registerKey"
-                variant="blue"
+                color="blue"
                 class="-mr-4"
             >
                 {{ __('base::webauthn.register_button') }}
@@ -157,11 +157,12 @@
 
             <x-button
                 x-show="! showInstructions && showName"
-                variant="white"
+                color="slate"
+                variant="text"
                 wire:click="$set('showAddKey', false)"
             >
                 {{ __('base::messages.confirm_modal_cancel') }}
             </x-button>
-        </x-slot>
+        </x-slot:footer>
     </x-dialog-modal>
 </div>

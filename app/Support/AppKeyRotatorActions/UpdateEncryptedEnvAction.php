@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\File;
 use Rawilk\AppKeyRotator\AppKeyRotator;
 use Rawilk\AppKeyRotator\Contracts\RotatorAction;
 
-final class UpdateEncryptedEnvAction implements RotatorAction
+final readonly class UpdateEncryptedEnvAction implements RotatorAction
 {
     public function __construct(
-        private readonly string $key,
-        private readonly string $environment,
-        private readonly bool $updateEnvironmentSpecificFile,
+        private string $key,
+        private string $environment,
+        private bool $updateEnvironmentSpecificFile,
     ) {
     }
 
-    public function handle(AppKeyRotator $appKeyRotator, array $config)
+    public function handle(AppKeyRotator $appKeyRotator, array $config): void
     {
         if ($this->updateEnvironmentSpecificFile) {
             File::put(

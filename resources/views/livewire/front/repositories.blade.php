@@ -7,7 +7,7 @@
                     <x-input
                         wire:model.debounce="search"
                         type="search"
-                        placeholder="{{ $this->searchPlaceholder }}"
+                        :placeholder="$this->searchPlaceholder"
                         container-class="w-full"
                     />
                 </div>
@@ -107,7 +107,7 @@
                                                 <a href="{{ $repository->blogpost_url }}"
                                                    @if (isExternalLink($repository->blogpost_url))
                                                        target="_blank"
-                                                   rel="nofollow noreferrer noopener"
+                                                       rel="nofollow noreferrer noopener"
                                                    @endif
                                                    class="z-20 text-xs after:content-['_↗'] -mb-3"
                                                 >
@@ -122,7 +122,7 @@
                                                 <a href="{{ $repository->documentation_url }}"
                                                    @if (isExternalLink($repository->documentation_url))
                                                        target="_blank"
-                                                   rel="nofollow noreferrer noopener"
+                                                       rel="nofollow noreferrer noopener"
                                                    @endif
                                                    class="z-20 text-xs after:content-['_↗']"
                                                 >

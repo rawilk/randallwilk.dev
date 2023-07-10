@@ -6,6 +6,6 @@ namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
 
-final class {{ class }} extends MorphPivot
+class {{ class }} extends MorphPivot
 {
 }

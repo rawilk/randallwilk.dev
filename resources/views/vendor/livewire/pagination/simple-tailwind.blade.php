@@ -1,7 +1,7 @@
 <div>
     <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-slate-200 sm:px-6">
         <div class="hidden sm:block">
-            <p class="text-sm leading-5 text-slate-700">
+            <p class="text-sm leading-5 text-slate-700 dark:text-slate-300">
                 {!! __('pagination.showing', [
                     'from' => $paginator->firstItem(),
                     'to' => $paginator->lastItem(),

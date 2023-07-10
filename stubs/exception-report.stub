@@ -6,7 +6,7 @@ namespace {{ namespace }};
 
 use Exception;
 
-final class {{ class }} extends Exception
+class {{ class }} extends Exception
 {
     public function report(): ?bool
     {

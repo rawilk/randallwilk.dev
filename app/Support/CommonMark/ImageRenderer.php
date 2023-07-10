@@ -24,7 +24,7 @@ final class ImageRenderer implements NodeRendererInterface, ConfigurationAwareIn
         $this->config = $configuration;
     }
 
-    public function render(Node $node, ChildNodeRendererInterface $childRenderer)
+    public function render(Node $node, ChildNodeRendererInterface $childRenderer): HtmlElement
     {
         if (! ($node instanceof Image)) {
             throw new InvalidArgumentException('Incompatible inline type: ' . get_class($node));

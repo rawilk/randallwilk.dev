@@ -26,10 +26,10 @@
                                 </div>
                             </div>
 
-                            <div class="mt-5 flex justify-center sm:mt-0">
+                            <div class="mt-5 flex justify-center sm:mt-0" x-data>
                                 <x-button
-                                    href="{!! route('profile.show') !!}"
-                                    variant="white"
+                                    :href="route('profile.show')"
+                                    color="slate"
                                 >
                                     {{ __('View profile') }}
                                 </x-button>

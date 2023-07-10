@@ -1,6 +1,6 @@
 <x-page
-    title="{{ __('front.open_source.packages.title') }}"
-    description="{{ __('front.open_source.packages.description') }}"
+    :title="__('front.open_source.packages.title')"
+    :description="__('front.open_source.packages.description')"
 >
     @include('front.pages.open-source.partials.banner-packages')
 

@@ -1,5 +1,5 @@
-<x-page title="{{ __('front.legal.disclaimer_title') }}"
-        description="{{ __('front.legal.disclaimer_description', ['url' => url('/')]) }}"
+<x-page :title="__('front.legal.disclaimer_title')"
+        :description="__('front.legal.disclaimer_description', ['url' => url('/')])"
 >
     <x-front.page-banner>
         {{ __('front.legal.disclaimer_title') }}
@@ -45,7 +45,7 @@
                     <li>
                         <span class="font-bold">Site:</span>
                         this website or any associated sites of
-                        <x-front.legal-link url="{{ url('/') }}" after="." />
+                        <x-front.legal-link :url="url('/')" after="." />
                     </li>
                 </ul>
 

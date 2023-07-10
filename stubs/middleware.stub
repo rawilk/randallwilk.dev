@@ -7,7 +7,7 @@ namespace {{ namespace }};
 use Closure;
 use Illuminate\Http\Request;
 
-final class {{ class }}
+class {{ class }}
 {
     public function handle(Request $request, Closure $next)
     {

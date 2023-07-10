@@ -7,10 +7,11 @@
 .phpunit.result.cache
 /.idea
 /.vscode
+/bin/deploy.sh
 /node_modules
 /public/build
-/public/docs
 /public/doc-files
+/public/docs
 /public/hot
 /public/sitemap.xml
 /public/sitemap_docs.xml

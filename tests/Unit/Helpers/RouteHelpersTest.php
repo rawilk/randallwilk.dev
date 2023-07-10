@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use function App\Helpers\defaultLoginRedirect;
 use function Pest\Laravel\actingAs;
 
 test('a super admin user has an admin panel route for the default login redirect', function () {

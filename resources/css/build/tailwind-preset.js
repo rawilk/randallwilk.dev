@@ -19,6 +19,9 @@ module.exports = {
         './vendor/rawilk/laravel-base/src/**/*.php',
         './vendor/rawilk/laravel-base/resources/js/**/*.js',
         './vendor/rawilk/laravel-base/config/laravel-base.php',
+        './vendor/rawilk/blade/src/**/*.php',
+        './vendor/rawilk/blade/resources/**/*.php',
+        './vendor/rawilk/blade/config/blade.php',
     ],
 
     safelist: safelist.safelist,
@@ -29,7 +32,12 @@ module.exports = {
         // vendor plugins
         require('../../../vendor/rawilk/laravel-base/resources/js/tailwind-plugins/alert'),
         require('../../../vendor/rawilk/laravel-base/resources/js/tailwind-plugins/badge'),
-        require('../../../vendor/rawilk/laravel-base/resources/js/tailwind-plugins/button'),
+        require('../../../vendor/rawilk/laravel-base/resources/js/tailwind-plugins/dark-mode'),
+        require('../../../vendor/rawilk/blade/resources/js/tailwind-plugins/button'),
+        require('../../../vendor/rawilk/blade/resources/js/tailwind-plugins/card'),
+        require('../../../vendor/rawilk/blade/resources/js/tailwind-plugins/dark-mode'),
+        require('../../../vendor/rawilk/laravel-form-components/resources/js/tailwind-plugins/switch-toggle'),
+        require('../../../vendor/rawilk/laravel-form-components/resources/js/tailwind-plugins/dark-mode'),
     ],
 
     theme: {

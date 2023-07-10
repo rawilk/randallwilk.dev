@@ -1,5 +1,5 @@
-<x-page title="{{ __('front.terms.title') }}"
-        description="{{ __('front.terms.description') }}"
+<x-page :title="__('front.terms.title')"
+        :description="__('front.terms.description')"
 >
     <x-front.page-banner>
         {{ __('front.terms.title') }}
@@ -28,9 +28,9 @@
                 <h2>Ownership of Site; Agreement to Terms of Use</h2>
                 <p>
                     These Terms and Conditions of Use (the "Terms of Use") apply to the website located at
-                    <x-front.legal-link url="{{ url('/') }}" after="," />
+                    <x-front.legal-link :url="url('/')" after="," />
                     and all associated sites linked to
-                    <x-front.legal-link url="{{ url('/') }}" />
+                    <x-front.legal-link :url="url('/')" />
                     by Randall, (collectively, the "Site"). The
                     Site is the property of Randall Wilk ("Randall"). BY USING THE SITE, YOU AGREE TO THESE TERMS OF
                     USE; IF YOU DO NOT AGREE, DO NOT USE THE SITE.
@@ -45,7 +45,7 @@
                 </p>
                 <p>
                     I shall make sure that the latest version of these Terms of Use shall always be available on
-                    <x-front.legal-link url="{{ route('legal.terms') }}" after="." />
+                    <x-front.legal-link :url="route('legal.terms')" after="." />
                 </p>
                 <p>
                     I may, in exceptional cases deviate from the general conditions, as far as these deviations are
@@ -87,7 +87,7 @@
                     <li>
                         <span class="font-bold">Site:</span>
                         this website or any associated sites of
-                        <x-front.legal-link url="{{ url('/') }}" after="." />
+                        <x-front.legal-link :url="url('/')" after="." />
                     </li>
                 </ul>
 
@@ -197,7 +197,7 @@
                 <p>
                     Randall's Privacy Policy applies to use of this Site, and its terms are made a part of these
                     Terms of Use by this reference. To view Randall's Privacy Policy,
-                    <x-front.legal-link href="{!! route('legal.privacy') !!}" after="." text="click here" />
+                    <x-front.legal-link :href="route('legal.privacy')" after="." text="click here" />
                     Additionally, by using the Site, you acknowledge and agree that Internet transmissions are
                     never completely private or secure. You understand that any message or information you send to
                     the Site may be read or intercepted by others, even if there is a special notice that a
@@ -338,7 +338,7 @@
                 <h2>Void Where Prohibited</h2>
                 <p>
                     Randall administers and operates the
-                    <x-front.legal-link url="{{ url('/') }}" />
+                    <x-front.legal-link :url="url('/')" />
                     Site from his location in Wausau, Wisconsin USA; other sites from Randall may be administered
                     and operated from various locations inside or outside the United States. Although the Site is
                     accessible worldwide, not all features or services discussed, referenced, provided or offered

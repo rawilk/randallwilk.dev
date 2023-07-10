@@ -11,13 +11,13 @@ use Rawilk\AppKeyRotator\Contracts\BeforeRotatorAction;
  * We need to "rollback" changes made to the encrypted .env file
  * so when we pull from source control again, it won't fail.
  */
-final class BackupEnvEncryptedFileAction implements BeforeRotatorAction
+final readonly class BackupEnvEncryptedFileAction implements BeforeRotatorAction
 {
     public function __construct(private readonly string $environment)
     {
     }
 
-    public function handle(array $config)
+    public function handle(array $config): void
     {
         if (! File::exists(base_path(".env.{$this->environment}.encrypted"))) {
             return;

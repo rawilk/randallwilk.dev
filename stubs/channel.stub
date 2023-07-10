@@ -6,7 +6,7 @@ namespace {{ namespace }};
 
 use {{ namespacedUserModel }};
 
-final class {{ class }}
+class {{ class }}
 {
     public function __construct()
     {

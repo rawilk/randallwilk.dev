@@ -1,4 +1,7 @@
-<x-page title="{{ __('front.uses.title') }}" description="{{ __('front.uses.description') }}">
+<x-page
+    :title="__('front.uses.title')"
+    :description="__('front.uses.description')"
+>
     @include('front.pages.uses.partials.banner')
 
     <x-front.content-area>

@@ -7,7 +7,7 @@ namespace {{ namespace }};
 use {{ namespacedModel }};
 use {{ namespacedRequests }}
 
-final class {{ class }}
+class {{ class }}
 {
     public function index()
     {

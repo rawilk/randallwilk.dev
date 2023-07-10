@@ -29,7 +29,7 @@
     @if ($url)
         <x-slot:footer>
             <div class="text-sm">
-                <x-link href="{{ $url }}">{{ __('View all') }}</x-link>
+                <x-link :href="$url">{{ __('View all') }}</x-link>
             </div>
         </x-slot:footer>
     @endif

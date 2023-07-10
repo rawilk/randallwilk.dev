@@ -24,7 +24,7 @@
                             </p>
 
                             <div class="mt-3">
-                                <x-button variant="red" wire:click="disconnectFromGitHub" wire:target="disconnectFromGitHub">
+                                <x-button color="red" wire:click="disconnectFromGitHub">
                                     {{ __('users.profile.social_auth.disconnect_button', ['provider' => 'GitHub']) }}
                                 </x-button>
                             </div>
@@ -32,7 +32,7 @@
                             <p class="text-sm text-slate-500">{{ __('users.profile.social_auth.github_desc') }}</p>
 
                             <div class="mt-3">
-                                <x-button href="{!! route('login.github') !!}" variant="green">
+                                <x-button :href="route('login.github')" color="green">
                                     {{ __('users.profile.social_auth.connect_button', ['provider' => 'GitHub']) }}
                                 </x-button>
                             </div>
@@ -42,7 +42,7 @@
             </div>
         </div>
     </x-card>
-    
+
     @push('js')
         @include('layouts.partials.socialite-error-notification', ['errorWrapper' => 'error-wrapper'])
     @endpush

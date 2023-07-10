@@ -26,9 +26,9 @@ final class UserCount extends Component
         return <<<'HTML'
         <x-admin.dashboard.count-widget
             icon="heroicon-o-user-group"
-            title="{{ __('Total Users') }}"
+            :title="__('Total Users')"
             :count="$count"
-            url="{!! route('admin.users.index') !!}"
+            :url="route('admin.users.index')"
         />
         HTML;
     }

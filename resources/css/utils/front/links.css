@@ -4,17 +4,3 @@
     @apply prose-a:text-slate-500;
     @apply prose-a:no-underline;
 }
-
-/*.link-gray,*/
-/*a.link-gray,*/
-/*.links-gray a {*/
-/*    @apply text-slate-500;*/
-/*    --link-border-color: theme(colors.slate.500) 40;*/
-/*}*/
-
-/*.link-gray:hover,*/
-/*a.link-gray:hover,*/
-/*.links-gray a:hover {*/
-/*    @apply text-slate-700;*/
-/*    --link-border-color: theme(colors.slate.500) 80;*/
-/*}*/

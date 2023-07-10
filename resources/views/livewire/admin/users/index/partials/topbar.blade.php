@@ -2,7 +2,7 @@
     <x-topbar
         :hideable-columns="$hideableColumns"
         :hidden-columns="$hidden"
-        search-placeholder="{{ __('Search in Name, Email') }}"
+        :search-placeholder="__('Search in Name, Email')"
     >
         <div class="topbar-section">
             <x-dropdown trigger-text="{{ __('base::messages.bulk_actions') }}" right>

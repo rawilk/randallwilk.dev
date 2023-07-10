@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-final class Kernel extends HttpKernel
+class Kernel extends HttpKernel
 {
     /**
      * @var array<int, class-string|string>
@@ -34,7 +36,7 @@ final class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -47,7 +49,7 @@ final class Kernel extends HttpKernel
     /**
      * @var array<string, class-string|string>
      */
-    protected $routeMiddleware = [
+    protected $middlewareAliases = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,

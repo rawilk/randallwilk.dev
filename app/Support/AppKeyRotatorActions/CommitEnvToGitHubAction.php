@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\File;
 use Rawilk\AppKeyRotator\AppKeyRotator;
 use Rawilk\AppKeyRotator\Contracts\RotatorAction;
 
-final class CommitEnvToGitHubAction implements RotatorAction
+final readonly class CommitEnvToGitHubAction implements RotatorAction
 {
     public function __construct(private readonly string $environment)
     {
     }
 
-    public function handle(AppKeyRotator $appKeyRotator, array $config)
+    public function handle(AppKeyRotator $appKeyRotator, array $config): void
     {
         if (! file_exists(base_path(".env.{$this->environment}.encrypted"))) {
             return;

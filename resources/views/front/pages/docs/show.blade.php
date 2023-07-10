@@ -87,7 +87,7 @@
     <div class="mt-8 border-t border-slate-200 pt-6 dark:border-slate-800">
         <div class="font-display text-sm text-slate-900 dark:text-white">
             <span>{{ __('front.docs.show.edit_on_github') }}</span>
-            <x-link href="{{ $alias->pageGitHubUrl($page) }}"
+            <x-link :href="$alias->pageGitHubUrl($page)"
                     class="underline font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
             >
                 <span>{{ __('front.docs.show.edit_on_github_link') }}</span>
