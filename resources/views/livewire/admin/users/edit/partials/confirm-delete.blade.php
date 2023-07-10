@@ -9,7 +9,7 @@
 
     <x-slot:footer>
         <x-button wire:click="deleteUser"
-                  text="red"
+                  color="red"
         >
             {{ __('base::messages.delete_button') }}
         </x-button>
