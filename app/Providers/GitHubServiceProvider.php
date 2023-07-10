@@ -9,7 +9,7 @@ use Github\AuthMethod;
 use Github\Client;
 use Illuminate\Support\ServiceProvider;
 
-final class GitHubServiceProvider extends ServiceProvider
+class GitHubServiceProvider extends ServiceProvider
 {
     public function register(): void
     {

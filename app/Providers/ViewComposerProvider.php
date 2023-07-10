@@ -8,7 +8,7 @@ use App\Http\ViewComposers\SessionAlertViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-final class ViewComposerProvider extends ServiceProvider
+class ViewComposerProvider extends ServiceProvider
 {
     public function boot(): void
     {

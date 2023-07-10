@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Support\Auth\CustomUserProvider;
@@ -7,7 +9,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-final class AuthServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {

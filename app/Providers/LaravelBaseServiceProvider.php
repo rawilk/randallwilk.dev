@@ -12,7 +12,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Rawilk\LaravelBase\LaravelBase;
 
-final class LaravelBaseServiceProvider extends ServiceProvider
+class LaravelBaseServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {

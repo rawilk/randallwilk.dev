@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Horizon\HorizonApplicationServiceProvider;
 
-final class HorizonServiceProvider extends HorizonApplicationServiceProvider
+class HorizonServiceProvider extends HorizonApplicationServiceProvider
 {
     public function gate(): void
     {

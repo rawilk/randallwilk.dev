@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Docs\DocumentationContentParser;
@@ -8,7 +10,7 @@ use App\Docs\DocumentationPathParser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
-final class AppServiceProvider extends ServiceProvider
+class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {

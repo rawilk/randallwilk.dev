@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;
 
-final class BreadcrumbsServiceProvider extends ServiceProvider
+class BreadcrumbsServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
