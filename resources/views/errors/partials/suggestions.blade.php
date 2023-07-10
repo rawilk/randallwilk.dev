@@ -4,19 +4,19 @@
 
         <ul class="links-underline links-gray">
             <li>
-                <x-link href="{{ route('home') }}">{{ __('errors.suggestions.home') }}</x-link>
+                <x-link :href="route('home')">{{ __('errors.suggestions.home') }}</x-link>
             </li>
             <li>
-                <x-link href="{{ route('open-source.packages') }}">{{ __('errors.suggestions.open_source') }}</x-link>
+                <x-link :href="route('open-source.packages')">{{ __('errors.suggestions.open_source') }}</x-link>
             </li>
             <li>
-                <x-link href="{{ route('contact') }}">{{ __('errors.suggestions.contact') }}</x-link>
+                <x-link :href="route('contact')">{{ __('errors.suggestions.contact') }}</x-link>
             </li>
             <li>
-                <x-link href="{{ route('docs') }}">{{ __('errors.suggestions.docs') }}</x-link>
+                <x-link :href="route('docs')">{{ __('errors.suggestions.docs') }}</x-link>
             </li>
             <li>
-                <x-link href="{{ route('legal.privacy') }}">{{ __('errors.suggestions.privacy') }}</x-link>
+                <x-link :href="route('legal.privacy')">{{ __('errors.suggestions.privacy') }}</x-link>
             </li>
         </ul>
     </div>

@@ -22,13 +22,13 @@
                         <div class="flex items-center space-x-1">
                             <span>{{ __('Your password') }}</span>
 
-                            <x-laravel-base::elements.tooltip-help title="{{ __('We require your password for an added layer of security.') }}" />
+                            <x-laravel-base::elements.tooltip-help :title="__('We require your password for an added layer of security.')" />
                         </div>
                     </x-slot:label>
                 </x-form-group>
 
                 {{-- new password --}}
-                <x-form-group label="{{ __('New password') }}" name="password" inline>
+                <x-form-group :label="__('New password')" name="password" inline>
                     <x-password
                         wire:model.defer="state.password"
                         name="password"
@@ -40,12 +40,17 @@
         </x-form>
 
         <x-slot:footer>
-            <div class="flex justify-end items-center space-x-4">
+            <div class="flex justify-end items-center space-x-4" x-data>
                 <x-action-message on="password.updated" />
 
-                <x-button type="submit" variant="blue" form="update-password-form" wire:target="updatePassword">
-                    <span>{{ __('base::messages.save_button') }}</span>
-                    <x-heroicon-s-check />
+                <x-button
+                    type="submit"
+                    color="blue"
+                    form="update-password-form"
+                    wire:target="updatePassword"
+                    right-icon="heroicon-m-check"
+                >
+                    {{ __('base::messages.save_button') }}
                 </x-button>
             </div>
         </x-slot:footer>

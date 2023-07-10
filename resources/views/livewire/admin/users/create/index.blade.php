@@ -10,16 +10,26 @@
             @endif
         </div>
 
-        <div class="content-container lg:flex lg:flex-row-reverse lg:items-center my-6">
+        <div class="content-container lg:flex lg:flex-row-reverse lg:items-center my-6" x-data>
             <div class="flex w-full lg:ml-3 lg:w-auto">
-                <x-button type="submit" variant="blue" wire:target="store" block>
-                    <span>{{ __('base::messages.create_button') }}</span>
-                    <x-heroicon-s-check />
+                <x-button
+                    type="submit"
+                    color="blue"
+                    wire:target="store"
+                    block
+                    right-icon="heroicon-s-check"
+                >
+                    {{ __('base::messages.create_button') }}
                 </x-button>
             </div>
 
             <div class="mt-3 flex w-full lg:mt-0 lg:w-auto">
-                <x-button variant="white" href="{!! route('admin.users.index') !!}" block>
+                <x-button
+                    color="slate"
+                    variant="text"
+                    :href="route('admin.users.index')"
+                    block
+                >
                     {{ __('base::messages.cancel_button') }}
                 </x-button>
             </div>

@@ -12,11 +12,10 @@
         box-shadow: none;
     }
 
-    .switch-toggle--green .switch-toggle-short-bg.pressed {
-        @apply bg-green-400;
-    }
-
-    .switch-toggle--green {
-        @apply focus:ring-green-500;
+    [multiple] {
+        padding: initial;
+        border: initial;
+        background: inherit;
+        @apply shadow-none;
     }
 }

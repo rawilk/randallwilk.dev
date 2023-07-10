@@ -26,9 +26,9 @@ final class VisibleRepoCount extends Component
         return <<<'HTML'
         <x-admin.dashboard.count-widget
             icon="css-git-branch"
-            title="{{ __('Visible Repositories') }}"
+            :title="__('Visible Repositories')"
             :count="$count"
-            url="{!! route('admin.repositories.index') !!}"
+            :url="route('admin.repositories.index')"
         />
         HTML;
     }

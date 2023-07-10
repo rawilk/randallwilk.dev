@@ -9,6 +9,8 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class {{ class }} implements ValidationRule
 {
+    public bool $implicit = true;
+
     /**
      * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
      */

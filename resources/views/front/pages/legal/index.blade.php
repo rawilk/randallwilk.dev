@@ -1,4 +1,4 @@
-<x-page title="{{ __('front.legal.title') }}" description="{{ __('front.legal.description', ['url' => url('/')]) }}">
+<x-page :title="__('front.legal.title')" :description="__('front.legal.description', ['url' => url('/')])">
     <x-front.page-banner>
         {{ __('front.legal.banner') }}
 

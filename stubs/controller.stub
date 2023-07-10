@@ -6,7 +6,7 @@ namespace {{ namespace }};
 
 use Illuminate\Http\Request;
 
-final class {{ class }}
+class {{ class }}
 {
     public function index()
     {

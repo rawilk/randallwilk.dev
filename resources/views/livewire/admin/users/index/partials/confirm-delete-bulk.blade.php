@@ -8,8 +8,7 @@
     <x-slot:footer>
         <x-button
             wire:click="deleteSelected"
-            wire:target="deleteSelected"
-            variant="red"
+            color="red"
         >
             {{ __('base::messages.delete_button') }}
         </x-button>
@@ -17,7 +16,8 @@
         <x-button
             wire:click="$set('showBulkDelete', false)"
             wire:loading.attr="disabled"
-            variant="white"
+            color="slate"
+            variant="text"
         >
             {{ __('base::messages.confirm_modal_cancel') }}
         </x-button>

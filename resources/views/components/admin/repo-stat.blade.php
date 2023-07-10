@@ -10,7 +10,7 @@
     @if ($condition ===  null)
         <x-dynamic-component :component="$icon" class="h-4 w-4 text-slate-500" />
         @if ($actionUrl)
-            <x-link dark target="_blank" href="{{ $actionUrl }}">
+            <x-link dark target="_blank" :href="$actionUrl">
                 {{ $slot }}
             </x-link>
         @else

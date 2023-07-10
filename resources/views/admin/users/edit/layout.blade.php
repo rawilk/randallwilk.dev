@@ -4,10 +4,13 @@
             <span class="page-title">{{ $user->name }}</span>
 
             <x-slot:actions>
-                <div class="hidden sm:block">
-                    <x-button href="{!! route('admin.users.index') !!}" variant="white">
-                        <x-css-arrow-left />
-                        <span>{{ __('Back to users') }}</span>
+                <div class="hidden sm:block" x-data>
+                    <x-button
+                        :href="route('admin.users.index')"
+                        color="slate"
+                        left-icon="css-arrow-left"
+                    >
+                        {{ __('Back to users') }}
                     </x-button>
                 </div>
             </x-slot:actions>
@@ -19,7 +22,7 @@
             {{-- account info --}}
             <x-inner-nav-item
                 icon="heroicon-o-user-circle"
-                href="{{ $user->edit_url }}"
+                :href="$user->edit_url"
             >
                 {{ __('Account Information') }}
             </x-inner-nav-item>
@@ -28,7 +31,7 @@
             @canany(['assignRolesTo', 'assignPermissionsTo'], $user)
                 <x-inner-nav-item
                     icon="heroicon-o-finger-print"
-                    href="{{ $user->abilities_url }}"
+                    :href="$user->abilities_url"
                     :active="request()->routeIs('admin.users.edit.abilities')"
                 >
                     {{ __('Abilities') }}

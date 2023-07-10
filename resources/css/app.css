@@ -1,12 +1,11 @@
-@charset "UTF-8";
-
-@import 'build/admin-config.css';
 @import 'tailwindcss/base';
 
 @import 'tailwindcss/components';
 @import 'vendor/vendor.css';
 @import 'utils/logo.css';
+@import "@wilkr/alpine-ripple/dist/alpine-ripple.css";
 @import '../../vendor/rawilk/laravel-base/resources/css/components/index.css';
+@import '../../vendor/rawilk/blade/resources/css/index.css';
 @import 'utils/form.css';
 
 @import 'tailwindcss/utilities';

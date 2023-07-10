@@ -1,7 +1,5 @@
-const colors = require('tailwindcss/colors');
-
 module.exports = {
-    presets: [require('./tailwind-preset')],
+    presets: [require('./resources/css/build/tailwind-preset')],
 
     theme: {
         extend: {

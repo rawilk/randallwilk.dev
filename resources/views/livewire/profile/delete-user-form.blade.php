@@ -4,7 +4,7 @@
         <p class="mt-2 max-w-xl text-sm text-slate-500">{{ __('users.profile.delete.warning') }}</p>
 
         <div class="mt-5">
-            <x-button variant="red" wire:click="confirmUserDeletion">
+            <x-button color="red" wire:click="confirmUserDeletion">
                 {{ __('users.profile.delete.trigger') }}
             </x-button>
         </div>

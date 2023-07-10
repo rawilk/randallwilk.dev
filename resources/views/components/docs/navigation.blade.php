@@ -14,7 +14,7 @@
             <x-select name="version-switcher"
                       id="version-switcher-{{ $type }}"
                       x-on:change="window.location = $el.value"
-                      class="hover:cursor-pointer focus:!ring-1 focus:!ring-slate-300 focus:!border-slate-300 !text-sm !ring-1 !ring-slate-200 hover:!ring-slate-300 dark:!bg-slate-800/75 dark:!ring-inset dark:!ring-white/5 dark:hover:!bg-slate-700/40 dark:hover:!ring-slate-500 !text-slate-500 dark:!text-slate-400 dark:!border-slate-800"
+                      class="w-full rounded-md hover:cursor-pointer focus:!ring-1 focus:!ring-slate-300 focus:!border-slate-300 !text-sm !ring-1 !ring-slate-200 hover:!ring-slate-300 dark:!bg-slate-800/75 dark:!ring-inset dark:!ring-white/5 dark:hover:!bg-slate-700/40 dark:hover:!ring-slate-500 !text-slate-500 dark:!text-slate-400 dark:!border-slate-800"
             >
                 @foreach ($repository->aliases as $aliasOption)
                     <option

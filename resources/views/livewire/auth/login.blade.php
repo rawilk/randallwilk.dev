@@ -1,17 +1,18 @@
 <div>
-    <x-auth.authentication-form title="{{ __('auth.login.title') }}">
+    <x-auth.authentication-form :title="__('auth.login.title')">
         <div>
             <p class="text-sm font-medium text-slate-700">
                 {{ __('auth.login.social_login_title') }}
             </p>
 
             <div class="mt-1 grid grid-cols-1">
-                <div>
+                <div x-data>
                     <x-button
-                        variant="white"
+                        color="slate"
                         block
+                        variant="outline"
                         onclick="event.preventDefault(); showGitHubAuthWindow();"
-                        href="{!! route('login.github') !!}"
+                        :href="route('login.github')"
                     >
                         <span class="sr-only">{{ __('auth.socialite.login_via_github') }}</span>
                         <x-svg-github class="h-6 w-6 fill-current text-slate-600" />
@@ -37,7 +38,7 @@
 
             <x-form wire:submit.prevent="login">
                 {{-- email --}}
-                <x-form-group label="{{ __('Email address') }}" name="email">
+                <x-form-group :label="__('Email address')" name="email">
                     <x-email
                         wire:model.defer="email"
                         name="email"
@@ -48,7 +49,7 @@
                 </x-form-group>
 
                 {{-- password --}}
-                <x-form-group label="{{ __('Password') }}" name="password">
+                <x-form-group :label="__('Password')" name="password">
                     <x-password
                         wire:model.defer="password"
                         name="password"
@@ -65,15 +66,15 @@
 
                     @if (Route::has('password.request'))
                         <div class="text-sm leading-5">
-                            <x-link href="{!! route('password.request') !!}" hide-external-indicator>
+                            <x-link :href="route('password.request')" hide-external-indicator>
                                 {{ __('auth.login.forgot_password_link') }}
                             </x-link>
                         </div>
                     @endif
                 </div>
 
-                <div class="mt-6">
-                    <x-button variant="blue" type="submit" block wire:target="login">
+                <div class="mt-6" x-data>
+                    <x-button color="blue" type="submit" block wire:target="login">
                         {{ __('auth.login.login_button') }}
                     </x-button>
                 </div>
@@ -86,7 +87,7 @@
                 <x-login-link
                     email="randall@randallwilk.dev"
                     label="Login as super admin"
-                    redirect-url="{{ route('admin.dashboard') }}"
+                    :redirect-url="route('admin.dashboard')"
                 />
             </div>
         @endenv

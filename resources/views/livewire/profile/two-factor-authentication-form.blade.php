@@ -41,8 +41,8 @@
                     {{ $apps->isEmpty() ? __('base::2fa.authenticator.show_setup_button') : __('base::2fa.authenticator.show_set_up_addtl_button') }}
                 </x-profile.two-factor-trigger>
             @else
-                <x-tooltip title="{{ __('base::2fa.authenticator.alerts.max_reached') }}">
-                    <x-button variant="blue" disabled>
+                <x-tooltip :title="__('base::2fa.authenticator.alerts.max_reached')">
+                    <x-button color="blue" disabled>
                         {{ $apps->isEmpty() ? __('base::2fa.authenticator.show_setup_button') : __('base::2fa.authenticator.show_set_up_addtl_button') }}
                     </x-button>
                 </x-tooltip>

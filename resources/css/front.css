@@ -1,7 +1,5 @@
-@charset "UTF-8";
-
-@import 'build/front-config.css';
 @import 'utils/front/bootstrap.css';
+@import "@wilkr/alpine-ripple/dist/alpine-ripple.css";
 
 @import 'tailwindcss/base';
 
@@ -9,6 +7,7 @@
 @import 'utils/form.css';
 @import 'utils/logo.css';
 @import 'utils/front/laravel-base.css';
+@import 'utils/front/blade-package.css';
 @import 'utils/front/banner.css';
 @import 'utils/front/bullets.css';
 @import 'utils/front/counters.css';
@@ -23,3 +22,5 @@
 @import 'tailwindcss/utilities';
 @import '../../vendor/rawilk/laravel-base/resources/css/utils/app.css';
 @import 'utils/front/utilities.css';
+
+@config './build/tailwind-front.config.js';

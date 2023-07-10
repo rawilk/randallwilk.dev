@@ -6,7 +6,7 @@ namespace {{ namespace }};
 
 use Illuminate\Console\Command;
 
-final class {{ class }} extends Command
+class {{ class }} extends Command
 {
     protected $signature = '{{ command }}';
 

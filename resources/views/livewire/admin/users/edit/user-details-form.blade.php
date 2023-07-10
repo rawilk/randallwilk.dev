@@ -11,31 +11,31 @@
                 @includeWhen(\Rawilk\LaravelBase\Features::managesAvatars(), 'livewire.admin.users.partials.avatar-upload')
 
                 {{-- name --}}
-                <x-form-group label="{{ __('Name') }}" name="name" inline>
+                <x-form-group :label="__('Name')" name="name" inline>
                     <x-input
                         wire:model.defer="state.name"
                         name="name"
                         required
                         maxlength="255"
                         max-width=" sm:max-w-xs"
-                        placeholder="{{ $user->name }}"
+                        :placeholder="$user->name"
                         autocomplete="off"
                     />
                 </x-form-group>
 
                 {{-- email --}}
-                <x-form-group name="email" label="{{ __('Email') }}" inline>
+                <x-form-group name="email" :label="__('Email')" inline>
                     <x-email
                         wire:model.defer="state.email"
                         name="email"
                         required
-                        placeholder="{{ $user->email }}"
+                        :placeholder="$user->email"
                         autocomplete="off"
                     />
                 </x-form-group>
 
                 {{-- timezone --}}
-                <x-form-group name="timezone" label="{{ __('Timezone') }}" inline>
+                <x-form-group name="timezone" :label="__('Timezone')" inline>
                     <x-timezone-select
                         wire:model.defer="state.timezone"
                         name="timezone"
@@ -48,17 +48,17 @@
         </x-form>
 
         <x-slot:footer>
-            <div class="flex justify-end items-center space-x-4">
+            <div class="flex justify-end items-center space-x-4" x-data>
                 <x-action-message on="profile.updated" />
 
                 <x-button
-                    variant="blue"
+                    color="blue"
                     type="submit"
                     form="user-details-form"
                     wire:target="save"
+                    right-icon="heroicon-m-check"
                 >
-                    <span>{{ __('base::messages.save_button') }}</span>
-                    <x-heroicon-s-check />
+                    {{ __('base::messages.save_button') }}
                 </x-button>
             </div>
         </x-slot:footer>

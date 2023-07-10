@@ -1,5 +1,5 @@
 <x-front.section-list-link-item
-    url="{{ action([\App\Http\Controllers\Docs\DocsController::class, 'repository'], $repository->slug) }}"
+    :url="action([\App\Http\Controllers\Docs\DocsController::class, 'repository'], $repository->slug)"
 >
     <x-slot:title>
         {{ $repository->slug }}

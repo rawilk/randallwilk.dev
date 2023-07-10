@@ -4,7 +4,7 @@
 
         <x-slot name="content">
             <x-form wire:submit.prevent="saveApp" id="authenticatorAppNameForm">
-                <x-form-group label="{{ __('base::2fa.authenticator.labels.app_name') }}" name="name" input-id="authenticatorAppName" class="pt-3">
+                <x-form-group :label="__('base::2fa.authenticator.labels.app_name')" name="name" input-id="authenticatorAppName" class="pt-3">
                     <x-input
                         wire:model.defer="editState.name"
                         name="name"
@@ -30,13 +30,14 @@
                 type="submit"
                 form="authenticatorAppNameForm"
                 wire:target="saveApp"
-                variant="blue"
+                color="blue"
             >
                 {{ __('base::messages.save_button') }}
             </x-button>
 
             <x-button
-                variant="white"
+                color="slate"
+                variant="text"
                 wire:click="$set('showEdit', false)"
                 wire:loading.attr="disabled"
             >

@@ -1,5 +1,5 @@
 @if ($url)
-    <x-front.section-list-link-item url="{{ $url }}" title="{{ $skill }}" target="_blank">
+    <x-front.section-list-link-item :url="$url" :title="$skill" target="_blank">
         @if ($description)
             <p class="relative z-10 mt-2 text-sm text-slate-600">
                 {{ $description }}
@@ -12,7 +12,7 @@
         </div>
     </x-front.section-list-link-item>
 @else
-    <x-front.section-list-item title="{{ $skill }}">
+    <x-front.section-list-item :title="$skill">
         @if ($description)
             <p>{{ $description }}</p>
         @endif

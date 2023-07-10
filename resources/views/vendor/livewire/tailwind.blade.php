@@ -1,119 +1,100 @@
-<div class="flex items-center justify-between">
-    {{-- mobile simple nav --}}
-    <div class="flex-1 flex justify-between sm:hidden">
-        <span>
-            @if ($paginator->onFirstPage())
-                <span class="button button--white button--md button--disabled" aria-disabled="true">
-                    {!! __('pagination.previous') !!}
-                </span>
-            @else
-                <x-button wire:click="previousPage"
-                          wire:target="previousPage"
-                          variant="white"
-                          rel="previous"
-                >
-                    {!! __('pagination.previous') !!}
-                </x-button>
-            @endif
-        </span>
-
-        <span>
-            @if ($paginator->hasMorePages())
-                <x-button wire:click="nextPage"
-                          wire:target="nextPage"
-                          variant="white"
-                          rel="next"
-                >
-                    {!! __('pagination.next') !!}
-                </x-button>
-            @else
-                <span class="button button--white button--md button--disabled" aria-disabled="true">
-                    {!! __('pagination.next') !!}
-                </span>
-            @endif
-        </span>
-    </div>
-
-    {{-- desktop nav --}}
-    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-        <div>
-            @if ($paginator->total() > 0)
-                <p class="text-sm text-slate-700">
-                    {!! __('pagination.showing', [
-                        'from' => $paginator->firstItem(),
-                        'to' => $paginator->lastItem(),
-                        'total' => $paginator->total(),
-                    ]) !!}
-                </p>
-            @endif
-        </div>
-
-        <div>
-            @if ($paginator->hasPages())
-                <nav role="navigation" aria-label="{{ __('pagination.label') }}" class="relative z-0 inline-flex shadow-sm -space-x-px">
-                    {{-- Previous Page Link --}}
-                    @if ($paginator->onFirstPage())
-                        <span class="button button--white button--disabled button--md button--icon rounded-r-none"
-                              aria-disabled="true"
-                              aria-label="{{ __('pagination.previous') }}"
-                        >
-                            <x-heroicon-s-chevron-left class="opacity-75" />
-                        </span>
-                    @else
-                        <x-button wire:click="previousPage" variant="white" rel="prev" icon aria-label="{{ __('pagination.previous') }}" class="h-full rounded-r-none" container-class="h-full">
-                            <x-heroicon-s-chevron-left />
-                        </x-button>
-                    @endif
-
-                    {{-- Pagination Elements --}}
-                    @foreach ($elements as $element)
-                        {{-- "Three Dots" Separator --}}
-                        @if (is_string($element))
-                            <span aria-disabled="true">
-                                <span class="button button--white button--md rounded-none bg-slate-100 button--disabled h-full flex items-start">{{ $element }}</span>
-                            </span>
-                        @endif
-
-                        {{-- Array of links --}}
-                        @if (is_array($element))
-                            @foreach ($element as $page => $url)
-                                <span wire:key="paginator-page-{{ $page }}">
-                                    @if ($page === $paginator->currentPage())
-                                        <span aria-current="page">
-                                            <span class="h-full button button--white button--md button--disabled rounded-none bg-slate-100 hover:bg-slate-100">
-                                                {{ $page }}
-                                            </span>
-                                        </span>
-                                    @else
-                                        <x-button wire:click="gotoPage({{ $page }})"
-                                                  class="rounded-none h-full"
-                                                  container-class="h-full"
-                                                  variant="white"
-                                                  aria-label="{{ __('Go to page :page', ['page' => $page]) }}"
-                                        >
-                                            {{ $page }}
-                                        </x-button>
-                                    @endif
-                                </span>
-                            @endforeach
-                        @endif
-                    @endforeach
-
-                    {{-- Next Page Link --}}
-                    @if ($paginator->hasMorePages())
-                        <x-button wire:click="nextPage" variant="white" rel="next" icon aria-label="{{ __('pagination.next') }}" class="rounded-l-none">
-                            <x-heroicon-s-chevron-right />
-                        </x-button>
-                    @else
-                        <span class="button button--white button--disabled button--md button--icon rounded-l-none"
-                              aria-disabled="true"
-                              aria-label="{{ __('pagination.next') }}"
-                        >
-                            <x-heroicon-s-chevron-right class="opacity-75" />
-                        </span>
-                    @endif
-                </nav>
-            @endif
-        </div>
-    </div>
+{{-- results total --}}
+<div class="text-center">
+    @if ($paginator->total() > 0)
+        <p class="text-sm text-slate-700 dark:text-slate-300">
+            {!! __('pagination.showing', [
+                'from' => number_format($paginator->firstItem()),
+                'to' => number_format($paginator->lastItem()),
+                'total' => number_format($paginator->total()),
+            ]) !!}
+        </p>
+    @endif
 </div>
+
+{{-- nav --}}
+@if ($paginator->hasPages())
+    <div class="mt-4 flex justify-center"
+         x-data="{
+            visitPage(page) {
+                page = Number(page);
+                const max = Number({{ $paginator->lastPage() }});
+
+                if (page < 1) page = 1
+                if (page > max) page = max
+
+                @this.gotoPage(page);
+            }
+         }"
+    >
+        <nav role="navigation"
+             aria-label="{{ __('Pagination Navigation') }}"
+             class="relative z-0 inline-flex"
+        >
+            @unless ($paginator->onFirstPage())
+                {{-- first page link --}}
+                <x-blade::button.icon
+                    wire:click="gotoPage(1)"
+                    size="sm"
+                    variant="text"
+                    color="slate"
+                    aria-label="{{ __('pagination.first') }}"
+                >
+                    <x-heroicon-s-chevron-double-left />
+                </x-blade::button.icon>
+
+                {{-- previous page link --}}
+                <x-blade::button.icon
+                    wire:click="previousPage"
+                    size="sm"
+                    variant="text"
+                    color="slate"
+                    aria-label="{{ __('pagination.previous') }}"
+                    rel="prev"
+                >
+                    <x-heroicon-s-chevron-left />
+                </x-blade::button.icon>
+            @endunless
+
+            {{-- page select --}}
+            <div>
+                <x-input
+                    type="number"
+                    min="1"
+                    max="{{ $paginator->lastPage() }}"
+                    step="1"
+                    value="{{ $paginator->currentPage() }}"
+                    x-on:keydown.enter.prevent="visitPage($el.value)"
+                    x-on:blur="visitPage($el.value)"
+                    x-on:change.debounce="visitPage($el.value)"
+                    class="mx-2"
+                />
+            </div>
+
+            @if ($paginator->hasMorePages())
+                {{-- next page link --}}
+                <x-blade::button.icon
+                    wire:click="nextPage"
+                    size="sm"
+                    variant="text"
+                    color="slate"
+                    aria-label="{{ __('pagination.next') }}"
+                    rel="next"
+                >
+                    <x-heroicon-s-chevron-right />
+                </x-blade::button.icon>
+
+                {{-- last page link --}}
+                <x-blade::button.icon
+                    wire:click="gotoPage({{ $paginator->lastPage() }})"
+                    size="sm"
+                    variant="text"
+                    color="slate"
+                    aria-label="{{ __('pagination.last') }}"
+                    rel="next"
+                >
+                    <x-heroicon-s-chevron-double-right />
+                </x-blade::button.icon>
+            @endif
+        </nav>
+    </div>
+@endif

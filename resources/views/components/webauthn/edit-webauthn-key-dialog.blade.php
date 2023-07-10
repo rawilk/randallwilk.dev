@@ -5,9 +5,9 @@
 
 <x-dialog-modal max-width="lg" wire:model.defer="showEdit" :show-icon="false">
     @if ($editing)
-        <x-slot name="title">{{ __('base::webauthn.edit_key_title') }}</x-slot>
+        <x-slot:title>{{ __('base::webauthn.edit_key_title') }}</x-slot:title>
 
-        <x-slot name="content">
+        <x-slot:content>
             <x-form wire:submit.prevent="saveKey" id="{{ $prefix }}NameForm">
                 <x-form-group label="{{ __('base::webauthn.labels.key_name') }}" name="name" input-id="{{ $prefix }}Name" class="pt-3">
                     <x-input
@@ -28,25 +28,26 @@
                     {!! __('base::webauthn.labels.last_used_at', ['date' => $editing->lastUsedAtHtml(userTimezone())]) !!}
                 </div>
             </x-form>
-        </x-slot>
+        </x-slot:content>
 
-        <x-slot name="footer">
+        <x-slot:footer>
             <x-button
                 type="submit"
                 form="{{ $prefix }}NameForm"
                 wire:target="saveKey"
-                variant="blue"
+                color="blue"
             >
                 {{ __('base::messages.save_button') }}
             </x-button>
 
             <x-button
-                variant="white"
+                color="slate"
+                variant="text"
                 wire:click="$set('showEdit', false)"
                 wire:loading.attr="disabled"
             >
                 {{ __('base::messages.confirm_modal_cancel') }}
             </x-button>
-        </x-slot>
+        </x-slot:footer>
     @endif
 </x-dialog-modal>

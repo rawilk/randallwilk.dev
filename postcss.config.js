@@ -1,8 +1,7 @@
 module.exports = {
     plugins: [
+        require('postcss-import'),
         require('tailwindcss/nesting'),
-        require('postcss-multiple-tailwind')({
-            defaultConfig: 'build/tailwind.config.js',
-        }),
+        require('tailwindcss'),
     ],
 };

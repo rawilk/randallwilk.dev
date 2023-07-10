@@ -10,7 +10,7 @@
             @includeWhen(\Rawilk\LaravelBase\Features::managesAvatars(), 'livewire.admin.users.partials.avatar-upload')
 
             {{-- name --}}
-            <x-form-group label="{{ __('users.form.labels.name') }}" name="name" inline>
+            <x-form-group :label="__('users.form.labels.name')" name="name" inline>
                 <x-input
                     wire:model.defer="state.name"
                     name="name"
@@ -22,7 +22,7 @@
             </x-form-group>
 
             {{-- email --}}
-            <x-form-group label="{{ __('users.form.labels.email') }}" name="email" inline>
+            <x-form-group :label="__('users.form.labels.email')" name="email" inline>
                 <x-email
                     wire:model.defer="state.email"
                     name="email"
@@ -32,7 +32,7 @@
             </x-form-group>
 
             {{-- timezone --}}
-            <x-form-group label="{{ __('users.form.labels.timezone') }}" name="timezone" inline>
+            <x-form-group :label="__('users.form.labels.timezone')" name="timezone" inline>
                 <x-timezone-select
                     wire:model.defer="state.timezone"
                     name="timezone"
@@ -44,11 +44,16 @@
         </x-form>
 
         <x-slot:footer>
-            <div class="flex items-center justify-end space-x-4">
+            <div class="flex items-center justify-end space-x-4" x-data>
                 <x-action-message on="profile.updated" />
 
-                <x-button type="submit" variant="blue" form="update-profile-information-form" wire:target="updateProfileInformation">
-                    <span>{{ __('base::messages.save_button') }}</span>
+                <x-button
+                    type="submit"
+                    color="blue"
+                    form="update-profile-information-form"
+                    wire:target="updateProfileInformation"
+                >
+                    {{ __('base::messages.save_button') }}
                 </x-button>
             </div>
         </x-slot:footer>

@@ -7,7 +7,7 @@ namespace {{ namespace }};
 use Exception;
 use Illuminate\Http\Request;
 
-final class {{ class }} extends Exception
+class {{ class }} extends Exception
 {
     public function render(Request $request)
     {

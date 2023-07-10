@@ -19,9 +19,9 @@
                 </x-profile.two-factor-trigger>
             @else
                 <div> {{-- wrapped in div to prevent DOM diffing issues from livewire --}}
-                    <x-laravel-base::elements.tooltip title="{{ __('base::2fa.recovery.show_codes_disabled_help') }}">
+                    <x-laravel-base::elements.tooltip :title="__('base::2fa.recovery.show_codes_disabled_help')">
                         <x-button
-                            variant="blue"
+                            color="blue"
                             disabled
                         >
                             {{ __('base::2fa.recovery.show_codes_button') }}
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="mt-4 text-center">
-                    <x-profile.two-factor-trigger action="regenerate" variant="blue" :confirm-enabled="$this->mustConfirmPassword">
+                    <x-profile.two-factor-trigger action="regenerate" color="blue" :confirm-enabled="$this->mustConfirmPassword">
                         {{ __('base::2fa.recovery.regenerate_button') }}
                     </x-profile.two-factor-trigger>
                 </div>

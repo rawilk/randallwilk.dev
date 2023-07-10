@@ -22,7 +22,7 @@
 
                         <div class="mt-4 flex-shrink-0 sm:mt-0">
                             <x-laravel-base::auth.impersonate-button :user-id="$user->getAuthIdentifier()">
-                                <x-button variant="outline-red" class="sm:button--lg">
+                                <x-button color="red" variant="outlined" class="sm:button--lg">
                                     {{ __('base::users.impersonate.button') }}
                                 </x-button>
                             </x-laravel-base::auth.impersonate-button>
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="mt-4 flex-shrink-0 sm:mt-0">
-                            <x-button wire:click="confirmDelete" variant="outline-red" class="sm:button--lg">
+                            <x-button wire:click="confirmDelete" color="red" variant="outlined" class="sm:button--lg">
                                 {{ __('Delete') }}
                             </x-button>
                         </div>

@@ -37,8 +37,8 @@
             <x-td class="table-actions">
                 <x-action-menu>
                     @can('edit', $user)
-                        <x-dropdown-item href="{{ $user->edit_url }}">
-                            <x-heroicon-s-pencil />
+                        <x-dropdown-item :href="$user->edit_url">
+                            <x-heroicon-m-pencil />
                             <span>{{ __('base::messages.edit_button') }}</span>
                         </x-dropdown-item>
                     @endcan
@@ -46,7 +46,7 @@
                     @can('impersonate', $user)
                         <x-laravel-base::auth.impersonate-button :user-id="$user->getAuthIdentifier()">
                             <x-dropdown-item>
-                                <x-heroicon-s-arrows-right-left />
+                                <x-heroicon-m-arrows-right-left />
                                 <span>{{ __('base::users.impersonate.button') }}</span>
                             </x-dropdown-item>
                         </x-laravel-base::auth.impersonate-button>
@@ -54,7 +54,7 @@
 
                     @can('delete', $user)
                         <x-dropdown-divider />
-                        <x-dropdown-item wire:click="confirmDelete({{ $user->id }})">
+                        <x-dropdown-item wire:click="confirmDelete('{{ $user->id }}')">
                             <x-css-trash />
                             <span>{{ __('base::messages.delete_button') }}</span>
                         </x-dropdown-item>
@@ -69,7 +69,7 @@
 
                     <div>
                         @can('edit', $user)
-                            <x-link href="{{ $user->edit_url }}">
+                            <x-link :href="$user->edit_url">
                                 {!! $this->highlight(e($user->name)) !!}
                             </x-link>
                         @else
@@ -79,12 +79,12 @@
                         <div>
                             @can('impersonate', $user)
                                 <x-laravel-base::auth.impersonate-button :user-id="$user->getAuthIdentifier()">
-                                    <x-laravel-base::button.link
+                                    <x-blade::button.link
                                         class="text-xs"
                                         dark
                                     >
                                         {{ __('base::users.impersonate.button') }}
-                                    </x-laravel-base::button.link>
+                                    </x-blade::button.link>
                                 </x-laravel-base::auth.impersonate-button>
                             @endcan
                         </div>

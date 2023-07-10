@@ -1,5 +1,5 @@
-<x-page title="{{ __('front.privacy.title') }}"
-        description="{{ __('front.privacy.description') }}"
+<x-page :title="__('front.privacy.title')"
+        :description="__('front.privacy.description')"
 >
     <x-front.page-banner>
         {{ __('front.privacy.banner') }}
@@ -35,9 +35,9 @@
                 <p>
                     With this Privacy Statement, Randall wants to point out to you any processing operations on
                     this data and on your rights. By using the website located at
-                    <x-front.legal-link url="{{ url('/') }}" after="," />
+                    <x-front.legal-link :url="url('/')" after="," />
                     and all associated sites linked to
-                    <x-front.legal-link url="{{ url('/') }}" />
+                    <x-front.legal-link :url="url('/')" />
                     by Randall, (collectively, the "Site") you declare that you have read this privacy policy and
                     that you explicitly agree to its content as well as to the processing itself.
                 </p>
@@ -85,7 +85,7 @@
                     <li>
                         <span class="font-bold">Site:</span>
                         this website or any associated sites of
-                        <x-front.legal-link url="{{ url('/') }}" after="." />
+                        <x-front.legal-link :url="url('/')" after="." />
                     </li>
                 </ul>
 
@@ -254,7 +254,7 @@
                     <li>
                         Cookie settings within
                         <x-front.legal-link
-                            url="ttps://help.opera.com/en/latest/web-preferences/#cookies"
+                            url="https://help.opera.com/en/latest/web-preferences/#cookies"
                             text="Opera"
                             target="_blank"
                         />
@@ -296,7 +296,7 @@
                     The application is done by sending an email to
                     <x-front.legal-link
                         url="mailto:{{ config('site.contact.email') }}"
-                        text="{{ config('site.contact.email') }}"
+                        :text="config('site.contact.email')"
                         after="."
                     />
                 </p>
@@ -364,7 +364,7 @@
                     month after receiving the request. The application is done by sending an email to
                     <x-front.legal-link
                         url="mailto:{{ config('site.contact.email') }}"
-                        text="{{ config('site.contact.email') }}"
+                        :text="config('site.contact.email')"
                         after="."
                     />
                 </p>
@@ -381,7 +381,7 @@
                     after receiving the request. The application is done by sending an email to
                     <x-front.legal-link
                         url="mailto:{{ config('site.contact.email') }}"
-                        text="{{ config('site.contact.email') }}"
+                        :text="config('site.contact.email')"
                         after="."
                     />
                 </p>
@@ -397,7 +397,7 @@
                     after receiving the request. The application is done by sending an email to
                     <x-front.legal-link
                         url="mailto:{{ config('site.contact.email') }}"
-                        text="{{ config('site.contact.email') }}"
+                        :text="config('site.contact.email')"
                         after="."
                     />
                 </p>

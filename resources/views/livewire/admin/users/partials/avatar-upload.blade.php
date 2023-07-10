@@ -22,17 +22,17 @@
         <x-file-upload
             wire:model="photo"
             name="photo"
-            label="{{ __('users.labels.select_new_avatar') }}"
+            :label="__('users.labels.select_new_avatar')"
         />
 
-        <div>
+        <div x-data>
             @if ($photo)
-                <x-button wire:click="cancelUpload" variant="red" id="cancel-upload-button">
+                <x-button wire:click="cancelUpload" color="red" id="cancel-upload-button">
                     {{ __('users.labels.cancel_avatar_upload') }}
                 </x-button>
             @elseif ($this->user->avatar_path)
                 <x-button wire:click="deleteProfilePhoto"
-                          variant="red"
+                          color="red"
                           id="remove-photo-button"
                 >
                     {{ __('users.labels.remove_avatar') }}

@@ -1,49 +1,41 @@
 module.exports = {
     safelist: [
         // Alerts...
-        'alert--error',
-        'alert--info',
-        'alert--success',
-        'alert--warning',
+        {
+            pattern: /alert--*/,
+        },
 
         // Badges...
-        'badge--slate',
-        'badge--gray',
-        'badge--blue',
-        'badge--red',
-        'badge--rose',
-        'badge--green',
-        'badge--orange',
-        'badge--indigo',
-        'badge--pink',
-        'badge--yellow',
+        {
+            pattern: /badge--*/,
+        },
 
         // Buttons...
-        'button--slate',
-        'button--gray',
-        'button--blue',
-        'button--red',
-        'button--rose',
-        'button--green',
-        'button--orange',
-        'button--indigo',
-        'button--pink',
-        'button--yellow',
-        'button--white',
-        'button--outline-slate',
-        'button--outline-gray',
-        'button--outline-blue',
-        'button--outline-red',
-        'button--outline-rose',
-        'button--outline-green',
-        'button--outline-orange',
-        'button--outline-indigo',
-        'button--outline-pink',
-        'button--outline-yellow',
-        'button--xs',
-        'button--sm',
-        'button--md',
-        'button--lg',
-        'button--xl',
+        {
+            pattern: /button--*/,
+        },
+
+        // Cards
+        {
+            pattern: /card-header--*/,
+        },
+
+        // Form components...
+        {
+            pattern: /file-upload__input--*/,
+        },
+        {
+            pattern: /switch-toggle--*/,
+        },
+        {
+            pattern: /custom-select__button--*/,
+        },
+        {
+            pattern: /form-input--*/,
+        },
+
+        // For dark mode...
+        'filepond--panel-root',
+        'filepond--root',
     ],
 };

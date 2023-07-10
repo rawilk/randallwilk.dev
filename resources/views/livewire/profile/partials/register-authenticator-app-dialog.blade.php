@@ -45,7 +45,7 @@
                             <span>{{ decrypt($twoFactorSecret) }}</span>
 
                             <div class="absolute top-0 right-1 pr-1 pt-1">
-                                <x-laravel-base::misc.copy-to-clipboard class="border-none" text="{{ decrypt($twoFactorSecret) }}" />
+                                <x-laravel-base::misc.copy-to-clipboard class="border-none" :text="decrypt($twoFactorSecret)" />
                             </div>
                         </div>
                     @endif
@@ -53,7 +53,7 @@
 
                 <div class="mt-6 text-center">
                     <x-button
-                        variant="blue"
+                        color="blue"
                         x-on:click="showCode"
                     >
                         {{ __('base::2fa.authenticator.setup_continue_button') }}
@@ -77,10 +77,10 @@
                     </div>
 
                     <div class="mt-6">
-                        <x-laravel-base::button.link dark x-on:click.prevent.stop="showInstructions = true" class="flex items-center">
+                        <x-blade::button.link dark x-on:click.prevent.stop="showInstructions = true" class="flex items-center">
                             <x-css-chevron-left class="h-4 w-4 mr-1" />
                             <span>{{ __('base::2fa.authenticator.setup_back_button') }}</span>
-                        </x-laravel-base::button.link>
+                        </x-blade::button.link>
                     </div>
                 </div>
 

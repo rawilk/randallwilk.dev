@@ -1,7 +1,7 @@
 <div class="space-y-4 divide-y divide-slate-200">
 
     @if ($this->canAssignRoles)
-        <x-form-group name="roles" label="{{ __('Roles') }}">
+        <x-form-group name="roles" :label="__('Roles')">
             <div x-data="{
                 @if ($this->canAssignPermissions)
                     allRoles: {{ $roles->toJson() }},
@@ -33,7 +33,7 @@
                             <div class="flex items-center h-5">
                                 <x-checkbox
                                     x-model="roles"
-                                    value="{{ $role->id }}"
+                                    :value="$role->id"
                                     id="role-option-{{ $role->id }}"
                                     name="roles[]"
                                 />
@@ -63,7 +63,7 @@
 
     @if ($this->canAssignPermissions)
         <div @class(['pt-4' => $this->canAssignRoles]) x-data="{ showPermissions: false }">
-            <x-form-group name="permissions" label="{{ __('Permissions') }}">
+            <x-form-group name="permissions" :label="__('Permissions')">
 
                 <p class="text-sm text-gray-500 leading-5 mt-2 mb-4">
                     {{ __('You may grant this user additional abilities that are not granted through their assigned roles.') }}
@@ -72,7 +72,9 @@
                 <div class="mb-4">
                     <x-button x-on:click="showPermissions = ! showPermissions"
                               x-text="showPermissions ? '{{ __('Hide Permissions') }}' : '{{ __('Show Permissions') }}'"
-                              variant="white"
+                              color="slate"
+                              variant="outlined"
+                              size="sm"
                     >
                     </x-button>
                 </div>
@@ -129,24 +131,24 @@
                         <div class="text-xs">
                             <span>{{ __('base::messages.labels.form.make_selection') }}</span>
 
-                            <x-laravel-base::button.link x-on:click="selectAllIn($root)">
+                            <x-blade::button.link x-on:click="selectAllIn($root)">
                                 {{ __('base::messages.labels.form.select_all') }}
-                            </x-laravel-base::button.link>
+                            </x-blade::button.link>
                             <span>/</span>
-                            <x-laravel-base::button.link x-on:click="removeAllIn($root)">
+                            <x-blade::button.link x-on:click="removeAllIn($root)">
                                 {{ __('base::messages.labels.form.select_none') }}
-                            </x-laravel-base::button.link>
+                            </x-blade::button.link>
                         </div>
 
                         {{-- collapse/expand all --}}
                         <div class="text-xs mt-2 sm:mt-0">
-                            <x-laravel-base::button.link x-on:click="$dispatch('perm-collapse')">
+                            <x-blade::button.link x-on:click="$dispatch('perm-collapse')">
                                 {{ __('base::messages.labels.form.collapse_all') }}
-                            </x-laravel-base::button.link>
+                            </x-blade::button.link>
                             <span>/</span>
-                            <x-laravel-base::button.link x-on:click="$dispatch('perm-expand')">
+                            <x-blade::button.link x-on:click="$dispatch('perm-expand')">
                                 {{ __('base::messages.labels.form.expand_all') }}
-                            </x-laravel-base::button.link>
+                            </x-blade::button.link>
                         </div>
                     </div>
 
@@ -213,13 +215,13 @@
                                         <div class="text-xs">
                                             <span>{{ __('base::messages.labels.form.make_selection') }}</span>
 
-                                            <x-laravel-base::button.link x-on:click="selectAllIn($root)">
+                                            <x-blade::button.link x-on:click="selectAllIn($root)">
                                                 {{ __('base::messages.labels.form.select_all') }}
-                                            </x-laravel-base::button.link>
+                                            </x-blade::button.link>
                                             <span>/</span>
-                                            <x-laravel-base::button.link x-on:click="removeAllIn($root)">
+                                            <x-blade::button.link x-on:click="removeAllIn($root)">
                                                 {{ __('base::messages.labels.form.select_none') }}
-                                            </x-laravel-base::button.link>
+                                            </x-blade::button.link>
                                         </div>
 
                                         <div class="mt-2 -space-y-px bg-white rounded-md">

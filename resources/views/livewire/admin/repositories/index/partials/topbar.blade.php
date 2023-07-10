@@ -1,5 +1,5 @@
 <x-topbar
-    search-placeholder="{{ __('repos.labels.search_placeholder') }}"
+    :search-placeholder="__('repos.labels.search_placeholder')"
     :show-columns="false"
 >
     {{-- actions --}}

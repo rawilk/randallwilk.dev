@@ -28,15 +28,14 @@
 
         <div class="flex-row md:flex space-y-2 md:space-x-3 md:space-y-0">
             @if ($confirmPasswordEnabled)
-                <x-confirms-password wire:then="confirmDelete({{ $authenticator->getKey() }})" class="inline-flex" confirmable-id="authAppConfirmDelete">
-                    <x-laravel-base::button.link wire:target="confirmDelete" class="text-xs">
+                <x-confirms-password wire:then="confirmDelete('{{ $authenticator->getKey() }}')" class="inline-flex" confirmable-id="authAppConfirmDelete">
+                    <x-laravel-base::button.link wire:target="confirmDelete('{{ $authenticator->getKey() }}')" class="text-xs">
                         {{ __('base::webauthn.delete_key_button') }}
                     </x-laravel-base::button.link>
                 </x-confirms-password>
             @else
                 <x-laravel-base::button.link
-                    wire:click="confirmDelete({{ $authenticator->getKey() }})"
-                    wire:target="confirmDelete"
+                    wire:click="confirmDelete('{{ $authenticator->getKey() }}')"
                     class="text-xs"
                 >
                     {{ __('base::2fa.authenticator.delete_app_button') }}
@@ -44,8 +43,7 @@
             @endif
 
             <x-laravel-base::button.link
-                wire:click="editApp({{ $authenticator->getKey() }})"
-                wire:target="editApp"
+                wire:click="editApp('{{ $authenticator->getKey() }}')"
                 class="text-xs"
             >
                 {{ __('base::messages.edit_button') }}

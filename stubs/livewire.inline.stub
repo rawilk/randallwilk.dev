@@ -6,7 +6,7 @@ namespace [namespace];
 
 use Livewire\Component;
 
-final class [class] extends Component
+class [class] extends Component
 {
     public function render(): string
     {

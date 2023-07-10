@@ -8,7 +8,7 @@ use {{ namespacedModel }};
 use {{ namespacedUserModel }};
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-final class {{ class }}
+class {{ class }}
 {
     use HandlesAuthorization;
 }
