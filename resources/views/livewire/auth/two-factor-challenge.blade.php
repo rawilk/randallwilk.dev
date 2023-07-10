@@ -189,9 +189,9 @@
                 <div class="text-slate-600">
                     <span x-show="challengeType === 'backup_code'">{!! __('base::2fa.challenge.cant_access_codes') !!}</span>
                     <span x-show="challengeType !== 'backup_code'">{!! __('base::2fa.challenge.cant_access_device') !!}</span>
-                    <x-laravel-base::button.link x-on:click="showOptions = true; removeErrors();">
+                    <x-blade::button.link x-on:click="showOptions = true; removeErrors();">
                         {{ __('base::2fa.challenge.see_other_options_button') }}
-                    </x-laravel-base::button.link>
+                    </x-blade::button.link>
                 </div>
             </div>
         </div>
