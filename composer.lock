@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55dd396e5a8631c4448c3c660e79aed1",
+    "content-hash": "8e128437da64c49ff8bde4c0df07859b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -6031,16 +6031,16 @@
         },
         {
             "name": "rawilk/laravel-base",
-            "version": "v0.6.13",
+            "version": "v0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rawilk/laravel-base.git",
-                "reference": "656070965f05189589603c7d4fa5a9e9a35fc1a4"
+                "reference": "7876615819add8c19a680ecd2595d633b3d18946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rawilk/laravel-base/zipball/656070965f05189589603c7d4fa5a9e9a35fc1a4",
-                "reference": "656070965f05189589603c7d4fa5a9e9a35fc1a4",
+                "url": "https://api.github.com/repos/rawilk/laravel-base/zipball/7876615819add8c19a680ecd2595d633b3d18946",
+                "reference": "7876615819add8c19a680ecd2595d633b3d18946",
                 "shasum": ""
             },
             "require": {
@@ -6124,7 +6124,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rawilk/laravel-base/issues",
-                "source": "https://github.com/rawilk/laravel-base/tree/v0.6.13"
+                "source": "https://github.com/rawilk/laravel-base/tree/v0.7.2"
             },
             "funding": [
                 {
@@ -6132,7 +6132,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-16T14:01:40+00:00"
+            "time": "2023-07-10T15:49:42+00:00"
         },
         {
             "name": "rawilk/laravel-breadcrumbs",

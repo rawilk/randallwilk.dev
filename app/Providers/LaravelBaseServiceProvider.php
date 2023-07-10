@@ -8,6 +8,7 @@ use App\Actions\Auth\ResetUserPasswordAction;
 use App\Actions\LaravelBase\UpdatePasswordAction;
 use App\Actions\LaravelBase\UpdateUserProfileInformationAction;
 use App\Actions\Users\DeleteUserAction;
+use function App\Helpers\defaultLoginRedirect;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Rawilk\LaravelBase\LaravelBase;
@@ -17,6 +18,7 @@ class LaravelBaseServiceProvider extends ServiceProvider
     public function boot(): void
     {
         LaravelBase::findAppTimezoneUsing(fn () => config('site.timezone'));
+        LaravelBase::resolveDefaultLoginRedirectUsing(fn () => defaultLoginRedirect());
 
         $this->registerViews();
         $this->registerBindings();

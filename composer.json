@@ -26,7 +26,7 @@
         "predis/predis": "^2.0",
         "rawilk/blade": "^0.2.4",
         "rawilk/laravel-app-key-rotator": "^3.0",
-        "rawilk/laravel-base": "^0.6",
+        "rawilk/laravel-base": "^0.7",
         "rawilk/laravel-breadcrumbs": "^4.0",
         "rawilk/laravel-casters": "^3.0",
         "rawilk/laravel-form-components": "^8.0",
