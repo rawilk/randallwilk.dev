@@ -80,10 +80,10 @@ final class AdminMenuItems
                         'label' => __('base::roles.index.title'),
                         'url' => route('admin.roles.index'),
                     ])
-                    ->viewIf($this->user->canAny($userPermissions), $this->submenuItemView, [
-                        'label' => __('base::users.index.title'),
-                        'url' => route('admin.users.index'),
-                    ]);
+                        ->viewIf($this->user->canAny($userPermissions), $this->submenuItemView, [
+                            'label' => __('base::users.index.title'),
+                            'url' => route('admin.users.index'),
+                        ]);
                 });
             }
         );
