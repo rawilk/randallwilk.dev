@@ -36,7 +36,7 @@ it("resets a user's password", function () {
         'password' => 'new-password',
     ]))->toBeTrue();
 
-    $this->assertDatabaseMissing('password_resets', [
+    $this->assertDatabaseMissing('password_reset_tokens', [
         'email' => $user->email,
     ]);
 });
@@ -76,7 +76,7 @@ function getPasswordResetToken($user): string
 {
     $token = Str::random();
 
-    DB::table('password_resets')->insert([
+    DB::table('password_reset_tokens')->insert([
         'email' => $user->email,
         'token' => Hash::make($token),
         'created_at' => now(),

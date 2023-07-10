@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Users;
 
 use App\Exports\Users\UsersExport;
+use App\Models\Access\Role;
 use App\Models\User\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -15,7 +16,6 @@ use Rawilk\LaravelBase\Contracts\Profile\DeletesUsers;
 use Rawilk\LaravelBase\Http\Livewire\DataTable\HasDataTable;
 use Rawilk\LaravelBase\Http\Livewire\DataTable\WithCachedRows;
 use Rawilk\LaravelBase\Http\Livewire\DataTable\WithHighlighting;
-use Rawilk\LaravelBase\Models\Role;
 
 final class Index extends Component
 {
@@ -25,7 +25,7 @@ final class Index extends Component
     use WithHighlighting;
 
     private const SELECTABLE_COLUMNS = [
-        'id', 'first_name', 'last_name', 'email',
+        'id', 'h_key', 'first_name', 'last_name', 'email',
         'timezone', 'created_at', 'updated_at', 'avatar_path',
     ];
 

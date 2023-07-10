@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Models\Access\Role;
 use App\Models\User\User;
 use Illuminate\Support\Facades\Hash;
-use Rawilk\LaravelBase\Models\Role;
 
 it("can get a user's full name", function () {
     $user = new User([

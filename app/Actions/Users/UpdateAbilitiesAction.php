@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Actions\Users;
 
+use App\Models\Access\Role;
 use App\Models\User\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Rawilk\LaravelBase\Models\Role;
 
 final class UpdateAbilitiesAction
 {

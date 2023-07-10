@@ -25,6 +25,7 @@
         "livewire/livewire": "^2.10",
         "predis/predis": "^2.0",
         "rawilk/blade": "^0.2.4",
+        "rawilk/human-keys": "^1.0",
         "rawilk/laravel-app-key-rotator": "^3.0",
         "rawilk/laravel-base": "^0.7",
         "rawilk/laravel-breadcrumbs": "^4.0",
@@ -38,7 +39,8 @@
         "spatie/laravel-sitemap": "^6.2",
         "spatie/packagist-api": "^2.1",
         "spatie/sheets": "^1.9",
-        "spatie/valuestore": "^1.3"
+        "spatie/valuestore": "^1.3",
+        "tuupola/ksuid": "^2.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

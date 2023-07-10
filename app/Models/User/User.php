@@ -5,19 +5,21 @@ declare(strict_types=1);
 namespace App\Models\User;
 
 use App\Enums\PermissionEnum;
+use App\Models\Access\Role;
 use App\Models\Imports\Import;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
+use Rawilk\HumanKeys\Concerns\HasHumanKey;
 use Rawilk\LaravelBase\Concerns\HasAvatar;
 use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
 use Rawilk\LaravelBase\Concerns\Impersonatable;
 use Rawilk\LaravelBase\Concerns\TwoFactorAuthenticatable;
-use Rawilk\LaravelBase\Models\Role;
 use Rawilk\LaravelBase\Scopes\SuperAdminScope;
 use Rawilk\LaravelCasters\Support\Name;
 use Spatie\Permission\Traits\HasRoles;
@@ -34,6 +36,8 @@ class User extends Authenticatable
     use HasDatesForHumans;
     use Impersonatable;
     use TwoFactorAuthenticatable;
+    use HasUuids;
+    use HasHumanKey;
 
     protected $guarded = ['id'];
 
@@ -97,6 +101,21 @@ class User extends Authenticatable
     public function imports(): HasMany
     {
         return $this->hasMany(Import::class);
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'h_key';
+    }
+
+    public function humanKeys(): array
+    {
+        return ['h_key'];
+    }
+
+    public static function humanKeyPrefix(): string
+    {
+        return 'usr';
     }
 
     protected static function booted(): void

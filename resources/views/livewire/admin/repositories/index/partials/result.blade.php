@@ -73,12 +73,12 @@
             </div>
         </div>
 
-        <div wire:key="repo{{ $repository->getKey() }}State{{ $repository->visible }}">
+        <div wire:key="repo{{ $repository->h_key }}State{{ $repository->visible }}">
             <x-switch-toggle
                 short
                 :value="$repository->visible"
                 color="green"
-                wire:click.prevent.stop="toggleVisible('{{ $repository->getKey() }}')"
+                wire:click.prevent.stop="toggleVisible('{{ $repository->h_key }}')"
             />
         </div>
     </div>
@@ -89,7 +89,7 @@
             {{-- delete --}}
             <div class="w-0 flex-1 flex">
                 <button
-                    wire:click="confirmDelete('{{ $repository->getKey() }}')"
+                    wire:click="confirmDelete('{{ $repository->h_key }}')"
                     @class([
                         'relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-slate-700 font-medium border border-transparent rounded-bl-lg',
                         'hover:text-slate-500 transition-colors focus:outline-blue-gray',
@@ -105,7 +105,7 @@
             {{-- edit --}}
             <div class="-ml-px w-0 flex-1 flex">
                 <button
-                    wire:click="edit('{{ $repository->getKey() }}')"
+                    wire:click="edit('{{ $repository->h_key }}')"
                     @class([
                         'relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-slate-700 font-medium border border-transparent rounded-bl-lg',
                         'hover:text-slate-500 transition-colors focus:outline-blue-gray',
