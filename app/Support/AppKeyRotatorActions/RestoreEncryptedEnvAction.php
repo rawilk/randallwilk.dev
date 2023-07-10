@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\File;
 use Rawilk\AppKeyRotator\AppKeyRotator;
 use Rawilk\AppKeyRotator\Contracts\RotatorAction;
 
-final class RestoreEncryptedEnvAction implements RotatorAction
+final readonly class RestoreEncryptedEnvAction implements RotatorAction
 {
     public function __construct(private readonly string $environment)
     {
     }
 
-    public function handle(AppKeyRotator $appKeyRotator, array $config)
+    public function handle(AppKeyRotator $appKeyRotator, array $config): void
     {
         if (! File::exists(base_path(".env.{$this->environment}.encrypted.bak"))) {
             return;
