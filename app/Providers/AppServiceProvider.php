@@ -8,10 +8,19 @@ use App\Docs\DocumentationContentParser;
 use App\Docs\DocumentationPage;
 use App\Docs\DocumentationPathParser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public function boot(): void
+    {
+        Vite::useScriptTagAttributes([
+            'data-turbolinks-eval' => 'false',
+            'data-turbo-eval' => 'false',
+        ]);
+    }
+
     public function register(): void
     {
         Model::unguard();
