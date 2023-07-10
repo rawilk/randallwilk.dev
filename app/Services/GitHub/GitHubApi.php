@@ -9,9 +9,9 @@ use Github\Client as GitHubClient;
 use Github\ResultPager;
 use Illuminate\Support\Collection;
 
-final class GitHubApi
+final readonly class GitHubApi
 {
-    public function __construct(private readonly GitHubClient $client)
+    public function __construct(private GitHubClient $client)
     {
     }
 
