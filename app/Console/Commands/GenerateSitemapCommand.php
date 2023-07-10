@@ -4,9 +4,10 @@ namespace App\Console\Commands;
 
 use App\Docs\Docs;
 use App\Docs\Repository;
-use Carbon\Carbon;
+use DateTimeInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Psr\Http\Message\UriInterface;
@@ -115,7 +116,7 @@ final class GenerateSitemapCommand extends Command
 
             $lastModified = null;
             try {
-                $lastModified = Carbon::createFromFormat(
+                $lastModified = Date::createFromFormat(
                     'U',
                     Storage::disk("docs_{$page->repository}")->lastModified($page->getPath())
                 );
@@ -145,20 +146,20 @@ final class GenerateSitemapCommand extends Command
      * To do this, we will store the last modified date in a `last_mod.json`
      * file, and parse it here.
      */
-    private function getLastModificationDate(Url $url): Carbon
+    private function getLastModificationDate(Url $url): DateTimeInterface
     {
         $path = parse_url($url->url, PHP_URL_PATH);
 
         if ($lastModified = ($this->lastModifications[$path] ?? null)) {
-            return Carbon::parse($lastModified);
+            return Date::parse($lastModified);
         }
 
         /*
          * If we don't have a last modified date for a specific page, we'll fall back
          * on the `_site` key.
          */
-        $date = $this->lastModifications['_site'] ?? Carbon::now();
+        $date = $this->lastModifications['_site'] ?? now();
 
-        return Carbon::parse($date);
+        return Date::parse($date);
     }
 }

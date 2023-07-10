@@ -10,32 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Rawilk\LaravelBase\Contracts\Models\Import as ImportContract;
 
-/**
- * App\Models\Imports\Import
- *
- * @property int $id
- * @property int|null $user_id
- * @property string $model
- * @property string $import
- * @property string $file_path
- * @property string $file_name
- * @property int $total_rows
- * @property int $processed_rows
- * @property \Carbon\CarbonImmutable|null $completed_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- *
- * @method static \Database\Factories\ImportFactory factory(...$parameters)
- * @method static Builder|Import forImport(string $import)
- * @method static Builder|Import forModel(string $model)
- * @method static Builder|Import newModelQuery()
- * @method static Builder|Import newQuery()
- * @method static Builder|Import notCompleted()
- * @method static Builder|Import query()
- *
- * @mixin \Eloquent
- */
-final class Import extends Model implements ImportContract
+class Import extends Model implements ImportContract
 {
     use HasFactory;
 

@@ -16,52 +16,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
 
-/**
- * App\Models\GitHub\Repository
- *
- * @property int $id
- * @property string $name
- * @property string|null $scoped_name The name of the repo with the owner's username prefixed.
- * @property string|null $description
- * @property array|null $topics
- * @property string|null $documentation_url
- * @property string|null $blogpost_url
- * @property int $stars
- * @property int|null $downloads
- * @property \Carbon\CarbonImmutable $repository_created_at
- * @property bool $new
- * @property bool $highlighted
- * @property \App\Enums\RepositoryTypeEnum|null $type
- * @property ProgrammingLanguageEnum|null $language
- * @property bool $visible
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read string|null $created_at_for_humans
- * @property-read string $display_name
- * @property-read string $downloads_for_front
- * @property-read string $downloads_for_humans
- * @property-read string $full_name
- * @property-read string $show_url
- * @property-read string $stars_for_front
- * @property-read string $stars_for_humans
- * @property-read string $type_background_color
- * @property-read string|null $updated_at_for_humans
- * @property-read string $url
- *
- * @method static Builder|Repository applySort(?string $sort = null)
- * @method static Builder|Repository byType(?string $type)
- * @method static Builder|Repository newModelQuery()
- * @method static Builder|Repository newQuery()
- * @method static \Illuminate\Database\Query\Builder|Repository onlyTrashed()
- * @method static Builder|Repository query()
- * @method static Builder|Repository visible()
- * @method static \Illuminate\Database\Query\Builder|Repository withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Repository withoutTrashed()
- *
- * @mixin \Eloquent
- */
-final class Repository extends Model
+class Repository extends Model
 {
     use SoftDeletes;
     use HasDatesForHumans;
