@@ -131,7 +131,7 @@ class Repository extends Model
         $query->where('visible', true);
     }
 
-    public function scopeApplySort(Builder $query, ?string $sort = null): void
+    public function scopeApplySort(Builder $query, string $sort = null): void
     {
         /** @var \App\Enums\RepositorySortEnum $enum */
         $enum = rescue(fn () => RepositorySortEnum::tryFrom(ltrim($sort, '-')));

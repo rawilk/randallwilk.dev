@@ -93,7 +93,7 @@ class User extends Authenticatable
         return $this->hasPermissionTo(PermissionEnum::USERS_IMPERSONATE->value);
     }
 
-    public function canBeImpersonated(?Authenticatable $impersonator = null): bool
+    public function canBeImpersonated(Authenticatable $impersonator = null): bool
     {
         return $impersonator?->can('impersonate', $this) ?? false;
     }

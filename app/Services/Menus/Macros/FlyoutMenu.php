@@ -10,7 +10,7 @@ final class FlyoutMenu implements MenuMacro
 {
     public function register(): void
     {
-        Menu::macro('flyout', function (?callable $callback = null, ?callable $footerCallback = null) {
+        Menu::macro('flyout', function (callable $callback = null, callable $footerCallback = null) {
             /** @var \Spatie\Menu\Laravel\Menu $this */
             $this->wrap('div', [
                 'x-data' => '{ open: false }',
