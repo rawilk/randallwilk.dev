@@ -34,3 +34,8 @@ Route::view('/uses', 'front.pages.uses.index')->name('uses');
 
 // Sitemap...
 Route::get('/sitemap', Controllers\Front\SiteMapController::class)->name('sitemap');
+
+// Archive...
+Route::prefix('/archive')->as('archive.')->group(function () {
+    Route::view('/uses/sep-2022', 'front.pages.archive.uses.sep-2022.index')->name('uses.sep-2022');
+});

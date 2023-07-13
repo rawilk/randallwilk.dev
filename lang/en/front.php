@@ -128,10 +128,18 @@ return [
     'terms' => ['description' => 'Terms of use for randallwilk.dev', 'title' => 'Terms of Use'],
     'uses' => [
         'affiliate_disclosure' => 'This page may contain affiliate links and I may earn a small commission when you click on the links at no additional cost to you.',
+        'archive' => [
+            'sep-2022' => [
+                'banner_intro' => "Software I use, gadgets I love, and other things I recommend. I see a lot of other developers making a \"uses\" page, so I figured I might as well too. Here's a big list of all my favorite stuff.",
+                'outro' => 'If you have any questions on any of these apps or services, feel free to [contact me](:url).',
+                'title' => 'My Setup -  2022 Edition',
+            ],
+        ],
         'banner_intro' => "Software I use, gadgets I love, and other things I recommend. I see a lot of other developers making a \"uses\" page, so I figured I might as well too. Here's a big list of all my favorite stuff.",
         'banner_title' => 'My current setup',
         'description' => 'Tools I use to get my work done at home or in the office.',
-        'outro' => "If you have any questions on any of these apps or services, feel free to [contact me](:url).\n\nThis list was last updated: **September 8, 2022**",
+        'last_updated' => 'Last Updated: :date',
+        'outro' => "If you have any questions on any of these apps or services, feel free to [contact me](:url). If you're interested to see a previous setup I had, see the [September 2022](:prev_url) version.",
         'outro_title' => 'In closing',
         'title' => 'My current setup',
     ],

@@ -1,8 +1,8 @@
 <x-front.section-list heading="Development tools" id="dev-tools">
-    <x-front.section-list-item title="Warp Terminal">
+    <x-front.section-list-item title="iTerm2">
         <p>
             My terminal of choice is
-            <x-front.legal-link url="https://www.warp.dev/" target="_blank" text="warp" after="." />
+            <x-front.legal-link url="https://www.iterm2.com/" target="_blank" text="iTerm2" after="." />
             I'm also using the
             <a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="noreferrer noopener">Z shell</a>
             and
@@ -10,10 +10,8 @@
         </p>
 
         <p>
-            For theming, I use the Base16 Materia theme, which is a
-            <x-front.legal-link url="https://docs.warp.dev/appearance/custom-themes" target="_blank" text="custom theme" />
-            from Warp.
-
+            For theming, I use a slightly modified version of
+            <x-front.legal-link url="https://github.com/rawilk/dotfiles/blob/main/misc/Solarized%20Dark%20Corrected.itermcolors" target="_blank" text="Solarized Dark" after="." />
             The font I use is
             <x-front.legal-link url="https://github.com/powerline/fonts/blob/master/SourceCodePro/Source%20Code%20Pro%20for%20Powerline.otf" target="_blank" text="Source Code Pro for Powerline" after="." />
             I also use several custom
@@ -30,9 +28,9 @@
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/warp-screenshot.png')"
-            alt="Warp Terminal"
-            class="mx-auto w-[40rem] -mb-[35px]"
+            :src="asset('images/uses/archive/iTerm screenshot.png')"
+            alt="iTerm Screenshot"
+            class="-mb-[35px]"
         />
     </x-front.section-list-item>
 
@@ -45,15 +43,15 @@
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/phpstorm-screenshot.png')"
-            alt="PhpStorm IDE"
-            class="mx-auto mb-4"
+            :src="asset('images/uses/archive/PhpStorm screenshot.png')"
+            alt="PhpStorm Screenshot"
+            class="my-4"
         />
 
         <p>
             I'm using the
             <x-front.legal-link url="https://plugins.jetbrains.com/plugin/8006-material-theme-ui" target="_blank" text="Material Theme UI" />
-            theme with the Atom One Dark color scheme, and I use Fira Code as my editor font.
+            theme with the Material Oceanic color scheme. I use Fira Code as my editor font.
         </p>
 
         <p>
@@ -69,13 +67,6 @@
             It makes
             <x-front.legal-link url="https://pestphp.com/" target="_blank" text="Pest" />
             a first class citizen in the IDE, and as another perk, it's completely free.
-        </p>
-
-        <p>
-            One other plugin I've recently found invaluable to my every-day workflow is
-            <x-front.legal-link url="https://github.com/features/copilot" target="_blank" text="GitHub Copilot" after="." />
-            If I'm ever stuck or don't quite remember how to do something, copilot is usually pretty good at generating code
-            that will at least get me started in the right direction.
         </p>
     </x-front.section-list-item>
 

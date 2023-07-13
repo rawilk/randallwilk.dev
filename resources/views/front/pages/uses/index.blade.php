@@ -5,6 +5,10 @@
     @include('front.pages.uses.partials.banner')
 
     <x-front.content-area>
+        <div class="text-sm">
+            {!! Str::inlineMarkdown(__('front.uses.last_updated', ['date' => '<time datetime="2023-07-13">July 13, 2023</time>'])) !!}
+        </div>
+
         <p>{!! Str::inlineMarkdown(__('front.uses.banner_intro')) !!}</p>
 
         <p class="italic">

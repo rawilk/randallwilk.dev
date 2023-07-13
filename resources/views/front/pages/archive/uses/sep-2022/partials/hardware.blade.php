@@ -11,17 +11,17 @@
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/macos-ventura.png')"
-            alt="macOS Specs"
-            class="w-1/2 mx-auto -mb-[35px]"
+            :src="asset('images/uses/archive/macOS screenshot.png')"
+            alt="macOS"
+            class="-mb-[35px]"
         />
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="OWC 11-Port Thunderbolt Dock">
+    <x-front.section-list-item title="Razer Thunderbolt™ 4 Dock">
         <p>
             I looked at a lot of docks, and I've found that the
-            <x-front.legal-link url="https://eshop.macsales.com/shop/owc-thunderbolt-dock" target="_blank" text="OWC 11-Port Thunderbolt Dock" />
-            does an amazing job for a docking station. It's not the cheapest dock, but it has everything I was looking for in a
+            <x-front.legal-link url="https://www.razer.com/gaming-pc-accessories/Razer-Thunderbolt-4-Dock/RC21-01690200-R3U1" target="_blank" text="Razer Thunderbolt™ 4 Dock" />
+            does an amazing job for a docking station. It's a little expensive, but it has everything I was looking for in a
             docking station.
         </p>
 
@@ -31,48 +31,59 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="LG 32UN500-W 32-Inch Monitor x2">
+    <x-front.section-list-item title="LG 32QK500-C 32-Inch Monitor x2">
         <p>
-            At home and at the office, I'm usually docked and use two 32" monitors from LG in addition to the built-in screen from
+            At the office, I'm usually docked and use two 32" monitors from LG in addition to the built-in screen from
             the MacBook. Here's the
-            <x-front.legal-link url="https://www.amazon.com/LG-32UN500-W-Compatibility-Virtually-Borderless-dp-B08FPLLX6Y/dp/B08FPLLX6Y/ref=dp_ob_title_ce?th=1" target="_blank" text="link" />
-            to buy them.
+            <x-front.legal-link url="https://www.amazon.com/gp/product/B07YGZRQ98/" target="_blank" text="link" />
+            to buy them, however I don't think they're available for purchase anymore, unfortunately.
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Monitor Arm">
+    <x-front.section-list-item title="Monitor Arms">
         <p>
-            I prefer using monitor arms over the default stand that most monitors come with, and at the end of 2022 I switched to the
-            <x-front.legal-link url="https://www.amazon.com/gp/product/B08CXJPQG9/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1" target="_blank" text="HUANUO Dual Monitor Stand" after="." />
-            It's a single mount with two monitor arms, and it holds the monitors in place nicely.
-            Each arm is flexible in where I can position them.
+            I prefer using monitor arms over the default stand that most monitors come with, and I ended up going with two
+            <x-front.legal-link url="https://www.amazon.com/gp/product/B097SZ393X/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&psc=1" target="_blank" text="NB North Bayou Monitor Arms" after="." />
+            They hold the monitors in place nicely, and are pretty flexible and where I can position them.
         </p>
+    </x-front.section-list-item>
 
+    <x-front.section-list-item title="Apple Magic Keyboard">
         <p>
-            I was previously using two separate monitor arms, but I felt having one single mount was much nicer and provided me
-            with a cleaner setup.
+            I prefer minimal style keyboards, and Apple's
+            <x-front.legal-link url="https://www.apple.com/shop/product/MMMR3LL/A/magic-keyboard-with-touch-id-and-numeric-keypad-for-mac-models-with-apple-silicon-us-english-black-keys?fnode=eddf580a2586b80dcccb255cbbf734fed134200df48ee0f92811df4356f3a12b834d30cf89ec1c093f9e00da4ca2ba0dffeddd216de1d1468c7db6b4f88f7303d6653836a5e7f89e2de0e6025259fddf2e123f9efc2dc6b4236603b43065b493" target="_blank" text="Black Magic Keyboard with Touch ID" />
+            fits the bill nicely. Since I usually dock to external monitors, it's easier to use an external keyboard,
+            plus this keyboard also provides a numeric keypad.
         </p>
     </x-front.section-list-item>
 
     <x-front.section-list-item title="Keychron K5 SE Mechanical Keyboard">
         <p>
-            I used to love using the magic keyboard from Apple, but once I started using a mechanical keyboard I never looked back.
-            My current keyboard at both home and the office is the
+            I just recently started using the
             <x-front.legal-link url="https://www.keychron.com/products/keychron-k5-se-ultra-slim-wireless-mechanical-keyboard?variant=40070921224281" target="_blank" text="Keychron K5 SE Mechanical Keyboard" />
-            and I'm in love with it. As much as I like the magic keyboard, this one just feels better to type on
+            and so far I'm in love with it. As much as I like the magic keyboard, this one just feels better to type on
             for long periods of time. I got mine with blue switches, so it's loud and clicky, which is what I was
             looking for in a keyboard.
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Logitech MX Master 3s Mouse">
+    <x-front.section-list-item title="Logitech MX Master 3 Mouse">
         <p>
             Even when not docked, I still prefer an external mouse for most operations. I really love the
-            <x-front.legal-link url="https://www.logitech.com/en-us/products/mice/mx-master-3s.910-006557.html" target="_blank" text="Logitech MX Master 3s" />
+            <x-front.legal-link url="https://www.logitech.com/en-us/products/mice/mx-master-3s.910-006556.html" target="_blank" text="Logitech MX Master 3" />
             mouse. For me, it feels great to hold, and it also provides support for some macOS gestures like swiping up
             for mission control.
         </p>
 
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="Apple Black Magic Trackpad">
+        <p>
+            For the situations where my mouse just doesn't quite work the way I want it to, Apple's
+            <x-front.legal-link url="https://www.apple.com/shop/product/MMMP3AM/A/magic-trackpad-black-multi-touch-surface?fnode=87ddeb63efcf555189f5ddf118b12e451a1547e5926e0741901d5c48749b2ca5cfaaa998ccf1bc716af2aa53002b5a8299b61f8ddae170ad10d587f670d83b2132764c409be87f2ac58957457b5a704adce93002a8fa32e8019b4d9bc23167d4" target="_blank" text="Black Magic Trackpad" />
+            works as a great companion. I could just use the trackpad on the MacBook, however having the trackpad close
+            to me is more convenient.
+        </p>
     </x-front.section-list-item>
 
     <x-front.section-list-item title="TwelveSouth Curve Stand">
@@ -132,10 +143,10 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Logitech Z407 Bluetooth Speakers">
+    <x-front.section-list-item title="Logitech Z207 Bluetooth Speakers">
         <p>
-            For the home and the office, I didn't want to go crazy on buying an expensive set of speakers. I went with the
-            <x-front.legal-link url="https://www.amazon.com/gp/product/B0877BPCJM/ref=ppx_yo_dt_b_asin_title_o05_s01?ie=UTF8&psc=1" target="_blank" text="Logitech Z407 Bluetooth Speakers" />
+            For the office, I didn't want to go crazy on buying an expensive set of speakers. I went with the
+            <x-front.legal-link url="https://www.amazon.com/Logitech-Multi-Device-Stereo-Speaker/dp/B074KJ6JQW/ref=sr_1_4?crid=3EYTK8AMJZLIB&keywords=logitech+bluetooth+speaker&qid=1662654675&sprefix=logitech+bluetooth+speake%2Caps%2C118&sr=8-4" target="_blank" text="Logitech Z207 Bluetooth Speakers" />
             for a cheaper solution, but they still sound decent for my needs.
         </p>
     </x-front.section-list-item>

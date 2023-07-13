@@ -44,12 +44,4 @@
             is my preferred development platform. I feel that it provides the best experience for contributors.
         </p>
     </x-front.section-list-item>
-
-    <x-front.section-list-item title="Flare">
-        <p>
-            To track exceptions in production, I've found
-            <x-front.legal-link url="https://flareapp.io" target="_blank" text="Flare" />
-            to be very helpful.
-        </p>
-    </x-front.section-list-item>
 </x-front.section-list>

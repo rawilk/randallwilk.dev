@@ -15,9 +15,9 @@
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/macos-ventura-screenshot.png')"
+            :src="asset('images/uses/archive/macOS desktop screenshot.png')"
             alt="macOS desktop"
-            class="mb-4"
+            class="my-4"
         />
 
         <p>
@@ -28,34 +28,20 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Raycast">
+    <x-front.section-list-item title="Alfred">
         <p>
-            I've never liked Spotlight on macOS, and previously I used Alfred as a replacement. However, now I've discovered
-            <x-front.legal-link url="https://www.raycast.com/" target="_blank" text="Raycast" after="." />
-            Raycast is my primary mode of navigating through macOS, as I've bound the keyboard shortcut to
-            <kbd class="italic text-slate-500 inline-flex gap-x-1">
-               <kbd class="font-sans">cmd</kbd>
-               <span class="font-sans">+</span>
-               <kbd class="font-sans">space</kbd>
-            </kbd>
-            (overriding Spotlight's keybinding).
+            I honestly don't really like Spotlight, so I'm glad that a tool like
+            <x-front.legal-link url="https://www.alfredapp.com/" target="_blank" text="Alfred" />
+            exists. Some of my favorite workflows include
+            <x-front.legal-link url="https://github.com/bchatard/jetbrains-alfred-workflow" target="_blank" text="phpstorm" />
+            by
+            <x-front.legal-link url="https://github.com/bchatard" target="_blank" text="bchatard" />
+            to easily open recent PhpStorm projects and the
+            <x-front.legal-link url="https://github.com/tillkruss/alfred-laravel-docs" target="_blank" text="Laravel docs workflow" />
+            by
+            <x-front.legal-link url="https://twitter.com/tillkruss" target="_blank" text="Till Krüss" />
+            to easily search the Laravel docs.
         </p>
-
-        <p>
-            Some of the extensions I've installed for Raycast include:
-        </p>
-
-        <ul>
-            <li>
-                <x-front.legal-link url="https://www.raycast.com/gdsmith/jetbrains" target="_blank" text="JetBrains Toolbox Recent Projects" after=":" /> Allows me to open up a PhpStorm project from anywhere.
-            </li>
-            <li>
-                <x-front.legal-link url="https://www.raycast.com/indykoning/laravel-docs" target="_blank" text="Laravel Docs" after=":" /> Allows me to search the Laravel Docs from anywhere.
-            </li>
-            <li>
-                <x-front.legal-link url="https://www.raycast.com/vimtor/tailwindcss" target="_blank" text="Tailwind CSS" after=":" /> Allows me to search Tailwind Docs and classes from anywhere.
-            </li>
-        </ul>
     </x-front.section-list-item>
 
     <x-front.section-list-item title="1Password">
