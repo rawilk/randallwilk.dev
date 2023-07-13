@@ -11,9 +11,9 @@
             {{ __('Search docs') }}
         </span>
         <template x-if="modifierKey">
-            <kbd class="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 md:block">
+            <kbd class="ml-auto hidden font-medium text-slate-400 dark:text-slate-500 md:flex">
                 <kbd class="font-sans" x-text="modifierKey"></kbd>
-                <kbd class="font-sans -ml-2">K</kbd>
+                <kbd class="font-sans">K</kbd>
             </kbd>
         </template>
     </button>
