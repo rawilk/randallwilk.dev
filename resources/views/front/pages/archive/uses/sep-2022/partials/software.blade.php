@@ -10,7 +10,7 @@
         <p>
             I like to keep my desktop pretty clean, so I hide the dock by default and never save anything to the desktop
             itself; not even drives are allowed on my desktop. I also only keep the apps are currently running in the
-            dock and hide the indicator for running apps (that dot underneath each app), because it it's in the dock
+            dock and hide the indicator for running apps (that dot underneath each app), because if it's in the dock
             it's running. Here's a screenshot where I've deliberately moved my pointer down so the dock is shown.
         </p>
 
