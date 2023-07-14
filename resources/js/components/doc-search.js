@@ -27,8 +27,12 @@ export default (options = {}) => ({
         });
     },
 
+    isMac() {
+        return /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+    },
+
     setModifierKey() {
-        this.modifierKey = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform) ? '⌘' : 'Ctrl ';
+        this.modifierKey = this.isMac() ? '⌘' : 'Ctrl';
     },
 
     openSearch() {
