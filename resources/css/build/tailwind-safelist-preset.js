@@ -2,36 +2,36 @@ module.exports = {
     safelist: [
         // Alerts...
         {
-            pattern: /alert--*/,
+            pattern: /alert--.+/,
         },
 
         // Badges...
         {
-            pattern: /badge--*/,
+            pattern: /badge--.+/,
         },
 
         // Buttons...
         {
-            pattern: /button--*/,
+            pattern: /button--.+/,
         },
 
         // Cards
         {
-            pattern: /card-header--*/,
+            pattern: /card-header--.+/,
         },
 
         // Form components...
         {
-            pattern: /file-upload__input--*/,
+            pattern: /file-upload__input--.+/,
         },
         {
-            pattern: /switch-toggle--*/,
+            pattern: /switch-toggle--.+/,
         },
         {
-            pattern: /custom-select__button--*/,
+            pattern: /custom-select__button--.+/,
         },
         {
-            pattern: /form-input--*/,
+            pattern: /form-input--.+/,
         },
 
         // For dark mode...
