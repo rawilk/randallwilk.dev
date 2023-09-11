@@ -8,7 +8,7 @@
     "devDependencies": {
         "@alpinejs/collapse": "^3.12.3",
         "@alpinejs/intersect": "^3.12.3",
-        "@babel/preset-env": "^7.22.7",
+        "@babel/preset-env": "^7.22.15",
         "@docsearch/js": "^3.5.1",
         "@popperjs/core": "^2.11.8",
         "@ryangjchandler/alpine-clipboard": "^2.2.0",
