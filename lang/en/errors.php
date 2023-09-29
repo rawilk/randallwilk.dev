@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     '401' => [
         'description' => "Seems like you don't have access to this page.",

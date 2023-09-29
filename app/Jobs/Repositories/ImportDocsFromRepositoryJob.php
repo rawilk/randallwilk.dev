@@ -17,11 +17,11 @@ use Symfony\Component\Process\Process;
 
 final class ImportDocsFromRepositoryJob implements ShouldQueue
 {
+    use Batchable;
     use Dispatchable;
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    use Batchable;
 
     public function __construct(private readonly array $repository)
     {

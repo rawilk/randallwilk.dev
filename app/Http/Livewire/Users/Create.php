@@ -20,9 +20,9 @@ use Rawilk\LaravelBase\Components\Alerts\Alert;
  */
 final class Create extends Component
 {
-    use WithFileUploads;
     use AuthorizesRequests;
     use SavesUserAbilities;
+    use WithFileUploads;
 
     public $photo;
 

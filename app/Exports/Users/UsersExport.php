@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Rawilk\LaravelBase\Concerns\Exports\FormatsColumns;
 
-final class UsersExport implements FromQuery, WithHeadings, WithMapping, WithColumnFormatting
+final class UsersExport implements FromQuery, WithColumnFormatting, WithHeadings, WithMapping
 {
     use Exportable;
     use FormatsColumns;

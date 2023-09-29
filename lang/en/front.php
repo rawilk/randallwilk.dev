@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'contact' => [
         'contact_details' => 'If you would like to discuss a consulting or speaking arrangement with me, you may email me at [:email](mailto::email) and I will do my best to give a prompt response.',

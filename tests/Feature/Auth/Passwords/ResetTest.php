@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Rawilk\LaravelBase\Http\Livewire\Auth\Passwords\Reset;
+
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
-use Rawilk\LaravelBase\Http\Livewire\Auth\Passwords\Reset;
 
 test('can see the password reset page', function () {
     $user = User::factory()->create();

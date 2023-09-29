@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'abilities' => ['page_title' => 'User Abilities'],
     'delete_modal_text' => 'This will permanently delete **:name**! You will not be able to recover any data associated with this user.',

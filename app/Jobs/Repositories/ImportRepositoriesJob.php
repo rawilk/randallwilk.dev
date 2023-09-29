@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Date;
 
 final class ImportRepositoriesJob implements ShouldQueue
 {
+    use Batchable;
     use Dispatchable;
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    use Batchable;
 
     private GitHubApi $api;
 
