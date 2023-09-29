@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'repositories' => [
         /*
@@ -73,7 +75,8 @@ return [
             'name' => 'laravel-settings',
             'repository' => 'rawilk/laravel-settings',
             'branches' => [
-                'main' => 'v2',
+                'main' => 'v3',
+                'v2' => 'v2',
                 'v1' => 'v1',
             ],
             'main_branch' => 'main',
