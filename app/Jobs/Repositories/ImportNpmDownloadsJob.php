@@ -44,7 +44,7 @@ final class ImportNpmDownloadsJob implements ShouldQueue
     private function getNpmPackages(): Collection
     {
         return Repository::query()
-            ->where('language', ProgrammingLanguageEnum::JAVASCRIPT->value)
+            ->where('language', ProgrammingLanguageEnum::JavaScript->value)
             ->when($this->package, fn ($query, $name) => $query->where('name', $name)->orWhere('scoped_name', $name))
             ->get();
     }

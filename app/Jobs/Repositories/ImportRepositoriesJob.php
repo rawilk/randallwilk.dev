@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Jobs\Repositories;
 
+use App\Enums\ProgrammingLanguageEnum;
 use App\Models\GitHub\Repository;
 use App\Services\GitHub\GitHubApi;
 use DateTimeInterface;
@@ -42,11 +43,13 @@ final class ImportRepositoriesJob implements ShouldQueue
         $repositories = $this->fetchRepositories();
 
         $repositories->each(function (array $repositoryAttributes) {
+            $language = ProgrammingLanguageEnum::tryFrom($repositoryAttributes['language'] ?? '') ?? ProgrammingLanguageEnum::Unknown;
+
             $repository = Repository::withTrashed()->updateOrCreate(['name' => $repositoryAttributes['name'] ?? null], [
                 'name' => $repositoryAttributes['name'],
                 'description' => $repositoryAttributes['description'],
                 'stars' => $repositoryAttributes['stargazers_count'],
-                'language' => $repositoryAttributes['language'],
+                'language' => $language,
                 'repository_created_at' => Date::createFromFormat(DateTimeInterface::ATOM, $repositoryAttributes['created_at']),
             ]);
 

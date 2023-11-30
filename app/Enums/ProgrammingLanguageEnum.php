@@ -6,15 +6,17 @@ namespace App\Enums;
 
 enum ProgrammingLanguageEnum: string
 {
-    case JAVASCRIPT = 'JavaScript';
-    case PHP = 'PHP';
-    case SHELL = 'Shell';
+    case Blade = 'Blade';
+    case JavaScript = 'JavaScript';
+    case Php = 'PHP';
+    case Shell = 'Shell';
+    case Unknown = 'Unknown';
 
     public function color(): string
     {
         return match ($this) {
-            self::JAVASCRIPT => 'orange',
-            self::PHP => 'blue',
+            self::JavaScript => 'orange',
+            self::Php => 'blue',
             default => 'gray',
         };
     }

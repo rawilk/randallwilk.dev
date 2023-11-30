@@ -80,7 +80,7 @@ class Repository extends Model
 
     public function isNpmPackage(): bool
     {
-        return $this->language === ProgrammingLanguageEnum::JAVASCRIPT;
+        return $this->language === ProgrammingLanguageEnum::JavaScript;
     }
 
     public function hasDocs(): bool
