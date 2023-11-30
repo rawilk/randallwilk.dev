@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User\User;
+
 use function Pest\Laravel\actingAs;
 
 it('gets the configured application timezone', function () {

@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\File;
 
 final class CleanupDocsImportJob implements ShouldQueue
 {
+    use Batchable;
     use Dispatchable;
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    use Batchable;
 
     public function handle(): void
     {

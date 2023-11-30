@@ -20,10 +20,10 @@ use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
 
 class Repository extends Model
 {
-    use SoftDeletes;
     use HasDatesForHumans;
-    use HasUuids;
     use HasHumanKey;
+    use HasUuids;
+    use SoftDeletes;
 
     protected $guarded = ['id'];
 

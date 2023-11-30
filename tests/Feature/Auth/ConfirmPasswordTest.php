@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 use App\Models\User\User;
 use Illuminate\Support\Facades\Route;
+use Rawilk\LaravelBase\Http\Livewire\Auth\ConfirmPassword;
+
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\followingRedirects;
 use function Pest\Laravel\withSession;
 use function Pest\Livewire\livewire;
-use Rawilk\LaravelBase\Http\Livewire\Auth\ConfirmPassword;
 
 beforeEach(function () {
     Route::get('/must-be-confirmed', fn () => 'You must be confirmed to see this page.')

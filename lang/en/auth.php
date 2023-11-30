@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'alerts' => ['registration_not_allowed' => 'User registration is not allowed at this time.'],
     'failed' => 'These credentials do not match our records.',

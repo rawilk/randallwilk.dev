@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'close_mobile_menu_button' => 'Close navigation',
     'mobile_navigation' => 'Navigation',

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'permission' => [
         'permissions' => ['assign' => 'User can assign permissions directly to other users.'],

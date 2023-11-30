@@ -17,11 +17,11 @@ use Illuminate\Support\Collection;
 
 final class ImportNpmDownloadsJob implements ShouldQueue
 {
+    use Batchable;
     use Dispatchable;
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    use Batchable;
 
     public function __construct(private readonly ?string $package = null)
     {

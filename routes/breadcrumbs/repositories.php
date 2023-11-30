@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\GitHub\Repository;
 use Rawilk\Breadcrumbs\Facades\Breadcrumbs;
 use Rawilk\Breadcrumbs\Support\Generator;

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 use App\Models\User\User;
 use Illuminate\Support\Facades\Mail;
+use Rawilk\LaravelBase\Http\Livewire\Auth\Passwords\Email;
+
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
-use Rawilk\LaravelBase\Http\Livewire\Auth\Passwords\Email;
 
 test('can view the password reset page', function () {
     get(route('password.request'))

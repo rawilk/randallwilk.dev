@@ -16,7 +16,6 @@ final class Repository
 
     /**
      * @param  \Illuminate\Support\Collection<int, \App\Docs\Alias>  $aliases
-     * @param  \App\Docs\DocumentationPage|null  $index
      */
     public function __construct(
         public string $slug,
