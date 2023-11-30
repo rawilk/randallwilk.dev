@@ -102,6 +102,15 @@ return [
             'category' => 'Laravel',
         ],
         [
+            'name' => 'profile-filament-plugin',
+            'repository' => 'rawilk/profile-filament-plugin',
+            'branches' => [
+                'main' => 'v1',
+            ],
+            'main_branch' => 'main',
+            'category' => 'Laravel',
+        ],
+        [
             'name' => 'yubikey-u2f',
             'repository' => 'rawilk/yubikey-u2f',
             'branches' => [
