@@ -13,13 +13,13 @@
                     {{-- type --}}
                     <x-form-group :label="__('repos.labels.form.type')" name="type" inline>
                         <x-select
-                            wire:model.defer="state.type"
-                            name="type"
-                            required
-                            focus
+                                wire:model.defer="state.type"
+                                name="type"
+                                required
+                                focus
                         >
                             <option value="" @disabled($repository->type)>{{ __('Select a type...') }}</option>
-                            @foreach (\App\Enums\RepositoryTypeEnum::cases() as $case)
+                            @foreach (\App\Enums\RepositoryType::cases() as $case)
                                 <option value="{{ $case->value }}">{{ $case->label() }}</option>
                             @endforeach
                         </x-select>
@@ -28,29 +28,30 @@
                     {{-- scoped name --}}
                     <x-form-group :label="__('repos.labels.scoped_name')" name="scoped_name" inline>
                         <x-input
-                            wire:model.defer="state.scoped_name"
-                            name="scoped_name"
-                            maxlength="255"
+                                wire:model.defer="state.scoped_name"
+                                name="scoped_name"
+                                maxlength="255"
                         />
 
                         <x-slot:help-text>{{ __('repos.labels.scoped_name_help') }}</x-slot:help-text>
                     </x-form-group>
 
                     {{-- docs url --}}
-                    <x-form-group :label="__('repos.labels.form.documentation_url')" name="documentation_url" inline optional>
+                    <x-form-group :label="__('repos.labels.form.documentation_url')" name="documentation_url" inline
+                                  optional>
                         <x-input
-                            wire:model.defer="state.documentation_url"
-                            name="documentation_url"
-                            maxlength="255"
+                                wire:model.defer="state.documentation_url"
+                                name="documentation_url"
+                                maxlength="255"
                         />
                     </x-form-group>
 
                     {{-- blogpost url --}}
                     <x-form-group :label="__('repos.labels.form.blogpost_url')" name="blogpost_url" inline optional>
                         <x-input
-                            wire:model.defer="state.blogpost_url"
-                            name="blogpost_url"
-                            maxlength="255"
+                                wire:model.defer="state.blogpost_url"
+                                name="blogpost_url"
+                                maxlength="255"
                         />
                     </x-form-group>
 
@@ -74,7 +75,8 @@
 
                     {{-- featured --}}
                     @isset($state['highlighted'])
-                        <x-form-group :label="__('repos.labels.form.featured')" name="highlighted" inline is-checkbox-group>
+                        <x-form-group :label="__('repos.labels.form.featured')" name="highlighted" inline
+                                      is-checkbox-group>
                             <x-switch-toggle short wire:model.defer="state.highlighted" name="highlighted" />
 
                             <x-slot:helpText>{{ __('repos.labels.form.featured_help') }}</x-slot:helpText>

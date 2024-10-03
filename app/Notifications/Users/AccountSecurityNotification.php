@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Notifications\Users;
 
-use App\Enums\QueuesEnum;
+use App\Enums\Queue;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -16,7 +16,7 @@ abstract class AccountSecurityNotification extends Notification implements Shoul
 
     public function __construct()
     {
-        $this->onQueue(QueuesEnum::MAIL->value);
+        $this->onQueue(Queue::Mail->value);
     }
 
     abstract protected function greeting(): string;

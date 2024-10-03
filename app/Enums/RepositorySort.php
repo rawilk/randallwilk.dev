@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use Rawilk\LaravelBase\Contracts\Enums\HasLabel;
-
-enum RepositorySortEnum: string implements HasLabel
+enum RepositorySort: string
 {
-    case DOWNLOADS = 'downloads';
-    case NAME = 'name';
-    case STARS = 'stars';
-    case REPOSITORY_CREATED_AT = 'repository_created_at';
+    case Downloads = 'downloads';
+    case Name = 'name';
+    case Stars = 'stars';
+    case RepositoryCreatedAt = 'repository_created_at';
 
     public function shouldBeDesc(): bool
     {
-        return $this !== self::NAME;
+        return $this !== self::Name;
     }
 
     public function selectValue(): string

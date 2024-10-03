@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Jobs\Repositories;
 
-use App\Enums\ProgrammingLanguageEnum;
+use App\Enums\ProgrammingLanguage;
 use App\Models\GitHub\Repository;
 use App\Services\Npm\NpmApi;
 use Illuminate\Bus\Batchable;
@@ -44,7 +44,7 @@ final class ImportNpmDownloadsJob implements ShouldQueue
     private function getNpmPackages(): Collection
     {
         return Repository::query()
-            ->where('language', ProgrammingLanguageEnum::JavaScript->value)
+            ->where('language', ProgrammingLanguage::JavaScript->value)
             ->when($this->package, fn ($query, $name) => $query->where('name', $name)->orWhere('scoped_name', $name))
             ->get();
     }

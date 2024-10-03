@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models\GitHub;
 
-use App\Enums\ProgrammingLanguageEnum;
-use App\Enums\RepositorySortEnum;
-use App\Enums\RepositoryTypeEnum;
+use App\Enums\ProgrammingLanguage;
+use App\Enums\RepositorySort;
+use App\Enums\RepositoryType;
 use App\Support\Formatting\ShortNumberFormatter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -30,7 +30,7 @@ class Repository extends Model
     protected $casts = [
         'downloads' => 'integer',
         'highlighted' => 'boolean',
-        'language' => ProgrammingLanguageEnum::class,
+        'language' => ProgrammingLanguage::class,
         'new' => 'boolean',
         'repository_created_at' => 'immutable_datetime',
         'stars' => 'integer',
@@ -80,12 +80,12 @@ class Repository extends Model
 
     public function isPackage(): bool
     {
-        return $this->type === RepositoryTypeEnum::PACKAGE;
+        return $this->type === RepositoryType::Package;
     }
 
     public function isNpmPackage(): bool
     {
-        return $this->language === ProgrammingLanguageEnum::JavaScript;
+        return $this->language === ProgrammingLanguage::JavaScript;
     }
 
     public function hasDocs(): bool
@@ -93,17 +93,17 @@ class Repository extends Model
         return ! is_null($this->documentation_url);
     }
 
-    public function getTypeAttribute(null|string|RepositoryTypeEnum $type): ?RepositoryTypeEnum
+    public function getTypeAttribute(null|string|RepositoryType $type): ?RepositoryType
     {
         if (is_null($type)) {
             return null;
         }
 
-        if ($type instanceof RepositoryTypeEnum) {
+        if ($type instanceof RepositoryType) {
             return $type;
         }
 
-        return RepositoryTypeEnum::tryFrom($type);
+        return RepositoryType::tryFrom($type);
     }
 
     public function getFullNameAttribute(): string
@@ -138,8 +138,8 @@ class Repository extends Model
 
     public function scopeApplySort(Builder $query, ?string $sort = null): void
     {
-        /** @var RepositorySortEnum $enum */
-        $enum = rescue(fn () => RepositorySortEnum::tryFrom(ltrim($sort, '-')));
+        /** @var RepositorySort $enum */
+        $enum = rescue(fn () => RepositorySort::tryFrom(ltrim($sort, '-')));
         if (! $enum) {
             return;
         }

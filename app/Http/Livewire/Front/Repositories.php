@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Livewire\Front;
 
-use App\Enums\RepositorySortEnum;
+use App\Enums\RepositorySort;
 use App\Models\GitHub\Repository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
@@ -64,8 +64,8 @@ final class Repositories extends Component
     public function mount(): void
     {
         $this->sort = $this->type === 'package'
-            ? RepositorySortEnum::DOWNLOADS->selectValue()
-            : RepositorySortEnum::REPOSITORY_CREATED_AT->selectValue();
+            ? RepositorySort::Downloads->selectValue()
+            : RepositorySort::RepositoryCreatedAt->selectValue();
     }
 
     public function render(): View

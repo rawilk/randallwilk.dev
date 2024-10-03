@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Notifications\Users;
 
-use App\Enums\QueuesEnum;
+use App\Enums\Queue;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -16,7 +16,7 @@ final class WelcomeNotification extends Notification implements ShouldQueue
 
     public function __construct(public string $password)
     {
-        $this->onQueue(QueuesEnum::MAIL->value);
+        $this->onQueue(Queue::Mail->value);
     }
 
     public function via($notifiable): array

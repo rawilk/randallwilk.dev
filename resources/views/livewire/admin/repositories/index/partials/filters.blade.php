@@ -3,7 +3,7 @@
     <x-form-group :label="__('Type')" name="filters.type">
         <x-select name="filters.type" wire:model.defer="filters.type">
             <option value="">{{ __('labels.option_any') }}</option>
-            @foreach (\App\Enums\RepositoryTypeEnum::cases() as $case)
+            @foreach (\App\Enums\RepositoryType::cases() as $case)
                 <option value="{{ $case->value }}">{{ $case->label() }}</option>
             @endforeach
             <option value="missing">{{ __('repos.labels.missing_type') }}</option>

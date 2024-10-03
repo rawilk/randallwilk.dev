@@ -4,18 +4,16 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-use Rawilk\LaravelBase\Contracts\Enums\HasLabel;
-
-enum RepositoryTypeEnum: string implements HasLabel
+enum RepositoryType: string
 {
-    case PACKAGE = 'package';
-    case PROJECT = 'project';
+    case Package = 'package';
+    case Project = 'project';
 
     public function bgColor(): string
     {
         return match ($this) {
-            self::PACKAGE => 'bg-green-200',
-            self::PROJECT => 'bg-blue-200',
+            self::Package => 'bg-green-200',
+            self::Project => 'bg-blue-200',
         };
     }
 

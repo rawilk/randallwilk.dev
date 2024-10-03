@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum ProgrammingLanguageEnum: string
+enum ProgrammingLanguage: string
 {
     case Blade = 'Blade';
     case JavaScript = 'JavaScript';
