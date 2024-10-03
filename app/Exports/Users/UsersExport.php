@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Exports\Users;
 
-use App\Models\User\User;
+use App\Models\User;
 use DateTimeInterface;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;

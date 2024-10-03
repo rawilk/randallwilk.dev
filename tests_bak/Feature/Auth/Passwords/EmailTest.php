@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Rawilk\LaravelBase\Http\Livewire\Auth\Passwords\Email;
 

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedInteger('github_id')->nullable();
             $table->string('github_username')->nullable();
             $table->string('remember_token', 100)->nullable();
-            $table->dateTimestamps();
+            $table->datetimes();
         });
     }
 };

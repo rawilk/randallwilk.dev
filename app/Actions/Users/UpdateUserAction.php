@@ -7,7 +7,7 @@ namespace App\Actions\Users;
 use App\Actions\LaravelBase\PasswordValidationRules;
 use App\Actions\LaravelBase\UpdateUserProfileInformationAction;
 use App\Events\Users\UserPasswordWasUpdatedEvent;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use Illuminate\Contracts\View\View;
 
 final class ShowRepositoryController

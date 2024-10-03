@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Actions\Repositories;
 
 use App\Enums\RepositoryType;
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 

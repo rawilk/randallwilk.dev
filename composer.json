@@ -13,7 +13,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "blade-ui-kit/blade-heroicons": "^2.0",
+        "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "khatabwedaa/blade-css-icons": "^1.1",
         "knplabs/github-api": "^3.8",
@@ -22,7 +22,6 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "league/commonmark": "^2.3",
-        "livewire/livewire": "^3.0",
         "predis/predis": "^2.0",
         "rawilk/human-keys": "^1.0",
         "rawilk/laravel-casters": "^3.0",
@@ -67,10 +66,10 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
-            "@php artisan horizon:publish --ansi",
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
             "@php artisan custom-stub:publish --force"
         ],
@@ -80,10 +79,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "model-docs": "@php artisan ide-helper:models -R -W",
-        "update-permissions": "@php artisan db:seed --class=UpdatePermissionSeeder --force",
         "test": "vendor/bin/pest -p",
-        "format": "vendor/bin/pint"
+        "format": "vendor/bin/pint --only-dirty"
     },
     "extra": {
         "laravel": {

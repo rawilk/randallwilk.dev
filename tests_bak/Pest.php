@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\Access\Role;
-use App\Models\User\User;
+use App\Models\User;
 use Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

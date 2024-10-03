@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Actions\Users;
 
 use App\Actions\LaravelBase\PasswordValidationRules;
-use App\Models\User\User;
+use App\Models\User;
 use App\Notifications\Users\WelcomeNotification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners\TwoFactorAuth;
 
-use App\Models\User\User;
+use App\Models\User;
 use Rawilk\LaravelBase\Contracts\Models\AuthenticatorApp;
 use Rawilk\LaravelBase\Events\TwoFactorAuth\AuthenticatorAppWasDeleted;
 use Rawilk\LaravelBase\Features;

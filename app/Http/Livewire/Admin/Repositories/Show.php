@@ -12,7 +12,7 @@ use App\Jobs\Repositories\ImportDocsFromRepositoryJob;
 use App\Jobs\Repositories\ImportNpmDownloadsJob;
 use App\Jobs\Repositories\ImportPackagistDownloadsJob;
 use App\Jobs\Repositories\ImportRepositoriesJob;
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use App\Notifications\Repositories\ManualDocSyncFinished;
 use App\Notifications\Repositories\ManualSyncFinished;
 use Illuminate\Bus\Batch;

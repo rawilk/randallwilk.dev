@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Profile;
 
 use App\Actions\Profile\DisconnectFromGitHubAction;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 

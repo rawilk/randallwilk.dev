@@ -1,5 +1,5 @@
 @php
-    /** @var \App\Models\GitHub\Repository $repository */
+    /** @var \App\Models\Repository $repository */
 @endphp
 <div @class([
     'lg:rounded-lg | h-full flex flex-col justify-between shadow divide-y divide-slate-200',
@@ -35,38 +35,38 @@
             <div class="mt-5 grid md:grid-cols-2 gap-4 text-xs">
                 {{-- documentation --}}
                 <x-admin.repo-stat
-                    icon="heroicon-o-document-text"
-                    :action-url="$repository->documentation_url"
-                    :missing-text="__('repos.labels.missing_docs')"
+                        icon="heroicon-o-document-text"
+                        :action-url="$repository->documentation_url"
+                        :missing-text="__('repos.labels.missing_docs')"
                 >
                     {{ __('repos.labels.see_docs') }}
                 </x-admin.repo-stat>
 
                 {{-- blog post --}}
                 <x-admin.repo-stat
-                    icon="heroicon-s-rss"
-                    :action-url="$repository->blogpost_url"
-                    :missing-text="__('repos.labels.missing_blogpost')"
+                        icon="heroicon-s-rss"
+                        :action-url="$repository->blogpost_url"
+                        :missing-text="__('repos.labels.missing_blogpost')"
                 >
                     {{ __('repos.labels.see_blogpost') }}
                 </x-admin.repo-stat>
 
                 {{-- new --}}
                 <x-admin.repo-stat
-                    :condition="$repository->new"
-                    icon="heroicon-s-exclamation-triangle"
-                    off-icon="heroicon-o-exclamation-triangle"
-                    :missing-text="__('repos.labels.not_new')"
+                        :condition="$repository->new"
+                        icon="heroicon-s-exclamation-triangle"
+                        off-icon="heroicon-o-exclamation-triangle"
+                        :missing-text="__('repos.labels.not_new')"
                 >
                     {{ __('repos.labels.is_new') }}
                 </x-admin.repo-stat>
 
                 {{-- featured --}}
                 <x-admin.repo-stat
-                    :condition="$repository->highlighted"
-                    icon="heroicon-s-star"
-                    off-icon="heroicon-o-star"
-                    :missing-text="__('repos.labels.not_featured')"
+                        :condition="$repository->highlighted"
+                        icon="heroicon-s-star"
+                        off-icon="heroicon-o-star"
+                        :missing-text="__('repos.labels.not_featured')"
                 >
                     {{ __('repos.labels.is_featured') }}
                 </x-admin.repo-stat>
@@ -75,10 +75,10 @@
 
         <div wire:key="repo{{ $repository->h_key }}State{{ $repository->visible }}">
             <x-switch-toggle
-                short
-                :value="$repository->visible"
-                color="green"
-                wire:click.prevent.stop="toggleVisible('{{ $repository->h_key }}')"
+                    short
+                    :value="$repository->visible"
+                    color="green"
+                    wire:click.prevent.stop="toggleVisible('{{ $repository->h_key }}')"
             />
         </div>
     </div>
@@ -89,13 +89,13 @@
             {{-- delete --}}
             <div class="w-0 flex-1 flex">
                 <button
-                    wire:click="confirmDelete('{{ $repository->h_key }}')"
-                    @class([
-                        'relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-slate-700 font-medium border border-transparent rounded-bl-lg',
-                        'hover:text-slate-500 transition-colors focus:outline-blue-gray',
-                        'hover:bg-slate-100' => $repository->visible,
-                        'hover:bg-red-100' => ! $repository->visible,
-                    ])
+                        wire:click="confirmDelete('{{ $repository->h_key }}')"
+                        @class([
+                            'relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-slate-700 font-medium border border-transparent rounded-bl-lg',
+                            'hover:text-slate-500 transition-colors focus:outline-blue-gray',
+                            'hover:bg-slate-100' => $repository->visible,
+                            'hover:bg-red-100' => ! $repository->visible,
+                        ])
                 >
                     <x-css-trash class="h-5 w-5 text-red-500" />
                     <span class="ml-2">{{ __('base::messages.delete_button') }}</span>
@@ -105,13 +105,13 @@
             {{-- edit --}}
             <div class="-ml-px w-0 flex-1 flex">
                 <button
-                    wire:click="edit('{{ $repository->h_key }}')"
-                    @class([
-                        'relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-slate-700 font-medium border border-transparent rounded-bl-lg',
-                        'hover:text-slate-500 transition-colors focus:outline-blue-gray',
-                        'hover:bg-slate-100' => $repository->visible,
-                        'hover:bg-red-100' => ! $repository->visible,
-                    ])
+                        wire:click="edit('{{ $repository->h_key }}')"
+                        @class([
+                            'relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-slate-700 font-medium border border-transparent rounded-bl-lg',
+                            'hover:text-slate-500 transition-colors focus:outline-blue-gray',
+                            'hover:bg-slate-100' => $repository->visible,
+                            'hover:bg-red-100' => ! $repository->visible,
+                        ])
                 >
                     <x-heroicon-s-pencil class="h-4 w-4 text-slate-500" />
                     <span class="ml-2">{{ __('base::messages.edit_button') }}</span>

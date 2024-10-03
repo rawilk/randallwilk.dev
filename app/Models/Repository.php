@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Models\GitHub;
+namespace App\Models;
 
 use App\Enums\ProgrammingLanguage;
 use App\Enums\RepositorySort;
@@ -16,27 +16,12 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Rawilk\HumanKeys\Concerns\HasHumanKey;
-use Rawilk\LaravelBase\Concerns\HasDatesForHumans;
 
 class Repository extends Model
 {
-    use HasDatesForHumans;
     use HasHumanKey;
     use HasUuids;
     use SoftDeletes;
-
-    protected $guarded = ['id'];
-
-    protected $casts = [
-        'downloads' => 'integer',
-        'highlighted' => 'boolean',
-        'language' => ProgrammingLanguage::class,
-        'new' => 'boolean',
-        'repository_created_at' => 'immutable_datetime',
-        'stars' => 'integer',
-        'topics' => 'array',
-        'visible' => 'boolean',
-    ];
 
     public static function humanKeyPrefix(): string
     {
@@ -51,11 +36,6 @@ class Repository extends Model
     public function getDisplayNameAttribute(): string
     {
         return $this->scoped_name ?? $this->name;
-    }
-
-    public function getShowUrlAttribute(): string
-    {
-        return route('admin.repositories.show', $this);
     }
 
     public function getDownloadsForHumansAttribute(): string
@@ -90,7 +70,7 @@ class Repository extends Model
 
     public function hasDocs(): bool
     {
-        return ! is_null($this->documentation_url);
+        return filled($this->documentation_url);
     }
 
     public function getTypeAttribute(null|string|RepositoryType $type): ?RepositoryType
@@ -180,5 +160,19 @@ class Repository extends Model
                 Cache::forget('repos.visible_count');
             }
         });
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'downloads' => 'integer',
+            'highlighted' => 'boolean',
+            'language' => ProgrammingLanguage::class,
+            'new' => 'boolean',
+            'repository_created_at' => 'immutable_datetime',
+            'stars' => 'integer',
+            'topics' => 'array',
+            'visible' => 'boolean',
+        ];
     }
 }

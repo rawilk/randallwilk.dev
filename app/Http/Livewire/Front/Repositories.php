@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Livewire\Front;
 
 use App\Enums\RepositorySort;
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Livewire\Component;

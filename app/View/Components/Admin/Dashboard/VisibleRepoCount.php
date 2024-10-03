@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\View\Components\Admin\Dashboard;
 
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\Component;
 

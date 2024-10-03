@@ -36,7 +36,7 @@
                 class="grid grid-cols-1 gap-x-12 gap-y-16"
             >
                 @php
-                    /** @var \App\Models\GitHub\Repository $repository */
+                    /** @var \App\Models\Repository $repository */
                 @endphp
                 @forelse ($repositories as $repository)
                     <li class="group relative flex flex-col items-start"

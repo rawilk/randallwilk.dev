@@ -6,7 +6,7 @@ namespace App\Http\Livewire\Users;
 
 use App\Exports\Users\UsersExport;
 use App\Models\Access\Role;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;

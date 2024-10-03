@@ -6,7 +6,7 @@ namespace App\Http\Livewire\Users;
 
 use App\Actions\Users\CreateUserAction;
 use App\Http\Livewire\Users\Concerns\SavesUserAbilities;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Session;

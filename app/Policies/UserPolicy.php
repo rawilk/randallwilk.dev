@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Policies;
 
 use App\Enums\PermissionEnum;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Rawilk\LaravelBase\Contracts\Models\ImpersonatesUsers;
 

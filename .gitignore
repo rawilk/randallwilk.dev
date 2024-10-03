@@ -2,7 +2,7 @@
 .env.backup
 .env.local
 .env.production
-.envault.json
+.env.staging
 .phpstorm.meta.php
 .phpunit.result.cache
 /.idea
@@ -10,9 +10,12 @@
 /bin/deploy.sh
 /node_modules
 /public/build
+/public/css
 /public/doc-files
 /public/docs
 /public/hot
+/public/js
+/public/js/*.LICENSE.txt
 /public/sitemap.xml
 /public/sitemap_docs.xml
 /public/sitemap_pages.xml
@@ -20,6 +23,7 @@
 /storage/*.key
 /storage/docs
 /storage/docs-temp
+/storage/framework/laravel-excel
 /vendor
 Homestead.json
 Homestead.yaml

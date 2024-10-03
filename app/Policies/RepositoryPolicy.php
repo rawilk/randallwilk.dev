@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Policies;
 
 use App\Enums\PermissionEnum;
-use App\Models\GitHub\Repository;
-use App\Models\User\User;
+use App\Models\Repository;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 final class RepositoryPolicy

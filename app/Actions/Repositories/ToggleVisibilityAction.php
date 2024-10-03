@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Repositories;
 
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 
 final class ToggleVisibilityAction
 {

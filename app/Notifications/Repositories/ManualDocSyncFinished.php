@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Notifications\Repositories;
 
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;

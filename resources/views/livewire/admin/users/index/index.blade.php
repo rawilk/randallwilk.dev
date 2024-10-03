@@ -16,7 +16,7 @@
     {{-- import --}}
     @canany([\App\Enums\PermissionEnum::USERS_CREATE->value, \App\Enums\PermissionEnum::USERS_EDIT->value])
         <livewire:csv-importer
-            :model="\App\Models\User\User::class"
+            :model="\App\Models\User::class"
             :import-class="\App\imports\Users\UsersImport::class"
             :columns-to-map="['first_name', 'last_name', 'email', 'password', 'timezone', 'roles', 'permissions']"
             :required-columns="['first_name', 'email']"

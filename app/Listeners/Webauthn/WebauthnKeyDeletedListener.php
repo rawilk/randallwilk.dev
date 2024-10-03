@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners\Webauthn;
 
-use App\Models\User\User;
+use App\Models\User;
 use Rawilk\LaravelBase\Contracts\Models\AuthenticatorApp;
 use Rawilk\LaravelBase\Events\Webauthn\WebauthnKeyWasDeleted;
 use Rawilk\LaravelBase\Features;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Jobs\Repositories;
 
 use App\Enums\ProgrammingLanguage;
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use App\Services\Npm\NpmApi;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;

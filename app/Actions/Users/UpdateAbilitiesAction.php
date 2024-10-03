@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Actions\Users;
 
 use App\Models\Access\Role;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;

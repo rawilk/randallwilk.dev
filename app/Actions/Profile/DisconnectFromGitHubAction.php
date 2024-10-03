@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Profile;
 
-use App\Models\User\User;
+use App\Models\User;
 
 final class DisconnectFromGitHubAction
 {

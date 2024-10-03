@@ -7,30 +7,37 @@ on:
       - 'dependabot/npm_and_yarn/*'
     paths:
       - '**.php'
+      - '.github/workflows/pint.yml'
 
 jobs:
-  phplint:
+  lint:
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: true
+      matrix:
+        php: [ 8.3 ]
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
+      -   name: Checkout code
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 2
 
-      - name: Laravel pint
-        uses: aglipanci/laravel-pint-action@2.1.0
-        with:
-          preset: laravel
+      -   name: Laravel pint
+          uses: aglipanci/laravel-pint-action@2.4
+          with:
+            preset: laravel
+            onlyDirty: true
 
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+      -   name: Extract branch name
+          shell: bash
+          run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          id: extract_branch
 
-      - name: Commit Changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: PHP Linting (Pint)
-          branch: ${{ steps.extract_branch.outputs.branch }}
-          skip_fetch: true
+      -   name: Commit Changes
+          uses: stefanzweifel/git-auto-commit-action@v5
+          with:
+            commit_message: PHP Linting (Pint)
+            branch: ${{ steps.extract_branch.outputs.branch }}
+            skip_fetch: true

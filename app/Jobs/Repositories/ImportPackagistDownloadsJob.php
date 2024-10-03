@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Jobs\Repositories;
 
-use App\Models\GitHub\Repository;
+use App\Models\Repository;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
