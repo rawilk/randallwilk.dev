@@ -5,21 +5,24 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Models\Imports\Import;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
+use Filament\Models\Contracts\HasName;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
-use Rawilk\HumanKeys\Concerns\HasHumanKey;
 use Rawilk\LaravelCasters\Support\Name;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
 {
     //    use HasAvatar;
     //    use HasDatesForHumans;
+    use Concerns\UsesHumanKeys;
     use HasFactory;
-    use HasHumanKey;
     use HasUuids;
 
     //    use Impersonatable;
@@ -46,14 +49,22 @@ class User extends Authenticatable
         return $this->hasMany(Import::class);
     }
 
-    public function getRouteKeyName(): string
+    public function canAccessPanel(Panel $panel): bool
     {
-        return 'h_key';
+        return match ($panel->getId()) {
+            'admin' => $this->isAdmin(),
+            default => false,
+        };
     }
 
-    public function humanKeys(): array
+    public function getFilamentName(): string
     {
-        return ['h_key'];
+        return $this->name->full;
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return null;
     }
 
     protected static function booted(): void
@@ -70,6 +81,7 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
             'name' => Name::class,
+            'is_admin' => 'boolean',
         ];
     }
 }

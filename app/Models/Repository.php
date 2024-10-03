@@ -15,11 +15,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Rawilk\HumanKeys\Concerns\HasHumanKey;
 
 class Repository extends Model
 {
-    use HasHumanKey;
+    use Concerns\UsesHumanKeys;
     use HasUuids;
     use SoftDeletes;
 
@@ -141,16 +140,6 @@ class Repository extends Model
     public function nameForNpm(): string
     {
         return $this->scoped_name ?? $this->name;
-    }
-
-    public function getRouteKeyName(): string
-    {
-        return 'h_key';
-    }
-
-    public function humanKeys(): array
-    {
-        return ['h_key'];
     }
 
     protected static function booted(): void
