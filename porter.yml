@@ -1,9 +1,0 @@
-services:
-  - name: Queue
-    command: php artisan horizon
-    restart:
-      watch:
-        - app
-
-  - name: Vite
-    command: npm run dev
