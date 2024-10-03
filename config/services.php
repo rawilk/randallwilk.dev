@@ -22,16 +22,6 @@ return [
         'scheme' => 'https',
     ],
 
-    'postmark' => [
-        'token' => env('POSTMARK_TOKEN'),
-    ],
-
-    'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
-        'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-    ],
-
     'github' => [
         'username' => env('GITHUB_USERNAME'),
         'token' => env('GITHUB_TOKEN'),
@@ -50,5 +40,4 @@ return [
     'algolia' => [
         'app_id' => env('ALGOLIA_APP_ID'),
     ],
-
 ];
