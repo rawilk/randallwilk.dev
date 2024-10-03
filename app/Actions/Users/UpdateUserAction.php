@@ -16,7 +16,7 @@ final class UpdateUserAction
 {
     use PasswordValidationRules;
 
-    public function __invoke(User $user, array $input, User $authenticatedUser = null): void
+    public function __invoke(User $user, array $input, ?User $authenticatedUser = null): void
     {
         if (! $this->shouldEdit($user, $authenticatedUser)) {
             return;

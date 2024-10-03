@@ -63,11 +63,6 @@ final class Alias
         return $flattenedArrayOfPages[$currentIndex - 1] ?? null;
     }
 
-    private function getFlattenedArrayOfPages(): ?Collection
-    {
-        return $this->navigation?->map(fn ($item) => $item['pages'] ?? [])->flatten(1);
-    }
-
     public function branchUrl(): string
     {
         return "{$this->githubUrl}/tree/{$this->branch}";
@@ -76,5 +71,10 @@ final class Alias
     public function pageGitHubUrl(DocumentationPage $page): string
     {
         return "{$this->githubUrl}/blob/{$this->branch}/docs/{$page->slug}.md";
+    }
+
+    private function getFlattenedArrayOfPages(): ?Collection
+    {
+        return $this->navigation?->map(fn ($item) => $item['pages'] ?? [])->flatten(1);
     }
 }

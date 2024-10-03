@@ -38,6 +38,11 @@ class Repository extends Model
         'visible' => 'boolean',
     ];
 
+    public static function humanKeyPrefix(): string
+    {
+        return 'repo';
+    }
+
     public function getUrlAttribute(): string
     {
         return "https://github.com/rawilk/{$this->name}";
@@ -131,9 +136,9 @@ class Repository extends Model
         $query->where('visible', true);
     }
 
-    public function scopeApplySort(Builder $query, string $sort = null): void
+    public function scopeApplySort(Builder $query, ?string $sort = null): void
     {
-        /** @var \App\Enums\RepositorySortEnum $enum */
+        /** @var RepositorySortEnum $enum */
         $enum = rescue(fn () => RepositorySortEnum::tryFrom(ltrim($sort, '-')));
         if (! $enum) {
             return;
@@ -166,11 +171,6 @@ class Repository extends Model
     public function humanKeys(): array
     {
         return ['h_key'];
-    }
-
-    public static function humanKeyPrefix(): string
-    {
-        return 'repo';
     }
 
     protected static function booted(): void

@@ -7,7 +7,6 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Default Log Channel
@@ -97,7 +96,7 @@ return [
                 'port' => env('PAPERTRAIL_PORT'),
                 'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
-            'processors' => [\Monolog\Processor\PsrLogMessageProcessor::class],
+            'processors' => [Monolog\Processor\PsrLogMessageProcessor::class],
         ],
 
         'stderr' => [
@@ -108,7 +107,7 @@ return [
             'with' => [
                 'stream' => 'php://stderr',
             ],
-            'processors' => [\Monolog\Processor\PsrLogMessageProcessor::class],
+            'processors' => [Monolog\Processor\PsrLogMessageProcessor::class],
         ],
 
         'syslog' => [

@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Illuminate\Support\Str;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Horizon Domain
@@ -170,8 +169,8 @@ return [
         'supervisor-1' => [
             'connection' => 'redis',
             'queue' => [
-                \App\Enums\QueuesEnum::MAIL->value,
-                \App\Enums\QueuesEnum::DEFAULT_QUEUE->value,
+                App\Enums\QueuesEnum::MAIL->value,
+                App\Enums\QueuesEnum::DEFAULT_QUEUE->value,
             ],
             'balance' => 'auto',
             'maxProcesses' => 1,

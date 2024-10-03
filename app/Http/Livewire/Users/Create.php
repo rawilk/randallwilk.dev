@@ -16,7 +16,7 @@ use Livewire\WithFileUploads;
 use Rawilk\LaravelBase\Components\Alerts\Alert;
 
 /**
- * @property-read \App\Models\User\User $user
+ * @property-read User $user
  */
 final class Create extends Component
 {

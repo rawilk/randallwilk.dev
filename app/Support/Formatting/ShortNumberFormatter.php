@@ -18,6 +18,11 @@ final class ShortNumberFormatter
     {
     }
 
+    public static function of(null|int|float $value): self
+    {
+        return new self($value);
+    }
+
     public function usingLocale(string $locale): self
     {
         $this->locale = $locale;
@@ -30,11 +35,6 @@ final class ShortNumberFormatter
         $this->maxDecimalPlaces = $max;
 
         return $this;
-    }
-
-    public static function of(null|int|float $value): self
-    {
-        return new self($value);
     }
 
     public function format(): string

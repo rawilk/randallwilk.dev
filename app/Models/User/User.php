@@ -54,12 +54,12 @@ class User extends Authenticatable
         'two_factor_enabled' => 'boolean',
     ];
 
-    protected static function newFactory(): UserFactory
+    public static function humanKeyPrefix(): string
     {
-        return UserFactory::new();
+        return 'usr';
     }
 
-    public function hasRole($roles, string $guard = null): bool
+    public function hasRole($roles, ?string $guard = null): bool
     {
         if ($this->isSuperAdmin()) {
             return true;
@@ -93,7 +93,7 @@ class User extends Authenticatable
         return $this->hasPermissionTo(PermissionEnum::USERS_IMPERSONATE->value);
     }
 
-    public function canBeImpersonated(Authenticatable $impersonator = null): bool
+    public function canBeImpersonated(?Authenticatable $impersonator = null): bool
     {
         return $impersonator?->can('impersonate', $this) ?? false;
     }
@@ -113,9 +113,9 @@ class User extends Authenticatable
         return ['h_key'];
     }
 
-    public static function humanKeyPrefix(): string
+    protected static function newFactory(): UserFactory
     {
-        return 'usr';
+        return UserFactory::new();
     }
 
     protected static function booted(): void

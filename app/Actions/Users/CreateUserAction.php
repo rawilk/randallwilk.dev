@@ -20,7 +20,7 @@ final class CreateUserAction
     /** @var int */
     private const RANDOM_PASSWORD_LENGTH = 16;
 
-    public function __invoke(array $input, User $authenticatedUser = null, bool $skipPermissionsValidation = false): void
+    public function __invoke(array $input, ?User $authenticatedUser = null, bool $skipPermissionsValidation = false): void
     {
         $data = convertEmptyStringsToNull(
             $this->validate($input)
@@ -74,7 +74,7 @@ final class CreateUserAction
         ])->validate();
     }
 
-    private function setAbilities(User $user, array $input, User $authenticatedUser = null, bool $skipPermissionsValidation = false): void
+    private function setAbilities(User $user, array $input, ?User $authenticatedUser = null, bool $skipPermissionsValidation = false): void
     {
         /*
          * A default role will be assigned in the action if the authenticated

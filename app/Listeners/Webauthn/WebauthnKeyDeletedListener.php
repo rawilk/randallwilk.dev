@@ -23,7 +23,7 @@ final class WebauthnKeyDeletedListener
             return;
         }
 
-        /** @var \Illuminate\Contracts\Auth\Authenticatable|\App\Models\User\User $user */
+        /** @var \Illuminate\Contracts\Auth\Authenticatable|User $user */
         $user = $event->webauthnKey->user;
 
         if (! $user) {

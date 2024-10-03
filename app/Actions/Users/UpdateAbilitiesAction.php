@@ -23,7 +23,7 @@ final class UpdateAbilitiesAction
 
     private User $authenticatedUser;
 
-    public function __invoke(User $user, array $input, User $authenticatedUser = null, bool $skipValidation = false): void
+    public function __invoke(User $user, array $input, ?User $authenticatedUser = null, bool $skipValidation = false): void
     {
         $this->init($user, $input, $authenticatedUser);
 
@@ -44,7 +44,7 @@ final class UpdateAbilitiesAction
         }
     }
 
-    private function init(User $user, array $input, User $authenticatedUser = null): void
+    private function init(User $user, array $input, ?User $authenticatedUser = null): void
     {
         $this->authenticatedUser = $authenticatedUser ?: Auth::user();
 

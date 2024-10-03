@@ -56,7 +56,7 @@ final class UpdateUserProfileInformationAction implements UpdatesUserProfileInfo
         $user->save();
     }
 
-    protected function updateVerifiedUser($user, array $input): void
+    private function updateVerifiedUser($user, array $input): void
     {
         $name = Name::from($input['name']);
 

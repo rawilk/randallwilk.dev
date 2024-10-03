@@ -11,8 +11,8 @@ final class ExpandableMenu implements MenuMacro
 {
     public function register(): void
     {
-        Menu::macro('expandable', function (callable $callback = null) {
-            /** @var \Spatie\Menu\Laravel\Menu $this */
+        Menu::macro('expandable', function (?callable $callback = null) {
+            /** @var Menu $this */
             $this
                 ->wrap('div', [
                     'x-data' => '{ open: false, hasActiveChild: false }',

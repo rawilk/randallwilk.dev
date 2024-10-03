@@ -109,7 +109,6 @@ final class GitHubSocialiteController
         }
 
         return User::where('github_id', $githubUser->getId())->firstOrFail();
-
         /*
          * TODO: allow user creation again.
          */

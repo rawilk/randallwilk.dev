@@ -37,10 +37,6 @@ final class Index extends Component
 
     public $roles = [];
 
-    protected $listeners = [
-        'imports.finished' => '$refresh',
-    ];
-
     public array $filters = [
         'search' => '',
         'updated-min' => '',
@@ -50,6 +46,10 @@ final class Index extends Component
         'min-id' => '',
         'max-id' => '',
         'roles' => [],
+    ];
+
+    protected $listeners = [
+        'imports.finished' => '$refresh',
     ];
 
     public function getRowsQueryProperty()
@@ -137,17 +137,6 @@ final class Index extends Component
         $query->orderByRaw("concat(users.first_name, users.last_name) {$direction}");
     }
 
-    private function mapFilterValue($key, $value)
-    {
-        if ($key === 'roles') {
-            return array_map(function ($roleId) {
-                return $this->roles->where('id', $roleId)->first()?->name;
-            }, $value);
-        }
-
-        return $value;
-    }
-
     public function mount(): void
     {
         $this->hideableColumns = [
@@ -170,5 +159,16 @@ final class Index extends Component
         return view('livewire.admin.users.index.index', [
             'users' => $this->rows,
         ]);
+    }
+
+    private function mapFilterValue($key, $value)
+    {
+        if ($key === 'roles') {
+            return array_map(function ($roleId) {
+                return $this->roles->where('id', $roleId)->first()?->name;
+            }, $value);
+        }
+
+        return $value;
     }
 }
