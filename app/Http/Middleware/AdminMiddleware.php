@@ -8,6 +8,9 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
+/**
+ * @deprecated Will remove soon
+ */
 class AdminMiddleware
 {
     /*

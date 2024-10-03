@@ -2,20 +2,18 @@
 
 declare(strict_types=1);
 
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
+use App\Console\Commands\GenerateSitemapCommand;
+use App\Console\Commands\GitHub\ImportDocsFromRepositoriesCommand;
+use App\Console\Commands\GitHub\ImportGitHubRepositoriesCommand;
+use App\Console\Commands\GitHub\ImportPackagistDownloadsCommand;
+use App\Console\Commands\Npm\ImportNpmDownloadsCommand;
+use Illuminate\Support\Facades\Schedule;
 
-/*
-|--------------------------------------------------------------------------
-| Console Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of your Closure based console
-| commands. Each Closure is bound to a command instance allowing a
-| simple approach to interacting with each command's IO methods.
-|
-*/
+Schedule::command(ImportGitHubRepositoriesCommand::class)->weekly();
+Schedule::command(ImportPackagistDownloadsCommand::class)->hourly();
+Schedule::command(ImportNpmDownloadsCommand::class)->weekly();
+Schedule::command(GenerateSitemapCommand::class)->daily();
+Schedule::command(ImportDocsFromRepositoriesCommand::class)->everyThirtyMinutes()->runInBackground();
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+// Model pruning
+Schedule::command('queue:prune-batches --hours=48 --unfinished=72')->daily()->runInBackground();
