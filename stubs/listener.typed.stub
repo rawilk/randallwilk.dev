@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace {{ namespace }};
 
-use {{ namespacedUserModel }};
+use {{ eventNamespace }};
 
 class {{ class }}
 {
-    public function join({{ userModel }} $user): bool
+    public function __invoke({{ event }} $event): void
     {
     }
 }

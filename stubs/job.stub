@@ -14,7 +14,7 @@ class {{ class }}
     {
     }
 
-    public function handle(): void
+    public function __invoke(): void
     {
     }
 }
