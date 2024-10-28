@@ -8,13 +8,13 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\View\Component;
 
-final class SkillListItem extends Component
+class SkillListItem extends Component
 {
-    public ?string $url;
+    public readonly ?string $url;
 
-    public ?string $description;
+    public readonly ?string $description;
 
-    public function __construct(public string $skill, public array $data = [])
+    public function __construct(public readonly string $skill, array $data = [])
     {
         $this->url = Arr::get($data, 'url');
         $this->description = Arr::get($data, 'description');

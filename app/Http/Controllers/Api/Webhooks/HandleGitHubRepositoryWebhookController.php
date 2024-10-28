@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\UnauthorizedException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-final class HandleGitHubRepositoryWebhookController
+class HandleGitHubRepositoryWebhookController
 {
     public function __invoke(Request $request)
     {
@@ -26,7 +26,7 @@ final class HandleGitHubRepositoryWebhookController
         UpdatedRepositoriesValueStore::make()->store($updatedRepositoryName);
     }
 
-    private function ensureValidRequest(Request $request): void
+    protected function ensureValidRequest(Request $request): void
     {
         $signature = $request->headers->get('X-Hub-Signature-256');
 

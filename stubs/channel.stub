@@ -8,11 +8,7 @@ use {{ namespacedUserModel }};
 
 class {{ class }}
 {
-    public function __construct()
-    {
-    }
-
-    public function join({{ userModel }} $user): array|bool
+    public function join({{ userModel }} $user): bool
     {
     }
 }

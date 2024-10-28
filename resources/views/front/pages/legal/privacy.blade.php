@@ -9,7 +9,7 @@
                 <x-front.link>
                     <div class="flex items-center">
                         <x-heroicon-s-chevron-left class="h-3 w-3 mr-2" />
-                        <a href="{!! route('legal.index') !!}" class="text-sm">
+                        <a href="{{ route('legal.index') }}" class="text-sm" wire:navigate>
                             <span>{{ __('front.legal.back_link') }}</span>
                         </a>
                     </div>
@@ -95,7 +95,7 @@
                 <address>
                     Randall Wilk<br>
                     Email:
-                    <a href="mailto:{!! config('site.contact.email') !!}">{!! config('site.contact.email') !!}</a>
+                    <a href="mailto:{{ config('randallwilk.contact.email') }}">{{ config('randallwilk.contact.email') }}</a>
                 </address>
 
                 <h2>Collected personal data</h2>
@@ -295,8 +295,8 @@
                     to access, Randall will pursue the matter within one (1) month after receiving the request.
                     The application is done by sending an email to
                     <x-front.legal-link
-                        url="mailto:{{ config('site.contact.email') }}"
-                        :text="config('site.contact.email')"
+                        url="mailto:{{ config('randallwilk.contact.email') }}"
+                        :text="config('randallwilk.contact.email')"
                         after="."
                     />
                 </p>
@@ -363,8 +363,8 @@
                     If the User wishes to exercise these rights, Randall will pursue the matter within one (1)
                     month after receiving the request. The application is done by sending an email to
                     <x-front.legal-link
-                        url="mailto:{{ config('site.contact.email') }}"
-                        :text="config('site.contact.email')"
+                        url="mailto:{{ config('randallwilk.contact.email') }}"
+                        :text="config('randallwilk.contact.email')"
                         after="."
                     />
                 </p>
@@ -380,8 +380,8 @@
                     If the user wishes to exercise these rights, Randall will pursue the matter within one (1) month
                     after receiving the request. The application is done by sending an email to
                     <x-front.legal-link
-                        url="mailto:{{ config('site.contact.email') }}"
-                        :text="config('site.contact.email')"
+                        url="mailto:{{ config('randallwilk.contact.email') }}"
+                        :text="config('randallwilk.contact.email')"
                         after="."
                     />
                 </p>
@@ -396,8 +396,8 @@
                     If the User wishes to exercise these rights, Randall will pursue the matter within one (1) month
                     after receiving the request. The application is done by sending an email to
                     <x-front.legal-link
-                        url="mailto:{{ config('site.contact.email') }}"
-                        :text="config('site.contact.email')"
+                        url="mailto:{{ config('randallwilk.contact.email') }}"
+                        :text="config('randallwilk.contact.email')"
                         after="."
                     />
                 </p>

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Docs\DocHeaders;
 
-final class DocHeaderFactory
+class DocHeaderFactory
 {
-    private const CONFIGS = [
+    protected const array CONFIGS = [
         'laravel-app-key-rotator' => LaravelAppKeyRotatorDocHeader::class,
         'laravel-breadcrumbs' => LaravelBreadcrumbsDocHeader::class,
         'laravel-casters' => LaravelCastersDocHeader::class,
@@ -16,11 +16,12 @@ final class DocHeaderFactory
         'laravel-ups' => LaravelUPSDocHeader::class,
         'laravel-webauthn' => LaravelWebauthnDocHeader::class,
         'alpine-ripple' => AlpineRippleDocHeader::class,
+        'profile-filament-plugin' => ProfileFilamentDocHeader::class,
         'vue-context' => VueContextDocHeader::class,
     ];
 
     public static function resolve(string $repository): ?string
     {
-        return self::CONFIGS[$repository] ?? null;
+        return static::CONFIGS[$repository] ?? null;
     }
 }

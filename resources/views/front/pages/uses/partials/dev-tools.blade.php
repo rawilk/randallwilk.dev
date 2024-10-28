@@ -10,7 +10,7 @@
         </p>
 
         <p>
-            For theming, I use the Base16 Materia theme, which is a
+            For theming, I use the Base16 Material theme, which is a
             <x-front.legal-link url="https://docs.warp.dev/appearance/custom-themes" target="_blank" text="custom theme" />
             from Warp.
 
@@ -38,22 +38,21 @@
 
     <x-front.section-list-item title="PhpStorm">
         <p>
-            I absolutely love using
             <x-front.legal-link url="https://www.jetbrains.com/phpstorm" target="_blank" text="PhpStorm" />
-            for development. Since my primary language is PHP, it makes sense to use this one. I've tried others like
-            Visual Studio Code or Atom, but I like this one the best. Here's a screenshot of my editor setup:
+            is still my IDE of choice. I've tried many others in the past including Visual Studio Code, Sublime, or Atom, but I keep
+            coming back to PhpStorm. Here's a screenshot of my editor setup:
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/phpstorm-screenshot.png')"
+            :src="asset('images/uses/phpstorm-screenshot.png?v=01JARTKKG5QEGZDMRNP1W5BCXS')"
             alt="PhpStorm IDE"
             class="mx-auto mb-4"
         />
 
         <p>
             I'm using the
-            <x-front.legal-link url="https://plugins.jetbrains.com/plugin/8006-material-theme-ui" target="_blank" text="Material Theme UI" />
-            theme with the Atom One Dark color scheme, and I use Fira Code as my editor font.
+            <x-front.legal-link url="https://plugins.jetbrains.com/plugin/11938-one-dark-theme" target="_blank" text="One Dark Theme" />
+            with the Vivid color scheme, and I use Fira Code as my editor font.
         </p>
 
         <p>
@@ -72,18 +71,29 @@
         </p>
 
         <p>
-            One other plugin I've recently found invaluable to my every-day workflow is
-            <x-front.legal-link url="https://github.com/features/copilot" target="_blank" text="GitHub Copilot" after="." />
-            If I'm ever stuck or don't quite remember how to do something, copilot is usually pretty good at generating code
-            that will at least get me started in the right direction.
+            I've also found it very helpful to configure tasks to run both <code>npm run dev</code> and <code>php artisan horizon</code>
+            automatically when I open projects, so I don't need to keep manually running them.
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Laravel Valet">
+    <x-front.section-list-item title="Laravel Herd">
         <p>
-            When using macOS, it's a no-brainer to use
-            <x-front.legal-link url="https://laravel.com/docs/master/valet" target="_blank" text="Laravel Valet" after="." />
-            Valet makes it extremely simple to run my sites locally through Nginx.
+            Using <x-front.legal-link url="https://herd.laravel.com/" target="_blank" text="Herd" />
+            for local development is a no-brainer. In my experience it's made it much easier to manage my sites and
+            local php and node versions, plus it runs each site much faster.
+        </p>
+
+        <p>
+            The free version is enough for my needs, as it's easy enough to install and run my own MySQL/PostgreSQL instances without
+            needing to pay for Herd to do it for me.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="DBngin">
+        <p>
+            Speaking of databases, <x-front.legal-link url="https://dbngin.com/" target="_blank" text="DBngin" /> makes it trivial to install
+            and run instances of MySQL and PostgreSQL locally. I used to just install them through Homebrew, however I've found this
+            to be much better solution for my requirements.
         </p>
     </x-front.section-list-item>
 
@@ -116,14 +126,6 @@
             <x-front.legal-link url="https://beyondco.de/" target="_blank" text="BeyondCode" after="," />
             <x-front.legal-link url="https://tinkerwell.app/" target="_blank" text="Tinkerwell" />
             makes running arbitrary code either locally or even remotely via ssh simple to do.
-        </p>
-    </x-front.section-list-item>
-
-    <x-front.section-list-item title="BabelEdit">
-        <p>
-            <x-front.legal-link url="https://www.codeandweb.com/babeledit" target="_blank" text="BabelEdit" />
-            makes managing language files for Laravel projects simple. Instead of jumping between files for language
-            lines, I can do it all in one single window.
         </p>
     </x-front.section-list-item>
 

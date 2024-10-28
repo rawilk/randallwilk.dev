@@ -8,20 +8,22 @@ export default defineConfig({
 
         laravel({
             input: [
-                'resources/css/app.css',
-                'resources/js/app.js',
-                'resources/css/front.css',
-                'resources/css/docs.css',
+                // Docs
+                'resources/css/front/app/app.css',
                 'resources/js/docs.js',
 
-                // Filepond...
-                'resources/js/filepond.js',
-                'resources/css/vendor/filepond.css',
+                // Front
+                'resources/css/front/docs/app.css',
+                'resources/js/app.js',
+
+                // Admin
+                'resources/js/admin-app.js',
+
+                // Panels
+                'resources/css/filament/admin/theme.css',
             ],
 
             refresh: true,
-
-            valetTls: 'randallwilk.dev.test',
         }),
     ],
 });

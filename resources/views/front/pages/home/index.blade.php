@@ -1,4 +1,7 @@
-<x-page title="Full-Stack Laravel Developer" canonical="{{ route('home') }}">
+<x-page
+    title="Full-Stack Laravel Developer"
+    :canonical="route('home')"
+>
     <x-slot:description>
         Randall Wilk is a Full-Stack developer that builds websites & web applications using the TALL stack.
         He is based in Wausau WI, United States.
@@ -8,5 +11,7 @@
     @include('front.pages.home.partials.about')
     @include('front.pages.home.partials.skills')
 
-    @include('layouts.front.partials.support')
+    <x-slot:call-to-action>
+        <x-layout.front.support-cta />
+    </x-slot:call-to-action>
 </x-page>

@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('language')->nullable();
             $table->boolean('visible')->default(false);
-            $table->dateTimestamps();
+            $table->datetimes();
             $table->dateTime('deleted_at')->nullable();
         });
     }

@@ -1,5 +1,6 @@
 <div @class(['wrap' => $wrap])>
     <div @class([
+        'relative',
         'prose prose-slate max-w-none',
         'sm:prose-lg' => $largeText,
         // links

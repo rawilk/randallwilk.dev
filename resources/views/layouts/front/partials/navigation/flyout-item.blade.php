@@ -1,9 +1,12 @@
-<a href="{{ $url }}"
+<a
+    href="{{ $url }}"
     @class([
         '-m-3 block rounded-md p-3',
         'bg-gray-100' => $active,
         'hover:bg-gray-50' => ! $active,
-    ])>
+    ])
+    wire:navigate
+>
     <span class="block text-base font-medium text-slate-900">{{ $label }}</span>
 
     @if ($description ?? '')

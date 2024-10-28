@@ -7,7 +7,7 @@ namespace App\View\Components\Front;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-final class ContentArea extends Component
+class ContentArea extends Component
 {
     public function __construct(
         public bool $indentLists = true,

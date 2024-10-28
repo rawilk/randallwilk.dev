@@ -19,7 +19,7 @@ use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Url;
 use Throwable;
 
-final class GenerateSitemapCommand extends Command
+class GenerateSitemapCommand extends Command
 {
     protected $signature = 'sitemap:generate';
 
@@ -46,7 +46,7 @@ final class GenerateSitemapCommand extends Command
         $this->info('All sitemaps generated!');
     }
 
-    private function generateMainSitemap(): void
+    protected function generateMainSitemap(): void
     {
         $this->comment('Generating main sitemap...');
 
@@ -64,7 +64,7 @@ final class GenerateSitemapCommand extends Command
                 return true;
             })
             ->hasCrawled(function (Url $url) {
-                /*
+                /**
                  * Prevent the root url being added twice.
                  *
                  * @see https://github.com/spatie/laravel-sitemap/discussions/296#discussioncomment-185873
@@ -80,7 +80,7 @@ final class GenerateSitemapCommand extends Command
             ->writeToFile(public_path('sitemap_pages.xml'));
     }
 
-    private function generateDocsSitemap(): void
+    protected function generateDocsSitemap(): void
     {
         $this->comment('Generating docs sitemap...');
 
@@ -98,7 +98,7 @@ final class GenerateSitemapCommand extends Command
         $sitemap->writeToFile(public_path('sitemap_docs.xml'));
     }
 
-    private function generateSitemapIndex(): void
+    protected function generateSitemapIndex(): void
     {
         $this->comment('Generating sitemap index...');
 
@@ -108,7 +108,7 @@ final class GenerateSitemapCommand extends Command
             ->writeToFile(public_path('sitemap.xml'));
     }
 
-    private function addAliasPagesToSitemap(Collection $pages, Sitemap $sitemap): void
+    protected function addAliasPagesToSitemap(Collection $pages, Sitemap $sitemap): void
     {
         /** @var \App\Docs\DocumentationPage $page */
         foreach ($pages as $page) {
@@ -135,7 +135,7 @@ final class GenerateSitemapCommand extends Command
     /**
      * @return \Illuminate\Support\Collection<int, \App\Docs\Alias>
      */
-    private function getDocAliases(): Collection
+    protected function getDocAliases(): Collection
     {
         return app(Docs::class)->getRepositories()
             ->map(fn (Repository $repository) => $repository->aliases)
@@ -148,7 +148,7 @@ final class GenerateSitemapCommand extends Command
      * To do this, we will store the last modified date in a `last_mod.json`
      * file, and parse it here.
      */
-    private function getLastModificationDate(Url $url): DateTimeInterface
+    protected function getLastModificationDate(Url $url): DateTimeInterface
     {
         $path = parse_url($url->url, PHP_URL_PATH);
 
@@ -156,7 +156,7 @@ final class GenerateSitemapCommand extends Command
             return Date::parse($lastModified);
         }
 
-        /*
+        /**
          * If we don't have a last modified date for a specific page, we'll fall back
          * on the `_site` key.
          */

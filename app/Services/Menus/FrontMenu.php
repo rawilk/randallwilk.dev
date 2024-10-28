@@ -5,34 +5,32 @@ declare(strict_types=1);
 namespace App\Services\Menus;
 
 use Illuminate\Support\Arr;
-use Spatie\Menu\Laravel\Facades\Menu;
 use Spatie\Menu\Laravel\Menu as LaravelMenu;
 use Spatie\Menu\Laravel\View;
-use Spatie\Menu\Link;
 
-final class FrontMenu
+class FrontMenu
 {
-    private const FLYOUT_BUTTON_VIEW = 'layouts.front.partials.navigation.flyout-button';
+    protected const string FLYOUT_BUTTON_VIEW = 'layouts.front.partials.navigation.flyout-button';
 
-    private const FLYOUT_ITEM_VIEW = 'layouts.front.partials.navigation.flyout-item';
+    protected const string FLYOUT_ITEM_VIEW = 'layouts.front.partials.navigation.flyout-item';
 
-    private const FLYOUT_ITEM_FOOTER_VIEW = 'layouts.front.partials.navigation.flyout-footer-item';
+    protected const string FLYOUT_ITEM_FOOTER_VIEW = 'layouts.front.partials.navigation.flyout-footer-item';
 
     public function register(): void
     {
         $this->registerMainMenu();
     }
 
-    private function registerMainMenu(): void
+    protected function registerMainMenu(): void
     {
         $flyoutButtonView = self::FLYOUT_BUTTON_VIEW;
         $flyoutItemView = self::FLYOUT_ITEM_VIEW;
         $flyoutFooterView = self::FLYOUT_ITEM_FOOTER_VIEW;
 
-        Menu::macro('main', function (array $attributes = []) use ($flyoutButtonView, $flyoutItemView, $flyoutFooterView) {
+        LaravelMenu::macro('main', function (array $attributes = []) use ($flyoutButtonView, $flyoutItemView, $flyoutFooterView) {
             $isMobile = Arr::get($attributes, 'mobile', false);
 
-            return Menu::new()
+            return LaravelMenu::new()
                 ->submenuIf(
                     ! $isMobile,
                     View::create($flyoutButtonView, [
@@ -40,7 +38,7 @@ final class FrontMenu
                         'active' => request()->routeIs('open-source.*'),
                     ]),
                     function (LaravelMenu $menu) use ($flyoutItemView, $flyoutFooterView) {
-                        return $menu->flyout(function (LaravelMenu $menu) use ($flyoutItemView) {
+                        $menu->flyout(function (LaravelMenu $menu) use ($flyoutItemView) {
                             $menu->view($flyoutItemView, [
                                 'label' => __('front.menus.open_source.packages'),
                                 'url' => route('open-source.packages'),
@@ -61,24 +59,13 @@ final class FrontMenu
                         });
                     }
                 )
+                ->routeIf($isMobile, 'home', 'Home')
                 ->routeIf($isMobile, 'open-source.packages', __('front.menus.open_source.packages'))
                 ->routeIf($isMobile, 'open-source.projects', __('front.menus.open_source.projects'))
                 ->routeIf($isMobile, 'open-source.support', __('front.menus.open_source.support'))
+                ->setItemAttribute('wire:navigate')
                 ->route('docs', __('front.menus.main.docs'))
                 ->route('contact', __('front.menus.main.contact'))
-                ->setActiveFromRequest();
-        });
-
-        Menu::macro('mobileService', function () {
-            return Menu::new()
-                ->route('profile.show', __('users.profile.page_title'))
-                ->routeIfCan('viewAdminPanel', 'admin.dashboard', __('front.menus.footer.dashboard'))
-                ->routeIfCan('viewHorizon', 'horizon.index', __('View Horizon'))
-                ->add(
-                    Link::to('#', __('Sign Out'))->setAttribute('x-on:click.prevent', 'document.getElementById(\'logout-form\').submit()')
-                )
-                ->withoutWrapperTag()
-                ->withoutParentTag()
                 ->setActiveFromRequest();
         });
     }

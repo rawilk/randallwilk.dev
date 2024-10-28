@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Docs\DocHeaders;
 
-final class VueContextDocHeader implements DocHeader
+class VueContextDocHeader implements DocHeader
 {
     public static function heroTabs(string $version): array
     {
@@ -23,7 +23,9 @@ final class VueContextDocHeader implements DocHeader
     {
         return <<<'HTML'
         <div
-          @contextmenu.prevent="$refs.menu.open($event, { id: 1 })"
+          @contextmenu.prevent="
+            $refs.menu.open($event, { id: 1 })
+          "
          >
             John Smith
         </div>

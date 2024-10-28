@@ -22,7 +22,7 @@ class {{ class }} implements ShouldQueue
     {
     }
 
-    public function handle(): void
+    public function __invoke(): void
     {
     }
 }

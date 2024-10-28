@@ -1,38 +1,19 @@
-import './docs/highlight';
+import header from './front/header';
+import search from './docs/components/search';
+import themeSwitcher from './docs/components/theme-switcher.js';
+import mobileNav from './stores/mobile-nav';
+import tableOfContents from './stores/table-of-contents.js';
 import './docs/callouts';
-import './docs/clipboard';
+import './docs/highlight';
 import './docs/permalinks';
-import docsHeader from './components/docs-header';
-import docSearch from './components/doc-search';
-import themeSelector from './components/theme-selector';
+import './docs/clipboard';
+import './docs/links';
 
 document.addEventListener('alpine:init', () => {
-    Alpine.data('docsHeader', docsHeader);
-    Alpine.data('docSearch', docSearch);
-    Alpine.data('themeSelector', themeSelector);
+    window.Alpine.data('header', header);
+    window.Alpine.data('search', search);
+    window.Alpine.data('themeSwitcher', themeSwitcher);
 
-    Alpine.store('visibleSection', {
-        current: '',
-        headings: [],
-
-        registerHeadings(tableOfContents) {
-            this.headings = tableOfContents.flatMap(heading => [heading.id, ...heading.children.map(child => child.id)]);
-            this.headings.forEach(id => {
-                const el = document.getElementById(id);
-                if (! el) {
-                    return;
-                }
-
-                const observer = new IntersectionObserver(entries => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            this.current = id;
-                        }
-                    });
-                });
-
-                observer.observe(el);
-            });
-        }
-    });
+    window.Alpine.store('mobileNav', mobileNav());
+    window.Alpine.store('toc', tableOfContents);
 });

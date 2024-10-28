@@ -7,7 +7,7 @@
         </x-slot:content>
     </x-front.page-banner>
 
-    <div class="section section-group pt-0">
+    <div class="section section-group mt-8">
         <section>
             <x-front.content-area class="space-y-10 md:space-y-20" :large-text="false">
                 {{-- privacy policy --}}
@@ -17,7 +17,7 @@
                     <p class="!mb-3">{{ __('front.legal.privacy_description') }}</p>
                     <x-front.link>
                         <div class="flex items-center">
-                            <a href="{!! route('legal.privacy') !!}">
+                            <a href="{{ route('legal.privacy') }}" wire:navigate>
                                 {{ __('front.legal.privacy_link') }}
                             </a>
                             <x-heroicon-s-chevron-right class="h-3 w-3 ml-2" />
@@ -32,7 +32,7 @@
                     <p class="!mb-3">{{ __('front.legal.terms_description') }}</p>
                     <x-front.link>
                         <div class="flex items-center">
-                            <a href="{!! route('legal.terms') !!}">
+                            <a href="{{ route('legal.terms') }}" wire:navigate>
                                 {{ __('front.legal.terms_link') }}
                             </a>
                             <x-heroicon-s-chevron-right class="h-3 w-3 ml-2" />
@@ -47,7 +47,7 @@
                     <p class="!mb-3">{{ __('front.legal.disclaimer_legal_description') }}</p>
                     <x-front.link>
                         <div class="flex items-center">
-                            <a href="{!! route('legal.disclaimer') !!}">
+                            <a href="{{ route('legal.disclaimer') }}" wire:navigate>
                                 {{ __('front.legal.disclaimer_link') }}
                             </a>
                             <x-heroicon-s-chevron-right class="h-3 w-3 ml-2" />

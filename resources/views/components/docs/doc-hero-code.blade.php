@@ -35,7 +35,7 @@
                 <div aria-hidden="true"
                      class="select-none border-r border-slate-300/5 pr-4 font-mono text-slate-600 overflow-hidden"
                 >
-                    <pre class="flex overflow-x-auto pb-6 line-numbers p-0 !pl-10 !pb-2 mt-0"><code class="pl-2 pr-4 language-{{ $codeLanguage() }}">{{ $codeSnippet() }}</code></pre>
+                    <pre class="flex overflow-x-auto line-numbers p-0 !pl-10 pb-2 mt-0"><code class="pl-2 pr-4 language-{{ $codeLanguage() }}">{{ $codeSnippet() }}</code></pre>
                 </div>
             </div>
         </div>

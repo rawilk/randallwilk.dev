@@ -1,0 +1,6 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+@import '../../components/auth.css';
+@import '../../components/logo.css';
+@import '../../components/tables.css';
+
+@config('tailwind.config.js');

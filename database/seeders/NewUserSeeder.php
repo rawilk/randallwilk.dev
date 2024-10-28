@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Access\Role;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
-final class NewUserSeeder extends Seeder
+class NewUserSeeder extends Seeder
 {
     public function run(): void
     {
@@ -18,23 +17,16 @@ final class NewUserSeeder extends Seeder
     private function createSuperAdminUser(): void
     {
         // We've already seeded the admin user, no need to do it again.
-        if (User::withoutGlobalScopes()->exists()) {
+        if (User::withoutGlobalScopes()->where('is_admin', true)->exists()) {
             return;
         }
 
-        $user = User::factory()->create([
-            'first_name' => 'Super',
-            'last_name' => 'Admin',
-            'email' => 'admin@example.com',
+        User::factory()->admin()->create([
+            'name' => config('randallwilk.dev_credentials.name'),
+            'email' => config('randallwilk.dev_credentials.email'),
+            'timezone' => config('randallwilk.timezone'),
             'password' => 'secret',
             'remember_token' => null,
         ]);
-
-        // Our super admin user needs to be assigned the super admin role.
-        $role = Role::withoutGlobalScopes()->where('name', Role::$superAdminName)->first();
-
-        if ($role) {
-            $user->assignRole($role);
-        }
     }
 }

@@ -6,13 +6,14 @@ namespace App\Console\Commands\GitHub;
 
 use App\Jobs\Docs\CleanupDocsImportJob;
 use App\Jobs\Docs\CleanupRepositoryFoldersJob;
+use App\Jobs\Docs\RefreshDocsCacheJob;
 use App\Jobs\Repositories\ImportDocsFromRepositoryJob;
 use App\Support\ValueStores\UpdatedRepositoriesValueStore;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Bus;
 
-final class ImportDocsFromRepositoriesCommand extends Command
+class ImportDocsFromRepositoriesCommand extends Command
 {
     protected $signature = 'import:docs {--repo= : Import docs from a specific repo} {--all}';
 
@@ -29,12 +30,12 @@ final class ImportDocsFromRepositoriesCommand extends Command
         $jobs = [
             new CleanupRepositoryFoldersJob,
             ...$this->convertRepositoriesToJobs($updatedRepositoryNames),
+            new CleanupDocsImportJob,
+            new RefreshDocsCacheJob,
         ];
 
         Bus::batch([$jobs])
             ->finally(function () {
-                CleanupDocsImportJob::dispatch();
-
                 UpdatedRepositoriesValueStore::make()->flush();
             })
             ->dispatch();
@@ -42,7 +43,7 @@ final class ImportDocsFromRepositoriesCommand extends Command
         $this->info('Repository docs queued to sync!');
     }
 
-    private function convertRepositoriesToJobs(array $updatedRepositoryNames): array
+    protected function convertRepositoriesToJobs(array $updatedRepositoryNames): array
     {
         $repositoriesWithDocs = $this->getRepositoriesWithDocs();
 
@@ -50,20 +51,20 @@ final class ImportDocsFromRepositoriesCommand extends Command
             ->map(fn (string $repositoryName) => $repositoriesWithDocs[$repositoryName] ?? null)
             ->filter()
             ->map(fn (array $repository) => new ImportDocsFromRepositoryJob($repository))
-            ->toArray();
+            ->all();
     }
 
-    private function getRepositoriesWithDocs(): Collection
+    protected function getRepositoriesWithDocs(): Collection
     {
         return collect(config('docs.repositories'))->keyBy('repository');
     }
 
-    private function getUpdatedRepositoryNames(): array
+    protected function getUpdatedRepositoryNames(): array
     {
         if ($this->option('all')) {
             return collect(config('docs.repositories'))
                 ->map(fn (array $repo) => $repo['repository'])
-                ->toArray();
+                ->all();
         }
 
         $names = UpdatedRepositoriesValueStore::make()->getNames();

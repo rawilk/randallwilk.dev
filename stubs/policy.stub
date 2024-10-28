@@ -11,4 +11,28 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 class {{ class }}
 {
     use HandlesAuthorization;
+
+    public function viewAny({{ user }} $user)
+    {
+    }
+
+    public function view({{ user }} $user, {{ model }} ${{ modelVariable }})
+    {
+    }
+
+    public function create({{ user }} $user)
+    {
+    }
+
+    public function update({{ user }} $user)
+    {
+    }
+
+    public function deleteAny({{ user }} $user)
+    {
+    }
+
+    public function delete({{ user }} $user)
+    {
+    }
 }

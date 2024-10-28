@@ -7,7 +7,7 @@
         <div class="flex items-center justify-center | md:max-w-[600px] md:mx-auto | xl:max-w-[900px] | h-[calc(100vh-80px)] sm:h-[calc(100vh-88px)] xl:h-[calc(100vh-99px)]">
             <div class="md:grid md:grid-cols-3 md:gap-6">
                 <div class="md:col-span-1 text-center">
-                    <img src="{!! asset('images/randall.jpeg') !!}"
+                    <img src="{{ asset('images/randall.jpeg') }}"
                          alt="Randall Wilk"
                          class="w-40 mx-auto md:mx-0 sm:w-48 rounded-full border-4 border-brand"
                     >
@@ -16,14 +16,14 @@
                 <div class="mt-8 text-center | md:text-left md:mt-0 md:col-span-2">
                     <p class="text-2xl mb-1 font-bold text-slate-900">I'm Randall Wilk</p>
                     <div x-data="{
-                                options: {
-                                    stringsElement: '#typed-strings',
-                                    typeSpeed: 60,
-                                    backSpeed: 20,
-                                    backDelay: 1200,
-                                    showCursor: false,
-                                },
-                            }"
+                            options: {
+                                stringsElement: '#typed-strings',
+                                typeSpeed: 60,
+                                backSpeed: 20,
+                                backDelay: 1200,
+                                showCursor: false,
+                            },
+                        }"
                          x-init="new Typed($refs.typed, options)"
                     >
                         <div id="typed-strings" style="display: none;">

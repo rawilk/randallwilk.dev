@@ -4,53 +4,31 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\Access\Role;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-final class UserFactory extends Factory
+class UserFactory extends Factory
 {
     protected $model = User::class;
 
-    private static ?array $roles = null;
-
-    public function configure(): self
-    {
-        return $this->afterCreating(function (User $user) {
-            if (is_array(self::$roles)) {
-                $user->assignRole(self::$roles);
-
-                self::$roles = null;
-            }
-        });
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'timezone' => fake()->timezone(),
             'password' => 'secret',
             'remember_token' => Str::random(10),
+            'is_admin' => false,
         ];
     }
 
-    public function superAdmin(): self
+    public function admin(): static
     {
-        $roleModel = app(config('permission.models.role'));
-        $role = $roleModel::firstOrCreate(['name' => Role::$superAdminName], []);
-
-        self::$roles = [$role];
-
-        return $this;
+        return $this->state(['is_admin' => true]);
     }
 }

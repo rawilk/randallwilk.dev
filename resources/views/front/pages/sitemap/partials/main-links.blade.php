@@ -23,12 +23,5 @@
             <x-front.sitemap-link :url="route('legal.disclaimer')">{{ __('Disclaimers') }}</x-front.sitemap-link>
             <x-front.sitemap-link :url="route('legal.index')">{{ __('Legal Overview') }}</x-front.sitemap-link>
         </x-front.sitemap-link-section>
-
-        {{-- account --}}
-        <x-front.sitemap-link-section :title="__('Account')">
-            <x-front.sitemap-link :url="route('login')">{{ __('Sign in to Your Account') }}</x-front.sitemap-link>
-            <x-front.sitemap-link :url="route('profile.show')">{{ __('Manage Your Account') }}</x-front.sitemap-link>
-            <x-front.sitemap-link :url="route('profile.authentication')">{{ __('Authentication Settings') }}</x-front.sitemap-link>
-        </x-front.sitemap-link-section>
     </ul>
 </section>

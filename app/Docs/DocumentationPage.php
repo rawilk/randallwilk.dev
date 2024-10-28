@@ -20,11 +20,19 @@ use Spatie\Sheets\Sheet;
  * @property string $title
  * @property null|string $url
  */
-final class DocumentationPage extends Sheet
+class DocumentationPage extends Sheet
 {
     public function isIndex(): bool
     {
         return Str::endsWith($this->slug, '_index');
+    }
+
+    public function versionSelectAlias(): string
+    {
+        return Str::of($this->alias)
+            ->replace('v', '')
+            ->append('.x')
+            ->toString();
     }
 
     public function isRootPage(): bool

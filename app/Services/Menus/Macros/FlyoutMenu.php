@@ -6,12 +6,12 @@ namespace App\Services\Menus\Macros;
 
 use Spatie\Menu\Laravel\Menu;
 
-final class FlyoutMenu implements MenuMacro
+class FlyoutMenu implements MenuMacro
 {
     public function register(): void
     {
-        Menu::macro('flyout', function (callable $callback = null, callable $footerCallback = null) {
-            /** @var \Spatie\Menu\Laravel\Menu $this */
+        Menu::macro('flyout', function (?callable $callback = null, ?callable $footerCallback = null) {
+            /** @var Menu $this */
             $this->wrap('div', [
                 'x-data' => '{ open: false }',
                 'x-on:click.outside' => 'open = false',
@@ -19,7 +19,7 @@ final class FlyoutMenu implements MenuMacro
             ])
                 ->withoutParentTag()
                 ->setWrapperTag('div')
-                ->addClass('absolute z-10 -ml-4 mt-3 w-screen max-w-md transform lg:max-w-2xl lg:left-1/2 lg:ml-0 lg:-translate-x-1/2')
+                ->addClass('absolute z-10 -ml-4 mt-3 w-screen max-w-md transform xl:max-w-2xl md:left-1/2 md:ml-0 md:-translate-x-1/2 xl:-translate-x-[60%]')
                 ->setAttribute('x-show', 'open')
                 ->setAttribute('x-cloak', '')
                 ->setAttribute('x-transition:enter', 'transition ease-out duration-200')

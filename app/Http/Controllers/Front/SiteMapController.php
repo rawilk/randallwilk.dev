@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Front;
 use App\Docs\Docs;
 use Illuminate\Contracts\View\View;
 
-final class SiteMapController
+class SiteMapController
 {
     public function __invoke(Docs $docs): View
     {

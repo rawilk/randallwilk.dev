@@ -1,0 +1,22 @@
+@layer components {
+    .section {
+        @apply py-16;
+        @apply sm:py-24;
+        @apply xl:pb-32;
+    }
+
+    .section-group .section:first-child {
+        @apply pt-0;
+    }
+
+    .banner + .section-group {
+        @apply pt-0;
+    }
+
+    .section-group .section {
+        @apply py-0;
+        @apply pt-16;
+        @apply sm:pt-24;
+        @apply xl:pt-32;
+    }
+}

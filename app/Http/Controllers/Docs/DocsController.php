@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
-final class DocsController
+class DocsController
 {
     public function index(Docs $docs): View
     {
@@ -22,7 +22,7 @@ final class DocsController
         ]);
     }
 
-    public function repository(Docs $docs, string $repository, string $alias = null)
+    public function repository(Docs $docs, string $repository, ?string $alias = null)
     {
         try {
             $repository = $docs->getRepository($repository);
@@ -40,7 +40,7 @@ final class DocsController
                 $slug = $alias;
                 $alias = $latest;
 
-                return redirect()->action([DocsController::class, 'show'], [$repository->slug, $alias, $slug]);
+                return redirect()->action([__CLASS__, 'show'], [$repository->slug, $alias, $slug]);
             }
 
             $alias = $repository->getAlias($alias);
@@ -74,7 +74,7 @@ final class DocsController
             $slug = "{$alias}/{$slug}";
             $alias = $latest;
 
-            return redirect()->action([DocsController::class, 'show'], [$repository->slug, $alias, $slug]);
+            return redirect()->action([__CLASS__, 'show'], [$repository->slug, $alias, $slug]);
         }
 
         $alias = $repository->getAlias($alias);
@@ -82,7 +82,7 @@ final class DocsController
         if (! $alias) {
             $alias = $repository->aliases->keys()->first();
 
-            return redirect()->action([DocsController::class, 'show'], [$repository->slug, $alias, $slug]);
+            return redirect()->action([__CLASS__, 'show'], [$repository->slug, $alias, $slug]);
         }
 
         $pages = $alias->pages;
@@ -90,7 +90,7 @@ final class DocsController
         $page = $pages->firstWhere('slug', $slug);
 
         if (! $page) {
-            return redirect()->action([DocsController::class, 'repository'], [$repository->slug, $alias->slug]);
+            return redirect()->action([__CLASS__, 'repository'], [$repository->slug, $alias->slug]);
         }
 
         $repositories = $docs->getRepositories();
@@ -123,7 +123,7 @@ final class DocsController
         ));
     }
 
-    private function getNavigation(Collection $pages): Collection
+    protected function getNavigation(Collection $pages): Collection
     {
         $navigation = $pages
             ->reduce(function (array $navigation, DocumentationPage $page) {
@@ -139,7 +139,7 @@ final class DocsController
         return collect($navigation)->sortBy(fn (array $pages) => $pages['_index']->sort ?? -1);
     }
 
-    private function getSectionTitle(string $section, Collection $navigation): ?string
+    protected function getSectionTitle(string $section, Collection $navigation): ?string
     {
         if ($section === '_root') {
             return 'Introduction';
@@ -153,7 +153,7 @@ final class DocsController
         return $section['_index']['title'] ?? null;
     }
 
-    private function extractTableOfContents(string $contents): array
+    protected function extractTableOfContents(string $contents): array
     {
         return TableOfContentsBuilder::generate($contents);
     }

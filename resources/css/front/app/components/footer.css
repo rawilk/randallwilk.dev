@@ -1,0 +1,8 @@
+.footer-wrap .footer-list > li {
+    display: list-item;
+}
+
+.footer-links a {
+    @apply font-bold
+    hover:underline;
+}

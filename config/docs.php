@@ -32,6 +32,7 @@ return [
             ],
             'main_branch' => 'main',
             'category' => 'Laravel',
+            'archived' => true,
         ],
         [
             'name' => 'laravel-casters',
@@ -118,6 +119,7 @@ return [
             ],
             'main_branch' => 'main',
             'category' => 'Laravel',
+            'archived' => true,
         ],
 
         /*

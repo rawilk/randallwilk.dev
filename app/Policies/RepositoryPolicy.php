@@ -4,22 +4,70 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
-use App\Enums\PermissionEnum;
-use App\Models\GitHub\Repository;
-use App\Models\User\User;
+use App\Models\Repository;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Gate;
 
-final class RepositoryPolicy
+class RepositoryPolicy
 {
     use HandlesAuthorization;
 
-    public function delete(User $user, Repository $repository): bool
+    public function before(User $user, string $ability)
     {
-        return $user->hasPermissionTo(PermissionEnum::REPOSITORIES_MANAGE->value);
+        if ($ability === 'importDocs') {
+            return null;
+        }
+
+        if ($user->isAdmin()) {
+            return Response::allow();
+        }
     }
 
-    public function edit(User $user, Repository $repository): bool
+    public function update(User $user, Repository $repository)
     {
-        return $user->hasPermissionTo(PermissionEnum::REPOSITORIES_MANAGE->value);
+    }
+
+    public function delete(User $user, Repository $repository)
+    {
+    }
+
+    public function restore(User $user, Repository $repository)
+    {
+    }
+
+    public function deleteAny(User $user)
+    {
+    }
+
+    public function restoreAny(User $user)
+    {
+    }
+
+    public function view(User $user, Repository $repository)
+    {
+    }
+
+    public function viewAny(User $user)
+    {
+    }
+
+    public function manage(User $user)
+    {
+    }
+
+    public function importDocs(User $user, Repository $repository): Response
+    {
+        if (Gate::denies('manage', $repository::class)) {
+            return Response::deny();
+        }
+
+        $repositoriesWithDocs = collect(config('docs.repositories'))->keyBy('repository');
+
+        return Arr::has($repositoriesWithDocs, $repository->full_name)
+            ? Response::allow()
+            : Response::deny();
     }
 }

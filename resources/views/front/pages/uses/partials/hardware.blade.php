@@ -11,7 +11,7 @@
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/macos-ventura.png')"
+            :src="asset('images/uses/macos-sequoia.png')"
             alt="macOS Specs"
             class="w-1/2 mx-auto -mb-[35px]"
         />
@@ -54,14 +54,31 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Keychron K5 SE Mechanical Keyboard">
+    <x-front.section-list-item title="Epomaker x Aula F99 Keyboard">
         <p>
-            I used to love using the magic keyboard from Apple, but once I started using a mechanical keyboard I never looked back.
-            My current keyboard at both home and the office is the
-            <x-front.legal-link url="https://www.keychron.com/products/keychron-k5-se-ultra-slim-wireless-mechanical-keyboard?variant=40070921224281" target="_blank" text="Keychron K5 SE Mechanical Keyboard" />
-            and I'm in love with it. As much as I like the magic keyboard, this one just feels better to type on
-            for long periods of time. I got mine with blue switches, so it's loud and clicky, which is what I was
-            looking for in a keyboard.
+            By far the best mechanical keyboard I've ever used. The
+            <x-front.legal-link url="https://epomaker.com/products/epomaker-aula-f99?_pos=1&_sid=d2ca2dab0&_ss=r" target="_blank" text="Epomaker x Aula F99 Keyboard" />
+            looks and sounds amazing out-of-the-box.
+        </p>
+
+        <p>
+            However, I chose to put in
+            <x-front.legal-link
+                url="https://www.gateron.co/products/gateron-baby-kangaroo-tactile-switch-set?_pos=1&_psq=baby+kan&_ss=e&_v=1.0"
+                target="_blank"
+                text="Gateron Baby Kangaroo"
+            />
+            tactile switches, along with some
+            <x-front.legal-link
+                url="https://mechanicalkeyboards.com/products/kbdfans-pbtfans-retro-100-icon-base-149-key-double-shot-pbt-keycap-set?_pos=1&_psq=pbtfans+retro&_ss=e&_v=1.0"
+                target="_blank"
+                text="KBD Fans Retro Doubleshot PBT Keycaps"
+            />.
+            I love how the baby kangaroo switches sound and feel, and the retro keycaps paired nicely with this board in my opinion.
+        </p>
+
+        <p>
+            My only complaint with this board is how much it flexes when changing out the switches.
         </p>
     </x-front.section-list-item>
 
@@ -89,7 +106,7 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Apple AirPods Pro (1st Gen.)">
+    <x-front.section-list-item title="Apple AirPods Pro 2">
         <p>
             When I need headphones, I love using my
             <x-front.legal-link url="https://www.apple.com/airpods-pro/" target="_blank" text="Apple AirPods Pro" after="." />
@@ -140,11 +157,11 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="LTT Northern Lights Desk Pad">
+    <x-front.section-list-item title="Laravel Desk Pad">
         <p>
-            I really like the design of the
-            <x-front.legal-link url="https://www.lttstore.com/products/deskpad" target="_blank" text="LTT Northern Lights Desk Pad" />
-            and the fact that I can comfortably fit my keyboard, mouse and trackpad on it.
+            I like a big desk pad and when I can I try to support Laravel, so of course I was going to buy
+            <x-front.legal-link url="https://laravel.bigcartel.com/product/laravel-desk-pad" target="_blank" text="Laravel Desk Pad" />
+            when I found it. The quality and size of the pad are great and worth every penny.
         </p>
     </x-front.section-list-item>
 

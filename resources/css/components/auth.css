@@ -1,0 +1,11 @@
+@layer components {
+    .fi-auth-layout {
+        .fi-simple-header-heading {
+            @apply w-full text-center;
+        }
+
+        .fi-simple-header-subheading {
+            @apply w-full text-center text-pretty;
+        }
+    }
+}

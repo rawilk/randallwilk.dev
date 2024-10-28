@@ -21,7 +21,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('guard_name');
-            $table->dateTimestamps();
+            $table->datetimes();
 
             $table->unique(['name', 'guard_name']);
         });
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('guard_name');
             $table->string('description', 100)->nullable();
-            $table->dateTimestamps();
+            $table->datetimes();
         });
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames) {

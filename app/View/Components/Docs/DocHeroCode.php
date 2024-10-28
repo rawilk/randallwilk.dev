@@ -8,7 +8,7 @@ use App\Docs\DocHeaders\DocHeaderFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-final class DocHeroCode extends Component
+class DocHeroCode extends Component
 {
     /** @var class-string<\App\Docs\DocHeaders\DocHeader>|null */
     public ?string $config;
@@ -35,7 +35,7 @@ final class DocHeroCode extends Component
 
     public function hasHeroCode(): bool
     {
-        return ! is_null($this->config);
+        return filled($this->config);
     }
 
     public function render(): View

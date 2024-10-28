@@ -1,18 +1,34 @@
-<x-page title="{{ __('errors.503.title') }}" :show-header="false" :show-footer="false">
+<x-page
+    title="Scheduled Maintenance"
+    :show-header="false"
+    :show-footer="false"
+>
+    <div class="wrap pt-10 mb-10">
+        <x-logo
+            type="dual"
+            class="h-12 w-auto"
+        />
+    </div>
+
     <x-front.page-banner>
-        {!! Str::inlineMarkdown(__('errors.503.slogan')) !!}
+        Be right back!
 
         <x-slot:content>
-            <p class="banner-intro">{!! Str::inlineMarkdown(__('errors.503.description')) !!}</p>
+            <p class="banner-intro">
+                I'm currently working on some improvements to the site...<br>
+                Please check back in a couple of minutes!
+            </p>
         </x-slot:content>
     </x-front.page-banner>
 
-    <div class="section section-group pt-0">
-        <section class="section">
-            <div class="wrap markup">
-                <p class="text-lg !mb-2">{!! Str::inlineMarkdown(__('errors.503.contact_title')) !!}</p>
-                @include('errors.partials.contact')
-            </div>
-        </section>
-    </div>
+    <section class="section">
+        <div class="wrap markup">
+            <x-errors.contact>
+                <x-slot:title>
+                    Even though my site is undergoing some maintenance,<br>
+                    you can still reach me.
+                </x-slot:title>
+            </x-errors.contact>
+        </div>
+    </section>
 </x-page>

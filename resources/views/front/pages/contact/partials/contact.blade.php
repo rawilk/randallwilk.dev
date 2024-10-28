@@ -1,14 +1,18 @@
 <section id="email" class="section">
     <x-front.content-area>
-        {!! Str::markdown(__('front.contact.contact_details', ['email' => config('site.contact.email')])) !!}
+        {{
+            str(__('front.contact.contact_details', ['email' => config('randallwilk.contact.email')]))
+                ->markdown()
+                ->toHtmlString()
+        }}
 
         <p>{{ __('front.contact.social_media_intro') }}</p>
 
         <ul>
-            @foreach (config('site.contact.social') as $name => $url)
+            @foreach (config('randallwilk.contact.social') as $name => $socialContact)
                 <li class="text-base">
-                    <span>{!! $name !!}:</span>
-                    <a href="{{ $url }}" rel="nofollow noreferrer">{{ $url }}</a>
+                    <span>{{ $name }}:</span>
+                    <a href="{{ $socialContact['url'] }}" rel="nofollow noreferrer">{{ $socialContact['url'] }}</a>
                 </li>
             @endforeach
         </ul>

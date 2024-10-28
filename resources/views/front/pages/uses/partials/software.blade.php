@@ -15,9 +15,9 @@
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/macos-ventura-screenshot.png')"
+            :src="asset('images/uses/macos-sequoia-screenshot.png')"
             alt="macOS desktop"
-            class="mb-4"
+            class="my-6"
         />
 
         <p>
@@ -33,10 +33,10 @@
             I've never liked Spotlight on macOS, and previously I used Alfred as a replacement. However, now I've discovered
             <x-front.legal-link url="https://www.raycast.com/" target="_blank" text="Raycast" after="." />
             Raycast is my primary mode of navigating through macOS, as I've bound the keyboard shortcut to
-            <kbd class="italic text-slate-500 inline-flex gap-x-1">
-               <kbd class="font-sans">cmd</kbd>
-               <span class="font-sans">+</span>
-               <kbd class="font-sans">space</kbd>
+            <kbd class="italic text-gray-500 inline-flex gap-x-1 shadow-none">
+               <kbd class="font-mono">cmd</kbd>
+               <span class="font-mono">+</span>
+               <kbd class="font-mono">space</kbd>
             </kbd>
             (overriding Spotlight's keybinding).
         </p>
@@ -92,13 +92,6 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="VPN">
-        <p>
-            I usually only turn it on when I need to, but on both my MacBook and iPhone, I like to use
-            <x-front.legal-link url="https://nordvpn.com" target="_blank" text="NordVPN" after="." />
-        </p>
-    </x-front.section-list-item>
-
     <x-front.section-list-item title="Spark">
         <p>
             On both my MacBook and iPhone, I prefer to use the
@@ -123,18 +116,17 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Microsoft Office">
-        <p>
-            Although the subscription is kind of pricy, I still really like the using Microsoft Word & Excel from the
-            <x-front.legal-link url="https://www.office.com/" target="_blank" text="Microsoft Office 365" />
-            subscription. For me, they are just nicer to use than most alternatives.
-        </p>
-    </x-front.section-list-item>
-
     <x-front.section-list-item title="Bartender">
         <p>
             <x-front.legal-link url="https://www.macbartender.com/" target="_blank" text="Bartender" />
             is a nice little utility that helps manage how the menu bar is laid out for macOS.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="Showcode">
+        <p>
+            <x-front.legal-link url="https://showcode.app/" target="_blank" text="Showcode" />
+            makes it easy to share beautiful screenshots of code snippets.
         </p>
     </x-front.section-list-item>
 

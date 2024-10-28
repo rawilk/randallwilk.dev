@@ -6,17 +6,23 @@
 
     <x-front.content-area>
         <div class="text-sm">
-            {!! Str::inlineMarkdown(__('front.uses.last_updated', ['date' => '<time datetime="2023-07-13">July 13, 2023</time>'])) !!}
+            {{
+                str(__('front.uses.last_updated', ['date' => '<time datetime="2024-10-22">October 22, 2024</time>']))
+                    ->inlineMarkdown()
+                    ->toHtmlString()
+            }}
         </div>
 
-        <p>{!! Str::inlineMarkdown(__('front.uses.banner_intro')) !!}</p>
+        <p>
+            {{ str(__('front.uses.banner_intro'))->inlineMarkdown()->toHtmlString() }}
+        </p>
 
         <p class="italic">
-            {!! Str::inlineMarkdown(__('front.uses.affiliate_disclosure')) !!}
+            {{ str(__('front.uses.affiliate_disclosure'))->inlineMarkdown()->toHtmlString() }}
         </p>
     </x-front.content-area>
 
-    <div class="wrap space-y-20 mt-16 sm:mt-20 pb-20">
+    <div class="wrap space-y-20 mt-16 sm:mt-20 pb-32">
         @include('front.pages.uses.partials.dev-tools')
 
         @include('front.pages.uses.partials.hardware')
@@ -26,7 +32,7 @@
         @include('front.pages.uses.partials.misc')
     </div>
 
-    <div class="sm:mt-20 pb-32">
-        @include('front.pages.uses.partials.outro')
-    </div>
+    <x-slot:call-to-action>
+        <x-layout.front.support-cta />
+    </x-slot:call-to-action>
 </x-page>

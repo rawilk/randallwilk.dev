@@ -6,6 +6,6 @@ namespace App\Exceptions\Docs;
 
 use Exception;
 
-final class DocsImportException extends Exception
+class DocsImportException extends Exception
 {
 }

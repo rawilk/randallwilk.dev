@@ -1,10 +1,14 @@
-{{-- View Composer: SessionAlertViewComposer --}}
-@foreach ($sessionAlertTypes as $type)
-    <x-session-alert :type="$type">
+@foreach (App\Enums\SessionAlert::cases() as $case)
+    <x-feedback.session-alert :type="$case" :pull-from-session="$pullFromSession ?? false">
         @php($message = $component->message())
 
-        <x-alert :type="$type" :dismiss="$canDismissAlert ?? false" :role="null">
-            <p>{!! $message !!}</p>
-        </x-alert>
-    </x-session-alert>
+        <x-feedback.alert
+            :color="$case->color()"
+            remove-parent-on-dismiss
+            :dismiss="$canDismissAlert ?? false"
+            :role="null"
+        >
+            {{ str(e($message))->markdown()->toHtmlString() }}
+        </x-feedback.alert>
+    </x-feedback.session-alert>
 @endforeach

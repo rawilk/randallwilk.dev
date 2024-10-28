@@ -9,8 +9,16 @@
 
     <x-front.section-list-item title="DigitalOcean">
         <p>
-            My preferred hosting provider for my servers is
+            The vps server provider I still use for a lot of projects is
             <x-front.legal-link url="https://www.digitalocean.com/?refcode=0f79a60f0243&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge" target="_blank" text="DigitalOcean" after="." />
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="Hetzner">
+        <p>
+            For some projects I've started to use
+            <x-front.legal-link url="https://www.hetzner.com/" target="_blank" text="Hetzner" />
+            for vps hosting. I've found you can get more powerful servers for a cheaper cost than with providers like DigitalOcean.
         </p>
     </x-front.section-list-item>
 
