@@ -2,8 +2,8 @@
 
 <x-feedback.socialite-alert />
 
-<div>
-    <div class="grid xl:grid-cols-2 gap-4">
+<div class="mt-4">
+    <div class="grid gap-4">
         {{ $this->passkeyLoginAction }}
 
         {{ $this->githubLoginAction }}

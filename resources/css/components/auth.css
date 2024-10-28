@@ -1,17 +1,11 @@
-/*.fi-auth-layout {*/
-/*    .fi-simple-header {*/
-/*        @apply items-start;*/
-/*    }*/
-/*}*/
-
 @layer components {
     .fi-auth-layout {
         .fi-simple-header-heading {
-            @apply w-full text-left;
+            @apply w-full text-center;
         }
 
         .fi-simple-header-subheading {
-            @apply w-full text-left text-pretty;
+            @apply w-full text-center text-pretty;
         }
     }
 }
