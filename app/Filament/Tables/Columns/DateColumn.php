@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Tables\Columns;
 
+use Closure;
 use Filament\Tables\Columns\TextColumn;
 
 class DateColumn extends TextColumn
@@ -14,21 +15,21 @@ class DateColumn extends TextColumn
 
     public static string $defaultTimeDisplayFormat = 'g:i a';
 
-    public function date(?string $format = null, ?string $timezone = null): static
+    public function date(string|Closure|null $format = null, ?string $timezone = null): static
     {
         $format ??= static::$defaultDateDisplayFormat;
 
         return parent::date($format, $timezone);
     }
 
-    public function dateTime(?string $format = null, ?string $timezone = null): static
+    public function dateTime(string|Closure|null $format = null, ?string $timezone = null): static
     {
         $format ??= static::$defaultDateTimeDisplayFormat;
 
         return parent::dateTime($format, $timezone);
     }
 
-    public function time(?string $format = null, ?string $timezone = null): static
+    public function time(string|Closure|null $format = null, ?string $timezone = null): static
     {
         $format ??= static::$defaultTimeDisplayFormat;
 
