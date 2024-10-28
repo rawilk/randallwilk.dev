@@ -23,7 +23,6 @@
                     href="{{ route('home') }}"
                     class="flex h-8 w-40 sm:h-10"
                     title="{{ __('front.home_link_title') }}"
-                    wire:navigate
                 >
                     <span class="sr-only">{{ config('app.name') }}</span>
                     <x-logo

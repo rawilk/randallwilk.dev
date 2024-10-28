@@ -5,7 +5,6 @@
         'hover:bg-gray-100' => ! $active,
         'bg-gray-200' => $active,
     ])
-    wire:navigate
 >
     <span class="block text-base font-medium text-slate-900">{{ $label }}</span>
 

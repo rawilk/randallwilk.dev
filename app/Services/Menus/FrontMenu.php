@@ -63,7 +63,6 @@ class FrontMenu
                 ->routeIf($isMobile, 'open-source.packages', __('front.menus.open_source.packages'))
                 ->routeIf($isMobile, 'open-source.projects', __('front.menus.open_source.projects'))
                 ->routeIf($isMobile, 'open-source.support', __('front.menus.open_source.support'))
-                ->setItemAttribute('wire:navigate')
                 ->route('docs', __('front.menus.main.docs'))
                 ->route('contact', __('front.menus.main.contact'))
                 ->setActiveFromRequest();
