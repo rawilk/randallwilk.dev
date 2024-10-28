@@ -111,10 +111,12 @@ class RequestPasswordReset extends BaseComponent
 
         // If the user doesn't exist in the system, we'll send an email notifying them of the attempt.
         if ($status !== Password::RESET_LINK_SENT) {
-            defer(function () use ($data) {
-                LaravelNotification::route('mail', $data['email'])
-                    ->notifyNow(new ResetPasswordInvalidUser(filament()->getLoginUrl()));
-            });
+            LaravelNotification::route('mail', $data['email'])
+                ->notifyNow(new ResetPasswordInvalidUser(filament()->getLoginUrl()));
+
+            //            defer(function () use ($data) {
+            //
+            //            });
         }
 
         $this->email = $data['email'];
