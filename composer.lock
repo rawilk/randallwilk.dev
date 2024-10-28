@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0c92a12234267c5d4430c7f320e7eac",
+    "content-hash": "980cd16bd8f2ede57ec42c85863e805d",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2409,67 +2409,6 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
-        },
-        {
-            "name": "khatabwedaa/blade-css-icons",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/khatabwedaa/blade-css-icons.git",
-                "reference": "36e5b15de46b9d46ae36fc021318ea2bdc10d563"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/khatabwedaa/blade-css-icons/zipball/36e5b15de46b9d46ae36fc021318ea2bdc10d563",
-                "reference": "36e5b15de46b9d46ae36fc021318ea2bdc10d563",
-                "shasum": ""
-            },
-            "require": {
-                "blade-ui-kit/blade-icons": "^1.6",
-                "illuminate/support": "^9.0|^10.0|^11.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^7.0|^8.0|^9.0",
-                "phpunit/phpunit": "^9.0|^10.5|^11.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Khatabwedaa\\BladeCssIcons\\BladeCssIconsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Khatabwedaa\\BladeCssIcons\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Khatab Wedaa",
-                    "email": "khatabwedaa@gmail.com",
-                    "homepage": "https://twitter.com/khatabwedaa",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A package to easily make use of Css.gg in your Laravel Blade views.",
-            "homepage": "https://github.com/khatabwedaa/blade-css-icons",
-            "keywords": [
-                "Css.gg",
-                "blade",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/khatabwedaa/blade-css-icons/issues",
-                "source": "https://github.com/khatabwedaa/blade-css-icons/tree/1.4.0"
-            },
-            "time": "2024-03-20T21:23:28+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
@@ -7820,88 +7759,6 @@
                 }
             ],
             "time": "2024-08-27T18:56:10+00:00"
-        },
-        {
-            "name": "spatie/laravel-permission",
-            "version": "6.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-permission.git",
-                "reference": "fe973a58b44380d0e8620107259b7bda22f70408"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/fe973a58b44380d0e8620107259b7bda22f70408",
-                "reference": "fe973a58b44380d0e8620107259b7bda22f70408",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/auth": "^8.12|^9.0|^10.0|^11.0",
-                "illuminate/container": "^8.12|^9.0|^10.0|^11.0",
-                "illuminate/contracts": "^8.12|^9.0|^10.0|^11.0",
-                "illuminate/database": "^8.12|^9.0|^10.0|^11.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "laravel/passport": "^11.0|^12.0",
-                "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0",
-                "phpunit/phpunit": "^9.4|^10.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "6.x-dev",
-                    "dev-master": "6.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Spatie\\Permission\\PermissionServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Spatie\\Permission\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Permission handling for Laravel 8.0 and up",
-            "homepage": "https://github.com/spatie/laravel-permission",
-            "keywords": [
-                "acl",
-                "laravel",
-                "permission",
-                "permissions",
-                "rbac",
-                "roles",
-                "security",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-permission/issues",
-                "source": "https://github.com/spatie/laravel-permission/tree/6.9.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-06-22T23:04:52+00:00"
         },
         {
             "name": "spatie/laravel-sitemap",
