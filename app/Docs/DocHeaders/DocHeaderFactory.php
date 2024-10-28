@@ -16,6 +16,7 @@ class DocHeaderFactory
         'laravel-ups' => LaravelUPSDocHeader::class,
         'laravel-webauthn' => LaravelWebauthnDocHeader::class,
         'alpine-ripple' => AlpineRippleDocHeader::class,
+        'profile-filament-plugin' => ProfileFilamentDocHeader::class,
         'vue-context' => VueContextDocHeader::class,
     ];
 
