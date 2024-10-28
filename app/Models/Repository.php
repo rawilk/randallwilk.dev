@@ -9,7 +9,6 @@ use App\Enums\RepositorySort;
 use App\Enums\RepositoryType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
@@ -18,7 +17,6 @@ use Illuminate\Support\Str;
 class Repository extends Model
 {
     use Concerns\UsesHumanKeys;
-    use HasUuids;
     use SoftDeletes;
 
     public static function humanKeyPrefix(): string
