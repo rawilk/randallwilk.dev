@@ -18,7 +18,6 @@
             <dd class="mt-1">
                 <a href="{{ $previous->url }}"
                    class="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
-                   wire:navigate
                 >
                     <span aria-hidden="true">&larr;</span>
                     <span>{{ $previous->title }}</span>
@@ -36,7 +35,6 @@
             <dd class="mt-1">
                 <a href="{{ $next->url }}"
                    class="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
-                   wire:navigate
                 >
                     <span>{{ $next->title }}</span>
                     <span aria-hidden="true">&rarr;</span>

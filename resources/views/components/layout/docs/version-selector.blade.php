@@ -30,7 +30,6 @@
                         'text-sky-500 font-semibold' => $alias->slug === $page->alias,
                         'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white' => $alias->slug !== $page->alias,
                     ])
-                    wire:navigate
                 >
                     <span>Version&nbsp;</span>
                     <span>{{ $alias->versionSelectAlias() }}</span>

@@ -24,6 +24,6 @@ const setLinkTargetToBlank = el => {
     el.setAttribute('rel', 'noopener');
 };
 
-document.addEventListener('livewire:navigated', () => {
+document.addEventListener('DOMContentLoaded', () => {
     configureLinks();
 });

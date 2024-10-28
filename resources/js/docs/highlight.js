@@ -3,7 +3,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers';
 
 Prism.manual = true;
 
-document.addEventListener('livewire:navigated', () => {
+document.addEventListener('DOMContentLoaded', () => {
     highlightCode();
 });
 

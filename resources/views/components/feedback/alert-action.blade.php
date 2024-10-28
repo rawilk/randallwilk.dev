@@ -23,11 +23,7 @@
         );
     @endphp
 
-    <a {{ $attributes->class($classes)->merge(['href' => $href]) }}
-       @if ($shouldWireNavigate)
-           wire:navigate
-        @endif
-    >
+    <a {{ $attributes->class($classes)->merge(['href' => $href]) }}>
         {{ $slot }}
     </a>
 @else

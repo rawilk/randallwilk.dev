@@ -65,7 +65,7 @@
                         {note}
                         You're browsing the documentation for an old version of <span class="font-bold">{{ $repository->slug }}</span>.
                         Consider upgrading your project to
-                        <a href="{{ action([App\Http\Controllers\Docs\DocsController::class, 'repository'], [$repository->slug, $latestVersion->slug]) }}" wire:navigate>{{ $latestVersion->slug }}</a>.
+                        <a href="{{ action([App\Http\Controllers\Docs\DocsController::class, 'repository'], [$repository->slug, $latestVersion->slug]) }}">{{ $latestVersion->slug }}</a>.
 
                         Check your version with the following command:
                         <br><br>

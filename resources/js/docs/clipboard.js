@@ -12,7 +12,7 @@ const copiedSvg = `
 </svg>
 `;
 
-document.addEventListener('livewire:navigated', () => {
+document.addEventListener('DOMContentLoaded', () => {
     const codeBlocks = document.querySelectorAll('#docs-content .prism-wrapper');
 
     codeBlocks.forEach((element, key) => {

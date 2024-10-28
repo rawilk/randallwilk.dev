@@ -93,6 +93,6 @@ const replaceBlockquotesWithCallouts = () => {
     });
 };
 
-document.addEventListener('livewire:navigated', () => {
+document.addEventListener('DOMContentLoaded', () => {
     replaceBlockquotesWithCallouts();
 });

@@ -6,7 +6,6 @@
             @foreach ($repositories as $repository)
                 <x-front.sitemap-link
                     :url="action([\App\Http\Controllers\Docs\DocsController::class, 'repository'], $repository->slug)"
-                    :spa="false"
                 >
                     {{ $repository->slug }}
                 </x-front.sitemap-link>
