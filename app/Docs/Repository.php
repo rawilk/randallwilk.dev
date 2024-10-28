@@ -10,9 +10,9 @@ class Repository
 {
     public ?string $category;
 
-    private ?bool $archived = null;
+    protected ?bool $archived = null;
 
-    private ?array $config;
+    protected ?array $config;
 
     /**
      * @param  \Illuminate\Support\Collection<int, \App\Docs\Alias>  $aliases
