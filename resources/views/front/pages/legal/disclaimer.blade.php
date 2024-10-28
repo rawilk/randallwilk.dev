@@ -9,7 +9,7 @@
                 <x-front.link>
                     <div class="flex items-center">
                         <x-heroicon-s-chevron-left class="h-3 w-3 mr-2" />
-                        <a href="{{ route('legal.index') }}" class="text-sm" wire:navigate>
+                        <a href="{{ route('legal.index') }}" class="text-sm">
                             <span>{{ __('front.legal.back_link') }}</span>
                         </a>
                     </div>

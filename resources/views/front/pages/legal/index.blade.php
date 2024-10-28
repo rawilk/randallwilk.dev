@@ -17,7 +17,7 @@
                     <p class="!mb-3">{{ __('front.legal.privacy_description') }}</p>
                     <x-front.link>
                         <div class="flex items-center">
-                            <a href="{{ route('legal.privacy') }}" wire:navigate>
+                            <a href="{{ route('legal.privacy') }}">
                                 {{ __('front.legal.privacy_link') }}
                             </a>
                             <x-heroicon-s-chevron-right class="h-3 w-3 ml-2" />
@@ -32,7 +32,7 @@
                     <p class="!mb-3">{{ __('front.legal.terms_description') }}</p>
                     <x-front.link>
                         <div class="flex items-center">
-                            <a href="{{ route('legal.terms') }}" wire:navigate>
+                            <a href="{{ route('legal.terms') }}">
                                 {{ __('front.legal.terms_link') }}
                             </a>
                             <x-heroicon-s-chevron-right class="h-3 w-3 ml-2" />
@@ -47,7 +47,7 @@
                     <p class="!mb-3">{{ __('front.legal.disclaimer_legal_description') }}</p>
                     <x-front.link>
                         <div class="flex items-center">
-                            <a href="{{ route('legal.disclaimer') }}" wire:navigate>
+                            <a href="{{ route('legal.disclaimer') }}">
                                 {{ __('front.legal.disclaimer_link') }}
                             </a>
                             <x-heroicon-s-chevron-right class="h-3 w-3 ml-2" />
