@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Cache;
 use Rawilk\LaravelCasters\Contracts\HasSingleNameColumn;
 use Rawilk\LaravelCasters\Support\Name;
 use Rawilk\ProfileFilament\Concerns\TwoFactorAuthenticatable;
@@ -73,11 +72,8 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, 
 
     protected static function booted(): void
     {
-        // Prevent non-super admin users from seeing super admin users.
-        //        self::addGlobalScope(new SuperAdminScope);
-
-        self::created(fn () => Cache::forget('users.count'));
-        self::deleted(fn () => Cache::forget('users.count'));
+        static::created(fn () => cache()->forget('users.count'));
+        static::deleted(fn () => cache()->forget('users.count'));
     }
 
     protected function casts(): array
