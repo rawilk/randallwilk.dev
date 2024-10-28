@@ -12,10 +12,11 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Sleep;
 use Spatie\Fork\Fork;
 use Symfony\Component\Process\Process;
 
-final class ImportDocsFromRepositoryJob implements ShouldQueue
+class ImportDocsFromRepositoryJob implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -23,7 +24,7 @@ final class ImportDocsFromRepositoryJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public function __construct(private readonly array $repository)
+    public function __construct(protected readonly array $repository)
     {
     }
 
@@ -38,16 +39,18 @@ final class ImportDocsFromRepositoryJob implements ShouldQueue
         Fork::new()
             ->concurrent(4)
             ->run(...$callables);
+
+        Sleep::for(1)->second();
     }
 
-    private function convertRepositoryToCallables(): array
+    protected function convertRepositoryToCallables(): array
     {
         return collect([$this->repository])
             ->flatMap(function (array $repository) {
                 return collect($repository['branches'])
                     ->map(fn ($alias, string $branch) => [$repository, $alias, $branch])
                     ->values()
-                    ->toArray();
+                    ->all();
             })
             ->mapSpread(function (array $repository, string $alias, string $branch) {
                 $process = $this->createProcessComponent($repository, $branch, $alias);
@@ -67,12 +70,13 @@ final class ImportDocsFromRepositoryJob implements ShouldQueue
                     Log::channel('docs')->info("Import process finished for {$repository['name']} {$branch}");
 
                     cache()->store('docs')->forget($repository['name']);
+                    cache()->store('docs')->forget($repository['name'] . ':aliases');
                 };
             })
             ->toArray();
     }
 
-    private function createProcessComponent(array $repository, string $branch, string $alias): Process
+    protected function createProcessComponent(array $repository, string $branch, string $alias): Process
     {
         $accessToken = config('services.github.docs_access_token');
         $publicDocsAssetPath = public_path('doc-files');

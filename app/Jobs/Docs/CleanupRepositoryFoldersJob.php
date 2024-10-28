@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 
-final class CleanupRepositoryFoldersJob implements ShouldQueue
+class CleanupRepositoryFoldersJob implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;

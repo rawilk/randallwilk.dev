@@ -7,13 +7,12 @@ namespace App\Models;
 use App\Enums\ProgrammingLanguage;
 use App\Enums\RepositorySort;
 use App\Enums\RepositoryType;
-use App\Support\Formatting\ShortNumberFormatter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class Repository extends Model
@@ -27,34 +26,9 @@ class Repository extends Model
         return 'repo';
     }
 
-    public function getUrlAttribute(): string
+    public function getRouteKeyName(): string
     {
-        return "https://github.com/rawilk/{$this->name}";
-    }
-
-    public function getDisplayNameAttribute(): string
-    {
-        return $this->scoped_name ?? $this->name;
-    }
-
-    public function getDownloadsForHumansAttribute(): string
-    {
-        return number_format($this->downloads);
-    }
-
-    public function getDownloadsForFrontAttribute(): string
-    {
-        return ShortNumberFormatter::of($this->downloads)->format();
-    }
-
-    public function getStarsForHumansAttribute(): string
-    {
-        return number_format($this->stars);
-    }
-
-    public function getStarsForFrontAttribute(): string
-    {
-        return ShortNumberFormatter::of($this->stars)->format();
+        return 'name';
     }
 
     public function isPackage(): bool
@@ -72,47 +46,33 @@ class Repository extends Model
         return filled($this->documentation_url);
     }
 
-    public function getTypeAttribute(null|string|RepositoryType $type): ?RepositoryType
-    {
-        if (is_null($type)) {
-            return null;
-        }
-
-        if ($type instanceof RepositoryType) {
-            return $type;
-        }
-
-        return RepositoryType::tryFrom($type);
-    }
-
-    public function getFullNameAttribute(): string
-    {
-        return "rawilk/{$this->name}";
-    }
-
     public function setTopics(Collection $topics): self
     {
-        $this->forceFill(['topics' => $topics->toArray()])->save();
+        $this->fill(['topics' => $topics->toArray()])->save();
 
         return $this;
     }
 
-    public function scopeByType(Builder $query, ?string $type): void
+    public function scopeByType(Builder $query, ?RepositoryType $type): void
     {
-        if (! $type) {
-            return;
-        }
-
         $query->when(
-            $type !== 'missing',
-            fn ($query) => $query->where('type', $type),
-            fn ($query) => $query->whereNull('type'),
+            $type !== null,
+            fn (Builder $query) => $query->where($query->qualifyColumn('type'), $type),
         );
     }
 
     public function scopeVisible(Builder $query): void
     {
-        $query->where('visible', true);
+        $query->where($query->qualifyColumn('visible'), true);
+    }
+
+    public function scopeSearch(Builder $query, ?string $search): void
+    {
+        if (! $search) {
+            return;
+        }
+
+        $query->whereLike($query->qualifyColumn('name'), "%{$search}%");
     }
 
     public function scopeApplySort(Builder $query, ?string $sort = null): void
@@ -124,14 +84,9 @@ class Repository extends Model
         }
 
         $query->orderBy(
-            $enum->value,
+            $query->qualifyColumn($enum->value),
             Str::startsWith($sort, '-') ? 'desc' : 'asc',
         );
-    }
-
-    public function getTypeBackgroundColorAttribute(): string
-    {
-        return $this->type?->bgColor() ?? 'bg-gray-200';
     }
 
     /**
@@ -144,11 +99,43 @@ class Repository extends Model
 
     protected static function booted(): void
     {
-        self::updating(function (self $repository) {
+        static::updating(function (self $repository) {
             if ($repository->isDirty(['type', 'visible'])) {
-                Cache::forget('repos.visible_count');
+                cache()->forget('repos.visible_count');
             }
         });
+    }
+
+    protected function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (): string => "rawilk/{$this->name}",
+        );
+    }
+
+    protected function displayName(): Attribute
+    {
+        return Attribute::make(
+            get: fn (): string => $this->scoped_name ?? $this->name,
+        );
+    }
+
+    protected function url(): Attribute
+    {
+        return Attribute::make(
+            get: fn (): string => "https://github.com/rawilk/{$this->name}",
+        )->shouldCache();
+    }
+
+    protected function type(): Attribute
+    {
+        return Attribute::make(
+            get: fn (null|string|RepositoryType $value) => match (true) {
+                default => null,
+                is_string($value) => RepositoryType::tryFrom($value),
+                $value instanceof RepositoryType => $value,
+            },
+        )->shouldCache();
     }
 
     protected function casts(): array

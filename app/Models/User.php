@@ -4,30 +4,31 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Models\Imports\Import;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
+use Rawilk\LaravelCasters\Contracts\HasSingleNameColumn;
 use Rawilk\LaravelCasters\Support\Name;
+use Rawilk\ProfileFilament\Concerns\TwoFactorAuthenticatable;
+use Rawilk\ProfileFilament\Contracts\PendingUserEmail\MustVerifyNewEmail;
+use Rawilk\Settings\Models\HasSettings;
+use Rawilk\Settings\Support\Context;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
+class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, HasSingleNameColumn, MustVerifyNewEmail
 {
-    //    use HasAvatar;
-    //    use HasDatesForHumans;
+    use Concerns\HasAvatar;
     use Concerns\UsesHumanKeys;
     use HasFactory;
+    use HasSettings;
     use HasUuids;
-
-    //    use Impersonatable;
     use Notifiable;
-    //    use TwoFactorAuthenticatable;
+    use TwoFactorAuthenticatable;
 
     protected $hidden = [
         'password',
@@ -42,11 +43,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
     public function isAdmin(): bool
     {
         return $this->is_admin;
-    }
-
-    public function imports(): HasMany
-    {
-        return $this->hasMany(Import::class);
     }
 
     public function canAccessPanel(Panel $panel): bool
@@ -64,7 +60,15 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return null;
+        return $this->avatar_url;
+    }
+
+    public function context(): Context
+    {
+        return new Context([
+            'model' => static::class,
+            'id' => $this->getRouteKey(),
+        ]);
     }
 
     protected static function booted(): void

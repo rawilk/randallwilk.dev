@@ -1,6 +1,0 @@
-.wrap {
-    @apply px-8;
-    @apply lg:px-16;
-    @apply mx-auto;
-    max-width: 72rem;
-}

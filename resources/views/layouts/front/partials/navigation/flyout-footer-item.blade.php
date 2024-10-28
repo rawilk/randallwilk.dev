@@ -1,9 +1,11 @@
-<a href="{{ $url }}"
+<a
+    href="{{ $url }}"
     @class([
         '-m-3 flow-root rounded-md p-3',
         'hover:bg-gray-100' => ! $active,
         'bg-gray-200' => $active,
     ])
+    wire:navigate
 >
     <span class="block text-base font-medium text-slate-900">{{ $label }}</span>
 

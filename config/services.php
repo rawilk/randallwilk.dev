@@ -37,6 +37,12 @@ return [
         'email' => env('HORIZON_EMAIL'),
     ],
 
+    'google' => [
+        'analytics' => [
+            'id' => env('GOOGLE_ANALYTICS_ID'),
+        ],
+    ],
+
     'algolia' => [
         'app_id' => env('ALGOLIA_APP_ID'),
     ],

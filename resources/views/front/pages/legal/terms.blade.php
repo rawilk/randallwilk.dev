@@ -9,7 +9,7 @@
                 <x-front.link>
                     <div class="flex items-center">
                         <x-heroicon-s-chevron-left class="h-3 w-3 mr-2" />
-                        <a href="{!! route('legal.index') !!}" class="text-sm">
+                        <a href="{{ route('legal.index') }}" class="text-sm" wire:navigate>
                             <span>{{ __('front.legal.back_link') }}</span>
                         </a>
                     </div>
@@ -98,7 +98,7 @@
                 <address>
                     RANDALL WILK<br>
                     Email:
-                    <x-link href="mailto:{{ config('site.contact.email') }}" :app-link="false" hide-external-indicator>{{ config('site.contact.email') }}</x-link>
+                    <x-front.legal-link url="mailto:{{ config('randallwilk.contact.email') }}" :text="config('randallwilk.contact.email')" />
                 </address>
                 <p>
                     Please feel free to contact me if you have further questions or comments.

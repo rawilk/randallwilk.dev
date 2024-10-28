@@ -1,0 +1,21 @@
+@import 'bootstrap.css';
+@import '/vendor/filament/filament/resources/css/theme.css';
+@import 'components/variables.css';
+@import '../../components/front/index.css';
+@import '../../components/logo.css';
+@import 'components/banner.css';
+@import 'components/bullets.css';
+@import 'components/counters.css';
+@import 'components/footer.css';
+@import 'components/forms.css';
+@import 'components/gradient.css';
+@import 'components/line.css';
+@import 'components/links.css';
+@import 'components/markup.css';
+@import 'components/section.css';
+@import 'components/select.css';
+@import 'components/title.css';
+@import 'components/wrap.css';
+@import 'components/utilities.css';
+
+@config('tailwind.config.js');

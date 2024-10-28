@@ -4,23 +4,26 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum ThemeOption: string
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasLabel;
+
+enum ThemeOption: string implements HasIcon, HasLabel
 {
     case Light = 'light';
     case Dark = 'dark';
     case System = 'system';
 
-    public function label(): string
-    {
-        return __("enums.theme_select.{$this->value}");
-    }
-
-    public function icon(): string
+    public function getIcon(): ?string
     {
         return match ($this) {
-            self::Light => 'theme.light',
-            self::Dark => 'theme.dark',
-            self::System => 'theme.system',
+            self::Light => 'heroicon-m-sun',
+            self::Dark => 'heroicon-m-moon',
+            self::System => 'heroicon-m-computer-desktop',
         };
+    }
+
+    public function getLabel(): ?string
+    {
+        return __("enums/theme-select.{$this->value}.label");
     }
 }

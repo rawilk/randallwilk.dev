@@ -6,7 +6,7 @@ namespace App\Docs;
 
 use Illuminate\Support\Collection;
 
-final class Repository
+class Repository
 {
     public ?string $category;
 

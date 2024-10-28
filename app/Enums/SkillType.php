@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum SkillType: string
+use Filament\Support\Contracts\HasLabel;
+
+enum SkillType: string implements HasLabel
 {
     case TechStack = 'tech';
     case SkillStack = 'skill_stack';
     case Services = 'services';
 
-    public function label(): string
+    public function getLabel(): ?string
     {
-        return __("enums.skills.{$this->value}");
+        return __("enums/skill-type.{$this->value}.label");
     }
 }

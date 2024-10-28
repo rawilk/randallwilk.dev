@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum RepositorySort: string
+use Filament\Support\Contracts\HasLabel;
+
+enum RepositorySort: string implements HasLabel
 {
     case Downloads = 'downloads';
     case Name = 'name';
@@ -25,8 +27,8 @@ enum RepositorySort: string
         return $this->value;
     }
 
-    public function label(): string
+    public function getLabel(): ?string
     {
-        return __("enums.repository_sort.{$this->value}");
+        return __("enums/repository-sort.{$this->value}.label");
     }
 }

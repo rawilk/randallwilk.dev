@@ -1,0 +1,13 @@
+@layer components {
+    .tbl-inactive {
+        .fi-ta-col-wrp:not(:has(input)),
+        .fi-dropdown-trigger {
+            @apply opacity-25;
+        }
+
+        .fi-checkbox-input,
+        .fi-ta-col-wrp:has(input) {
+            @apply opacity-75;
+        }
+    }
+}

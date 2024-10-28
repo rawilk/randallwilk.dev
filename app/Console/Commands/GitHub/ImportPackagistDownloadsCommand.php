@@ -7,7 +7,7 @@ namespace App\Console\Commands\GitHub;
 use App\Jobs\Repositories\ImportPackagistDownloadsJob;
 use Illuminate\Console\Command;
 
-final class ImportPackagistDownloadsCommand extends Command
+class ImportPackagistDownloadsCommand extends Command
 {
     protected $signature = 'import:packagist-downloads {--repo= : Only import downloads for a specific package}';
 

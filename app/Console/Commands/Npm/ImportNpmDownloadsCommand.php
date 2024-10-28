@@ -7,7 +7,7 @@ namespace App\Console\Commands\Npm;
 use App\Jobs\Repositories\ImportNpmDownloadsJob;
 use Illuminate\Console\Command;
 
-final class ImportNpmDownloadsCommand extends Command
+class ImportNpmDownloadsCommand extends Command
 {
     protected $signature = 'import:npm-downloads {--repo= : Only import downloads for a specific package}';
 

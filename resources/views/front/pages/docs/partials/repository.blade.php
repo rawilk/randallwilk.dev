@@ -1,31 +1,32 @@
-<x-front.section-list-link-item
-    :url="action([\App\Http\Controllers\Docs\DocsController::class, 'repository'], $repository->slug)"
+@use(App\Http\Controllers\Docs\DocsController)
+
+<x-front.oss-link-card
+    :title="$repository->slug"
+    :href="action([DocsController::class, 'repository'], $repository->slug)"
+    :badge="$repository->isArchived() ? 'Archived' : null"
+    :badge-color="Filament\Support\Colors\Color::Amber"
 >
-    <x-slot:title>
-        {{ $repository->slug }}
+    <div class="h-full flex flex-col">
+        <p class="mb-12">
+            {{ $repository->aliases->last()?->slogan }}
+        </p>
 
-        @if ($repository->isArchived())
-            <x-badge variant="orange">{{ __('front.docs.repo_archived') }}</x-badge>
-        @endif
-    </x-slot:title>
-
-    <p class="relative mt-2 text-sm z-20 text-slate-600">
-        {{ $repository->aliases->last()?->slogan }}
-    </p>
-
-    <div class="relative mt-4 grid grid-flow-col gap-2 justify-start items-center text-xs">
-        @foreach ($repository->aliases as $alias)
-            <div class="z-20">
-                <a href="{{ action([\App\Http\Controllers\Docs\DocsController::class, 'repository'], [$repository->slug, $alias->slug]) }}"
-                    @class([
-                        'inline-flex items-center justify-center rounded-full w-4 h-4 bg-opacity-50 hover:bg-opacity-100 p-3',
-                        'bg-blue-100 text-blue-300 font-bold' => $loop->first,
-                        'bg-gray-200 text-gray-400' => ! $loop->first,
-                    ])
-                >
-                    {{ $alias->slug }}
-                </a>
-            </div>
-        @endforeach
+        <div class="flex flex-wrap items-center gap-2 mt-auto">
+            @foreach ($repository->aliases as $alias)
+                <span>
+                    <a
+                        href="{{ action([DocsController::class, 'repository'], [$repository->slug, $alias->slug]) }}"
+                        @class([
+                            'relative z-20',
+                            'inline-flex items-center justify-center rounded-full font-bold w-6 h-6',
+                            'bg-brand text-white text-[11px]' => $loop->first,
+                            'bg-transparent text-black text-[14px]' => ! $loop->first,
+                        ])
+                    >
+                        {{ $alias->slug }}
+                    </a>
+                </span>
+            @endforeach
+        </div>
     </div>
-</x-front.section-list-link-item>
+</x-front.oss-link-card>

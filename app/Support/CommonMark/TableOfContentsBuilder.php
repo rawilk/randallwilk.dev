@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
  * by the commonmark package into an array so we can render a
  * "table of contents" wherever we need on the page.
  */
-final readonly class TableOfContentsBuilder
+readonly class TableOfContentsBuilder
 {
     public function __construct(private string $content)
     {
@@ -35,7 +35,7 @@ final readonly class TableOfContentsBuilder
         return $this->getHeadingLinks($dom);
     }
 
-    private function getHeadingLinks(DOMDocument $document): array
+    protected function getHeadingLinks(DOMDocument $document): array
     {
         if (! $tableOfContents = $this->getTableOfContents($document)) {
             return [];
@@ -52,7 +52,7 @@ final readonly class TableOfContentsBuilder
         return $headings;
     }
 
-    private function parseLi(DOMElement $node, int $level = 0): ?array
+    protected function parseLi(DOMElement $node, int $level = 0): ?array
     {
         if ($node->tagName !== 'li') {
             return null;
@@ -88,7 +88,7 @@ final readonly class TableOfContentsBuilder
     /**
      * @return \Generator<\DOMElement>
      */
-    private function htmlChildren(DOMElement $node): Generator
+    protected function htmlChildren(DOMElement $node): Generator
     {
         foreach ($node->childNodes as $childNode) {
             if ($childNode->nodeName === '#text') {
@@ -99,7 +99,7 @@ final readonly class TableOfContentsBuilder
         }
     }
 
-    private function getTableOfContents(DOMDocument $document): ?DOMElement
+    protected function getTableOfContents(DOMDocument $document): ?DOMElement
     {
         foreach ($document->getElementsByTagName('ul') as $node) {
             if ($this->isTableOfContents($node)) {
@@ -110,7 +110,7 @@ final readonly class TableOfContentsBuilder
         return null;
     }
 
-    private function isTableOfContents(DOMElement $node): bool
+    protected function isTableOfContents(DOMElement $node): bool
     {
         if (! $node->hasAttribute('class')) {
             return false;

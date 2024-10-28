@@ -4,21 +4,24 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum RepositoryType: string
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
+
+enum RepositoryType: string implements HasColor, HasLabel
 {
     case Package = 'package';
     case Project = 'project';
 
-    public function bgColor(): string
+    public function getLabel(): ?string
     {
-        return match ($this) {
-            self::Package => 'bg-green-200',
-            self::Project => 'bg-blue-200',
-        };
+        return __("enums/repository-type.{$this->value}.label");
     }
 
-    public function label(): string
+    public function getColor(): string|array|null
     {
-        return __("enums.repository_type.{$this->value}");
+        return match ($this) {
+            self::Package => 'success',
+            self::Project => 'primary',
+        };
     }
 }

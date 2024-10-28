@@ -1,0 +1,9 @@
+@layer components {
+    .wrap {
+        @apply px-8
+        lg:px-16
+        mx-auto;
+
+        max-width: 72rem;
+    }
+}

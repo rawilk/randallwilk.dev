@@ -16,7 +16,7 @@ use Illuminate\Support\Collection;
 use Spatie\Packagist\PackagistClient;
 use Spatie\Packagist\PackagistUrlGenerator;
 
-final class ImportPackagistDownloadsJob implements ShouldQueue
+class ImportPackagistDownloadsJob implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -24,7 +24,7 @@ final class ImportPackagistDownloadsJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public function __construct(private readonly string $username, private readonly ?string $packageName = null)
+    public function __construct(protected readonly string $username, protected readonly ?string $packageName = null)
     {
     }
 
@@ -44,7 +44,7 @@ final class ImportPackagistDownloadsJob implements ShouldQueue
             });
     }
 
-    private function getPackages(): Collection
+    protected function getPackages(): Collection
     {
         $packagist = new PackagistClient(new Client, new PackagistUrlGenerator);
 

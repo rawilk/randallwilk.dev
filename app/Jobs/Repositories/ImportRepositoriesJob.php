@@ -15,10 +15,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Date;
 
-final class ImportRepositoriesJob implements ShouldQueue
+class ImportRepositoriesJob implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -26,9 +25,9 @@ final class ImportRepositoriesJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    private GitHubApi $api;
+    protected GitHubApi $api;
 
-    public function __construct(private readonly string $username, private readonly ?string $repositoryName = null)
+    public function __construct(protected readonly string $username, protected readonly ?string $repositoryName = null)
     {
     }
 
@@ -54,16 +53,16 @@ final class ImportRepositoriesJob implements ShouldQueue
             ]);
 
             $repository->setTopics(
-                Cache::remember(
-                    "remember_topics-{$repository->name}",
-                    3600,
-                    fn () => $this->api->fetchRepositoryTopics($this->username, $repository->name),
+                cache()->remember(
+                    key: "remember_topics-{$repository->name}",
+                    ttl: now()->addHour(),
+                    callback: fn () => $this->api->fetchRepositoryTopics($this->username, $repository->name),
                 )
             );
         });
     }
 
-    private function fetchRepositories(): Collection
+    protected function fetchRepositories(): Collection
     {
         if ($this->repositoryName) {
             return collect([$this->api->fetchSingleRepository($this->username, $this->repositoryName)])->filter();

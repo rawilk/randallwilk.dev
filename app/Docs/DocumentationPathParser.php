@@ -7,7 +7,7 @@ namespace App\Docs;
 use Illuminate\Support\Str;
 use Spatie\Sheets\PathParser;
 
-final class DocumentationPathParser implements PathParser
+class DocumentationPathParser implements PathParser
 {
     public function parse(string $path): array
     {
@@ -26,6 +26,9 @@ final class DocumentationPathParser implements PathParser
 
         $slug = Str::before(implode('/', array_slice($parts, 1)), '.md');
 
-        return compact('slug', 'alias');
+        return [
+            'slug' => $slug,
+            'alias' => $alias,
+        ];
     }
 }

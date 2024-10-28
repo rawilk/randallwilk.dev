@@ -7,9 +7,34 @@ const icons = {
           </svg>`,
 };
 
+const fixBlockquote = el => {
+    if (el.innerText === '') {
+        el.remove();
+
+        return;
+    }
+
+    const wrapper = el.closest('div');
+
+    wrapper.querySelector('.prose').innerHTML = el.innerHTML;
+
+    el.remove();
+};
 
 const replaceBlockquotesWithCallouts = () => {
     [...document.querySelectorAll('#docs-content blockquote p')].forEach(el => {
+        // Prevent double highlighting when used with wire:navigate.
+        if (el.closest('blockquote').getAttribute('data-processed') === '1') {
+            // There's a bug right now, and this is the only way can think to fix it for now.
+            if (! el.classList.contains('prose')) {
+                fixBlockquote(el);
+            }
+
+            return;
+        }
+
+        el.closest('blockquote').setAttribute('data-processed', '1');
+
         if (el.parentNode.classList.contains('ignore')) {
             return;
         }
@@ -68,4 +93,6 @@ const replaceBlockquotesWithCallouts = () => {
     });
 };
 
-replaceBlockquotesWithCallouts();
+document.addEventListener('livewire:navigated', () => {
+    replaceBlockquotesWithCallouts();
+});

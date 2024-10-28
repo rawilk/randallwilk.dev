@@ -15,7 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 
-final class ImportNpmDownloadsJob implements ShouldQueue
+class ImportNpmDownloadsJob implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;
@@ -23,7 +23,7 @@ final class ImportNpmDownloadsJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public function __construct(private readonly ?string $package = null)
+    public function __construct(protected readonly ?string $package = null)
     {
     }
 
@@ -37,14 +37,16 @@ final class ImportNpmDownloadsJob implements ShouldQueue
 
         $this->getNpmPackages()
             ->each(function (Repository $repository) use ($api) {
-                $repository->forceFill(['downloads' => $api->getTotalDownloadsForPackage($repository->nameForNpm())])->save();
+                $repository->update([
+                    'downloads' => $api->getTotalDownloadsForPackage($repository->nameForNpm()),
+                ]);
             });
     }
 
-    private function getNpmPackages(): Collection
+    protected function getNpmPackages(): Collection
     {
         return Repository::query()
-            ->where('language', ProgrammingLanguage::JavaScript->value)
+            ->where('language', ProgrammingLanguage::JavaScript)
             ->when($this->package, fn ($query, $name) => $query->where('name', $name)->orWhere('scoped_name', $name))
             ->get();
     }

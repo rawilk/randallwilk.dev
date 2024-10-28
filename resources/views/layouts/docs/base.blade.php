@@ -1,25 +1,93 @@
-<x-laravel-base::layouts.html
-    :title="$title ?? ''"
-    class="bg-white dark:bg-slate-900"
->
-    <x-slot:html class="antialiased [font-feature-settings:'ss01']" id="docsScreen"></x-slot:html>
+@props([
+    'title' => '',
+    'canonical' => null,
+    'ogTitle' => null,
+    'ogDescription' => null,
+    'ogImage' => null,
+    'description' => '',
+    'needsLivewireScripts' => true,
+    'repository' => null,
+    'alias' => null,
+    'githubUrl' => null,
+    'navigation' => null,
+    'page' => null,
+    'latestVersion' => null,
+    'tableOfContents' => null,
+    'hero' => null,
+    'noIndex' => false,
+])
 
-    <x-slot:headTop>
-        @include('layouts.front.partials.analytics')
-        @include('layouts.front.partials.meta')
+<x-layout.html
+    :title="$title"
+    :html-attributes="
+        new Illuminate\View\ComponentAttributeBag([
+            'class' => 'antialiased [font-feature-settings:\'ss01\']',
+            'id' => 'docsScreen',
+        ])
+    "
+    class="bg-white dark:bg-slate-900"
+    x-data=""
+    x-cloak
+>
+    <x-slot:head-start>
+        <x-layout.partials.analytics :id="config('services.google.analytics.id')" />
+        <x-layout.partials.meta
+            :canonical="$canonical"
+            :title="$title"
+            :description="$description"
+            :og-description="$ogDescription"
+            :og-title="$ogTitle"
+            :og-image="$ogImage"
+            :no-index="$noIndex"
+        />
         <link rel="preconnect" href="https://{{ config('services.algolia.app_id') }}-dsn.algolia.net" crossorigin />
-    </x-slot:headTop>
+    </x-slot:head-start>
 
     <x-slot:head>
         @stack('head')
+
         @include('layouts.docs.partials.assets')
+
+        @if ($needsLivewireScripts)
+            @livewireStyles
+        @endif
+
+        <script>
+            const theme = localStorage.getItem('theme') ?? 'light';
+
+            if (
+                theme === 'dark' ||
+                (theme === 'system' &&
+                    window.matchMedia('(prefers-color-scheme: dark)')
+                        .matches)
+            ) {
+                document.documentElement.classList.add('dark');
+            }
+        </script>
     </x-slot:head>
 
-    @include('layouts.docs.partials.header')
+    <x-docs.banner />
 
-    {{ $hero ?? '' }}
+    <x-layout.docs.header
+        :repository="$repository"
+        :alias="$alias"
+        :page="$page"
+        :github-url="$githubUrl"
+    >
+        <x-slot:mobile-nav>
+            <x-docs.navigation
+                :navigation="$navigation"
+                :page="$page"
+                :repository="$repository"
+                type="mobile"
+                class="mt-5 px-1"
+            />
+        </x-slot:mobile-nav>
+    </x-layout.docs.header>
 
-    <main class="relative mx-auto flex max-w-8xl justify-center sm:px-2 lg:px-8 xl:px-12">
+    {{ $hero }}
+
+    <main class="relative mx-auto flex max-w-screen-2xl justify-center sm:px-2 lg:px-8 xl:px-12">
         {{-- nav --}}
         @include('layouts.docs.partials.navigation')
 
@@ -29,10 +97,16 @@
         </div>
 
         {{-- table of contents --}}
-        @include('layouts.docs.partials.table-of-contents')
+        <x-layout.docs.table-of-contents
+            :table-of-contents="$tableOfContents"
+        />
     </main>
 
-    <x-scroll-to-top-button />
+    <x-layout.front.footer />
 
-    @lbJavaScript
-</x-laravel-base::layouts.html>
+    @filamentScripts(withCore: true)
+
+    @if ($needsLivewireScripts)
+        @livewireScripts
+    @endif
+</x-layout.html>

@@ -4,9 +4,9 @@
     </div>
 
     <div class="wrap space-y-20 pb-20">
-        @foreach (\App\Enums\SkillType::cases() as $case)
-            <x-front.section-list heading="{{ $case->label() }}" id="skill-{{ $case->value }}">
-                @foreach (config("site.skills.{$case->value}") ?? [] as $skill => $skillAttrs)
+        @foreach (App\Enums\SkillType::cases() as $case)
+            <x-front.section-list :heading="$case->getLabel()" id="skill-{{ $case->value }}">
+                @foreach (config("randallwilk.skills.{$case->value}") ?? [] as $skill => $skillAttrs)
                     <x-front.skill-list-item skill="{{ $skill }}" :data="$skillAttrs" />
                 @endforeach
             </x-front.section-list>

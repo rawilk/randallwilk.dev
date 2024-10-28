@@ -8,4 +8,6 @@ const configurePermalinks = () => {
     });
 };
 
-configurePermalinks();
+document.addEventListener('livewire:navigated', () => {
+    configurePermalinks();
+});

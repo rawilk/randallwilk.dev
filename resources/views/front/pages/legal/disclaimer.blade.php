@@ -9,7 +9,7 @@
                 <x-front.link>
                     <div class="flex items-center">
                         <x-heroicon-s-chevron-left class="h-3 w-3 mr-2" />
-                        <a href="{!! route('legal.index') !!}" class="text-sm">
+                        <a href="{{ route('legal.index') }}" class="text-sm" wire:navigate>
                             <span>{{ __('front.legal.back_link') }}</span>
                         </a>
                     </div>
@@ -138,7 +138,7 @@
                 <ul>
                     <li>
                         By email:
-                        <a href="mailto:{{ config('site.contact.email') }}">{{ config('site.contact.email') }}</a>
+                        <a href="mailto:{{ config('randallwilk.contact.email') }}">{{ config('randallwilk.contact.email') }}</a>
                     </li>
                 </ul>
 

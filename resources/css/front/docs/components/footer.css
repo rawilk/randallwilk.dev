@@ -1,0 +1,37 @@
+@layer components {
+    footer:has(.footer-wrap) {
+        @apply px-4 sm:px-6 lg:px-8 dark:bg-slate-900;
+    }
+
+    .footer-wrap {
+        @apply w-full
+        max-w-8xl
+        mx-auto
+        dark:text-white;
+    }
+
+    .footer-link {
+        @apply dark:hover:text-white;
+    }
+
+    .footer-copyright {
+        @apply dark:text-gray-200;
+    }
+
+    .footer-social {
+        @apply dark:bg-slate-700
+        dark:text-white
+        dark:hover:bg-slate-200;
+    }
+
+    .footer-bottom {
+        @apply dark:border-slate-600;
+    }
+
+    .footer-sponsor-btn {
+        @apply dark:bg-slate-700
+        dark:hover:bg-slate-200
+        dark:text-white
+        dark:hover:text-slate-900;
+    }
+}

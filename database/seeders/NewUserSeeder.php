@@ -21,13 +21,12 @@ class NewUserSeeder extends Seeder
             return;
         }
 
-        User::factory()->create([
-            'first_name' => 'Super',
-            'last_name' => 'Admin',
-            'email' => 'admin@example.com',
+        User::factory()->admin()->create([
+            'name' => config('randallwilk.dev_credentials.name'),
+            'email' => config('randallwilk.dev_credentials.email'),
+            'timezone' => config('randallwilk.timezone'),
             'password' => 'secret',
             'remember_token' => null,
-            'is_admin' => true,
         ]);
     }
 }

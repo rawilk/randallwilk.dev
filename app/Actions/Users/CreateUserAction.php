@@ -4,92 +4,58 @@ declare(strict_types=1);
 
 namespace App\Actions\Users;
 
-use App\Actions\LaravelBase\PasswordValidationRules;
 use App\Models\User;
 use App\Notifications\Users\WelcomeNotification;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
-use Rawilk\LaravelCasters\Support\Name;
+use Throwable;
 
-final class CreateUserAction
+class CreateUserAction
 {
-    use PasswordValidationRules;
+    protected const int RANDOM_PASSWORD_LENGTH = 16;
 
-    /** @var int */
-    private const RANDOM_PASSWORD_LENGTH = 16;
-
-    public function __invoke(array $input, ?User $authenticatedUser = null, bool $skipPermissionsValidation = false): void
+    public function __invoke(array $data): User
     {
-        $data = convertEmptyStringsToNull(
-            $this->validate($input)
-        );
+        DB::beginTransaction();
 
-        $newPassword = $data['password'] ?? $this->generateRandomPassword();
+        try {
+            $user = User::create([
+                ...$data,
+                'password' => Str::password(static::RANDOM_PASSWORD_LENGTH),
+            ]);
 
-        $user = tap(User::make(), function (User $user) use ($data, $newPassword) {
-            $name = Name::from($data['name']);
+            $this->sendWelcomeEmail($user);
+        } catch (Throwable $exception) {
+            DB::rollBack();
 
-            $user->forceFill([
-                'first_name' => $name->first,
-                'last_name' => $name->last,
-                'email' => $data['email'],
-                'timezone' => $data['timezone'],
-                'password' => $newPassword,
-            ])->save();
-        });
+            $this->revertAvatarUpload(data_get($data, 'avatar_path'));
 
-        if (isset($data['photo'])) {
-            $user->updateAvatar($data['photo']);
+            throw $exception;
         }
 
-        $this->setAbilities($user, [
-            'permissions' => $input['permissions'] ?? null,
-            'roles' => $input['roles'] ?? null,
-            $authenticatedUser,
-            $skipPermissionsValidation,
-        ]);
+        DB::commit();
 
-        $this->sendWelcomeEmail($user, $newPassword);
+        return $user;
     }
 
-    private function validate(array $input): array
+    protected function revertAvatarUpload(?string $filename): void
     {
-        return Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users'),
-            ],
-            'password' => $this->passwordRules(true, false),
-            'timezone' => ['required', 'string'],
-            'photo' => [
-                'nullable',
-                File::image()->max(1024),
-            ],
-        ])->validate();
+        if (blank($filename)) {
+            return;
+        }
+
+        $disk = Storage::disk('avatars');
+
+        if ($disk->exists($filename)) {
+            $disk->delete($filename);
+        }
     }
 
-    private function setAbilities(User $user, array $input, ?User $authenticatedUser = null, bool $skipPermissionsValidation = false): void
+    protected function sendWelcomeEmail(User $user): void
     {
-        /*
-         * A default role will be assigned in the action if the authenticated
-         * user is not allowed to assign roles.
-         */
-        app(UpdateAbilitiesAction::class)($user, $input, $authenticatedUser, $skipPermissionsValidation);
-    }
-
-    private function generateRandomPassword(): string
-    {
-        return Str::password(self::RANDOM_PASSWORD_LENGTH);
-    }
-
-    private function sendWelcomeEmail(User $user, string $password): void
-    {
-        $user->notify(new WelcomeNotification($password));
+        $user->notify(
+            new WelcomeNotification(panelId: 'admin'),
+        );
     }
 }

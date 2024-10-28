@@ -1,0 +1,13 @@
+@import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+@import 'bootstrap.css';
+@import 'components/variables.css';
+@import '../../components/front/index.css';
+@import '../../components/logo.css';
+@import 'components/footer.css';
+@import 'components/prism.css';
+@import 'components/docs.css';
+@import 'components/docsearch.css';
+@import 'components/scrollbar.css';
+@import '../app/components/footer.css';
+
+@config('tailwind.config.js');

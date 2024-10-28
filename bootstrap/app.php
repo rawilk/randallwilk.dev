@@ -18,6 +18,12 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->redirectGuestsTo(fn (): string => filament()->getLoginUrl());
+
+        $middleware->redirectUsersTo(fn (): string => match (filament()->getCurrentPanel()?->getId()) {
+            'admin' => '/admin',
+            default => '/',
+        });
     })
     ->withExceptions(function (Exceptions $exceptions) {
     })->create();

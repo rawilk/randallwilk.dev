@@ -7,18 +7,18 @@ namespace App\Support\ValueStores;
 use Illuminate\Support\Arr;
 use Spatie\Valuestore\Valuestore;
 
-final class UpdatedRepositoriesValueStore
+class UpdatedRepositoriesValueStore
 {
-    private Valuestore $valueStore;
+    protected Valuestore $valueStore;
 
     public function __construct()
     {
         $this->valueStore = Valuestore::make(storage_path('app/updatedRepositories.json'));
     }
 
-    public static function make(): self
+    public static function make(): static
     {
-        return new self;
+        return new static;
     }
 
     public function getNames(): array
@@ -26,7 +26,7 @@ final class UpdatedRepositoriesValueStore
         return Arr::wrap($this->valueStore->get('updatedRepositoryNames') ?? []);
     }
 
-    public function store(string $name): self
+    public function store(string $name): static
     {
         $updatedRepositoryNames = $this->valueStore->get('updatedRepositoryNames', []);
 

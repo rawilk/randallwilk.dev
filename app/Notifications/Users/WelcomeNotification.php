@@ -6,15 +6,18 @@ namespace App\Notifications\Users;
 
 use App\Enums\Queue;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-final class WelcomeNotification extends Notification implements ShouldQueue
+use function App\Helpers\defaultEmailSalutation;
+
+class WelcomeNotification extends Notification implements ShouldDispatchAfterCommit, ShouldQueue
 {
     use Queueable;
 
-    public function __construct(public string $password)
+    public function __construct(protected string $panelId)
     {
         $this->onQueue(Queue::Mail->value);
     }
@@ -26,19 +29,14 @@ final class WelcomeNotification extends Notification implements ShouldQueue
 
     public function toMail($notifiable): MailMessage
     {
-        $message = (new MailMessage)
-            ->subject(__('New user account for randallwilk.dev'))
-            ->greeting(__('Hello :name!', ['name' => $notifiable->name->first]))
-            ->salutation(false)
-            ->line(__('A new user account has been created for you at [:url](:url).', ['url' => url('/')]))
-            ->line(__('You may login with your email address and the password we have created for you: **:password**', ['password' => $this->password]))
-            ->action(__('Login'), route('login'))
-            ->line(__('Please note: We strongly recommend changing your password after login for the first time.'));
+        $domain = parse_url(config('app.url'), PHP_URL_HOST);
 
-        if ($notifiable->github_id) {
-            $message->line(__('You may also login using your linked GitHub account as well: :username', ['username' => $notifiable->github_username]));
-        }
-
-        return $message;
+        return (new MailMessage)
+            ->subject(__('notifications/users.welcome.subject', ['domain' => $domain]))
+            ->greeting(__('notifications/users.welcome.greeting', ['name' => $notifiable->name->first]))
+            ->salutation(defaultEmailSalutation())
+            ->line(__('notifications/users.welcome.line1', ['url' => url('/')]))
+            ->line(__('notifications/users.welcome.line2', ['email' => $notifiable->email]))
+            ->action(__('notifications/users.welcome.action'), filament()->getPanel($this->panelId)->getRequestPasswordResetUrl());
     }
 }

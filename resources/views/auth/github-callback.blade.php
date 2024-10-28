@@ -1,3 +1,9 @@
+@use(App\Enums\SessionAlert)
+
+@php
+    $defaultRedirect = route("filament.{$panelId}.profile");
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -10,19 +16,27 @@
         <h1>Redirecting...</h1>
 
         <script>
-            @if (session()->has(\Rawilk\LaravelBase\Components\Alerts\Alert::ERROR))
+            @if (SessionAlert::Error->exists())
                 try {
-                window.localStorage.setItem('socialite.error', {{ Js::from(session()->pull(\Rawilk\LaravelBase\Components\Alerts\Alert::ERROR)) }});
-            } catch {
-            }
+                    window.localStorage.setItem(
+                        'socialite.message',
+                        JSON.stringify(@js([
+                            'type' => SessionAlert::Error->value,
+                            'message' => SessionAlert::Error->message()
+                        ]))
+                    );
+                } catch {
+                }
             @endif
 
             if (window.opener && window.opener !== window) {
-                // This is an auth popup. We can close this window and
-                // the parent window will take care of the user.
-                window.close();
+                // Let our opener know we are ready to redirect.
+                window.opener.postMessage({
+                    type: 'AUTH_COMPLETE',
+                    redirectUrl: @js($redirect ?? $defaultRedirect),
+                });
             } else {
-                window.location.replace('{{ session('next', route('profile.authentication')) }}');
+                window.location.replace(@js(session('next', $defaultRedirect)));
             }
         </script>
     </body>

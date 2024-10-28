@@ -1,0 +1,52 @@
+@layer components {
+    .select {
+        @apply inline-flex
+        items-center
+        border-2
+        border-gray-50
+        bg-white
+        px-2
+        py-1
+        rounded-sm;
+
+        select {
+            @apply font-sans
+            lowercase
+            bg-transparent
+            appearance-none
+            outline-none
+            border-0
+            p-0
+            focus:outline-none
+            focus:ring-0;
+
+            -webkit-appearance: none;
+            background: none;
+        }
+    }
+
+    .select-arrow {
+        @apply hidden;
+    }
+
+    @supports (display: grid) {
+        .select select {
+            @apply pr-6;
+        }
+
+        .select-arrow {
+            @apply absolute
+            block
+            right-0
+            mr-3
+            w-2
+            h-2
+            pointer-events-none
+            fill-current;
+        }
+    }
+
+    .select select:active + .select-arrow {
+        transform: rotate(180deg);
+    }
+}

@@ -7,7 +7,7 @@ namespace App\Console\Commands\GitHub;
 use App\Jobs\Repositories\ImportRepositoriesJob;
 use Illuminate\Console\Command;
 
-final class ImportGitHubRepositoriesCommand extends Command
+class ImportGitHubRepositoriesCommand extends Command
 {
     protected $signature = 'import:github-repositories {--repo= : Only import a specific (public) repository}';
 

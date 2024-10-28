@@ -12,7 +12,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\File;
 
-final class CleanupDocsImportJob implements ShouldQueue
+class CleanupDocsImportJob implements ShouldQueue
 {
     use Batchable;
     use Dispatchable;

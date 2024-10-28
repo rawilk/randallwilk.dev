@@ -1,7 +1,8 @@
 <x-front.page-banner>
-    {!! Str::inlineMarkdown(__('front.open_source.support.banner_title')) !!}
+    How to<br>
+    support me
 
     <x-slot:content>
-        <p class="banner-intro">{{ __('front.open_source.support.banner_intro') }}</p>
+        <p class="banner-intro">Keep me going</p>
     </x-slot:content>
 </x-front.page-banner>

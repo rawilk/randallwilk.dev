@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum ProgrammingLanguage: string
+use Filament\Support\Colors\Color;
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasLabel;
+
+enum ProgrammingLanguage: string implements HasColor, HasLabel
 {
     case Blade = 'Blade';
     case JavaScript = 'JavaScript';
@@ -12,12 +16,17 @@ enum ProgrammingLanguage: string
     case Shell = 'Shell';
     case Unknown = 'Unknown';
 
-    public function color(): string
+    public function getColor(): string|array|null
     {
         return match ($this) {
-            self::JavaScript => 'orange',
-            self::Php => 'blue',
+            self::JavaScript => Color::Orange,
+            self::Php => Color::Blue,
             default => 'gray',
         };
+    }
+
+    public function getLabel(): ?string
+    {
+        return __("enums/programming-language.{$this->value}.label");
     }
 }

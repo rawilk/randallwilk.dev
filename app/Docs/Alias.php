@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Docs;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
-final class Alias
+class Alias
 {
-    private ?Collection $navigation = null;
+    protected ?Collection $navigation = null;
 
     public function __construct(
         public string $slug,
@@ -68,12 +69,19 @@ final class Alias
         return "{$this->githubUrl}/tree/{$this->branch}";
     }
 
+    public function versionSelectAlias(): string
+    {
+        return Str::of((string) $this->versionNumber)
+            ->append('.x')
+            ->toString();
+    }
+
     public function pageGitHubUrl(DocumentationPage $page): string
     {
         return "{$this->githubUrl}/blob/{$this->branch}/docs/{$page->slug}.md";
     }
 
-    private function getFlattenedArrayOfPages(): ?Collection
+    protected function getFlattenedArrayOfPages(): ?Collection
     {
         return $this->navigation?->map(fn ($item) => $item['pages'] ?? [])->flatten(1);
     }

@@ -17,17 +17,16 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
 use Spatie\Sheets\ContentParser;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 
-final class DocumentationContentParser implements ContentParser
+class DocumentationContentParser implements ContentParser
 {
-    private MarkdownRenderer $markdownRenderer;
+    protected MarkdownRenderer $markdownRenderer;
 
     public function __construct()
     {
-        /*
+        /**
          * We will disable parsing code blocks server side, as we will use
          * Prism.js to handle this instead.
          */
-
         $this->markdownRenderer = app(MarkdownRenderer::class)
             ->highlightCode(false)
             ->addInlineRenderer(Image::class, new ImageRenderer)
@@ -42,6 +41,7 @@ final class DocumentationContentParser implements ContentParser
                     'symbol' => '#',
                     'id_prefix' => 'user-content',
                     'fragment_prefix' => 'user-content',
+                    'aria_hidden' => false,
                 ],
                 'table_of_contents' => [
                     'max_heading_level' => 3,

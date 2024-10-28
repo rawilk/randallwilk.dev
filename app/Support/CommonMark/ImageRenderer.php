@@ -15,9 +15,9 @@ use League\CommonMark\Util\RegexHelper;
 use League\Config\ConfigurationAwareInterface;
 use League\Config\ConfigurationInterface;
 
-final class ImageRenderer implements ConfigurationAwareInterface, NodeRendererInterface
+class ImageRenderer implements ConfigurationAwareInterface, NodeRendererInterface
 {
-    private ConfigurationInterface $config;
+    protected ConfigurationInterface $config;
 
     public function setConfiguration(ConfigurationInterface $configuration): void
     {

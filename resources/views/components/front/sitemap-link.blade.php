@@ -1,7 +1,8 @@
 @props([
     'url' => '#',
+    'spa' => true,
 ])
 
 <li>
-    <a href="{{ $url }}">{{ $slot }}</a>
+    <a href="{{ $url }}" @if ($spa) wire:navigate @endif>{{ $slot }}</a>
 </li>

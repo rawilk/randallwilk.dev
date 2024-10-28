@@ -7,7 +7,7 @@ namespace App\Support\Auth;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Database\Eloquent\Builder;
 
-final class CustomUserProvider extends EloquentUserProvider
+class CustomUserProvider extends EloquentUserProvider
 {
     protected function newModelQuery($model = null): Builder
     {
