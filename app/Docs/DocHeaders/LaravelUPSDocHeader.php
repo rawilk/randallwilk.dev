@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Docs\DocHeaders;
 
-final class LaravelUPSDocHeader implements DocHeader
+class LaravelUPSDocHeader implements DocHeader
 {
     public static function heroTabs(string $version): array
     {
