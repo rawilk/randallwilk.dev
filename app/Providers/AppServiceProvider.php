@@ -17,6 +17,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\ForeignKeyDefinition;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Rawilk\ProfileFilament\Models as ProfileFilamentModels;
@@ -34,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         Date::use(CarbonImmutable::class);
+
+        URL::forceScheme('https');
 
         $this->bootMorphMap();
 
