@@ -34,7 +34,7 @@
                                 {{
                                     str(__('front.footer.stack_info', [
                                         'forge' => 'https://forge.laravel.com',
-                                        'digitalocean' => 'https://www.digitalocean.com/?refcode=0f79a60f0243&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge',
+                                        'hetzner' => 'https://hetzner.com',
                                      ]))
                                         ->inlineMarkdown()
                                         ->toHtmlString()

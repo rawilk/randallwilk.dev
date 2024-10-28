@@ -21,7 +21,7 @@ return [
     'footer' => [
         'aria_label' => 'Footer',
         'summary' => 'Full-Stack developer based in Wausau, WI, specializing in Laravel, Livewire, Tailwind and Alpine.js.',
-        'stack_info' => 'Proudly hosted with [Laravel Forge](:forge) and [DigitalOcean](:digitalocean).',
+        'stack_info' => 'Proudly hosted with [Laravel Forge](:forge) and [Hetzner](:hetzner).',
         'sponsor_button' => 'Sponsor on GitHub',
     ],
     'home' => [
