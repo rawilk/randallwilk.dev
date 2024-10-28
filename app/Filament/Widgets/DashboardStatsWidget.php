@@ -34,7 +34,7 @@ class DashboardStatsWidget extends BaseWidget
 
     protected function getVisibleReposCount(): int
     {
-        return cache()->remember(
+        return (int) cache()->remember(
             'repos.visible_count',
             now()->addWeek(),
             fn () => Repository::visible()->whereNotNull('type')->count(),

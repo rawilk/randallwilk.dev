@@ -50,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
-            ->brandLogo(new HtmlString(Blade::render(<<<'HTML'
+            ->brandLogo(fn () => new HtmlString(Blade::render(<<<'HTML'
             <x-logo type="dual" class="logo h-full w-auto text-gray-800 dark:text-white" />
             HTML)))
             ->spa()
