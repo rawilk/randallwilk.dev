@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(fn () => new HtmlString(Blade::render(<<<'HTML'
             <x-logo type="dual" class="logo h-full w-auto text-gray-800 dark:text-white" />
             HTML)))
-            ->spa()
+            ->spa(false)
 
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
