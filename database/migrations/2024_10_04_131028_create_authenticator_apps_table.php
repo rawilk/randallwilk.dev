@@ -12,14 +12,11 @@ return new class extends Migration
     {
         Schema::create(config('profile-filament.table_names.authenticator_app'), function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
+            $table->user(nullable: false);
             $table->string('name')->nullable();
             $table->text('secret')->nullable();
-            $table->dateTime('last_used_at')->nullable();
-            $table->dateTime('created_at')->nullable();
-            $table->dateTime('updated_at')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamps();
         });
     }
 };

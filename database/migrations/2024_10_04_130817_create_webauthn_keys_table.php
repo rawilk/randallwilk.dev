@@ -12,17 +12,14 @@ return new class extends Migration
     {
         Schema::create(config('profile-filament.table_names.webauthn_key'), function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
+            $table->user(nullable: false);
             $table->string('name')->nullable();
             $table->text('credential_id');
             $table->text('public_key');
             $table->string('attachment_type', 50)->nullable();
             $table->boolean('is_passkey')->default(false);
-            $table->dateTime('last_used_at')->nullable();
-            $table->dateTime('created_at')->nullable();
-            $table->dateTime('updated_at')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamps();
         });
     }
 };

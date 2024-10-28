@@ -11,8 +11,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('repositories', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('h_key')->unique();
+            $table->id();
+            $table->humanKey();
             $table->string('name');
             $table->string('scoped_name')
                 ->index()
@@ -24,14 +24,14 @@ return new class extends Migration
             $table->string('blogpost_url')->nullable();
             $table->unsignedInteger('stars')->default(0);
             $table->unsignedInteger('downloads')->default(0);
-            $table->dateTime('repository_created_at')->useCurrent();
+            $table->timestamp('repository_created_at')->useCurrent();
             $table->boolean('new')->default(false);
             $table->boolean('highlighted')->default(false);
             $table->string('type')->nullable();
             $table->string('language')->nullable();
             $table->boolean('visible')->default(false);
-            $table->datetimes();
-            $table->dateTime('deleted_at')->nullable();
+            $table->timestamps();
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 };
