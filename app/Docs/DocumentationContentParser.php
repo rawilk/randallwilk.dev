@@ -41,7 +41,7 @@ class DocumentationContentParser implements ContentParser
                     'symbol' => '#',
                     'id_prefix' => 'user-content',
                     'fragment_prefix' => 'user-content',
-                    'aria_hidden' => false,
+                    'aria_hidden' => true,
                 ],
                 'table_of_contents' => [
                     'max_heading_level' => 3,
