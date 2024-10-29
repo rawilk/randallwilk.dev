@@ -29,5 +29,13 @@ jobs:
       - name: Inject secrets into environment
         run: |
           APP_ENV=test op inject -i .env.template_test -o .env.test
-          cat .env.test
+
+      - name: Deploy
+        uses: jbrooksuk/laravel-forge-action@v1.0.2
+        with:
+          trigger_url: ${{ secrets.FORGE_TRIGGER_URL }}
+          payload: |
+            {
+              "deployment_reason": "Triggered by GitHub Actions - ${{ github.sha }}"
+            }
 
