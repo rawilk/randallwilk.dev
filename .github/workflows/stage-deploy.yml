@@ -38,7 +38,7 @@ jobs:
 
       - name: Transfer .env to server
         run: |
-          rsync -r ./.env.test ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:home/${{ secrets.REMOTE_USER }}/testing/env.test
+          (ssh -o BatchMode=yes -o ConnectTimeout=5 ${{ secrets.REMOTE_USER }}@@{{ secrets.REMOTE_HOST }} echo ok 2>&1)
 
 #      - name: Deploy
 #        uses: jbrooksuk/laravel-forge-action@v1.0.2
