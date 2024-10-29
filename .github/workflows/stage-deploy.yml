@@ -45,7 +45,8 @@ jobs:
 
           # Debug
           ls -la ~/.ssh/known_hosts
-          head -c 20 ~/.ssh/known_hosts
+          echo 'Hosts content'
+          cat ~/.ssh/known_hosts
 
           # Test ssh connection
           ssh -T -o StrictHostKeyChecking=yes ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
