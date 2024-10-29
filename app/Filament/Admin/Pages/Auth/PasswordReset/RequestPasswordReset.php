@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Timebox;
 use Livewire\Attributes\Locked;
 
+use function Illuminate\Support\defer;
+
 class RequestPasswordReset extends BaseComponent
 {
     use IsAuthPage;
@@ -111,12 +113,10 @@ class RequestPasswordReset extends BaseComponent
 
         // If the user doesn't exist in the system, we'll send an email notifying them of the attempt.
         if ($status !== Password::RESET_LINK_SENT) {
-            LaravelNotification::route('mail', $data['email'])
-                ->notifyNow(new ResetPasswordInvalidUser(filament()->getLoginUrl()));
-
-            //            defer(function () use ($data) {
-            //
-            //            });
+            defer(function () use ($data) {
+                LaravelNotification::route('mail', $data['email'])
+                    ->notifyNow(new ResetPasswordInvalidUser(filament()->getLoginUrl()));
+            });
         }
 
         $this->email = $data['email'];
