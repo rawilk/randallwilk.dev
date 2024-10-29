@@ -34,13 +34,13 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          known_hosts: ${{ vars.FOO }}
           name: id_deploy
 
       - name: Setup known_hosts
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          echo "${{ vars.FOO }}" > ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
           # Debug
