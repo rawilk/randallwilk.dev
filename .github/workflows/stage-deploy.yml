@@ -38,7 +38,8 @@ jobs:
 
       - name: Transfer .env to server
         run: |
-          (ssh -o BatchMode=yes -o ConnectTimeout=5 ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} echo ok 2>&1)
+          # (ssh -o BatchMode=yes -o ConnectTimeout=5 ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} echo ok 2>&1)
+          echo 'test'
 
 #      - name: Deploy
 #        uses: jbrooksuk/laravel-forge-action@v1.0.2
