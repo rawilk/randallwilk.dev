@@ -30,12 +30,21 @@ jobs:
         run: |
           APP_ENV=test op inject -i .env.template_test -o .env.test
 
-      - name: Deploy
-        uses: jbrooksuk/laravel-forge-action@v1.0.2
+      - name: Setup SSH
+        uses: shimataro/ssh-key-action@v2
         with:
-          trigger_url: ${{ secrets.FORGE_TRIGGER_URL }}
-          payload: |
-            {
-              "deployment_reason": "Triggered by GitHub Actions - ${{ github.sha }}"
-            }
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Transfer .env to server
+        run: |
+          scp .env.test ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/testing/.env.test
+
+          # Set proper permissions
+          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "chown ${{ secrets.REMOTE_USER }}:${{ secrets.REMOTE_USER }} /home/${{ secrets.REMOTE_USER }}/testing/env.test && chmod 600 /home/${{ secrets.REMOTE_USER }}/testing/env.test"
+
+#      - name: Deploy
+#        uses: jbrooksuk/laravel-forge-action@v1.0.2
+#        with:
+#          trigger_url: ${{ secrets.FORGE_TRIGGER_URL }}
 
