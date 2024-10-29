@@ -23,7 +23,7 @@ RELEASE=$(date +"%Y%m%d%H%M%S")
 NEW_RELEASE_ROOT="${RELEASE_ROOT}/$RELEASE"
 
 # Directory that has the master copies of files like .env
-DATA_ROOT="$TARGET-data"
+DATA_ROOT="$ROOT/$TARGET-data"
 
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
