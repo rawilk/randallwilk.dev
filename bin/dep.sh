@@ -22,7 +22,16 @@ RELEASE_ROOT="$TARGET-releases"
 RELEASE=$(date +"%Y%m%d%H%M%S")
 NEW_RELEASE_ROOT="${RELEASE_ROOT}/$RELEASE"
 
+# stop script on error signal (-e) and undefined variables (-u)
+set -eu
+
+restart_php() {
+    ( flock -w 10 9 || exit 1
+        echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
+}
+
 echo "Deploying site: $TARGET"
+echo ""
 
 # Ensure we're in our root directory.
 cd "$ROOT"
@@ -42,3 +51,10 @@ echo "-----------------------"
 git clone -b "$FORGE_SITE_BRANCH" --depth 1 "$GIT_REPOSITORY" "$NEW_RELEASE_ROOT"
 
 echo ""
+
+# Install Composer Dependencies
+$FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader --no-dev --working-dir "$NEW_RELEASE_ROOT"
+
+# Restart php
+( flock -w 10 9 || exit 1
+    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
