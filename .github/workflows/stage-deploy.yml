@@ -44,6 +44,13 @@ jobs:
           ssh-add ~/.ssh/id_deploy
 
           # Prepare Remote Data Directory
+          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} '
+          [ ! -d "${{ secrets.REMOTE_TARGET }}" ] && mkdir -p "${{ secrets.REMOTE_TARGET }}" || true;
+          [ ! -d "${{ secrets.REMOTE_TARGET }}/public/doc-files" ] && mkdir -p "${{ secrets.REMOTE_TARGET }}/public/doc-files" || true;
+          [ ! -f "${{ secrets.REMOTE_TARGET }}/sitemap.xml" ] && touch "${{ secrets.REMOTE_TARGET }}/sitemap.xml" || true;
+          [ ! -f "${{ secrets.REMOTE_TARGET }}/sitemap_pages.xml" ] && touch "${{ secrets.REMOTE_TARGET }}/sitemap_pages.xml" || true;
+          [ ! -f "${{ secrets.REMOTE_TARGET }}/sitemap_docs.xml" ] && touch "${{ secrets.REMOTE_TARGET }}/sitemap_docs.xml" || true;
+          '
 
           # Transfer file
           rsync -ap \
