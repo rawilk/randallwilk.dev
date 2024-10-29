@@ -28,7 +28,7 @@ jobs:
 
       - name: Inject secrets into environment
         run: |
-          APP_ENV=test op inject -i .env.template_test -o .env.test
+          APP_ENV=test op inject -i .env.template_test -o .env --force
 
       - name: Setup SSH
         uses: shimataro/ssh-key-action@v2
@@ -43,15 +43,19 @@ jobs:
           eval $(ssh-agent)
           ssh-add ~/.ssh/id_deploy
 
-          # ssh -T -o StrictHostKeyChecking=yes ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
+          # Prepare Remote Data Directory
+          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} '
+          [ ! -d "${{ secrets.REMOTE_TARGET }}" ] && mkdir -p "${{ secrets.REMOTE_TARGET }}";
+          [ ! -d "${{ secrets.REMOTE_TARGET }}/public/doc-files" ] && mkdir -p "${{ secrets.REMOTE_TARGET }}/public-doc-files";
+          [ -f "${{ secrets.REMOTE_TARGET }}/sitemap.xml" ] && touch "${{ secrets.REMOTE_TARGET }}/sitemap.xml";
+          [ -f "${{ secrets.REMOTE_TARGET }}/sitemap_pages.xml" ] && touch "${{ secrets.REMOTE_TARGET }}/sitemap_pages.xml";
+          [ -f "${{ secrets.REMOTE_TARGET }}/sitemap_docs.xml" ] && touch "${{ secrets.REMOTE_TARGET }}/sitemap_docs.xml";
+          '
 
           # Transfer file
           rsync -ap \
-          .env.test \
-          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/testing/.env.test
-
-#      - name: Transfer .env to server
-#        run: |
+          .env \
+          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/.env
 
 
 #      - name: Deploy
