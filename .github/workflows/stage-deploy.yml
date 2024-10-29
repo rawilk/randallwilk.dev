@@ -22,8 +22,9 @@ jobs:
         uses: 1password/install-cli-action@v1
 
       - name: Authenticate with 1Password
-        run: |
-          export OP_SERVICE_ACCOUNT_TOKEN=${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+        uses: 1password/load-secrets-action/configure@v2
+        with:
+          service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
 
       - name: Inject secrets into environment
         run: |
