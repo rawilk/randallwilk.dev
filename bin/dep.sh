@@ -3,7 +3,7 @@
 # Note: All referenced variables must be defined/exported from the
 # Forge site deployment script.
 
-# Note: Data dir should already be created from our GitHub action
+# Note: Data root should already be created from our GitHub action
 # runner.
 
 # Delete script once script exits
@@ -21,6 +21,9 @@ RELEASE_ROOT="$TARGET-releases"
 # Name the new release (with the current date/time)
 RELEASE=$(date +"%Y%m%d%H%M%S")
 NEW_RELEASE_ROOT="${RELEASE_ROOT}/$RELEASE"
+
+# Directory that has the master copies of files like .env
+DATA_ROOT="$TARGET-data"
 
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
@@ -58,3 +61,9 @@ $FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader --n
 # Restart php
 ( flock -w 10 9 || exit 1
     echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
+
+# Symlink master copies of persistent data to the new release.
+echo "Symlinking site files..."
+echo "------------------------"
+
+ln -sfn "$DATA_ROOT/.env" "$NEW_RELEASE_ROOT/.env"
