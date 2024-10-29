@@ -18,6 +18,10 @@ ROOT=${FORGE_SITE_PATH%/*}
 # Directory to store each release in.
 RELEASE_ROOT="$TARGET-releases"
 
+# Name the new release (with the current date/time)
+RELEASE=$(date +"%Y%m%d%H%M%S")
+NEW_RELEASE_ROOT="${RELEASE_ROOT}/$RELEASE"
+
 echo "Deploying site: $TARGET"
 
 # Ensure we're in our root directory.
@@ -32,5 +36,9 @@ if [ ! -d "$RELEASE_ROOT" ]; then
 fi
 
 # Clone the repository into a new release
-echo "Creating new release..."
+echo "Creating new release ($RELEASE)..."
 echo "-----------------------"
+
+git clone -b "$FORGE_SITE_BRANCH" --depth 1 "$GIT_REPOSITORY" "$NEW_RELEASE_ROOT"
+
+echo ""
