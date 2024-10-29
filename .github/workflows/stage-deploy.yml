@@ -44,9 +44,6 @@ jobs:
           ssh-add ~/.ssh/id_deploy
 
           # Prepare Remote Data Directory
-          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} '
-          [ ! -d "${{ secrets.REMOTE_TARGET }}" ] && mkdir -p "${{ secrets.REMOTE_TARGET }}";
-          '
 
           # Transfer file
           rsync -ap \
