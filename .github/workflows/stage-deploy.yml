@@ -48,7 +48,7 @@ jobs:
           # Transfer file
           rsync -ap \
           .env.test \
-          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/testing
+          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/testing/test.env
 
 #      - name: Transfer .env to server
 #        run: |
