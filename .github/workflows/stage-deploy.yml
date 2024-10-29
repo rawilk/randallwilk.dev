@@ -35,11 +35,24 @@ jobs:
         with:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          name: id_deploy
+
+      - name: Setup known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          # Debug
+          ls -la ~/.ssh/known_hosts
+          head -c 20 ~/.ssh/known_hosts
+
+          # Test ssh connection
+          ssh -T -o StrictHostKeyChecking=yes ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
 
       - name: Transfer .env to server
         run: |
           # (ssh -o BatchMode=yes -o ConnectTimeout=5 ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} echo ok 2>&1)
-          echo 'test'
 
 #      - name: Deploy
 #        uses: jbrooksuk/laravel-forge-action@v1.0.2
