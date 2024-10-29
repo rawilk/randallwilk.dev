@@ -45,7 +45,9 @@ jobs:
 
           # Prepare Remote Data Directory
           ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} '
+          [ ! -d "/home/${{ secrets.REMOTE_USER }}/bin" ] && mkdir -p "/home/${{ secrets.REMOTE_USER }}/bin" || true;
           [ ! -d "${{ secrets.REMOTE_TARGET }}" ] && mkdir -p "${{ secrets.REMOTE_TARGET }}" || true;
+          [ ! -d "${{ secrets.REMOTE_TARGET }}/storage" ] && mkdir -p "${{ secrets.REMOTE_TARGET }}/storage" || true;
           [ ! -d "${{ secrets.REMOTE_TARGET }}/public/doc-files" ] && mkdir -p "${{ secrets.REMOTE_TARGET }}/public/doc-files" || true;
           [ ! -f "${{ secrets.REMOTE_TARGET }}/sitemap.xml" ] && touch "${{ secrets.REMOTE_TARGET }}/sitemap.xml" || true;
           [ ! -f "${{ secrets.REMOTE_TARGET }}/sitemap_pages.xml" ] && touch "${{ secrets.REMOTE_TARGET }}/sitemap_pages.xml" || true;
@@ -56,6 +58,11 @@ jobs:
           rsync -ap \
           .env \
           ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/.env
+
+          # Send deploy script to server
+          rsync -ap \
+          bin/dep.sh \
+          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/bin/dep.sh
 
 
 #      - name: Deploy
