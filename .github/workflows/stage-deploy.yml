@@ -40,7 +40,8 @@ jobs:
       - name: Setup known_hosts
         run: |
           # Test ssh connection
-          ssh -T -o StrictHostKeyChecking=yes ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
+          ls -l ~/.ssh
+          ssh -i ~/.ssh/id_deploy -T -o StrictHostKeyChecking=yes ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
 
       - name: Transfer .env to server
         run: |
