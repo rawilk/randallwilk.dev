@@ -37,14 +37,12 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           name: id_deploy
 
-      - name: Configure SSH Identity
-        run: |
-          eval $(ssh-agent)
-          ssh-add ~/.ssh/id_deploy
-
       - name: Test
         run: |
           # Test ssh connection
+          eval $(ssh-agent)
+          ssh-add ~/.ssh/id_deploy
+
           ssh -T -o StrictHostKeyChecking=yes ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
 
 #      - name: Transfer .env to server
