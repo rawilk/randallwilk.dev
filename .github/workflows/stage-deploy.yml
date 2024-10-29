@@ -34,20 +34,11 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }}
-          known_hosts: ${{ vars.FOO }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
           name: id_deploy
 
       - name: Setup known_hosts
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ vars.FOO }}" > ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-          # Debug
-          ls -la ~/.ssh/known_hosts
-          echo 'Hosts content'
-          cat ~/.ssh/known_hosts
-
           # Test ssh connection
           ssh -T -o StrictHostKeyChecking=yes ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} "echo 'SSH connection successful'"
 
