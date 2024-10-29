@@ -28,7 +28,7 @@ jobs:
 
       - name: Inject secrets into environment
         run: |
-          APP_ENV=test op inject -i .env.template_test -o .env --force
+          APP_ENV=staging op inject -i .env.template -o .env --force
 
       - name: Setup SSH
         uses: shimataro/ssh-key-action@v2
