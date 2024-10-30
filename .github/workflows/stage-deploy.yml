@@ -75,7 +75,7 @@ jobs:
           '
 
           # Transfer environment file
-          rsync -ap \
+          rsync -apL \
           .env \
           ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/shared/.env
 
