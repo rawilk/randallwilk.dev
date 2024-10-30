@@ -80,10 +80,10 @@ jobs:
           .env \
           ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/shared/.env
 
-          # Send deploy script to server
+          # Send deployment script to server
           rsync -ap \
-          bin/dep.sh \
-          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/bin/dep.sh
+          bin/deploy.sh \
+          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/bin/deploy.sh
 
       - name: Deploy
         uses: jbrooksuk/laravel-forge-action@v1.0.2
@@ -93,4 +93,3 @@ jobs:
       - name: Cleanup
         run: |
           rm .env
-

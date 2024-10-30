@@ -3,14 +3,11 @@
 # Note: All referenced variables must be defined/exported from the
 # Forge site deployment script.
 
-# Note: Data root should already be created from our GitHub action
-# runner.
+# Note: Data (shared) root should already be created from
+# our GitHub action runner.
 
 # Extract the domain name (everything after last /)
 TARGET=${FORGE_SITE_PATH##*/}
-
-# Extract the root path (everything before last /)
-# ROOT=${FORGE_SITE_PATH%/*}
 
 # Directory to store each release in.
 RELEASE_ROOT="$FORGE_SITE_PATH/releases"
@@ -59,7 +56,7 @@ $FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader --n
 
 # Restart php
 ( flock -w 10 9 || exit 1
-    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
+    echo 'Restarting FPM...'; sudo -S service "$FORGE_PHP_FPM" reload ) 9>/tmp/fpmlock
 
 # Symlink master copies of persistent data to the new release.
 echo "Symlinking site files..."
@@ -106,13 +103,6 @@ echo "$RELEASE" >> "$RELEASE_ROOT/.success"
 echo "Linking new release..."
 echo "----------------------"
 echo ""
-
-#if [ -d "$FORGE_SITE_PATH" ] && [ ! -L "$FORGE_SITE_PATH" ]; then
-#    echo "First time deployment detected - moving existing directory..."
-#
-#    # Back the directory up, just in case
-#    mv "$FORGE_SITE_PATH" "$FORGE_SITE_PATH-backup-$(date +%Y%m%d%H%M%S)"
-#fi
 
 # Create atomic symlink to new release
 ln -sfn "$NEW_RELEASE_ROOT" "$CURRENT_ROOT-temp"

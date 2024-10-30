@@ -7,7 +7,6 @@
 .phpunit.result.cache
 /.idea
 /.vscode
-/bin/deploy.sh
 /node_modules
 /public/build
 /public/css
