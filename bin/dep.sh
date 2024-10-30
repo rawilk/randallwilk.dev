@@ -110,6 +110,13 @@ echo "Linking new release..."
 echo "----------------------"
 echo ""
 
+if [ -d "$FORGE_SITE_PATH" ] && [ ! -L "$FORGE_SITE_PATH" ]; then
+    echo "First time deployment detected - moving existing directory..."
+
+    # Back the directory up, just in case
+    mv "$FORGE_SITE_PATH" "$FORGE_SITE_PATH-backup-$(date +%Y%m%d%H%M%S)"
+fi
+
 # Create atomic symlink to new release
 ln -sfn "$ROOT/$NEW_RELEASE_ROOT" "$FORGE_SITE_PATH-temp"
 mv -Tf "$FORGE_SITE_PATH-temp" "$FORGE_SITE_PATH"
