@@ -114,7 +114,7 @@ if [ -d "$CURRENT" ] && [ ! -L "$CURRENT" ]; then
     rm -rf "$CURRENT"
 fi
 
-ln -s -n -f -t "$NEW_RELEASE_ROOT" "$CURRENT"
+ln -s -n -f -t "$NEW_RELEASE_ROOT/public" "$CURRENT"
 
 # Remove failed releases
 echo "Removing failed releases..."
