@@ -30,7 +30,7 @@ jobs:
           key: extensions-${{ hashFiles('composer.lock') }}
 
       - name: Cache extensions
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.extcache.outputs.dir }}
           key: ${{ steps.extcache.outputs.key }}
@@ -55,7 +55,7 @@ jobs:
           mysql -u root -proot -e 'CREATE DATABASE IF NOT EXISTS randallwilk_test;'
 
       - name: Cache composer dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
