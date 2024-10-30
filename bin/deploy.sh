@@ -122,6 +122,7 @@ else
 fi
 
 # Remove older releases
+echo ""
 echo "Cleaning up old releases..."
 echo ""
 
