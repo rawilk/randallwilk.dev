@@ -75,9 +75,10 @@ jobs:
           '
 
           # Transfer environment file
-          rsync -ap \
+          # -l to preserve the symlinks
+          rsync -apl \
           .env \
-          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/.env
+          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/shared/.env
 
           # Send deploy script to server
           rsync -ap \
