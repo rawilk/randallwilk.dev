@@ -6,9 +6,6 @@
 # Note: Data root should already be created from our GitHub action
 # runner.
 
-# Delete script once script exits
-trap 'rm -- "$0"' EXIT
-
 # Extract the domain name (everything after last /)
 TARGET=${FORGE_SITE_PATH##*/}
 
