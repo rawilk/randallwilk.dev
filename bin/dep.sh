@@ -31,7 +31,8 @@ ARTISAN="$FORGE_PHP $ROOT/$NEW_RELEASE_ROOT/artisan"
 # Directory where the "current" release is stored
 CURRENT="$FORGE_SITE_PATH/current"
 
-echo "Current: $CURRENT"
+# To save on disk space, we will only keep a certain amount of releases
+RELEASES_TO_KEEP=3
 
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
@@ -108,7 +109,7 @@ echo ""
 rm -rf "$NEW_RELEASE_ROOT/node_modules"
 
 # Mark deployment as success
-echo "$RELEASE" >> $RELEASE_ROOT/.success
+echo "$RELEASE" >> "$RELEASE_ROOT/.success"
 
 # Link to the new deployment
 if [ -d "$CURRENT" ] && [ ! -L "$CURRENT" ]; then
@@ -118,5 +119,34 @@ fi
 
 ln -s -n -f -t "$NEW_RELEASE_ROOT" "$CURRENT"
 
+# Remove failed releases
+echo "Removing failed releases..."
+echo ""
+cd "$RELEASE_ROOT"
+
+if grep -qvf .success <(ls -1)
+then
+    grep -vf .successes <(ls -1)
+    grep -vf .successes <(ls -1) | xargs rm -rf
+else
+    echo "No failed releases found."
+fi
+
+# Remove older releases
+echo "Cleaning up old releases..."
+echo ""
+
+RELEASES_TO_KEEP=$((RELEASES_TO_KEEP-1))
+LINES_STORED_RELEASES_TO_DELETE=$(find . -mapdepth 1 -mindepth 1 -type d ! -name "$RELEASE" -printf '%T@\t%f\n' | head -n -"$RELEASES_TO_KEEP" | wc -l)
+if [ "$LINES_STORED_RELEASES_TO_DELETE" != 0 ]; then
+    find . -maxdepth 1 -mindepth 1 -type d ! -name "$RELEASE" -printf '%T@\t%f\n' | sort -t $'\t' -g | head -n -"$RELEASES_TO_KEEP" | cut -d $'\t' -f 2-
+    find . -maxdepth 1 -mindepth 1 -type d ! -name "$RELEASE" -printf '%T@\t%f\n' | sort -t $'\t' -g | head -n -"$RELEASES_TO_KEEP" | cut -d $'\t' -f 2- | xargs -I {} sed -i -e '/{}/d' .success
+    find . -maxdepth 1 -mindepth 1 -type d ! -name "$RELEASE" -printf '%T@\t%f\n' | sort -t $'\t' -g | head -n -"$RELEASES_TO_KEEP" | cut -d $'\t' -f 2- | xargs rm -rf
+else
+    echo "No old releases were found to delete."
+fi
+
 # Final optimizations
 $ARTISAN horizon:terminate
+
+echo "Deployment completed: $NEW_RELEASE_ROOT"
