@@ -75,8 +75,7 @@ jobs:
           '
 
           # Transfer environment file
-          # -L to preserve the symlinks
-          rsync -apL \
+          rsync -ap \
           .env \
           ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/shared/.env
 
