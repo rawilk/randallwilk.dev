@@ -28,6 +28,11 @@ DATA_ROOT="$ROOT/$TARGET-data"
 # Our artisan php file for the new release
 ARTISAN="$FORGE_PHP $ROOT/$NEW_RELEASE_ROOT/artisan"
 
+# Directory where the "current" release is stored
+CURRENT="$FORGE_SITE_PATH/current"
+
+echo "Current: $CURRENT"
+
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
 
@@ -104,6 +109,14 @@ rm -rf "$NEW_RELEASE_ROOT/node_modules"
 
 # Mark deployment as success
 echo "$RELEASE" >> $RELEASE_ROOT/.success
+
+# Link to the new deployment
+if [ -d "$CURRENT" ] && [ ! -L "$CURRENT" ]; then
+    # If the directory already exists and it's not a symlink, delete it.
+    rm -rf "$CURRENT"
+fi
+
+ln -s -n -f -t "$NEW_RELEASE_ROOT" "$CURRENT"
 
 # Final optimizations
 $ARTISAN horizon:terminate
