@@ -20,10 +20,16 @@ RELEASE_ROOT="$TARGET-releases"
 
 # Name the new release (with the current date/time)
 RELEASE=$(date +"%Y%m%d%H%M%S")
-NEW_RELEASE_ROOT="${RELEASE_ROOT}/$RELEASE"
+NEW_RELEASE_ROOT="$RELEASE_ROOT/$RELEASE"
 
 # Directory that has the master copies of files like .env
 DATA_ROOT="$ROOT/$TARGET-data"
+
+# Our artisan php file for the new release
+ARTISAN="$FORGE_PHP $NEW_RELEASE_ROOT/artisan"
+
+# Temp
+echo "artisan command: $ARTISAN"
 
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
@@ -49,7 +55,7 @@ fi
 
 # Clone the repository into a new release
 echo "Creating new release ($RELEASE)..."
-echo "-----------------------"
+echo "----------------------------------"
 
 git clone -b "$FORGE_SITE_BRANCH" --depth 1 "$GIT_REPOSITORY" "$NEW_RELEASE_ROOT"
 
@@ -67,3 +73,18 @@ echo "Symlinking site files..."
 echo "------------------------"
 
 ln -sfn "$DATA_ROOT/.env" "$NEW_RELEASE_ROOT/.env"
+rm -rf "$NEW_RELEASE_ROOT/storage"
+ln -sfn "$DATA_ROOT/storage" "$NEW_RELEASE_ROOT/storage"
+
+# Symlink sitemaps
+ln -sfn "$DATA_ROOT/public/sitemap.xml" "$NEW_RELEASE_ROOT/public/sitemap.xml"
+ln -sfn "$DATA_ROOT/public/sitemap_docs.xml" "$NEW_RELEASE_ROOT/public/sitemap_docs.xml"
+ln -sfn "$DATA_ROOT/public/sitemap_pages.xml" "$NEW_RELEASE_ROOT/public/sitemap_pages.xml"
+
+# Symlink Doc Files
+ln -sfn "$DATA_ROOT/public/doc-files" "$NEW_RELEASE_ROOT/public/doc-files"
+
+# Install Node Dependencies
+npm install --no-audit --prefix "$NEW_RELEASE_ROOT"
+
+# Run Migrations
