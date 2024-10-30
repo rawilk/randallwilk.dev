@@ -28,9 +28,6 @@ DATA_ROOT="$ROOT/$TARGET-data"
 # Our artisan php file for the new release
 ARTISAN="$FORGE_PHP $ROOT/$NEW_RELEASE_ROOT/artisan"
 
-# Directory where the "current" release is stored
-CURRENT="$FORGE_SITE_PATH/current"
-
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
 
@@ -50,7 +47,7 @@ fi
 
 # Clone the repository into a new release
 echo "Creating new release ($RELEASE)..."
-echo "---------------------------------------"
+echo "----------------------------------------"
 echo ""
 
 git clone -b "$FORGE_SITE_BRANCH" --depth 1 "$GIT_REPOSITORY" "$NEW_RELEASE_ROOT"
@@ -109,12 +106,12 @@ rm -rf "$NEW_RELEASE_ROOT/node_modules"
 echo "$RELEASE" >> "$RELEASE_ROOT/.success"
 
 # Link to the new deployment
-if [ -d "$CURRENT" ] && [ ! -L "$CURRENT" ]; then
-    # If the directory already exists and it's not a symlink, delete it.
-    rm -rf "$CURRENT"
-fi
+echo "Linking new release..."
+echo "----------------------"
+echo ""
 
-ln -s -n -f -t "$NEW_RELEASE_ROOT/public" "$CURRENT"
+# Create atomic symlink to new release
+ln -sfn "$ROOT/$NEW_RELEASE_ROOT" "$FORGE_SITE_PATH-temp"
 
 # Remove failed releases
 echo "Removing failed releases..."
