@@ -1,0 +1,95 @@
+name: Production Deploy
+
+concurrency:
+  group: production
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install 1Password CLI
+        uses: 1password/install-cli-action@v1
+
+      - name: Authenticate with 1Password
+        uses: 1password/load-secrets-action/configure@v2
+        with:
+          service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+
+      - name: Inject secrets into environment
+        run: |
+          APP_ENV=production op inject -i .env.template -o .env --force
+
+      - name: Setup SSH
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          name: id_deploy
+
+      - name: Transfer .env to server
+        run: |
+          # Configure identity file
+          eval $(ssh-agent)
+          ssh-add ~/.ssh/id_deploy
+
+          # Prepare Directory Structure
+          ssh ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} '
+          directories=(
+              "/home/${{ secrets.REMOTE_USER}}/bin"
+              "${{ secrets.REMOTE_TARGET }}/shared"
+              "${{ secrets.REMOTE_TARGET }}/shared/storage"
+              "${{ secrets.REMOTE_TARGET }}/shared/storage/app/public"
+              "${{ secrets.REMOTE_TARGET }}/shared/storage/framework/cache"
+              "${{ secrets.REMOTE_TARGET }}/shared/storage/framework/sessions"
+              "${{ secrets.REMOTE_TARGET }}/shared/storage/framework/testing"
+              "${{ secrets.REMOTE_TARGET }}/shared/storage/framework/views"
+              "${{ secrets.REMOTE_TARGET }}/shared/storage/docs"
+              "${{ secrets.REMOTE_TARGET }}/shared/storage/logs"
+              "${{ secrets.REMOTE_TARGET }}/shared/public/doc-files"
+          )
+
+          files=(
+              "${{ secrets.REMOTE_TARGET }}/shared/public/sitemap.xml"
+              "${{ secrets.REMOTE_TARGET }}/shared/public/sitemap_pages.xml"
+              "${{ secrets.REMOTE_TARGET }}/shared/public/sitemap_docs.xml"
+          )
+
+          for dir in "${directories[@]}"; do
+              [ ! -d "$dir" ] && mkdir -p "$dir" || true
+          done
+
+          for file in "${files[@]}"; do
+              [ ! -f "$file" ] && touch "$file" || true
+          done
+          '
+
+          # Transfer environment file
+          # -L to preserve symlinks on target
+          rsync -apL \
+          .env \
+          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/shared/.env
+
+          # Send deployment script to server
+          rsync -ap \
+          bin/deploy.sh \
+          ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/bin/deploy.sh
+
+      - name: Deploy
+        uses: jbrooksuk/laravel-forge-action@v1.0.2
+        with:
+          trigger_url: ${{ secrets.FORGE_TRIGGER_URL }}
+
+      - name: Cleanup
+        run: |
+          rm .env
