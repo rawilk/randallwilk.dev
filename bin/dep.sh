@@ -101,3 +101,6 @@ echo "---------------------------"
 echo ""
 
 rm -rf "$NEW_RELEASE_ROOT/node_modules"
+
+# Final optimizations
+$ARTISAN horizon:terminate
