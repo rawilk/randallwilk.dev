@@ -26,7 +26,7 @@ NEW_RELEASE_ROOT="$RELEASE_ROOT/$RELEASE"
 DATA_ROOT="$ROOT/$TARGET-data"
 
 # Our artisan php file for the new release
-ARTISAN="$FORGE_PHP $NEW_RELEASE_ROOT/artisan"
+ARTISAN="$FORGE_PHP $ROOT/$NEW_RELEASE_ROOT/artisan"
 
 # Temp
 echo "artisan command: $ARTISAN"
@@ -88,3 +88,4 @@ ln -sfn "$DATA_ROOT/public/doc-files" "$NEW_RELEASE_ROOT/public/doc-files"
 npm install --no-audit --prefix "$NEW_RELEASE_ROOT"
 
 # Run Migrations
+$ARTISAN migrate --force
