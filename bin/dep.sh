@@ -28,16 +28,8 @@ DATA_ROOT="$ROOT/$TARGET-data"
 # Our artisan php file for the new release
 ARTISAN="$FORGE_PHP $ROOT/$NEW_RELEASE_ROOT/artisan"
 
-# Temp
-echo "artisan command: $ARTISAN"
-
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
-
-restart_php() {
-    ( flock -w 10 9 || exit 1
-        echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
-}
 
 echo "Deploying site: $TARGET"
 echo ""
@@ -55,7 +47,8 @@ fi
 
 # Clone the repository into a new release
 echo "Creating new release ($RELEASE)..."
-echo "----------------------------------"
+echo "---------------------------------------"
+echo ""
 
 git clone -b "$FORGE_SITE_BRANCH" --depth 1 "$GIT_REPOSITORY" "$NEW_RELEASE_ROOT"
 
