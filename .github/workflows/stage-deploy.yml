@@ -66,11 +66,11 @@ jobs:
           )
 
           for dir in "${directories[@]}"; do
-              [ ! -d "$dir" ] && mkdir -p "$dir"
+              [ ! -d "$dir" ] && mkdir -p "$dir" || true
           done
 
           for file in "${files[@]}"; do
-              [ ! -f "$file" ] && touch "$file"
+              [ ! -f "$file" ] && touch "$file" || true
           done
           '
 
