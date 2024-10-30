@@ -7,7 +7,7 @@
         "build": "vite build"
     },
     "dependencies": {
-        "@babel/preset-env": "^7.25.7",
+        "@babel/preset-env": "^7.26.0",
         "@docsearch/js": "^3.6.2",
         "@tailwindcss/forms": "^0.5.9",
         "@tailwindcss/typography": "^0.5.15",
