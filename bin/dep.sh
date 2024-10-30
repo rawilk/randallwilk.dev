@@ -102,5 +102,8 @@ echo ""
 
 rm -rf "$NEW_RELEASE_ROOT/node_modules"
 
+# Mark deployment as success
+echo "$RELEASE" >> $RELEASE_ROOT/.success
+
 # Final optimizations
 $ARTISAN horizon:terminate
