@@ -8,4 +8,3 @@ fi
 echo 'Updating docs...'
 
 php artisan import:docs --all
-php artisan queue:work
