@@ -23,7 +23,7 @@ Be sure the following are installed on your machine:
 - Redis for queues/cache
 - (Optional) A GitHub OAuth app for your local installation for social login
 
-## Run the following commands:
+## Installation:
 
 ```bash
 cd ~/Sites
