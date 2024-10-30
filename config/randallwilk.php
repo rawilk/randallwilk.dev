@@ -23,7 +23,7 @@ return [
     |
     */
     'contact' => [
-        'email' => 'randall+@randallwilk.dev',
+        'email' => 'randall@randallwilk.dev',
 
         'social' => [
             'GitHub' => [
