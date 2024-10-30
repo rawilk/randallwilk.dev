@@ -82,3 +82,22 @@ npm install --no-audit --prefix "$NEW_RELEASE_ROOT"
 
 # Run Migrations
 $ARTISAN migrate --force
+
+# Optimize Site
+$ARTISAN optimize
+$ARTISAN filament:optimize
+$ARTISAN storage:link
+
+# Build front-end assets
+echo "Compiling front-end assets..."
+echo "-----------------------------"
+echo ""
+
+npm run build --prefix "$NEW_RELEASE_ROOT"
+
+# Cleanup node_modules
+echo "Cleaning up node_modules..."
+echo "---------------------------"
+echo ""
+
+rm -rf "$NEW_RELEASE_ROOT/node_modules"
