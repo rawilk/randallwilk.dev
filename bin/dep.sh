@@ -31,9 +31,6 @@ ARTISAN="$FORGE_PHP $ROOT/$NEW_RELEASE_ROOT/artisan"
 # Directory where the "current" release is stored
 CURRENT="$FORGE_SITE_PATH/current"
 
-# To save on disk space, we will only keep a certain amount of releases
-RELEASES_TO_KEEP=3
-
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
 
@@ -137,7 +134,7 @@ echo "Cleaning up old releases..."
 echo ""
 
 RELEASES_TO_KEEP=$((RELEASES_TO_KEEP-1))
-LINES_STORED_RELEASES_TO_DELETE=$(find . -mapdepth 1 -mindepth 1 -type d ! -name "$RELEASE" -printf '%T@\t%f\n' | head -n -"$RELEASES_TO_KEEP" | wc -l)
+LINES_STORED_RELEASES_TO_DELETE=$(find . -maxdepth 1 -mindepth 1 -type d ! -name "$RELEASE" -printf '%T@\t%f\n' | head -n -"$RELEASES_TO_KEEP" | wc -l)
 if [ "$LINES_STORED_RELEASES_TO_DELETE" != 0 ]; then
     find . -maxdepth 1 -mindepth 1 -type d ! -name "$RELEASE" -printf '%T@\t%f\n' | sort -t $'\t' -g | head -n -"$RELEASES_TO_KEEP" | cut -d $'\t' -f 2-
     find . -maxdepth 1 -mindepth 1 -type d ! -name "$RELEASE" -printf '%T@\t%f\n' | sort -t $'\t' -g | head -n -"$RELEASES_TO_KEEP" | cut -d $'\t' -f 2- | xargs -I {} sed -i -e '/{}/d' .success
@@ -146,7 +143,9 @@ else
     echo "No old releases were found to delete."
 fi
 
+cd "$ROOT"
+
 # Final optimizations
 $ARTISAN horizon:terminate
 
-echo "Deployment completed: $NEW_RELEASE_ROOT"
+echo "Deployment completed: $ROOT/$NEW_RELEASE_ROOT"
