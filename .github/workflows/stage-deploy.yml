@@ -75,6 +75,7 @@ jobs:
           '
 
           # Transfer environment file
+          # -L to preserve symlinks on target
           rsync -apL \
           .env \
           ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:${{ secrets.REMOTE_TARGET }}/shared/.env
@@ -84,8 +85,12 @@ jobs:
           bin/dep.sh \
           ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/home/${{ secrets.REMOTE_USER }}/bin/dep.sh
 
-#      - name: Deploy
-#        uses: jbrooksuk/laravel-forge-action@v1.0.2
-#        with:
-#          trigger_url: ${{ secrets.FORGE_TRIGGER_URL }}
+      - name: Deploy
+        uses: jbrooksuk/laravel-forge-action@v1.0.2
+        with:
+          trigger_url: ${{ secrets.FORGE_TRIGGER_URL }}
+
+      - name: Cleanup
+        run: |
+          rm .env
 

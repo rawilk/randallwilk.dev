@@ -10,20 +10,23 @@
 TARGET=${FORGE_SITE_PATH##*/}
 
 # Extract the root path (everything before last /)
-ROOT=${FORGE_SITE_PATH%/*}
+# ROOT=${FORGE_SITE_PATH%/*}
 
 # Directory to store each release in.
-RELEASE_ROOT="$TARGET-releases"
+RELEASE_ROOT="$FORGE_SITE_PATH/releases"
 
 # Name the new release (with the current date/time)
 RELEASE=$(date +"%Y%m%d%H%M%S")
 NEW_RELEASE_ROOT="$RELEASE_ROOT/$RELEASE"
 
 # Directory that has the master copies of files like .env
-DATA_ROOT="$ROOT/$TARGET-data"
+SHARED_ROOT="$FORGE_SITE_PATH/shared"
+
+# Directory that holds the "current" release
+CURRENT_ROOT="$FORGE_SITE_PATH/current"
 
 # Our artisan php file for the new release
-ARTISAN="$FORGE_PHP $ROOT/$NEW_RELEASE_ROOT/artisan"
+ARTISAN="$FORGE_PHP $NEW_RELEASE_ROOT/artisan"
 
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
@@ -31,8 +34,8 @@ set -eu
 echo "Deploying site: $TARGET"
 echo ""
 
-# Ensure we're in our root directory.
-cd "$ROOT"
+# Ensure we're in our root site directory.
+cd "$FORGE_SITE_PATH"
 
 # Create a releases directory if it doesn't exist.
 if [ ! -d "$RELEASE_ROOT" ]; then
@@ -62,23 +65,20 @@ $FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader --n
 echo "Symlinking site files..."
 echo "------------------------"
 
-ln -sfn "$DATA_ROOT/.env" "$NEW_RELEASE_ROOT/.env"
+ln -sfn "$SHARED_ROOT/.env" "$NEW_RELEASE_ROOT/.env"
 rm -rf "$NEW_RELEASE_ROOT/storage"
-ln -sfn "$DATA_ROOT/storage" "$NEW_RELEASE_ROOT/storage"
+ln -sfn "$SHARED_ROOT/storage" "$NEW_RELEASE_ROOT/storage"
 
 # Symlink sitemaps
-ln -sfn "$DATA_ROOT/public/sitemap.xml" "$NEW_RELEASE_ROOT/public/sitemap.xml"
-ln -sfn "$DATA_ROOT/public/sitemap_docs.xml" "$NEW_RELEASE_ROOT/public/sitemap_docs.xml"
-ln -sfn "$DATA_ROOT/public/sitemap_pages.xml" "$NEW_RELEASE_ROOT/public/sitemap_pages.xml"
+ln -sfn "$SHARED_ROOT/public/sitemap.xml" "$NEW_RELEASE_ROOT/public/sitemap.xml"
+ln -sfn "$SHARED_ROOT/public/sitemap_docs.xml" "$NEW_RELEASE_ROOT/public/sitemap_docs.xml"
+ln -sfn "$SHARED_ROOT/public/sitemap_pages.xml" "$NEW_RELEASE_ROOT/public/sitemap_pages.xml"
 
 # Symlink Doc Files
-ln -sfn "$DATA_ROOT/public/doc-files" "$NEW_RELEASE_ROOT/public/doc-files"
+ln -sfn "$SHARED_ROOT/public/doc-files" "$NEW_RELEASE_ROOT/public/doc-files"
 
 # Install Node Dependencies
 npm install --no-audit --prefix "$NEW_RELEASE_ROOT"
-
-# Run Migrations
-$ARTISAN migrate --force
 
 # Optimize Site
 $ARTISAN optimize
@@ -107,16 +107,16 @@ echo "Linking new release..."
 echo "----------------------"
 echo ""
 
-if [ -d "$FORGE_SITE_PATH" ] && [ ! -L "$FORGE_SITE_PATH" ]; then
-    echo "First time deployment detected - moving existing directory..."
-
-    # Back the directory up, just in case
-    mv "$FORGE_SITE_PATH" "$FORGE_SITE_PATH-backup-$(date +%Y%m%d%H%M%S)"
-fi
+#if [ -d "$FORGE_SITE_PATH" ] && [ ! -L "$FORGE_SITE_PATH" ]; then
+#    echo "First time deployment detected - moving existing directory..."
+#
+#    # Back the directory up, just in case
+#    mv "$FORGE_SITE_PATH" "$FORGE_SITE_PATH-backup-$(date +%Y%m%d%H%M%S)"
+#fi
 
 # Create atomic symlink to new release
-ln -sfn "$ROOT/$NEW_RELEASE_ROOT" "$FORGE_SITE_PATH-temp"
-mv -Tf "$FORGE_SITE_PATH-temp" "$FORGE_SITE_PATH"
+ln -sfn "$NEW_RELEASE_ROOT" "$CURRENT_ROOT-temp"
+mv -Tf "$CURRENT_ROOT-temp" "$CURRENT_ROOT"
 
 # Remove failed releases
 echo "Removing failed releases..."
@@ -145,9 +145,10 @@ else
     echo "No old releases were found to delete."
 fi
 
-cd "$ROOT"
+# Run Migrations
+$ARTISAN migrate --force
 
 # Final optimizations
 $ARTISAN horizon:terminate
 
-echo "Deployment completed: $ROOT/$NEW_RELEASE_ROOT"
+echo "Deployment completed: $NEW_RELEASE_ROOT"
