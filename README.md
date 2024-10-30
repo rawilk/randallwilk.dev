@@ -7,25 +7,47 @@ This repo contains the source code of [my personal website](https://randallwilk.
 
 # Local Development
 
-To work on this project on your local machine, you may follow the instructions below. These instructions
-assume you are serving the site using Laravel Valet out of your `~/Sites` directory:
+All development should be done on or PR'd to the `develop` branch. Treat the `main` and `stage` branches as readonly.
 
-1. Fork this repository
-2. Open your terminal and `cd` to your `~/Sites` folder
-3. Clone your fork into the `~/Sites/randallwik.dev` folder, by running the following command *with your username placed
-   into the {username} slot*:
-    ```bash
-    git clone git@github.com:{username}/randallwilk.dev randallwilk.dev
-    ```
-4. CD into the new directory you just created:
-    ```bash
-    cd randallwilk.dev
-    ```
-5. Run the `setup.sh` bin script, which will take all the steps necessary to prepare your local install:
-    ```bash
-    ./bin/setup.sh
-    ```
-6. You should also open up a `php artisan tinker` session and create an admin user so the admin panel can be accessed.
+To work on this project on your local machine, you may follow the instructions below. These instructions
+assume you are serving the site using Laravel Valet or Herd out of your `~/Sites` directory:
+
+## Requirements
+
+Be sure the following are installed on your machine:
+
+- [Composer](https://getcomposer.org/download/)
+- PHP >= 8.3
+- PostgreSQL >= 16
+- Node >= 18
+- Redis for queues/cache
+- (Optional) A GitHub OAuth app for your local installation for social login
+
+## Run the following commands:
+
+```bash
+cd ~/Sites
+
+# Clone your forked version - replace {username} with your username
+git clone git@github.com:{username}/randallwilk.dev randallwilk.dev
+
+cd randallwilk.dev
+
+# Run the bash setup script
+./bin/setup.sh
+```
+
+> **Note:** Be sure to fill out GitHub credentials in the `.env` to import docs (optional).
+
+> **Note:** The `repositories` database table is only populated by running the `php artisan import:github-repositories` command, and the repositories pulled in are based on your GitHub credentials in the `.env` file.
+
+## Docs
+
+Docs can be imported from the artisan command, as long as you have Laravel Horizon running and the credentials for the GitHub api filled in. It also requires you to have read access to each of the repositories that have docs (I don't think that should be an issue since they're all public).
+
+```bash
+php artisan import:docs
+```
 
 # Syncing Upstream Changes Into Your Fork
 
@@ -35,12 +57,29 @@ latest changes from this repository into your fork.
 # Updating After Remote Code Changes
 
 If you pull down the upstream changes from this repository into your local repository, you'll want to update your
-Composer and NPM dependencies. For convenience, you may run the `bin/update.sh` script to update these things:
+Composer and NPM dependencies. For convenience, you may run the `bin/update-deps.sh` script to update these things:
 
 ```bash
-./bin/update.sh
+./bin/update-deps.sh
 ```
 
-# TODO:
+# Deployment
 
-- Cleanup language lines
+Deployments for the `main` and `stage` branch are handled through GitHub actions that will handle generating a fresh copy of the `.env` file with secrets from my 1Password vault. The action will send the fresh copy to the server and trigger a deployment through Forge.
+
+To make updating these two branches easy, the `bin/publish.sh` script should be used, so there is no need to PR to these branches.
+
+```bash
+./bin/publish.sh
+```
+
+# Credits
+
+This website was principally designed and developed by [Randall Wilk](https://github.com/rawilk).
+
+# License
+
+- The web application falls under the [MIT License](https://choosealicense.com/licenses/mit/)
+- The content and design are under [exclusive copyright](https://choosealicense.com/no-license/)
+
+If you'd like to reuse or repost something, feel free to reach out at randall@randallwilk.dev. Please remember that the design is not meant to be forked!
