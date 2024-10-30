@@ -126,8 +126,8 @@ cd "$RELEASE_ROOT"
 
 if grep -qvf .success <(ls -1)
 then
-    grep -vf .successes <(ls -1)
-    grep -vf .successes <(ls -1) | xargs rm -rf
+    grep -vf .success <(ls -1)
+    grep -vf .success <(ls -1) | xargs rm -rf
 else
     echo "No failed releases found."
 fi
