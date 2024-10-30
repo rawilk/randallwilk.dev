@@ -112,6 +112,7 @@ echo ""
 
 # Create atomic symlink to new release
 ln -sfn "$ROOT/$NEW_RELEASE_ROOT" "$FORGE_SITE_PATH-temp"
+# mv -Tf "$FORGE_SITE_PATH-temp" "$FORGE_SITE_PATH"
 
 # Remove failed releases
 echo "Removing failed releases..."
