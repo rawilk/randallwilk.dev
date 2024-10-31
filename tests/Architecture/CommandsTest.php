@@ -6,15 +6,12 @@ use Illuminate\Console\Command;
 
 arch()->expect('App\Console\Commands')
     ->classes()
-    ->toExtend(Command::class);
-
-arch()->expect('App\Console\Commands')
-    ->classes()
-    ->toHaveSuffix('Command');
-
-arch()->expect('App\Console\Commands')
-    ->classes()
+    ->toHaveSuffix('Command')
     ->toHaveMethod('handle');
+
+arch()->expect('App\Console\Commands')
+    ->classes()
+    ->toExtend(Command::class);
 
 arch()->expect('App')
     ->classes()
