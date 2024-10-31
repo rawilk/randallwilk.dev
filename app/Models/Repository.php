@@ -9,6 +9,7 @@ use App\Enums\RepositorySort;
 use App\Enums\RepositoryType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
@@ -17,6 +18,7 @@ use Illuminate\Support\Str;
 class Repository extends Model
 {
     use Concerns\UsesHumanKeys;
+    use HasFactory;
     use SoftDeletes;
 
     public static function humanKeyPrefix(): string
@@ -39,12 +41,7 @@ class Repository extends Model
         return $this->language === ProgrammingLanguage::JavaScript;
     }
 
-    public function hasDocs(): bool
-    {
-        return filled($this->documentation_url);
-    }
-
-    public function setTopics(Collection $topics): self
+    public function setTopics(Collection $topics): static
     {
         $this->fill(['topics' => $topics->toArray()])->save();
 
@@ -108,13 +105,6 @@ class Repository extends Model
     {
         return Attribute::make(
             get: fn (): string => "rawilk/{$this->name}",
-        );
-    }
-
-    protected function displayName(): Attribute
-    {
-        return Attribute::make(
-            get: fn (): string => $this->scoped_name ?? $this->name,
         );
     }
 
