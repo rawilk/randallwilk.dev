@@ -4,16 +4,10 @@ declare(strict_types=1);
 
 use Illuminate\Console\Command;
 
-arch()->expect('App\Console\Commands')
-    ->classes()
+arch()
+    ->expect('App\Console\Commands')
+    ->toExtend(Command::class)
     ->toHaveSuffix('Command')
-    ->toHaveMethod('handle');
-
-arch()->expect('App\Console\Commands')
-    ->classes()
-    ->toExtend(Command::class);
-
-arch()->expect('App')
-    ->classes()
-    ->not->toExtend(Command::class)
-    ->ignoring('App\Console\Commands');
+    ->toHaveMethod('handle')
+    ->toImplementNothing()
+    ->not->toBeUsed();

@@ -7,9 +7,11 @@ use App\Notifications\Auth\ResetPasswordInvalidUser;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 arch()->expect('App\Notifications')
-    ->classes()
+    ->toHaveConstructor()
+    ->ignoring('App\Notifications\Concerns')
     ->toHaveSuffix('Notification')
     ->ignoring([
+        'App\Notifications\Concerns',
         ResetPassword::class,
         ResetPasswordInvalidUser::class,
     ]);
