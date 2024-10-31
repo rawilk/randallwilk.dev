@@ -30,6 +30,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, 
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_enabled',
+        'github_id',
+        'is_admin',
     ];
 
     public static function humanKeyPrefix(): string
