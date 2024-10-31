@@ -40,6 +40,9 @@ class Repositories extends Component
     #[Url]
     public string $sort = '-downloads';
 
+    #[Locked]
+    public int $pageSize = 9;
+
     public Collection $repositories;
 
     #[Computed]
@@ -142,7 +145,7 @@ class Repositories extends Component
             )
             ->search($this->search)
             ->applySort($this->sort)
-            ->limit(9)
+            ->limit($this->pageSize)
             ->get()
             ->each(function (Repository $repository) {
                 $this->repositories->push($repository);

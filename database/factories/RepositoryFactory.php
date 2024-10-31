@@ -33,6 +33,11 @@ class RepositoryFactory extends Factory
         ];
     }
 
+    public function visible(): static
+    {
+        return $this->state(['visible' => true]);
+    }
+
     public function package(): static
     {
         return $this->state(['type' => RepositoryType::Package]);
