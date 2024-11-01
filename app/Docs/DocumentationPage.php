@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Docs;
 
-use App\Http\Controllers\Docs\DocsController;
 use Illuminate\Support\Str;
 use Spatie\Sheets\Sheet;
 
@@ -53,14 +52,14 @@ class DocumentationPage extends Sheet
 
     public function getUrlAttribute(): ?string
     {
-        return action([DocsController::class, 'show'], [
+        return route('docs.show', [
             'repository' => $this->repository,
             'alias' => $this->alias,
             'slug' => $this->slug,
         ]);
     }
 
-    public function gitHubUrl(): string
+    public function editUrl(): string
     {
         return "{$this->githubUrl}/blob/{$this->branch}/docs/{$this->slug}.md";
     }
