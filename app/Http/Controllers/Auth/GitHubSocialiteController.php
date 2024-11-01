@@ -35,7 +35,10 @@ class GitHubSocialiteController
     public function callback()
     {
         return Pipeline::send(
-            new GitHubLoginBag(Socialite::driver('github'))
+            // Resolving the DTO out of the container allows us to mock it in tests.
+            app(GitHubLoginBag::class, [
+                'provider' => Socialite::driver('github'),
+            ])
         )->through([
             LoginActions\EnsureValidGitHubUser::class,
             LoginActions\ResolveSocialiteUser::class,
@@ -45,6 +48,10 @@ class GitHubSocialiteController
             LoginActions\RedirectIfUserHasMfa::class,
             LoginActions\AuthenticateUser::class,
         ])->then(function (GitHubLoginBag $bag) {
+            if (! $bag->isLoginRequest()) {
+                return redirect()->to($bag->redirect());
+            }
+
             return view('auth.github-callback', [
                 'panelId' => $bag->panelId(),
                 'redirect' => $bag->redirect(),

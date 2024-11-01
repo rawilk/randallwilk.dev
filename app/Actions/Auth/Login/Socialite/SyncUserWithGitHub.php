@@ -28,10 +28,7 @@ class SyncUserWithGitHub
         ]);
 
         if (! $request->isLoginRequest()) {
-            // Can't flash because it will be gone by the time our redirect happens.
-            session()->put(SessionAlert::Success->value, __('users/profile.connected_accounts.actions.connect.success'));
-
-            session()->put('github.connected', true);
+            session()->flash(SessionAlert::Success->value, __('users/profile.connected_accounts.actions.connect.success'));
 
             $this->sendNotification($request->user(), $gitHubUser->getNickname(), $request->panelId());
         }

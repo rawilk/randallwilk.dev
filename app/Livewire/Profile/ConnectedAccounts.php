@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Livewire\Profile;
 
-use App\Enums\SessionAlert;
 use App\Filament\Actions\Profile\ConnectGitHubAction;
 use App\Filament\Actions\Profile\DisconnectGitHubAction;
 use App\Models\User;
@@ -30,15 +29,6 @@ class ConnectedAccounts extends Component implements HasActions, HasForms
     public function user(): User
     {
         return auth()->user();
-    }
-
-    public function mount(): void
-    {
-        if (session()->pull('github.connected') === true) {
-            $message = SessionAlert::Success->message(pull: true);
-
-            SessionAlert::Success->flash($message);
-        }
     }
 
     public function render(): string
