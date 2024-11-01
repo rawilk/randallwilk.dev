@@ -42,7 +42,9 @@ class GitHubLoginBag
 
     public function gitHubUser(): ?SocialiteUser
     {
-        return once(fn () => $this->provider->stateless()->user());
+        return once(
+            fn () => rescue(fn () => $this->provider->stateless()->user(), report: false)
+        );
     }
 
     public function redirect(): string
@@ -56,6 +58,13 @@ class GitHubLoginBag
     public function panelId(): ?string
     {
         return once(fn (): ?string => session()->pull('panel', 'admin'));
+    }
+
+    public function errorRedirectUrl(): string
+    {
+        return $this->isLoginRequest
+            ? filament()->getPanel($this->panelId())->getLoginUrl()
+            : ProfileInfo::getUrl(panel: $this->panelId());
     }
 
     protected function defaultRedirect(): string

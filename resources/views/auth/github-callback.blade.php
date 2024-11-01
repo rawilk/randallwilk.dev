@@ -1,7 +1,10 @@
-@use(App\Enums\SessionAlert)
-
 @php
-    $defaultRedirect = route("filament.{$panelId}.profile");
+    use App\Enums\SessionAlert;
+    use Rawilk\ProfileFilament\Filament\Pages\Profile\ProfileInfo;
+
+    $defaultRedirect = ProfileInfo::getUrl(panel: $panelId);
+
+    session()->reflash();
 @endphp
 
 <!DOCTYPE html>
