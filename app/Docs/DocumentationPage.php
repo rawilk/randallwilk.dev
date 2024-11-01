@@ -59,4 +59,9 @@ class DocumentationPage extends Sheet
             'slug' => $this->slug,
         ]);
     }
+
+    public function gitHubUrl(): string
+    {
+        return "{$this->githubUrl}/blob/{$this->branch}/docs/{$this->slug}.md";
+    }
 }

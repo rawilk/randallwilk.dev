@@ -1,6 +1,9 @@
 @php
     /** @var \App\Docs\Repository $latestVersion */
     $latestVersion = $repository->aliases->first();
+
+    /** @var \App\Docs\DocumentationPage $page */
+    /** @var \App\Docs\Alias $alias */
 @endphp
 
 <x-doc-page
@@ -78,7 +81,7 @@
 
             <div class="pt-4">
                 <a
-                    href="{{ $alias->pageGitHubUrl($page) }}"
+                    href="{{ $page->gitHubUrl() }}"
                     class="text-sm"
                     target="_blank"
                     rel="noopener"

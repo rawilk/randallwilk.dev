@@ -21,9 +21,9 @@ class Alias
     ) {
     }
 
-    public static function fromDocumentationPage(DocumentationPage $page, Collection $pages): self
+    public static function fromDocumentationPage(DocumentationPage $page, Collection $pages): static
     {
-        return new self(
+        return new static(
             slug: $page->title,
             slogan: $page->slogan,
             branch: $page->branch,
@@ -74,11 +74,6 @@ class Alias
         return Str::of((string) $this->versionNumber)
             ->append('.x')
             ->toString();
-    }
-
-    public function pageGitHubUrl(DocumentationPage $page): string
-    {
-        return "{$this->githubUrl}/blob/{$this->branch}/docs/{$page->slug}.md";
     }
 
     protected function getFlattenedArrayOfPages(): ?Collection
