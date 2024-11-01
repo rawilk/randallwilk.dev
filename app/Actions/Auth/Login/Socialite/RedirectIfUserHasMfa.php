@@ -32,7 +32,10 @@ class RedirectIfUserHasMfa
             remember: true,
         );
 
-        session()->put('next', route("filament.{$request->panelId()}.auth.mfa.challenge"));
+        session()->put(
+            'next',
+            route(filament()->getPanel($request->panelId())->generateRouteName('auth.mfa.challenge')),
+        );
 
         session()->put('github.login', true);
 
