@@ -17,5 +17,6 @@ beforeEach(function () {
 });
 
 it('renders', function () {
-    livewire(ConnectedAccounts::class)->assertOk();
+    livewire(ConnectedAccounts::class)
+        ->assertOk();
 });
