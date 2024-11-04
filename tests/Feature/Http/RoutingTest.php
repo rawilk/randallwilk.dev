@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Enums\SkillType;
+
 use function Pest\Laravel\get;
 
 /**
@@ -36,3 +38,15 @@ test('redirects', function (string $path) {
 })->with([
     'projects',
 ]);
+
+test('home page test', function () {
+    $response = get(route('home'));
+
+    foreach (SkillType::cases() as $case) {
+        $response->assertSeeText($case->getLabel());
+
+        foreach (config("randallwilk.skills.{$case->value}") as $skill) {
+            $response->assertSeeText($skill);
+        }
+    }
+});
