@@ -6,6 +6,7 @@ namespace Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Timebox;
 use Rawilk\ProfileFilament\Database\Factories\AuthenticatorAppFactory;
 use Rawilk\ProfileFilament\Models\AuthenticatorApp;
@@ -31,6 +32,8 @@ abstract class TestCase extends BaseTestCase
 
             return 'Database\\Factories\\' . class_basename($modelName) . 'Factory';
         });
+
+        Storage::fake('tmp-for-tests');
     }
 
     protected function fakeIpLocation(): void

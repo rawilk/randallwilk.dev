@@ -55,7 +55,7 @@ class CreateUserAction
     protected function sendWelcomeEmail(User $user): void
     {
         $user->notify(
-            new WelcomeNotification(panelId: 'admin'),
+            new WelcomeNotification(panelId: filament()->getId()),
         );
     }
 }
