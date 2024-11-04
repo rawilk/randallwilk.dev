@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Timebox;
 use Rawilk\ProfileFilament\Database\Factories\AuthenticatorAppFactory;
 use Rawilk\ProfileFilament\Models\AuthenticatorApp;
-use Tests\Fixtures\Services\Location\LocationTestDriver;
+use Stevebauman\Location\Facades\Location;
+use Stevebauman\Location\Position;
 use Tests\Fixtures\Support\InstantlyResolvingTimebox;
 
 abstract class TestCase extends BaseTestCase
@@ -37,10 +38,24 @@ abstract class TestCase extends BaseTestCase
         });
 
         Storage::fake('tmp-for-tests');
+
+        $this->fakeIpLocation();
     }
 
     protected function fakeIpLocation(): void
     {
-        config()->set('location.driver', LocationTestDriver::class);
+        Location::fake([
+            '127.0.0.1' => Position::make([
+                'countryName' => 'United States',
+                'countryCode' => 'US',
+                'regionCode' => null,
+                'regionName' => 'Wisconsin',
+                'cityName' => 'Madison',
+                'zipCode' => '53703',
+                'latitude' => '43.0731',
+                'longitude' => '-89.4012',
+                'timezone' => 'America/Chicago',
+            ]),
+        ]);
     }
 }

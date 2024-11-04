@@ -38,7 +38,10 @@ function getUserPositionFromIp(?string $ip = null): ?Position
 {
     $ip ??= request()?->ip();
 
-    if (! $ip || $ip === '127.0.0.1') {
+    if (
+        (! $ip || $ip === '127.0.0.1') &&
+        (! app()->runningUnitTests())
+    ) {
         $ip = config('location.testing.ip');
     }
 

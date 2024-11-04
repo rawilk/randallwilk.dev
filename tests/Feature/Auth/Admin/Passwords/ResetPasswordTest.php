@@ -12,8 +12,6 @@ use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
-    $this->fakeIpLocation();
-
     $this->panel = filament()->getPanel('admin');
 
     filament()->setCurrentPanel($this->panel);
