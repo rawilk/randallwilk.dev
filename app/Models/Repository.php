@@ -36,6 +36,11 @@ class Repository extends Model
         return $this->type === RepositoryType::Package;
     }
 
+    public function isVisible(): bool
+    {
+        return $this->getAttribute('visible') === true;
+    }
+
     public function isNpmPackage(): bool
     {
         return $this->language === ProgrammingLanguage::JavaScript;
