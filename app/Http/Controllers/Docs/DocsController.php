@@ -40,7 +40,11 @@ class DocsController
                 $slug = $alias;
                 $alias = $latest;
 
-                return redirect()->action([__CLASS__, 'show'], [$repository->slug, $alias, $slug]);
+                return redirect()->route('docs.show', [
+                    'repository' => $repository->slug,
+                    'alias' => $alias,
+                    'slug' => $slug,
+                ]);
             }
 
             $alias = $repository->getAlias($alias);
@@ -50,10 +54,10 @@ class DocsController
             $alias = $repository->aliases->first();
         }
 
-        return redirect()->action([DocsController::class, 'show'], [
-            $repository->slug,
-            $alias->slug,
-            $alias->pages->where('section', '_root')->first()->slug,
+        return redirect()->route('docs.show', [
+            'repository' => $repository->slug,
+            'alias' => $alias->slug,
+            'slug' => $alias->pages->where('section', '_root')->first()->slug,
         ]);
     }
 
@@ -74,7 +78,11 @@ class DocsController
             $slug = "{$alias}/{$slug}";
             $alias = $latest;
 
-            return redirect()->action([__CLASS__, 'show'], [$repository->slug, $alias, $slug]);
+            return redirect()->route('docs.show', [
+                'repository' => $repository->slug,
+                'alias' => $alias,
+                'slug' => $slug,
+            ]);
         }
 
         $alias = $repository->getAlias($alias);
@@ -82,7 +90,11 @@ class DocsController
         if (! $alias) {
             $alias = $repository->aliases->keys()->first();
 
-            return redirect()->action([__CLASS__, 'show'], [$repository->slug, $alias, $slug]);
+            return redirect()->route('docs.show', [
+                'repository' => $repository->slug,
+                'alias' => $alias,
+                'slug' => $slug,
+            ]);
         }
 
         $pages = $alias->pages;
@@ -90,7 +102,10 @@ class DocsController
         $page = $pages->firstWhere('slug', $slug);
 
         if (! $page) {
-            return redirect()->action([__CLASS__, 'repository'], [$repository->slug, $alias->slug]);
+            return redirect()->route('docs.repository', [
+                'repository' => $repository->slug,
+                'alias' => $alias->slug,
+            ]);
         }
 
         $repositories = $docs->getRepositories();
@@ -110,17 +125,17 @@ class DocsController
 
         $sectionTitle = $this->getSectionTitle($page->section, $navigation);
 
-        return view('front.pages.docs.show', compact(
-            'page',
-            'repositories',
-            'repository',
-            'pages',
-            'navigation',
-            'alias',
-            'showBigTitle',
-            'tableOfContents',
-            'sectionTitle',
-        ));
+        return view('front.pages.docs.show', [
+            'alias' => $alias,
+            'navigation' => $navigation,
+            'page' => $page,
+            'pages' => $pages,
+            'repositories' => $repositories,
+            'repository' => $repository,
+            'sectionTitle' => $sectionTitle,
+            'showBigTitle' => $showBigTitle,
+            'tableOfContents' => $tableOfContents,
+        ]);
     }
 
     protected function getNavigation(Collection $pages): Collection
