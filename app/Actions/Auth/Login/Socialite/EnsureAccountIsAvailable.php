@@ -22,6 +22,10 @@ class EnsureAccountIsAvailable
         if ($this->accountIsAlreadyTaken($request->user(), $request->gitHubUser())) {
             SessionAlert::Error->flash(__('auth.socialite.alerts.already_linked'));
 
+            if (auth()->check()) {
+                return redirect()->to($request->errorRedirectUrl());
+            }
+
             return view('auth.github-callback', [
                 'panelId' => $request->panelId(),
             ]);

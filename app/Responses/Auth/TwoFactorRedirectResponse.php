@@ -12,8 +12,8 @@ class TwoFactorRedirectResponse implements LoginResponse
 {
     public function toResponse($request): RedirectResponse|Redirector
     {
-        $panelId = filament()->getCurrentPanel()->getId();
-
-        return redirect()->route("filament.{$panelId}.auth.mfa.challenge");
+        return redirect()->route(
+            filament()->getCurrentPanel()->generateRouteName('auth.mfa.challenge'),
+        );
     }
 }

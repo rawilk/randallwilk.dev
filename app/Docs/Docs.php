@@ -57,8 +57,10 @@ class Docs
                         $pages = $pages
                             ->where('slug', '<>', '_index')
                             ->sortBy(fn (DocumentationPage $page): int => $page->sort ?? PHP_INT_MAX)
-                            ->map(function (DocumentationPage $page) use ($slug) {
+                            ->map(function (DocumentationPage $page) use ($slug, $index) {
                                 $page->repository = $slug;
+                                $page->githubUrl = $index?->githubUrl;
+                                $page->branch = $index?->branch;
 
                                 return $page;
                             });

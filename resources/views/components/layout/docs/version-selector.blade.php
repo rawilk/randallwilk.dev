@@ -3,6 +3,11 @@
     'page',
 ])
 
+@php
+    /** @var \App\Docs\DocumentationPage $page */
+    /** @var \App\Docs\Repository $repository */
+@endphp
+
 <div {{ $attributes }}>
     <x-filament::dropdown
         placement="bottom-center"

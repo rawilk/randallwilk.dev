@@ -1,6 +1,9 @@
 @php
     /** @var \App\Docs\Repository $latestVersion */
     $latestVersion = $repository->aliases->first();
+
+    /** @var \App\Docs\DocumentationPage $page */
+    /** @var \App\Docs\Alias $alias */
 @endphp
 
 <x-doc-page
@@ -63,7 +66,8 @@
                 <blockquote>
                     <p>
                         {note}
-                        You're browsing the documentation for an old version of <span class="font-bold">{{ $repository->slug }}</span>.
+                        You're browsing the documentation for an old version of <span
+                            class="font-bold">{{ $repository->slug }}</span>.
                         Consider upgrading your project to
                         <a href="{{ action([App\Http\Controllers\Docs\DocsController::class, 'repository'], [$repository->slug, $latestVersion->slug]) }}">{{ $latestVersion->slug }}</a>.
 
@@ -78,7 +82,7 @@
 
             <div class="pt-4">
                 <a
-                    href="{{ $alias->pageGitHubUrl($page) }}"
+                    href="{{ $page->editUrl() }}"
                     class="text-sm"
                     target="_blank"
                     rel="noopener"

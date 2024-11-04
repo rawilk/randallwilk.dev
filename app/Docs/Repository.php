@@ -10,8 +10,6 @@ class Repository
 {
     public ?string $category;
 
-    protected ?bool $archived = null;
-
     protected ?array $config;
 
     /**
@@ -36,14 +34,12 @@ class Repository
 
     public function isArchived(): bool
     {
-        if (! is_null($this->archived)) {
-            return $this->archived;
-        }
+        return once(function (): bool {
+            if (! $this->config) {
+                return false;
+            }
 
-        if (! $this->config) {
-            return $this->archived = false;
-        }
-
-        return $this->archived = $this->config['archived'] ?? false;
+            return data_get($this->config, 'archived', false);
+        });
     }
 }

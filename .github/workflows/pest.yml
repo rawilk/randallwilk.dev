@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-      php: '8.2'
+      php: '8.3'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup cache environment
         id: extcache
@@ -48,12 +48,6 @@ jobs:
         with:
           node-version: 'latest'
 
-      - name: Create database
-        run: |
-          sudo /etc/init.d/mysql start
-          mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -proot mysql
-          mysql -u root -proot -e 'CREATE DATABASE IF NOT EXISTS randallwilk_test;'
-
       - name: Cache composer dependencies
         uses: actions/cache@v4
         with:
@@ -75,13 +69,3 @@ jobs:
 
       - name: Run pest
         run: ./vendor/bin/pest --stop-on-failure --parallel --display-skipped --processes=10
-        env:
-          DB_PASSWORD: root
-          DB_DATABASE: randallwilk_test
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-          GITHUB_WEBHOOK_SECRET: ${{ secrets.GH_WEBHOOK_SECRET }}
-          GITHUB_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
-          GITHUB_CLIENT_SECRET: ${{ secrets.GH_CLIENT_SECRET }}
-          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
-          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
-          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}

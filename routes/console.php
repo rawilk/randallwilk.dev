@@ -7,6 +7,7 @@ use App\Console\Commands\GitHub\ImportDocsFromRepositoriesCommand;
 use App\Console\Commands\GitHub\ImportGitHubRepositoriesCommand;
 use App\Console\Commands\GitHub\ImportPackagistDownloadsCommand;
 use App\Console\Commands\Npm\ImportNpmDownloadsCommand;
+use Illuminate\Auth\Console\ClearResetsCommand;
 use Illuminate\Support\Facades\Schedule;
 
 Schedule::command(ImportGitHubRepositoriesCommand::class)->weekly();
@@ -17,3 +18,4 @@ Schedule::command(ImportDocsFromRepositoriesCommand::class)->everyThirtyMinutes(
 
 // Model pruning
 Schedule::command('queue:prune-batches --hours=48 --unfinished=72')->daily()->runInBackground();
+Schedule::command(ClearResetsCommand::class)->daily();

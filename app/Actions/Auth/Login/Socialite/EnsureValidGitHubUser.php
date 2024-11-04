@@ -15,11 +15,7 @@ class EnsureValidGitHubUser
         if (! $request->gitHubUser()) {
             SessionAlert::Error->flash(__('auth.socialite.alerts.github_auth_process_failed'));
 
-            return redirect()->to(
-                auth()->check()
-                    ? route("filament.{$request->panelId()}.profile")
-                    : filament()->getPanel($request->panelId())->getLoginUrl()
-            );
+            return redirect()->to($request->errorRedirectUrl());
         }
 
         return $next($request);

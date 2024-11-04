@@ -6,6 +6,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
 /**
@@ -25,6 +26,18 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'is_admin' => false,
         ];
+    }
+
+    public function withMfa(): static
+    {
+        return $this->state([
+            'two_factor_enabled' => true,
+            'two_factor_recovery_codes' => Crypt::encryptString(
+                json_encode([
+                    'code-one',
+                ])
+            ),
+        ]);
     }
 
     public function admin(): static
