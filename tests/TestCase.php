@@ -6,6 +6,7 @@ namespace Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Timebox;
 use Rawilk\ProfileFilament\Database\Factories\AuthenticatorAppFactory;
@@ -22,6 +23,8 @@ abstract class TestCase extends BaseTestCase
         // Clearing cache to clear out rate limit hits, so each
         // test starts fresh.
         cache()->clear();
+
+        Http::preventStrayRequests();
 
         $this->app->bind(Timebox::class, InstantlyResolvingTimebox::class);
 
