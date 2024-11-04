@@ -50,3 +50,8 @@ function passwordResetUrl(string $token, string $email): string
         ],
     );
 }
+
+function sudoChallengeTitle(): string
+{
+    return __('profile-filament::messages.sudo_challenge.title');
+}
