@@ -108,6 +108,12 @@ echo ""
 ln -sfn "$NEW_RELEASE_ROOT" "$CURRENT_ROOT-temp"
 mv -Tf "$CURRENT_ROOT-temp" "$CURRENT_ROOT"
 
+# Symlink artisan file to the project root, so commands can be run through forge.
+if [ -f "$FORGE_SITE_PATH/artisan" ]; then
+    rm "$FORGE_SITE_PATH/artisan"
+fi
+ln -sfn "$CURRENT_ROOT/artisan" "$FORGE_SITE_PATH/artisan"
+
 # Remove failed releases
 echo "Removing failed releases..."
 echo ""
