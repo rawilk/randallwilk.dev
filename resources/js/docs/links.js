@@ -16,6 +16,30 @@ const setLinkTargetToBlank = el => {
     el.setAttribute('rel', 'noopener');
 };
 
+/**
+ * Some browsers (i.e. Chrome) have issues sometimes scrolling
+ * to a selected fragment on page load. This is an attempt
+ * to fix that.
+ */
+const scrollToFragment = () => {
+    const hash = window.location.hash;
+    if (! hash) {
+        return;
+    }
+
+    const id = hash.slice(1);
+    const element = document.getElementById(id);
+
+    if (element) {
+        setTimeout(() => {
+            element.scrollIntoView({
+                block: 'start',
+            });
+        }, 0);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     configureLinks();
+    scrollToFragment();
 });
