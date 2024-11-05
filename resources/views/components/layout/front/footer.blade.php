@@ -1,17 +1,12 @@
 <footer
     {{
         $attributes
-            ->merge([
-                'aria-labelledby' => 'footerHeading',
-            ], escape: false)
             ->class([
                 'shadow-inner-light bg-white text-gray-600',
                 'print:shadow-none print:bg-transparent',
             ])
     }}
 >
-    <h2 id="footerHeading" class="sr-only">{{ __('front.footer.aria_label') }}</h2>
-
     <div class="wrap footer-wrap">
         <div class="mx-auto pt-12 pb-8">
             <div class="py-0 text-left">
