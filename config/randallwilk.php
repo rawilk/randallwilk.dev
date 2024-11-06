@@ -202,4 +202,37 @@ return [
             ],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Staging
+    |--------------------------------------------------------------------------
+    |
+    | Configuration that deals with the staging environment and cloning
+    | production data into staging.
+    |
+    */
+    'staging' => [
+        /**
+         * These tables should always be excluded from the production -> staging
+         * environment clone.
+         */
+        'exclude_tables' => [
+            'authenticator_apps',
+            'failed_jobs',
+            'job_batches',
+            'migrations',
+            'old_user_emails',
+            'password_reset_tokens',
+            'pending_user_emails',
+            'sessions',
+            'settings',
+            'webauthn_keys',
+        ],
+
+        /**
+         * These users should not be redacted when cloning from production -> staging.
+         */
+        'ignore_users' => explode(',', env('RANDALLWILK_STAGE_CLONE_IGNORE', '')),
+    ],
 ];
