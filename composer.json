@@ -91,7 +91,9 @@
             "@php artisan key:generate --ansi"
         ],
         "test": "vendor/bin/pest -p",
-        "format": "vendor/bin/pint --only-dirty"
+        "format": "vendor/bin/pint --only-dirty",
+        "stage-sync": "@php artisan app:refresh-staging-data",
+        "redact": "@php artisan app:redact-sensitive-data"
     },
     "extra": {
         "laravel": {
