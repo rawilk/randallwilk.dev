@@ -83,11 +83,16 @@ abstract class BaseRedactor implements Redactor
                     return null;
                 }
 
-                $value = $attributes[$column] === null
-                    ? 'NULL'
-                    : "'" . addslashes($attributes[$column]) . "'";
+                $value = $attributes[$column];
 
-                return "WHEN {$id} THEN {$value}";
+                $sqlValue = match (true) {
+                    $value === null => 'NULL',
+                    is_bool($value) => $value ? 'true' : 'false',
+                    is_numeric($value) => $value,
+                    default => "'" . addslashes((string) $value) . "'",
+                };
+
+                return "WHEN {$id} THEN {$sqlValue}";
             })->filter()->values();
 
             if ($cases->isEmpty()) {
