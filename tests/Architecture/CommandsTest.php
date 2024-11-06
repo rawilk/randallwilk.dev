@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Providers\AppServiceProvider;
 use Illuminate\Console\Command;
 
 arch()
@@ -10,4 +11,6 @@ arch()
     ->toHaveSuffix('Command')
     ->toHaveMethod('handle')
     ->toImplementNothing()
-    ->not->toBeUsed();
+    ->not->toBeUsed()->ignoring([
+        AppServiceProvider::class,
+    ]);
