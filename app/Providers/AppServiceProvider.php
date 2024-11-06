@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Console\Commands\RedactSensitiveDataCommand;
+use App\Console\Commands\RefreshStagingDataCommand;
 use App\Docs\DocumentationContentParser;
 use App\Docs\DocumentationPage;
 use App\Docs\DocumentationPathParser;
@@ -67,7 +69,11 @@ class AppServiceProvider extends ServiceProvider
 
     protected function configureCommands(): void
     {
-        DB::prohibitDestructiveCommands($this->app->isProduction());
+        $isProduction = $this->app->isProduction();
+
+        DB::prohibitDestructiveCommands($isProduction);
+        RedactSensitiveDataCommand::prohibit($isProduction);
+        RefreshStagingDataCommand::prohibit(! $isProduction);
     }
 
     protected function configureModels(): void
