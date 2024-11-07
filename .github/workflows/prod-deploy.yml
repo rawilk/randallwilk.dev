@@ -56,6 +56,7 @@ jobs:
               "${{ secrets.REMOTE_TARGET }}/shared/storage/framework/views"
               "${{ secrets.REMOTE_TARGET }}/shared/storage/docs"
               "${{ secrets.REMOTE_TARGET }}/shared/storage/logs"
+              "${{ secrets.REMOTE_TARGET }}/shared/database/snapshots"
               "${{ secrets.REMOTE_TARGET }}/shared/public/doc-files"
           )
 
