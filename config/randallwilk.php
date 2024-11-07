@@ -221,7 +221,6 @@ return [
             'authenticator_apps',
             'failed_jobs',
             'job_batches',
-            'migrations',
             'old_user_emails',
             'password_reset_tokens',
             'pending_user_emails',
