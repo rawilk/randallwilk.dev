@@ -74,6 +74,10 @@ ln -sfn "$SHARED_ROOT/public/sitemap_pages.xml" "$NEW_RELEASE_ROOT/public/sitema
 # Symlink Doc Files
 ln -sfn "$SHARED_ROOT/public/doc-files" "$NEW_RELEASE_ROOT/public/doc-files"
 
+# Symlink database snapshots
+rm -rf "$NEW_RELEASE_ROOT/database/snapshots"
+ln -sfn "$SHARED_ROOT/database/snapshots" "$NEW_RELEASE_ROOT/database/snapshots"
+
 # Install Node Dependencies
 npm install --no-audit --prefix "$NEW_RELEASE_ROOT"
 
