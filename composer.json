@@ -34,7 +34,6 @@
         "rawilk/laravel-casters": "^3.0",
         "rawilk/laravel-settings": "^3.3",
         "rawilk/profile-filament-plugin": "^0.5",
-        "spatie/db-dumper": "^3.7",
         "spatie/fork": "^1.1",
         "spatie/laravel-db-snapshots": "^2.6",
         "spatie/laravel-login-link": "^1.1",
