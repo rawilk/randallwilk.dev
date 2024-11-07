@@ -6,7 +6,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Console\Prohibitable;
-use Illuminate\Support\Facades\DB;
 use Spatie\DbSnapshots\Commands\Create as CreateSnapshotCommand;
 use Spatie\DbSnapshots\Commands\Delete as DeleteSnapshotCommand;
 use Spatie\DbSnapshots\Commands\Load as LoadSnapshotCommand;
@@ -47,8 +46,14 @@ class RefreshStagingDataCommand extends Command
     {
         $this->components->info('Dumping production database...');
 
+        $productionConnectionName = config('database.default');
+        config()->set("database.connections.{$productionConnectionName}.dump", [
+            'addExtraOption' => $this->buildDumpOptions(),
+        ]);
+
         $this->call(CreateSnapshotCommand::class, [
             'name' => $snapshotName = 'dump-' . now()->unix(),
+            '--connection' => $productionConnectionName,
             '--compress' => true,
         ]);
 
@@ -56,10 +61,10 @@ class RefreshStagingDataCommand extends Command
 
         $this->call(LoadSnapshotCommand::class, [
             'name' => $snapshotName,
+            '--force' => true,
             '--connection' => 'staging',
+            '--stream' => true,
         ]);
-
-        $this->truncateExcludedTables();
 
         $this->components->info('Cleaning up...');
 
@@ -68,19 +73,23 @@ class RefreshStagingDataCommand extends Command
         ]);
     }
 
-    protected function truncateExcludedTables(): void
+    protected function buildDumpOptions(): string
     {
-        DB::reconnect();
+        $options = [
+            // Our production & staging databases have different database
+            // users that own them.
+            '--no-owner',
+            '--no-privileges',
 
-        $connection = DB::connection('staging');
+            // Exclude data from certain tables, so we don't
+            // need to bother truncating them later.
+            ...array_map(
+                fn (string $table) => "--exclude-table-data={$table}",
+                config('randallwilk.staging.exclude_tables', []),
+            ),
+        ];
 
-        $this->components->info('Truncating excluded staging tables...');
-
-        foreach (config('randallwilk.staging.exclude_tables', []) as $table) {
-            $this->line('Truncating: ' . $table);
-
-            $connection->table($table)->truncate();
-        }
+        return implode(' ', $options);
     }
 
     protected function confirmToProceed(): bool
