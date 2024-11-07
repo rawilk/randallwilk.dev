@@ -73,6 +73,19 @@ To make updating these two branches easy, the `bin/publish.sh` script should be 
 ./bin/publish.sh
 ```
 
+# Commands
+
+| Command | Description                                                                                    |
+| --- |------------------------------------------------------------------------------------------------|
+| `npm run dev` | Watch for changes in CSS and JS files                                                          |
+| `php artisan test` | Run tests                                                                                      |
+| `php artisan import:docs` | Import doc files                                                                               |
+| `php artisan import:github-repositories` | Sync public repo info with GitHub                                                              |
+| `php artisan import:packagist-downloads` | Sync download stats for composer packages                                                      |
+| `php artisan sitemap:generate` | Regenerate sitemaps                                                                            |
+| `php artisan app:refresh-staging-data` | Sync staging database with production; only available to run in production environment         |
+| `php artisan app:redact-sensitive-data` | Redact sensitive information from certain tables; not allowed to run in production environment |
+
 # Credits
 
 This website was principally designed and developed by [Randall Wilk](https://github.com/rawilk).
