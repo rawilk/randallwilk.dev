@@ -2475,16 +2475,16 @@
         },
         {
             "name": "knplabs/github-api",
-            "version": "v3.15.0",
+            "version": "v3.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/php-github-api.git",
-                "reference": "d4b7a1c00e22c1ca32408ecdd4e33c674196b1bc"
+                "reference": "25d7bafd6b0dd088d4850aef7fcc74dc4fba8b28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/d4b7a1c00e22c1ca32408ecdd4e33c674196b1bc",
-                "reference": "d4b7a1c00e22c1ca32408ecdd4e33c674196b1bc",
+                "url": "https://api.github.com/repos/KnpLabs/php-github-api/zipball/25d7bafd6b0dd088d4850aef7fcc74dc4fba8b28",
+                "reference": "25d7bafd6b0dd088d4850aef7fcc74dc4fba8b28",
                 "shasum": ""
             },
             "require": {
@@ -2518,7 +2518,7 @@
             "extra": {
                 "branch-alias": {
                     "dev-2.x": "2.20.x-dev",
-                    "dev-master": "3.14-dev"
+                    "dev-master": "3.15-dev"
                 }
             },
             "autoload": {
@@ -2551,7 +2551,7 @@
             ],
             "support": {
                 "issues": "https://github.com/KnpLabs/php-github-api/issues",
-                "source": "https://github.com/KnpLabs/php-github-api/tree/v3.15.0"
+                "source": "https://github.com/KnpLabs/php-github-api/tree/v3.16.0"
             },
             "funding": [
                 {
@@ -2559,7 +2559,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-23T19:00:43+00:00"
+            "time": "2024-11-07T19:35:30+00:00"
         },
         {
             "name": "laravel/framework",
@@ -16294,12 +16294,12 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
