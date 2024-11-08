@@ -8,7 +8,7 @@ updates:
         directory: "/"
         target-branch: develop
         schedule:
-            interval: "weekly"
+            interval: "monthly"
         commit-message:
             prefix: "Action"
         labels:
@@ -18,7 +18,7 @@ updates:
         directory: "/"
         target-branch: develop
         schedule:
-            interval: "weekly"
+            interval: "monthly"
         commit-message:
             prefix: "Composer"
         labels:
@@ -29,7 +29,7 @@ updates:
         directory: "/"
         target-branch: develop
         schedule:
-            interval: "weekly"
+            interval: "monthly"
         commit-message:
             prefix: "NPM"
         labels:
