@@ -29,7 +29,6 @@ ARTISAN="$FORGE_PHP $NEW_RELEASE_ROOT/artisan"
 set -eu
 
 echo "Deploying site: $TARGET"
-echo ""
 
 # Ensure we're in our root site directory.
 cd "$FORGE_SITE_PATH"
@@ -50,9 +49,7 @@ if [ ! -d "$RELEASE_ROOT" ]; then
 fi
 
 # Clone the repository into a new release
-echo "Creating new release ($RELEASE)..."
-echo "----------------------------------------"
-echo ""
+echo "Release name: $RELEASE"
 
 git clone -b "$FORGE_SITE_BRANCH" --depth 1 "$GIT_REPOSITORY" "$NEW_RELEASE_ROOT"
 
@@ -61,13 +58,14 @@ echo ""
 # Install Composer Dependencies
 $FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader --no-dev --working-dir "$NEW_RELEASE_ROOT"
 
+echo ""
+
 # Restart php
 ( flock -w 10 9 || exit 1
     echo 'Restarting FPM...'; sudo -S service "$FORGE_PHP_FPM" reload ) 9>/tmp/fpmlock
 
 # Symlink master copies of persistent data to the new release.
 echo "Symlinking site files..."
-echo "------------------------"
 
 ln -sfn "$SHARED_ROOT/.env" "$NEW_RELEASE_ROOT/.env"
 rm -rf "$NEW_RELEASE_ROOT/storage"
@@ -90,6 +88,7 @@ rm -rf "$NEW_RELEASE_ROOT/.git"
 ln -sfn "$FORGE_SITE_PATH/.git" "$NEW_RELEASE_ROOT/.git"
 
 # Install Node Dependencies
+echo "Installing npm and node dependencies..."
 npm install --no-audit --prefix "$NEW_RELEASE_ROOT"
 
 # Optimize Site
@@ -99,15 +98,12 @@ $ARTISAN storage:link
 
 # Build front-end assets
 echo "Compiling front-end assets..."
-echo "-----------------------------"
-echo ""
 
 npm run build --prefix "$NEW_RELEASE_ROOT"
 
 # Cleanup node_modules
-echo "Cleaning up node_modules..."
-echo "---------------------------"
 echo ""
+echo "Cleaning up node_modules..."
 
 rm -rf "$NEW_RELEASE_ROOT/node_modules"
 
@@ -116,8 +112,6 @@ echo "$RELEASE" >> "$RELEASE_ROOT/.success"
 
 # Link to the new deployment
 echo "Linking new release..."
-echo "----------------------"
-echo ""
 
 # Create atomic symlink to new release
 ln -sfn "$NEW_RELEASE_ROOT" "$CURRENT_ROOT-temp"
