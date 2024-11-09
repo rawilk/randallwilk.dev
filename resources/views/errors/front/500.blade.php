@@ -4,7 +4,7 @@
 
         <x-slot:content>
             <p class="banner-intro">
-                {{ $exception->getMessage() ?: 'Server error' }}
+                Server error
             </p>
 
             <p class="text-lg mt-4">
