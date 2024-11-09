@@ -36,7 +36,7 @@ cd "$FORGE_SITE_PATH"
 
 # Make sure git uses the deploy key if it is configured
 SSH_COMMAND=$(git config --get core.sshcommand)
-if [ "$SSH_FORGE_COMMAND" ]; then
+if [ "$SSH_COMMAND" ]; then
     echo "Using SSH command for git: $SSH_COMMAND"
     export GIT_SSH_COMMAND="$SSH_COMMAND"
 fi
