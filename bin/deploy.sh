@@ -34,6 +34,13 @@ echo ""
 # Ensure we're in our root site directory.
 cd "$FORGE_SITE_PATH"
 
+# Make sure git uses the deploy key if it is configured
+SSH_COMMAND=$(git config --get core.sshcommand)
+if [ "$SSH_FORGE_COMMAND" ]; then
+    echo "Using SSH command for git: $SSH_COMMAND"
+    export GIT_SSH_COMMAND="$SSH_COMMAND"
+fi
+
 # Create a releases directory if it doesn't exist.
 if [ ! -d "$RELEASE_ROOT" ]; then
     echo "Creating releases directory..."
@@ -77,6 +84,10 @@ ln -sfn "$SHARED_ROOT/public/doc-files" "$NEW_RELEASE_ROOT/public/doc-files"
 # Symlink database snapshots
 rm -rf "$NEW_RELEASE_ROOT/database/snapshots"
 ln -sfn "$SHARED_ROOT/database/snapshots" "$NEW_RELEASE_ROOT/database/snapshots"
+
+# Symlink git configuration
+rm -rf "$NEW_RELEASE_ROOT/.git"
+ln -sfn "$FORGE_SITE_PATH/.git" "$NEW_RELEASE_ROOT/.git"
 
 # Install Node Dependencies
 npm install --no-audit --prefix "$NEW_RELEASE_ROOT"
