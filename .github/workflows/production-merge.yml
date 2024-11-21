@@ -21,6 +21,8 @@ jobs:
         with:
           ref: ${{ env.DEVELOP_BRANCH }}
           fetch-depth: 0 # checkout the entire history
+          persist-credentials: true
+          token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: Set Git Credentials
         run: |
