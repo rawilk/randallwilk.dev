@@ -1,0 +1,34 @@
+# See: https://aaronsaray.com/2024/production-merge-in-github-actions/
+
+name: Production Merge
+
+on: workflow_dispatch
+
+permission:
+  contents: write
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    env:
+      PRODUCTION_BRANCH: main
+      DEVELOP_BRANCH: develop
+
+    steps:
+      - name: Checkout Develop (${{ env.DEVELOP_BRANCH }})
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.DEVELOP_BRANCH }}
+          fetch-depth: 0 # checkout the entire history
+
+      - name: Set Git Credentials
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor_id}}+${{ github.actor }}@users.noreply.github.com"
+
+      - name: Execute Merge
+        run: |
+          git checkout ${{ env.PRODUCTION_BRANCH }}
+          git merge ${{ env.DEVELOP_BRANCH }}
+          git push origin ${{ env.PRODUCTION_BRANCH }}

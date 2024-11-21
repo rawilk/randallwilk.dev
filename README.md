@@ -67,11 +67,7 @@ Composer and NPM dependencies. For convenience, you may run the `bin/update-deps
 
 Deployments for the `main` and `stage` branch are handled through GitHub actions that will handle generating a fresh copy of the `.env` file with secrets from my 1Password vault. The action will send the fresh copy to the server and trigger a deployment through Forge.
 
-To make updating these two branches easy, the `bin/publish.sh` script should be used, so there is no need to PR to these branches.
-
-```bash
-./bin/publish.sh
-```
+A deployment to the production and staging environments can only be triggered manually by dispatching the GitHub workflow, which requires the correct access permissions to the repository.
 
 # Commands
 
