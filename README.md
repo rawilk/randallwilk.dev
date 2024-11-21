@@ -63,12 +63,6 @@ Composer and NPM dependencies. For convenience, you may run the `bin/update-deps
 ./bin/update-deps.sh
 ```
 
-# Deployment
-
-Deployments for the `main` and `stage` branch are handled through GitHub actions that will handle generating a fresh copy of the `.env` file with secrets from my 1Password vault. The action will send the fresh copy to the server and trigger a deployment through Forge.
-
-A deployment to the production and staging environments can only be triggered manually by dispatching the GitHub workflow, which requires the correct access permissions to the repository.
-
 # Commands
 
 | Command | Description                                                                                    |
@@ -81,6 +75,26 @@ A deployment to the production and staging environments can only be triggered ma
 | `php artisan sitemap:generate` | Regenerate sitemaps                                                                            |
 | `php artisan app:refresh-staging-data` | Sync staging database with production; only available to run in production environment         |
 | `php artisan app:redact-sensitive-data` | Redact sensitive information from certain tables; not allowed to run in production environment |
+
+# Deployment
+
+Deployments for the `main` and `stage` branch are handled through GitHub actions that will handle generating a fresh copy of the `.env` file with secrets from my 1Password vault. The action will send the fresh copy to the server and trigger a deployment through Forge.
+
+A deployment to the production and staging environments can only be triggered manually by dispatching the GitHub workflow, which requires the correct access permissions to the repository.
+
+## Secrets
+
+For the GitHub actions workflow `deploy.yml` to work correctly, the following repository secrets are defined for the `production` and `staging` environments.
+
+| Secret                    | Description                                                                                                                                                            |
+|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `FORGE_TRIGGER_URL`       | The deployment trigger URL for the site in Laravel Forge                                                                                                               |
+| `KNOWN_HOSTS`             | The server ip and public keys. Can find this info in `known_hosts` file after connecting the server via ssh.                                                           |
+| `OP_SERVICE_ACCOUNT_TOKEN` | 1Password service account token to connect the environment's vault and 1Password secrets                                                                               |
+| `REMOTE_HOST`             | The server ip address                                                                                                                                                  |
+| `REMOTE_TARGET`           | The full path to the production site on the server, e.g `/home/user_name/randallwilk.dev`                                                                              |
+| `REMOTE_USER`             | The linux user that owns the site on the server, e.g `forge`.                                                                                                          |
+| `SSH_KEY`                 | The private ssh key for the linux user that owns the site. Be sure to add the public key to the server in Forge. Note: do **not** add a passphrase to the private key. |
 
 # Credits
 
