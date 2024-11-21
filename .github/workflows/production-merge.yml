@@ -4,7 +4,7 @@ name: Production Merge
 
 on: workflow_dispatch
 
-permission:
+permissions:
   contents: write
 
 jobs:
