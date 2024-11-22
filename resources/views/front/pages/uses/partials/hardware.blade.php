@@ -31,9 +31,18 @@
         </p>
     </x-front.section-list-item>
 
+    <x-front.section-list-item title="Dell S2725DS 27-Inch Monitor x2">
+        <p>
+            I've been upgrading my home office setup, and these monitors have been part of that upgrade. So far I'm very happy with the picture
+            and color quality of the monitors, and the pricing really wasn't too bad either. Here's the
+            <x-front.legal-link url="https://www.amazon.com/dp/B0D3FGFPPB?th=1" target="_blank" text="link" />
+            to buy them.
+        </p>
+    </x-front.section-list-item>
+
     <x-front.section-list-item title="LG 32UN500-W 32-Inch Monitor x2">
         <p>
-            At home and at the office, I'm usually docked and use two 32" monitors from LG in addition to the built-in screen from
+            While at the office, I'm usually docked and use two 32" monitors from LG in addition to the built-in screen from
             the MacBook. Here's the
             <x-front.legal-link url="https://www.amazon.com/LG-32UN500-W-Compatibility-Virtually-Borderless-dp-B08FPLLX6Y/dp/B08FPLLX6Y/ref=dp_ob_title_ce?th=1" target="_blank" text="link" />
             to buy them.
