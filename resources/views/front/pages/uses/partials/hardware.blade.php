@@ -49,6 +49,20 @@
         </p>
     </x-front.section-list-item>
 
+    <x-front.section-list-item title="Desk">
+        <p>
+            Another part of my recent office upgrade was the
+            <x-front.legal-link
+                url="https://www.amazon.com/dp/B0C32W7MHL/?coliid=I2CAH9KXOTR6EU&colid=252NZURVH7S53&ref_=list_c_wl_lv_ov_lig_dp_it&th=1"
+                target="_blank"
+                text="Sanodesk 72x30 Standing Desk"
+                after="."
+            />
+            Overall, I love this desk so far. The bamboo top looks and feels great, and I have plenty of room on the desk to set it up how I want to.
+            Being able to raise it to a standing position is also nice too when I get sick of sitting.
+        </p>
+    </x-front.section-list-item>
+
     <x-front.section-list-item title="Monitor Arm">
         <p>
             I prefer using monitor arms over the default stand that most monitors come with, and at the end of 2022 I switched to the
@@ -60,6 +74,15 @@
         <p>
             I was previously using two separate monitor arms, but I felt having one single mount was much nicer and provided me
             with a cleaner setup.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="Laptop Mount">
+        <p>
+            To free up desk space and add more flexibility, I added a
+            <x-front.legal-link url="https://www.upliftdesk.com/crestview-single-monitor-arm-by-uplift-desk/" target="_blank" text="Crestview Monitor Arm by UPLIFT Desk" after="," />
+            paired with their
+            <x-front.legal-link url="https://www.upliftdesk.com/laptop-mount-by-uplift-desk/" target="_blank" text="laptop mount" after="." />
         </p>
     </x-front.section-list-item>
 
@@ -101,12 +124,6 @@
 
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="TwelveSouth Curve Stand">
-        I've found that the
-        <x-front.legal-link url="https://www.twelvesouth.com/products/curve-for-macbook" target="_blank" text="TwelveSouth Curve Stand for MacBook" />
-        provides a great solution for elevating the MacBook off the desk and I think it looks great.
-    </x-front.section-list-item>
-
     <x-front.section-list-item title="Samsung 1 TB Portable SSD T7 Touch">
         <p>
             For my time machine backups, I use the
@@ -124,7 +141,7 @@
 
     <x-front.section-list-item title="Phone">
         <p>
-            My current phone is the iPhone 13 Pro Max with 128 GB of storage.
+            My current phone is the iPhone 16 Pro Max with 256 GB of storage.
         </p>
     </x-front.section-list-item>
 
