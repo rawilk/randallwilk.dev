@@ -54,6 +54,8 @@ class AdminPanelProvider extends PanelProvider
             <x-logo type="dual" class="logo h-full w-auto text-gray-800 dark:text-white" />
             HTML)))
             ->spa(false)
+            ->databaseNotifications()
+            ->databaseNotificationsPolling(null)
 
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
