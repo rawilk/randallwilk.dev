@@ -28,5 +28,14 @@ return Application::configure(basePath: dirname(__DIR__))
             default => '/',
         });
     })
+    ->withBroadcasting(
+        channels: __DIR__ . '/../routes/channels.php',
+        attributes: [
+            'prefix' => 'api/v1',
+            'middleware' => [
+                'web',
+            ],
+        ],
+    )
     ->withExceptions(function (Exceptions $exceptions) {
     })->create();
