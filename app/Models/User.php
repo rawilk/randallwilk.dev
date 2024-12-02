@@ -72,6 +72,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, 
         ]);
     }
 
+    public function receivesBroadcastNotificationsOn(): string
+    {
+        return "user.{$this->getRouteKey()}";
+    }
+
     protected static function booted(): void
     {
         static::created(fn () => cache()->forget('users.count'));
