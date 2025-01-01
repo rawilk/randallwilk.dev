@@ -13,7 +13,7 @@
         "@tailwindcss/typography": "^0.5.15",
         "autoprefixer": "^10.4.20",
         "babel-plugin-prismjs": "^2.1.0",
-        "laravel-vite-plugin": "^1.0.6",
+        "laravel-vite-plugin": "^1.1.1",
         "postcss": "^8.4.49",
         "postcss-nesting": "^13.0.1",
         "prismjs": "^1.29.0",
