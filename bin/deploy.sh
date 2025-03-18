@@ -72,7 +72,10 @@ rm -rf "$NEW_RELEASE_ROOT/storage"
 ln -sfn "$SHARED_ROOT/storage" "$NEW_RELEASE_ROOT/storage"
 
 # Symlink the .env file to the site root, so forge can access it as well when needed.
-rm "$FORGE_SITE_PATH/.env"
+if [ -f "$FORGE_SITE_PATH/.env" ]; then
+    rm "$FORGE_SITE_PATH/.env"
+fi
+
 ln -sfn "$SHARED_ROOT/.env" "$FORGE_SITE_PATH/.env"
 
 # Symlink sitemaps
