@@ -65,7 +65,8 @@ return [
             'name' => 'laravel-printing',
             'repository' => 'rawilk/laravel-printing',
             'branches' => [
-                'main' => 'v3',
+                'main' => 'v4',
+                'v3' => 'v3',
                 'v2' => 'v2',
                 'v1' => 'v1',
             ],
