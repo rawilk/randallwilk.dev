@@ -17,7 +17,7 @@
     <x-front.section-list-item title="Hetzner">
         <p>
             For some projects I've started to use
-            <x-front.legal-link url="https://www.hetzner.com/" target="_blank" text="Hetzner" />
+            <x-front.legal-link url="https://hetzner.cloud/?ref=y4rFJ4ODJ1SK" target="_blank" text="Hetzner" />
             for vps hosting. I've found you can get more powerful servers for a cheaper cost than with providers like DigitalOcean.
         </p>
     </x-front.section-list-item>

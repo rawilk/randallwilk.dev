@@ -29,7 +29,7 @@
                                 {{
                                     str(__('front.footer.stack_info', [
                                         'forge' => 'https://forge.laravel.com',
-                                        'hetzner' => 'https://hetzner.com',
+                                        'hetzner' => 'https://hetzner.cloud/?ref=y4rFJ4ODJ1SK',
                                      ]))
                                         ->inlineMarkdown()
                                         ->toHtmlString()
