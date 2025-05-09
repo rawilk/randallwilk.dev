@@ -1,19 +1,32 @@
 <x-front.section-list heading="Hardware" id="hardware">
-    <x-front.section-list-item title='16" MacBook Pro, M1 Pro 32GB RAM (2021)'>
+    <x-front.section-list-item title="16-inch MacBook Pro — M4 Max — Space Black">
         <p>
-            I was using a 2019 Intel-based 27" iMac prior to this and the difference is night and day. No matter how
-            many apps I have running or how much load I put it under, the MacBook Pro continues to perform beautifully.
-            It's also extremely quiet; I haven't even heard the fans spin up once since I've had this laptop.
+            I've upgraded a lot of things in my setup in 2024-2025, and now my MacBook is the latest upgrade. I was using a
+            16-inch MacBook Pro M1 Pro, and now I've decided to get a 16-inch MacBook Pro M4 Max. To be honest, I didn't really
+            <em>need</em> to upgrade, but I really wanted to.
         </p>
 
         <p>
-            The MacBook has the M1 Pro processor, 32 GB RAM and a 1 TB SSD.
+            Overall, I'm loving the M4 Max so far, and I've noticed that it does handle certain tasks such as running Pest PHP
+            tests about twice as fast sometimes as the M1 Pro did, which is nice.
+        </p>
+
+        <p>
+            This MacBook has the 16‑core CPU, 40‑core GPU version of the M4 Max Chip, as well as 64 GB of RAM, and a 2 TB SSD. While
+            these specs are largely overkill for what I need the MacBook for, I just wanted to basically have the highest-end MacBook Pro
+            for once.
+        </p>
+
+        <p>
+            I also opted for the Nano-texture display upgrade with this MacBook, and I'm definitely glad I did. I honestly can't really tell
+            much of a difference between this display and the glossy display on my last MBP, however not having a lot of glare on the screen
+            is very nice in areas where I can't really control the lighting.
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/macos-sequoia.png')"
+            :src="asset('images/uses/about-this-mac.png')"
             alt="macOS Specs"
-            class="w-1/2 mx-auto -mb-[35px]"
+            class="w-1/2 mx-auto -mb-[35px] mt-6"
         />
     </x-front.section-list-item>
 

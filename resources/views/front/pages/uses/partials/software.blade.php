@@ -15,7 +15,7 @@
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/macos-sequoia-screenshot.png')"
+            :src="asset('images/uses/desktop-screenshot.jpeg')"
             alt="macOS desktop"
             class="my-6"
         />
@@ -23,7 +23,7 @@
         <p>
             In
             <x-front.legal-link url="https://github.com/rawilk/dotfiles" target="_blank" text="my dotfiles repo" />
-            you'll find my
+            you'll find some of my
             <x-front.legal-link url="https://github.com/rawilk/dotfiles/blob/main/macos/set-defaults.sh" target="_blank" text="custom macOS settings" after="." />
         </p>
     </x-front.section-list-item>
@@ -64,15 +64,6 @@
             <x-front.legal-link url="https://1password.com/" target="_blank" text="1Password" after="." />
             I honestly don't think I could live without 1Password. Having access to all my vaults across all my devices
             is also a plus.
-        </p>
-    </x-front.section-list-item>
-
-    <x-front.section-list-item title="Mackup">
-        <p>
-            All settings from my apps are backed up to iCloud using
-            <x-front.legal-link url="https://github.com/lra/mackup" target="_blank" text="Mackup" after="." />
-            This is a fantastic piece of software that moves all your preferences to your cloud storage provider of
-            choice and symlinks them.
         </p>
     </x-front.section-list-item>
 
@@ -127,6 +118,40 @@
         <p>
             <x-front.legal-link url="https://showcode.app/" target="_blank" text="Showcode" />
             makes it easy to share beautiful screenshots of code snippets.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="Alcove">
+        <p>
+            <x-front.legal-link url="https://tryalcove.com/" target="_blank" text="Alcove" />
+            is a nice little app that turns the notch on the MacBook into a dynamic island, kind of like
+            how it is on the iPhone. It's not quite as versatile as it is on iOS, however it is nice for a quick glance
+            for things like what music is currently playing. In my desktop screenshot above it is shown with the current
+            song from Spotify playing in it.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="Shottr">
+        <p>
+            <x-front.legal-link url="https://shottr.cc/" target="_blank" text="Shottr" />
+            makes manipulating screenshots a lot easier and nicer than the default screenshot functionality provided
+            by macOS. My favorite feature from it is the ability to easily blur out text in my screenshots.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="Blip">
+        <p>
+            While Airdrop works very well between Apple devices, it can be kind of annoying to transfer files between either my Mac or iPhone
+            and my Windows PC when I need to. The <x-front.legal-link url="https://blip.net/" target="_blank" text="Blip" />
+            app helps bridge that gap and is free and easy to use. I've actually started using it more often between my Apple devices as well
+            than I use Airdrop now.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="ChatGPT App">
+        <p>
+            Having a desktop app to use for my <x-front.legal-link url="https://chatgpt.com" target="_blank" text="ChatGPT" />
+            needs is just more convenient than having to always navigate to the website when I need AI for something.
         </p>
     </x-front.section-list-item>
 

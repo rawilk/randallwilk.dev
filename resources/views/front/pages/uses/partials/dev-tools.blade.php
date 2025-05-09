@@ -1,16 +1,12 @@
 <x-front.section-list heading="Development tools" id="dev-tools">
     <x-front.section-list-item title="Warp Terminal">
         <p>
-            My terminal of choice is
+            My preferred terminal to use is
             <x-front.legal-link url="https://www.warp.dev/" target="_blank" text="warp" after="." />
-            I'm also using the
-            <a href="https://en.wikipedia.org/wiki/Z_shell" target="_blank" rel="noreferrer noopener">Z shell</a>
-            and
-            <x-front.legal-link url="https://ohmyz.sh/" target="_blank" text="Oh My Zsh" after="." />
         </p>
 
         <p>
-            For theming, I use the Base16 Material theme, which is a
+            Lately I've been using the "Cherry" theme, which is a
             <x-front.legal-link url="https://docs.warp.dev/appearance/custom-themes" target="_blank" text="custom theme" />
             from Warp.
 
@@ -26,13 +22,15 @@
             All my terminal settings are saved in
             <x-front.legal-link url="https://github.com/rawilk/dotfiles" target="_blank" text="my dotfiles repository" after="." />
             If you want the same environment, you can follow the installation instructions of the repo. I do recommend
-            forking and customizing the installation script to fit your needs, however.
+            forking and customizing the installation script to fit your needs, however. It's actually pretty easy and straightforward to setup my terminal now
+            that I don't need to install custom z-shell's like oh-my-zsh. Most of the configuration is easily done within the Warp settings, and everything
+            else is handled in my zsh profile.
         </p>
 
         <x-images.lightbox
-            :src="asset('images/uses/warp-screenshot.png')"
+            :src="asset('images/uses/warp.png')"
             alt="Warp Terminal"
-            class="mx-auto w-[40rem] -mb-[35px]"
+            class="mx-auto w-[40rem] -mb-[35px] mt-6"
         />
     </x-front.section-list-item>
 
@@ -86,14 +84,6 @@
         <p>
             The free version is enough for my needs, as it's easy enough to install and run my own MySQL/PostgreSQL instances without
             needing to pay for Herd to do it for me.
-        </p>
-    </x-front.section-list-item>
-
-    <x-front.section-list-item title="DBngin">
-        <p>
-            Speaking of databases, <x-front.legal-link url="https://dbngin.com/" target="_blank" text="DBngin" /> makes it trivial to install
-            and run instances of MySQL and PostgreSQL locally. I used to just install them through Homebrew, however I've found this
-            to be much better solution for my requirements.
         </p>
     </x-front.section-list-item>
 

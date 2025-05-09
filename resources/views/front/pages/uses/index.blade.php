@@ -7,15 +7,15 @@
     <x-front.content-area>
         <div class="text-sm">
             {{
-                str(__('front.uses.last_updated', ['date' => '<time datetime="2024-11-27">November 27, 2024</time>']))
+                str(__('front.uses.last_updated', ['date' => '<time datetime="2025-05-09">May 09, 2025</time>']))
                     ->inlineMarkdown()
                     ->toHtmlString()
             }}
         </div>
 
-        <p>
-            {{ str(__('front.uses.banner_intro'))->inlineMarkdown()->toHtmlString() }}
-        </p>
+        <div>
+            {{ str(__('front.uses.banner_intro'))->markdown()->toHtmlString() }}
+        </div>
 
         <p class="italic">
             {{ str(__('front.uses.affiliate_disclosure'))->inlineMarkdown()->toHtmlString() }}

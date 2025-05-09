@@ -107,7 +107,7 @@ return [
     'uses' => [
         'affiliate_disclosure' => 'This page may contain affiliate links and I may earn a small commission when you click on the links at no additional cost to you.',
 
-        'banner_intro' => "Software I use, gadgets I love, and other things I recommend. I see a lot of other developers making a \"uses\" page, so I figured I might as well too. Here's a big list of all my favorite stuff.",
+        'banner_intro' => "Having the right setup makes all the difference when it comes to staying focused and productive. Below you'll find an overview of my current hardware, development environment, productivity apps and other tools that I use and find useful in my daily workflow.\n\nAny images on this page can be clicked on to view a larger version of them.",
         'banner_title' => 'My current setup',
         'description' => 'Tools I use to get my work done at home or in the office.',
         'last_updated' => 'Last Updated: :date',
