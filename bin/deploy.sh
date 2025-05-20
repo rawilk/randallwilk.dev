@@ -28,6 +28,7 @@ ARTISAN="$FORGE_PHP $NEW_RELEASE_ROOT/artisan"
 # stop script on error signal (-e) and undefined variables (-u)
 set -eu
 
+echo "Deploying as user: $(whoami)"
 echo "Deploying site: $TARGET"
 
 # Ensure we're in our root site directory.
