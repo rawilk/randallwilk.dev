@@ -25,6 +25,7 @@ class UserFactory extends Factory
             'password' => 'secret',
             'remember_token' => Str::random(10),
             'is_admin' => false,
+            'avatar_path' => null,
         ];
     }
 
