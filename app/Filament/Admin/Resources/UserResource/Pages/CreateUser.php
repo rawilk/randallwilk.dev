@@ -58,13 +58,15 @@ class CreateUser extends CreateRecord
     {
         try {
             $user = app(CreateUserAction::class)($data);
-        } catch (Throwable) {
+        } catch (Throwable $e) {
             Notification::make()
                 ->danger()
                 ->title(__('users/create.exceptions.creation_failed'))
                 ->send();
 
             $this->revertAvatarUpload(data_get($data, 'avatar_path'));
+
+            report($e);
 
             throw new Halt;
         }
