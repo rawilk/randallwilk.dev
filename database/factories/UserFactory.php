@@ -26,6 +26,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'is_admin' => false,
             'avatar_path' => null,
+            'github_username' => null,
         ];
     }
 
