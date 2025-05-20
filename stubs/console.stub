@@ -12,7 +12,8 @@ class {{ class }} extends Command
 
     protected $description = 'Command description';
 
-    public function handle(): void
+    public function handle(): int
     {
+        return self::SUCCESS;
     }
 }
