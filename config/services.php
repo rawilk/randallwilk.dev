@@ -46,4 +46,8 @@ return [
     'algolia' => [
         'app_id' => env('ALGOLIA_APP_ID'),
     ],
+
+    'resend' => [
+        'key' => env('RESEND_KEY'),
+    ],
 ];
