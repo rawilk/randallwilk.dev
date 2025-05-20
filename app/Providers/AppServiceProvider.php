@@ -9,21 +9,16 @@ use App\Console\Commands\RefreshStagingDataCommand;
 use App\Docs\DocumentationContentParser;
 use App\Docs\DocumentationPage;
 use App\Docs\DocumentationPathParser;
-use App\Models;
-use App\Support\Macros\MacroHelper;
+use App\Support\Macros\MigrationMacroHelper;
+use App\Support\MorphMapConfig;
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Schema\ForeignKeyDefinition;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
-use Rawilk\ProfileFilament\Models as ProfileFilamentModels;
-use Rawilk\Settings\Models\Setting;
 
 use function App\Helpers\userTimezone;
 
@@ -31,22 +26,13 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Vite::useScriptTagAttributes([
-            'data-turbolinks-eval' => 'false',
-            'data-turbo-eval' => 'false',
-        ]);
-
-        Date::use(CarbonImmutable::class);
-
-        URL::forceScheme('https');
-
-        $this->bootMorphMap();
-
-        $this->configureModels();
-
         $this->configureCommands();
-
-        $this->registerMacros();
+        $this->configureDates();
+        $this->configureMacros();
+        $this->configureModels();
+        $this->configureUrl();
+        $this->configureVite();
+        $this->configureMorphMap();
     }
 
     public function register(): void
@@ -54,17 +40,9 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDocs();
     }
 
-    protected function bootMorphMap(): void
+    protected function configureMorphMap(): void
     {
-        Relation::enforceMorphMap([
-            'authenticator_app' => ProfileFilamentModels\AuthenticatorApp::class,
-            'old_user_email' => ProfileFilamentModels\OldUserEmail::class,
-            'pending_user_email' => ProfileFilamentModels\PendingUserEmail::class,
-            'repository' => Models\Repository::class,
-            'setting' => Setting::class,
-            'user' => Models\User::class,
-            'webauthn_key' => Models\WebauthnKey::class,
-        ]);
+        MorphMapConfig::configure();
     }
 
     protected function configureCommands(): void
@@ -76,11 +54,15 @@ class AppServiceProvider extends ServiceProvider
         RefreshStagingDataCommand::prohibit(! $isProduction);
     }
 
+    protected function configureDates(): void
+    {
+        Date::use(CarbonImmutable::class);
+    }
+
     protected function configureModels(): void
     {
         Model::unguard();
-        Model::preventLazyLoading($this->app->isLocal());
-        Model::preventAccessingMissingAttributes($this->app->isLocal());
+        Model::shouldBeStrict(! $this->app->isProduction());
     }
 
     protected function configureDocs(): void
@@ -100,25 +82,22 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 
-    protected function registerMacros(): void
+    protected function configureMacros(): void
     {
-        Date::macro('inUserTimezone', fn (?Authenticatable $user = null) => $this->tz(userTimezone($user)));
-
         if ($this->app->runningInConsole()) {
-            $this->registerMigrationMacros();
+            MigrationMacroHelper::register();
         }
+
+        Date::macro('inUserTimezone', fn (?Authenticatable $user = null) => $this->tz(userTimezone($user)));
     }
 
-    protected function registerMigrationMacros(): void
+    protected function configureUrl(): void
     {
-        Blueprint::macro('user', function (string $column = 'user_id', bool $nullable = true, bool $cascade = true): ForeignKeyDefinition {
-            $builder = $this->foreignId($column);
+        URL::forceHttps();
+    }
 
-            return MacroHelper::buildForeignIdMacro(builder: $builder, nullable: $nullable, cascade: $cascade, table: 'users');
-        });
-
-        Blueprint::macro('humanKey', function () {
-            return $this->string('h_key')->unique();
-        });
+    protected function configureVite(): void
+    {
+        Vite::usePrefetchStrategy('aggressive');
     }
 }
