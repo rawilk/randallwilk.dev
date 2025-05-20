@@ -14,11 +14,15 @@ use App\Support\MorphMapConfig;
 use Carbon\CarbonImmutable;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Mail\Events\MessageSending;
+use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 use function App\Helpers\userTimezone;
 
@@ -38,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->configureDocs();
+        $this->registerMailEventListeners();
     }
 
     protected function configureMorphMap(): void
@@ -99,5 +104,30 @@ class AppServiceProvider extends ServiceProvider
     protected function configureVite(): void
     {
         Vite::usePrefetchStrategy('aggressive');
+    }
+
+    protected function registerMailEventListeners(): void
+    {
+        Event::listen(function (MessageSending $event) {
+            $headers = $event->message->getHeaders();
+
+            if (Context::has('trace_id')) {
+                $headers->addTextHeader('X-Trace-ID', Context::get('trace_id'));
+            }
+
+            // In addition to stuff like DKIM, these headers can help verify that a message actually
+            // originated from the application, if ever necessary.
+            $timestamp = (string) now()->unix();
+            $id = Str::uuid()->toString();
+            $signature = hash_hmac(
+                'sha256',
+                str($id)->append('|', $timestamp)->value(),
+                config('randallwilk.secrets.email_hash_key'),
+            );
+
+            $headers->addTextHeader('X-Timestamp', $timestamp);
+            $headers->addTextHeader('X-App-ID', $id);
+            $headers->addTextHeader('X-App-Signature', $signature);
+        });
     }
 }

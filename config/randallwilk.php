@@ -234,4 +234,16 @@ return [
          */
         'ignore_users' => explode(',', env('RANDALLWILK_STAGE_CLONE_IGNORE', '')),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Secrets
+    |--------------------------------------------------------------------------
+    |
+    | Secret keys used to hash various things.
+    |
+    */
+    'secrets' => [
+        'email_hash_key' => env('RANDALLWILK_EMAIL_HASH_KEY'),
+    ],
 ];
