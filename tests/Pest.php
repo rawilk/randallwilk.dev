@@ -5,11 +5,10 @@ declare(strict_types=1);
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
-// Using this syntax so my IDE gives me autocomplete for some
-// laravel assertions.
-uses(Tests\TestCase::class)->in(
+pest()->extend(Tests\TestCase::class)->in(
     'Feature',
     'Unit',
+    'Arch',
 );
 
 pest()->uses(
