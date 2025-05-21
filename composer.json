@@ -46,6 +46,8 @@
         "spatie/sheets": "^1.9",
         "spatie/valuestore": "^1.3",
         "stevebauman/location": "^7.3",
+        "symfony/http-client": "^7.2",
+        "symfony/mailgun-mailer": "^7.2",
         "tapp/filament-timezone-field": "^3.0",
         "tuupola/ksuid": "^2.1"
     },
