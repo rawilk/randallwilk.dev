@@ -33,7 +33,7 @@ class ManualDocsImportFinishedNotification extends Notification implements Shoul
         $subject = str('Manual Docs Import Finished')
             ->when(
                 filled($this->repository),
-                fn (Stringable $str) => $str->append(" [{$this->repository->name}")
+                fn (Stringable $str) => $str->append(" [{$this->repository->name}]")
             )
             ->value();
 
