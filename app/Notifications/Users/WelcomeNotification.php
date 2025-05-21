@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace App\Notifications\Users;
 
 use App\Enums\Queue;
+use App\Mail\CustomMailMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
-use function App\Helpers\defaultEmailSalutation;
+use Illuminate\Support\Uri;
 
 class WelcomeNotification extends Notification implements ShouldDispatchAfterCommit, ShouldQueue
 {
     use Queueable;
 
-    public function __construct(protected string $panelId)
+    public function __construct(protected readonly string $panelId)
     {
-        $this->onQueue(Queue::Mail->value);
+        $this->onQueue(Queue::Mail);
     }
 
     public function via($notifiable): array
@@ -29,14 +29,17 @@ class WelcomeNotification extends Notification implements ShouldDispatchAfterCom
 
     public function toMail($notifiable): MailMessage
     {
-        $domain = parse_url(config('app.url'), PHP_URL_HOST);
+        $domain = Uri::of(config('app.url'))->host();
 
-        return (new MailMessage)
+        return (new CustomMailMessage)
             ->subject(__('notifications/users.welcome.subject', ['domain' => $domain]))
             ->greeting(__('notifications/users.welcome.greeting', ['name' => $notifiable->name->first]))
-            ->salutation(defaultEmailSalutation())
+            ->forEmail($notifiable->email)
+            ->replyTo(config('randallwilk.contact.email'))
             ->line(__('notifications/users.welcome.line1', ['url' => url('/')]))
             ->line(__('notifications/users.welcome.line2', ['email' => $notifiable->email]))
-            ->action(__('notifications/users.welcome.action'), filament()->getPanel($this->panelId)->getRequestPasswordResetUrl());
+            ->action(__('notifications/users.welcome.action'), filament()->getPanel($this->panelId)->getRequestPasswordResetUrl())
+            ->addTextHeader('X-Context', 'new-user-account')
+            ->canReplyTo();
     }
 }

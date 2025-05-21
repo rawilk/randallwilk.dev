@@ -1,60 +1,50 @@
-<div style="display:none;">@formatter:off</div>
-
-@component('mail::message')
-{{-- Greeting --}}
-@if (! empty($greeting))
+<x-mail::message
+    :can-reply-to="$canReplyTo ?? false"
+    :intended-email="$intendedEmail ?? null"
+>
+{{-- greeting --}}
+@if (filled($greeting))
 ## {{ $greeting }}
-@elseif ($greeting !== false)
-@if ($level === 'error')
-# @lang('Whoops!')
-@else
-# @lang('Hello!')
-@endif
 @endif
 
-{{-- Intro Lines --}}
+{{-- intro lines --}}
 @foreach ($introLines as $line)
 {{ $line }}
 
 @endforeach
 
-{{-- Action Button --}}
+{{-- action button --}}
 @isset($actionText)
-<?php
-    switch ($level) {
-        case 'success':
-        case 'error':
-            $color = $level;
-            break;
-        default:
-            $color = 'primary';
-    }
-?>
-@component('mail::button', ['url' => $actionUrl, 'color' => $color])
-{{ $actionText }}
-@endcomponent
+@php
+    $color = match ($level) {
+        'success', 'error' => $level,
+        default => 'primary',
+    };
+@endphp
+<x-mail::button :url="$actionUrl" :color="$color">{{ $actionText }}</x-mail::button>
 @endisset
 
-{{-- Outro Lines --}}
+{{-- outro lines --}}
 @foreach ($outroLines as $line)
 {{ $line }}
 
 @endforeach
 
-{{-- Salutation --}}
-@if (! empty($salutation))
+{{-- salutation --}}
+@if (filled($salutation))
 {{ $salutation }}
-@elseif ($salutation !== false)
-@lang('Regards'),<br>
-Randall Wilk
+@else
+{{ App\Helpers\defaultEmailSalutation() }}
 @endif
 
-{{-- Subcopy --}}
+{{-- subcopy --}}
 @isset($actionText)
-@slot('subcopy')
-{!! __("If you're having trouble clicking the \":actionText\" button, copy and paste the URL below into your browser:", ['actionText' => $actionText]) !!}
-
-<span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
-@endslot
+<x-slot:subcopy>
+<x-mail.subcopy
+    :text="$actionText"
+    :url="$actionUrl"
+    :url-display="$displayableActionUrl"
+/>
+</x-slot:subcopy>
 @endisset
-@endcomponent
+</x-mail::message>

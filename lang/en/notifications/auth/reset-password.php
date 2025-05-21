@@ -9,7 +9,7 @@ return [
     'link_instructions' => 'You can reset your password by clicking the link below.',
     'button' => 'Reset your password',
     'line3' => 'If you did not initiate this request, you can ignore this email or let me know at :support.',
-    'expire_info' => 'Please note that your password will not change unless you click the link above and create a new one. **This link will expire in :count minutes**. If your link has expired, you can always [request another](:request_url).',
+    'expire_info' => "Please note that your password will not change unless you click the link above and create a new one. If you don't use this link within :expiration, it will expire. [Click here to get a new password reset link](:request_url).",
     'multiple_requests_notice' => "If you've requested multiple reset emails, please make sure you click the link inside the most recent email.",
 
     'invalid_user' => [

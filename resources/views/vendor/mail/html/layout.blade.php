@@ -54,7 +54,6 @@ width: 100% !important;
 </td>
 </tr>
 
-{{ $unsubscribeUrl ?? '' }}
 {{ $footer ?? '' }}
 </table>
 </td>

@@ -1,34 +1,46 @@
-@component('mail::layout')
-{{-- Header --}}
-@slot('header')
-@component('mail::header', ['url' => config('app.url')])
-<x-logo type="dual" />
-@endcomponent
-@endslot
+@php
+    use Illuminate\Support\Uri;
 
-{{-- Body --}}
+    $canReplyTo ??= false;
+    $intendedEmail ??= null;
+@endphp
+
+<x-mail::layout>
+{{-- header --}}
+<x-slot:header>
+<x-mail::header :url="config('app.url')">
+<x-logo type="dual" />
+</x-mail::header>
+</x-slot:header>
+
+{{-- body --}}
 {{ $slot }}
 
-{{-- Subcopy --}}
+{{-- subcopy --}}
 @isset($subcopy)
-@slot('subcopy')
-@component('mail::subcopy')
+<x-slot:subcopy>
+<x-mail::subcopy>
 {{ $subcopy }}
-@endcomponent
-@endslot
+</x-mail::subcopy>
+</x-slot:subcopy>
 @endisset
 
-{{-- Unsubscribe --}}
-@isset($unsubscribeUrl)
-@slot('unsubscribeUrl')
-{{ $unsubscribeUrl }}
-@endslot
-@endisset
+{{-- footer --}}
+<x-slot:footer>
+<x-mail::footer>
+@isset($footerBefore)
+{{ $footerBefore }}
 
-{{-- Footer --}}
-@slot('footer')
-@component('mail::footer')
-© 2015 - {{ date('Y') }} Randall Wilk. @lang('All rights reserved.')
-@endcomponent
-@endslot
-@endcomponent
+@endisset
+@if (filled($intendedEmail))
+{{ __('This message was mailed to [:email] by :app_name.', ['email' => e($intendedEmail), 'app_name' => Uri::of(config('app.url'))->host()]) }}
+
+@endif
+@if ($canReplyTo === false)
+Please do not respond to this automated message. Emails sent from this address are not monitored.
+
+@endif
+© 2015 - {{ now()->year }} Randall Wilk. @lang('All rights reserved.')
+</x-mail::footer>
+</x-slot:footer>
+</x-mail::layout>

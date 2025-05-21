@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace App\Notifications\Users;
 
-use const PHP_URL_HOST;
-
 use App\Enums\Queue;
+use App\Mail\CustomMailMessage;
 use Carbon\CarbonInterface;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
-use function App\Helpers\defaultEmailSalutation;
+use Illuminate\Support\Uri;
+use Stringable;
 
 abstract class AccountSecurityNotification extends Notification implements ShouldQueue
 {
@@ -38,7 +37,7 @@ abstract class AccountSecurityNotification extends Notification implements Shoul
 
     public function __construct()
     {
-        $this->onQueue(Queue::Mail->value);
+        $this->onQueue(Queue::Mail);
     }
 
     abstract protected function booted(): void;
@@ -102,27 +101,24 @@ abstract class AccountSecurityNotification extends Notification implements Shoul
     {
         $this->booted();
 
-        $domain = parse_url(config('app.url'), PHP_URL_HOST);
+        $domain = Uri::of(config('app.url'))->host();
 
-        $message = (new MailMessage)
+        return (new CustomMailMessage)
+            ->forEmail($notifiable->email)
             ->subject($this->subject())
-            ->salutation(defaultEmailSalutation())
             ->greeting($this->greeting)
-            ->line($notifiable->email);
-
-        foreach ($this->lines as $line) {
-            $message->line($line);
-        }
-
-        if ($url = $this->getUrl()) {
-            $message->action($this->checkAccountbuttonText(), $url);
-        }
-
-        $message->line(__('notifications/auth/security.defaults.reason_for_email', ['domain' => $domain]));
-
-        $message->line($this->buildRequestDetails());
-
-        return $message;
+            ->line($notifiable->email)
+            ->lines($this->lines)
+            ->when(
+                $url = $this->getUrl(),
+                fn (CustomMailMessage $message) => $message->action(
+                    $this->checkAccountButtonText(),
+                    $url,
+                )
+            )
+            ->line(__('notifications/auth/security.defaults.reason_for_email', ['domain' => $domain]))
+            ->line($this->buildRequestDetails())
+            ->addTextHeader('X-Context', 'security-notification');
     }
 
     public function getUrl(): ?string
@@ -156,29 +152,32 @@ abstract class AccountSecurityNotification extends Notification implements Shoul
 
     protected function buildRequestDetails(): Htmlable
     {
-        $details = [__('notifications/auth/security.request_details.label')];
-
-        if ($this->location) {
-            $details[] = __('notifications/auth/security.request_details.location', ['location' => $this->location]);
-        }
-
-        if ($this->ip) {
-            $details[] = __('notifications/auth/security.request_details.ip', ['ip' => $this->ip]);
-        }
-
-        if ($this->date) {
-            // Date format example: "Tue, 20 Jul 2021 12:00 PM (EDT -0400)"
-            $details[] = __('notifications/auth/security.request_details.date', ['date' => $this->date->format('D, j M Y g:i A (T O)')]);
-        }
-
-        if ($this->browser) {
-            $details[] = __('notifications/auth/security.request_details.browser', ['browser' => $this->browser]);
-        }
-
-        if ($this->platform) {
-            $details[] = __('notifications/auth/security.request_details.platform', ['platform' => $this->platform]);
-        }
-
-        return str(implode('<br>', $details))->markdown()->toHtmlString();
+        return str(__('notifications/auth/security.request_details.label'))
+            ->when(
+                filled($this->location),
+                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request_details.location', ['location' => $this->location])),
+            )
+            ->when(
+                filled($this->ip),
+                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request_details.ip', ['ip' => $this->ip])),
+            )
+            ->when(
+                $this->date !== null,
+                // Date format example: "Tue, 20 Jul 2021 12:00 PM (EDT -0400)"
+                fn (Stringable $str) => $str->append(
+                    '<br>',
+                    __('notifications/auth/security.request_details.date', ['date' => $this->date->format('D, j M Y g:i A (T O)')])
+                )
+            )
+            ->when(
+                filled($this->browser),
+                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request_details.browser', ['browser' => $this->browser])),
+            )
+            ->when(
+                filled($this->platform),
+                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request_details.platform', ['platform' => $this->platform])),
+            )
+            ->inlineMarkdown()
+            ->toHtmlString();
     }
 }

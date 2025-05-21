@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Notifications\Repositories;
 
+use App\Mail\CustomMailMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
-use function App\Helpers\defaultEmailSalutation;
 
 class ManualRepositorySyncFinishedNotification extends Notification implements ShouldQueue
 {
@@ -26,11 +25,10 @@ class ManualRepositorySyncFinishedNotification extends Notification implements S
 
     public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new CustomMailMessage)
             ->subject('Manual Repository Sync Finished')
-            ->greeting(false)
+            ->forEmail($notifiable->email)
             ->line("A repository sync you triggered with batch id **{$this->batchId}** has now finished running.")
-            ->line("The name of the batch is: {$this->batchName}")
-            ->salutation(defaultEmailSalutation());
+            ->line("The name of the batch is: {$this->batchName}");
     }
 }
