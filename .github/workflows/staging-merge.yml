@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout Develop (${{ env.DEVELOP_BRANCH }})
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ env.DEVELOP_BRANCH }}
           fetch-depth: 0 # checkout the entire history
