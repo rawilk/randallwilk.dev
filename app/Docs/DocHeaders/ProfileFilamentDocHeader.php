@@ -25,7 +25,12 @@ class ProfileFilamentDocHeader implements DocHeader
         $panel
             ->plugin(
                 ProfileFilamentPlugin::make()
-                    ->useMfaMiddleware(false)
+                    ->multiFactorAuthentication([
+                        AppAuthenticationProvider::make(),
+                        WebauthnProvider::make(),
+                        EmailAuthenticationProvider::make(),
+                    ])
+                    ->passkeyLogin()
             )
         PHP;
     }
