@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install 1Password CLI
-        uses: 1password/install-cli-action@v2
+        uses: 1password/install-cli-action@v3
 
       - name: Authenticate with 1Password
         uses: 1password/load-secrets-action/configure@v3
@@ -76,7 +76,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install 1Password CLI
-        uses: 1password/install-cli-action@v2
+        uses: 1password/install-cli-action@v3
 
       - name: Authenticate with 1Password
         uses: 1password/load-secrets-action/configure@v3
