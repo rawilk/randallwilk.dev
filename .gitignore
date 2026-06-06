@@ -32,6 +32,8 @@ _ide_helper_models.php
 auth.json
 npm-debug.log
 yarn-error.log
+.nvmrc
+.junie
 
 # Storage disks
 public/avatars
