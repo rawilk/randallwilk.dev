@@ -86,7 +86,7 @@ readonly class TableOfContentsBuilder
     }
 
     /**
-     * @return \Generator<\DOMElement>
+     * @return Generator<DOMElement>
      */
     protected function htmlChildren(DOMElement $node): Generator
     {

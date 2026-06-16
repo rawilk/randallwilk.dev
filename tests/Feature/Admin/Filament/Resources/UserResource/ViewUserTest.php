@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Filament\Admin\Resources\UserResource;
+use App\Filament\Admin\Resources\Users\UserResource;
 use App\Livewire\Users\UpdatePasswordForm;
 use App\Livewire\Users\UpdateUserInfoForm;
 use App\Models\User;
@@ -27,21 +27,21 @@ it('renders', function () {
 });
 
 it('shows possible actions for the user', function () {
-    livewire(UserResource\Pages\ViewUser::class, [
+    livewire(Users\Pages\ViewUser::class, [
         'record' => $this->otherUser->getRouteKey(),
     ])
         ->assertInfolistActionVisible('delete', 'delete');
 });
 
 it('hides the delete action for the authenticated user', function () {
-    livewire(UserResource\Pages\ViewUser::class, [
+    livewire(Users\Pages\ViewUser::class, [
         'record' => $this->user->getRouteKey(),
     ])
         ->assertDontSeeText(__('users/view.sections.actions.heading'));
 });
 
 it('can delete a user', function () {
-    livewire(UserResource\Pages\ViewUser::class, [
+    livewire(Users\Pages\ViewUser::class, [
         'record' => $this->otherUser->getRouteKey(),
     ])
         ->callInfolistAction('delete', 'delete')

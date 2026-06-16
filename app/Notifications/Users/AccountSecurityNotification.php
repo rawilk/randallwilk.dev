@@ -6,13 +6,13 @@ namespace App\Notifications\Users;
 
 use App\Enums\Queue;
 use App\Mail\CustomMailMessage;
+use App\Support\AppConfig;
 use Carbon\CarbonInterface;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Uri;
 use Stringable;
 
 abstract class AccountSecurityNotification extends Notification implements ShouldQueue
@@ -101,7 +101,7 @@ abstract class AccountSecurityNotification extends Notification implements Shoul
     {
         $this->booted();
 
-        $domain = Uri::of(config('app.url'))->host();
+        $domain = AppConfig::appDomain();
 
         return (new CustomMailMessage)
             ->forEmail($notifiable->email)
@@ -114,9 +114,9 @@ abstract class AccountSecurityNotification extends Notification implements Shoul
                 fn (CustomMailMessage $message) => $message->action(
                     $this->checkAccountButtonText(),
                     $url,
-                )
+                ),
             )
-            ->line(__('notifications/auth/security.defaults.reason_for_email', ['domain' => $domain]))
+            ->line(__('notifications/auth/security.defaults.reason', ['domain' => $domain]))
             ->line($this->buildRequestDetails())
             ->addTextHeader('X-Context', 'security-notification');
     }
@@ -147,35 +147,35 @@ abstract class AccountSecurityNotification extends Notification implements Shoul
 
     protected function checkAccountButtonText(): string
     {
-        return __('notifications/auth/security.defaults.check_account_button');
+        return __('notifications/auth/security.defaults.action');
     }
 
     protected function buildRequestDetails(): Htmlable
     {
-        return str(__('notifications/auth/security.request_details.label'))
+        return str(__('notifications/auth/security.request-details.label'))
             ->when(
                 filled($this->location),
-                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request_details.location', ['location' => $this->location])),
+                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request-details.location', ['location' => $this->location])),
             )
             ->when(
                 filled($this->ip),
-                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request_details.ip', ['ip' => $this->ip])),
+                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request-details.ip', ['ip' => $this->ip])),
             )
             ->when(
                 $this->date !== null,
                 // Date format example: "Tue, 20 Jul 2021 12:00 PM (EDT -0400)"
                 fn (Stringable $str) => $str->append(
                     '<br>',
-                    __('notifications/auth/security.request_details.date', ['date' => $this->date->format('D, j M Y g:i A (T O)')])
-                )
+                    __('notifications/auth/security.request-details.date', ['date' => $this->date->format('D, j M Y g:i A (T O)')]),
+                ),
             )
             ->when(
                 filled($this->browser),
-                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request_details.browser', ['browser' => $this->browser])),
+                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request-details.browser', ['browser' => $this->browser])),
             )
             ->when(
                 filled($this->platform),
-                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request_details.platform', ['platform' => $this->platform])),
+                fn (Stringable $str) => $str->append('<br>', __('notifications/auth/security.request-details.platform', ['platform' => $this->platform])),
             )
             ->inlineMarkdown()
             ->toHtmlString();

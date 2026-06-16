@@ -4,37 +4,31 @@ declare(strict_types=1);
 
 namespace App\Actions\Users;
 
+use App\Enums\Disk;
 use App\Models\User;
 use App\Notifications\Users\WelcomeNotification;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Throwable;
 
-class CreateUserAction
+readonly class CreateUserAction
 {
     protected const int RANDOM_PASSWORD_LENGTH = 16;
 
     public function __invoke(array $data): User
     {
-        DB::beginTransaction();
-
         try {
             $user = User::create([
-                ...$data,
+                ...Arr::except($data, 'password'),
                 'password' => Str::password(static::RANDOM_PASSWORD_LENGTH),
             ]);
 
             $this->sendWelcomeEmail($user);
         } catch (Throwable $exception) {
-            DB::rollBack();
-
             $this->revertAvatarUpload(data_get($data, 'avatar_path'));
 
             throw $exception;
         }
-
-        DB::commit();
 
         return $user;
     }
@@ -45,7 +39,7 @@ class CreateUserAction
             return;
         }
 
-        $disk = Storage::disk('avatars');
+        $disk = Disk::Avatars->toStorageDisk();
 
         if ($disk->exists($filename)) {
             $disk->delete($filename);

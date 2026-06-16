@@ -31,13 +31,5 @@ return [
             'title' => 'Reset Password',
         ],
     ],
-    'socialite' => [
-        'alerts' => [
-            'already_linked' => 'This social account has already been linked to another user account.',
-            'github_auth_process_failed' => 'Something went wrong with the GitHub authentication process.',
-            'login_success' => 'You have been logged in.',
-        ],
-        'login_via_github' => 'Sign in with GitHub',
-    ],
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 ];

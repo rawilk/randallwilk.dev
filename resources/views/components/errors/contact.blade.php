@@ -2,7 +2,7 @@
     'title' => 'If you still have questions, please contact me so I can help you out.',
 ])
 
-<div class="[&_a]:text-blue-600 hover:[&_a]:text-blue-500 hover:[&_a]:underline">
+<div class="[&_a]:text-blue-600 [&_a:hover]:text-blue-500 [&_a:hover]:underline">
     <p class="text-lg !mb-3">
         {{ $title }}
     </p>

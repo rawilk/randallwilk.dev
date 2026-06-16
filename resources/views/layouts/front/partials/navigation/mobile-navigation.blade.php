@@ -16,7 +16,7 @@
     <template x-teleport="#header">
         {{-- backdrop --}}
         <div
-            class="fixed z-[999] inset-0 md:hidden backdrop-blur bg-gray-600/50"
+            class="fixed z-999 inset-0 md:hidden backdrop-blur bg-gray-600/50"
             x-show="$store.mobileNav.isOpen"
             x-cloak
             x-on:click="$store.mobileNav.close()"
@@ -27,7 +27,7 @@
     {{-- menu --}}
     <template x-teleport="#header">
         <div
-            class="absolute z-[1000] inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
+            class="absolute z-1000 inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
             x-show="$store.mobileNav.isOpen"
             x-trap="$store.mobileNav.isOpen"
             x-cloak
@@ -40,7 +40,7 @@
             x-on:click.outside="$store.mobileNav.close()"
             x-on:keydown.esc.window="$store.mobileNav.close()"
         >
-            <div class="divide-y-2 divide-gray-100 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+            <div class="divide-y-2 divide-gray-100 rounded-lg bg-white shadow-lg ring-1 ring-black/5">
                 <div class="px-5 py-5">
                     <div class="flex items-center justify-between">
                         {{-- logo --}}

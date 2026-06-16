@@ -26,7 +26,7 @@
 >
     <div class="w-full max-w-8xl mx-auto flex flex-wrap gap-5 items-center justify-between sm:flex-nowrap">
         {{-- logo/mobile-nav trigger --}}
-        <div class="relative flex flex-grow basis-0 items-center gap-3">
+        <div class="relative flex grow basis-0 items-center gap-3">
             <x-layout.docs.mobile-navigation>
                 {{ $mobileNav }}
             </x-layout.docs.mobile-navigation>

@@ -16,11 +16,11 @@
             <p class="sr-only">Theme</p>
             <button
                 type="button"
-                class="flex w-9 h-9 items-center justify-center rounded-full ring-1 ring-black/15 dark:ring-inset dark:bg-slate-700 dark:ring-white/15"
+                class="flex w-9 h-9 cursor-pointer items-center justify-center rounded-full ring-1 ring-black/15 dark:ring-inset dark:bg-slate-700 dark:ring-white/15"
                 aria-label="Open theme options"
             >
-                <x-heroicon-m-sun class="hidden w-6 h-6 fill-sky-400 [[data-theme=light]_&]:block" />
-                <x-heroicon-m-moon class="hidden w-6 h-6 fill-sky-400 [[data-theme=dark]_&]:block" />
+                <x-heroicon-m-sun class="hidden w-6 h-6 fill-sky-400 in-data-[theme=light]:block" />
+                <x-heroicon-m-moon class="hidden w-6 h-6 fill-sky-400 in-data-[theme=dark]:block" />
                 <x-heroicon-m-sun class="hidden w-6 h-6 fill-slate-400 [:not(.dark)[data-theme=system]_&]:block" />
                 <x-heroicon-m-moon class="hidden w-6 h-6 fill-slate-400 [.dark[data-theme=system]_&]:block" />
             </button>

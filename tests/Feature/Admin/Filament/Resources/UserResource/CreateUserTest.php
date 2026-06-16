@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Filament\Admin\Resources\UserResource;
+use App\Filament\Admin\Resources\Users\UserResource;
 use App\Models\User;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Http\UploadedFile;
@@ -25,7 +25,7 @@ it('renders', function () {
 });
 
 it('creates a new user', function () {
-    livewire(UserResource\Pages\CreateUser::class)
+    livewire(Users\Pages\CreateUser::class)
         ->fillForm($data = $this->requestData->create())
         ->call('create')
         ->assertHasNoFormErrors()
@@ -40,7 +40,7 @@ it('creates a new user', function () {
 });
 
 it('requires a name', function () {
-    livewire(UserResource\Pages\CreateUser::class)
+    livewire(Users\Pages\CreateUser::class)
         ->fillForm($this->requestData->create(['name' => null]))
         ->call('create')
         ->assertHasFormErrors([
@@ -49,7 +49,7 @@ it('requires a name', function () {
 });
 
 it('requires an email', function () {
-    livewire(UserResource\Pages\CreateUser::class)
+    livewire(Users\Pages\CreateUser::class)
         ->fillForm($this->requestData->create(['email' => null]))
         ->call('create')
         ->assertHasFormErrors([
@@ -58,7 +58,7 @@ it('requires an email', function () {
 });
 
 it('requires a valid email', function () {
-    livewire(UserResource\Pages\CreateUser::class)
+    livewire(Users\Pages\CreateUser::class)
         ->fillForm($this->requestData->create(['email' => 'invalid']))
         ->call('create')
         ->assertHasFormErrors([
@@ -67,7 +67,7 @@ it('requires a valid email', function () {
 });
 
 it('requires a unique email', function () {
-    livewire(UserResource\Pages\CreateUser::class)
+    livewire(Users\Pages\CreateUser::class)
         ->fillForm($this->requestData->create(['email' => $this->user->email]))
         ->call('create')
         ->assertHasFormErrors([
@@ -76,7 +76,7 @@ it('requires a unique email', function () {
 });
 
 it('requires a timezone', function () {
-    livewire(UserResource\Pages\CreateUser::class)
+    livewire(Users\Pages\CreateUser::class)
         ->fillForm($this->requestData->create(['timezone' => null]))
         ->call('create')
         ->assertHasFormErrors([
@@ -85,7 +85,7 @@ it('requires a timezone', function () {
 });
 
 it('can create other admin users', function () {
-    livewire(UserResource\Pages\CreateUser::class)
+    livewire(Users\Pages\CreateUser::class)
         ->fillForm($data = $this->requestData->create(['is_admin' => true]))
         ->call('create');
 
@@ -107,7 +107,7 @@ it('can create a user with an avatar picture', function () {
         $component->preserveFilenames();
     });
 
-    livewire(UserResource\Pages\CreateUser::class)
+    livewire(Users\Pages\CreateUser::class)
         ->fillForm($data)
         ->call('create')
         ->assertHasNoFormErrors();

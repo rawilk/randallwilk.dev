@@ -5,12 +5,6 @@ declare(strict_types=1);
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
-// Authentication...
-Route::get('/login/github', [Controllers\Auth\GitHubSocialiteController::class, 'redirect'])
-    ->middleware(['signed'])
-    ->name('login.github');
-Route::get('/login/github/callback', [Controllers\Auth\GitHubSocialiteController::class, 'callback'])->name('login.github.callback');
-
 Route::view('/contact', 'front.pages.contact.index')->name('contact');
 Route::view('/', 'front.pages.home.index')->name('home');
 
@@ -39,5 +33,5 @@ Route::view('/uses', 'front.pages.uses.index')->name('uses');
 // Sitemap...
 Route::get('/sitemap', Controllers\Front\SiteMapController::class)->name('sitemap');
 
-// Webauthn...
+// WebAuthn...
 Route::webauthn();

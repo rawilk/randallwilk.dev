@@ -1,6 +1,37 @@
-@import '/vendor/filament/filament/resources/css/theme.css';
-@import '../../components/auth.css';
-@import '../../components/logo.css';
-@import '../../components/tables.css';
+@import "../../../../vendor/filament/filament/resources/css/theme.css";
+@import "../../components/auth.css";
+@import "../../components/logo.css";
+@import "../../components/tables.css";
 
-@config('tailwind.config.js');
+@theme {
+    /* Colors */
+    --color-brand: #08c; /* If updating, be sure to update mail layout logo colors */
+    /* Fonts */
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* Filament */
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+@source '../../../../app/Support/Filament/FilamentDefaults.php';
+
+/* View Components */
+@source '../../../../app/View/Components/Feedback/**/*';
+@source '../../../../resources/views/components/**/*';
+
+/* Admin Panel */
+@source '../../../../app/Providers/Filament/AdminPanelProvider.php';
+
+/* Livewire */
+@source '../../../../app/Livewire/Profile/**/*';
+@source '../../../../app/Livewire/Users/**/*';
+
+/* Views */
+@source '../../../../resources/views/layouts/auth/**/*';
+@source '../../../../resources/views/errors/**/*';
+
+/* Svg */
+@source '../../../../resources/svg/**/*';
+
+/* Vendor */
+@source '../../../../vendor/rawilk/profile-filament-plugin/resources/views/**/*';

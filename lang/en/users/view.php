@@ -28,7 +28,7 @@ return [
         ],
 
         'h_key' => [
-            'label' => 'Human key',
+            'label' => 'Public ID',
         ],
     ],
 

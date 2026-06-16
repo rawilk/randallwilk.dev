@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Models\Concerns;
 
+use App\Enums\Disk;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Str;
-use Storage;
+use Throwable;
 
 /**
  * @property null|string $avatar_path
@@ -23,7 +24,7 @@ trait HasAvatar
 
             if ($previous && ! $this->hasExternalAvatar($previous)) {
                 rescue(
-                    callback: fn () => Storage::disk($this->avatarDisk())->delete($previous),
+                    callback: fn () => Disk::Avatars->toStorageDisk()->delete($previous),
                     report: false,
                 );
             }
@@ -32,11 +33,16 @@ trait HasAvatar
 
     public function deleteAvatar(): void
     {
-        if (! $this->avatar_path || $this->hasExternalAvatar()) {
+        if (blank($this->avatar_path)) {
             return;
         }
 
-        Storage::disk($this->avatarDisk())->delete($this->avatar_path);
+        if (! $this->hasExternalAvatar()) {
+            try {
+                Disk::Avatars->toStorageDisk()->delete($this->avatar_path);
+            } catch (Throwable) {
+            }
+        }
 
         $this->fill(['avatar_path' => null])->save();
     }
@@ -71,13 +77,6 @@ trait HasAvatar
     {
         return $this->hasExternalAvatar()
             ? $this->avatar_path
-            : Storage::disk($this->avatarDisk())->url($this->avatar_path);
-    }
-
-    protected function avatarDisk(): string
-    {
-        return isset($_ENV['VAPOR_ARTIFACT_NAME'])
-            ? 's3'
-            : 'avatars';
+            : Disk::Avatars->toStorageDisk()->url($this->avatar_path);
     }
 }

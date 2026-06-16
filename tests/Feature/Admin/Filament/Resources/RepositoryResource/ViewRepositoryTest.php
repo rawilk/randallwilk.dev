@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Filament\Admin\Actions\Repositories\DeleteRepositoryAction;
-use App\Filament\Admin\Resources\RepositoryResource;
+use App\Filament\Admin\Resources\Repositories\RepositoryResource;
 use App\Models\Repository;
 use Filament\Actions\RestoreAction;
 use Illuminate\Bus\PendingBatch;
@@ -38,7 +38,7 @@ it('renders for soft-deleted records', function () {
 it('can delete the repository', function () {
     $this->freezeSecond();
 
-    livewire(RepositoryResource\Pages\ViewRepository::class, [
+    livewire(Repositories\Pages\ViewRepository::class, [
         'record' => $this->record->getRouteKey(),
     ])
         ->callAction(DeleteRepositoryAction::class)
@@ -52,7 +52,7 @@ it('can delete the repository', function () {
 it('can restore the repository', function () {
     $record = Repository::factory()->trashed()->create();
 
-    livewire(RepositoryResource\Pages\ViewRepository::class, [
+    livewire(Repositories\Pages\ViewRepository::class, [
         'record' => $record->getRouteKey(),
     ])
         ->callAction(RestoreAction::class)
@@ -64,7 +64,7 @@ it('can restore the repository', function () {
 });
 
 it('can edit the repository', function () {
-    livewire(RepositoryResource\Pages\ViewRepository::class, [
+    livewire(Repositories\Pages\ViewRepository::class, [
         'record' => $this->record->getRouteKey(),
     ])
         ->mountAction('edit')
@@ -87,7 +87,7 @@ it('can edit the repository', function () {
 });
 
 it('requires a type', function () {
-    livewire(RepositoryResource\Pages\ViewRepository::class, [
+    livewire(Repositories\Pages\ViewRepository::class, [
         'record' => $this->record->getRouteKey(),
     ])
         ->callAction('edit', data: $this->formData->create(['type' => null]))
@@ -99,7 +99,7 @@ it('requires a type', function () {
 it('requires a unique scoped name', function () {
     Repository::factory()->trashed()->create(['scoped_name' => 'taken']);
 
-    livewire(RepositoryResource\Pages\ViewRepository::class, [
+    livewire(Repositories\Pages\ViewRepository::class, [
         'record' => $this->record->getRouteKey(),
     ])
         ->callAction('edit', data: $this->formData->create(['scoped_name' => 'taken']))
@@ -111,7 +111,7 @@ it('requires a unique scoped name', function () {
 it('has an action to sync repository info with GitHub', function () {
     Bus::fake();
 
-    livewire(RepositoryResource\Pages\ViewRepository::class, [
+    livewire(Repositories\Pages\ViewRepository::class, [
         'record' => $this->record->getRouteKey(),
     ])
         ->assertActionExists('sync')
@@ -140,7 +140,7 @@ it('has an action to import the docs', function () {
         ],
     ]);
 
-    livewire(RepositoryResource\Pages\ViewRepository::class, [
+    livewire(Repositories\Pages\ViewRepository::class, [
         'record' => $this->record->getRouteKey(),
     ])
         ->assertActionVisible('importDocs')
@@ -157,7 +157,7 @@ it('has an action to import the docs', function () {
 it('does not show the import docs action if the repository has no docs configured', function () {
     config()->set('docs.repositories', []);
 
-    livewire(RepositoryResource\Pages\ViewRepository::class, [
+    livewire(Repositories\Pages\ViewRepository::class, [
         'record' => $this->record->getRouteKey(),
     ])
         ->assertActionHidden('importDocs');

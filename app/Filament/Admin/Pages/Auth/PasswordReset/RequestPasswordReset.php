@@ -7,22 +7,30 @@ namespace App\Filament\Admin\Pages\Auth\PasswordReset;
 use App\Filament\Concerns\Auth\IsAuthPage;
 use App\Notifications\Auth\ResetPassword;
 use App\Notifications\Auth\ResetPasswordInvalidUser;
+use App\Support\AppConfig;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use Filament\Actions\Action;
+use Filament\Auth\Pages\PasswordReset\RequestPasswordReset as BasePage;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
-use Filament\Pages\Auth\PasswordReset\RequestPasswordReset as BaseComponent;
+use Filament\Schemas\Components\Actions;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Text;
+use Filament\Schemas\Schema;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Notification as LaravelNotification;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Timebox;
 use Livewire\Attributes\Locked;
 
 use function Illuminate\Support\defer;
 
-class RequestPasswordReset extends BaseComponent
+class RequestPasswordReset extends BasePage
 {
     use IsAuthPage;
 
@@ -30,8 +38,6 @@ class RequestPasswordReset extends BaseComponent
     public ?string $email = null;
 
     protected static string $layout = 'layouts.auth.base';
-
-    protected static string $view = 'filament.admin.pages.auth.password-reset.request-password-reset';
 
     public function mount(): void
     {
@@ -59,6 +65,34 @@ class RequestPasswordReset extends BaseComponent
             : __('pages/auth/request-password-reset.subheading');
     }
 
+    public function getFormContentComponent(): Component
+    {
+        return parent::getFormContentComponent()
+            ->footer([
+                Actions::make($this->getFormActions())
+                    ->alignment($this->getFormActionsAlignment())
+                    ->fullWidth($this->hasFullWidthFormActions())
+                    ->key('form-actions'),
+
+                $this->loginAction(),
+            ]);
+    }
+
+    public function form(Schema $schema): Schema
+    {
+        return parent::form($schema)
+            ->components([
+                $this->getEmailSentComponent(),
+
+                $this->getEmailFormComponent()
+                    ->when(
+                        app()->isProduction(),
+                        fn (TextInput $component) => $component->rule('email:rfc,dns'),
+                    )
+                    ->hidden(fn (): bool => filled($this->email)),
+            ]);
+    }
+
     public function request(): void
     {
         try {
@@ -77,8 +111,8 @@ class RequestPasswordReset extends BaseComponent
                 function (CanResetPassword $user, string $token): void {
                     // We're going to generate the reset link ourselves, so we can make it temporary.
                     $url = URL::temporarySignedRoute(
-                        name: filament()->getCurrentPanel()->generateRouteName('auth.password-reset.reset'),
-                        expiration: now()->addMinutes(config('auth.passwords.users.expire')),
+                        name: filament()->getCurrentOrDefaultPanel()->generateRouteName('auth.password-reset.reset'),
+                        expiration: now()->addMinutes(AppConfig::passwordResetDecayMinutes()),
                         parameters: [
                             'token' => $token,
                             'email' => $user->getEmailForPasswordReset(),
@@ -89,7 +123,7 @@ class RequestPasswordReset extends BaseComponent
                         $user->notifyNow(
                             (new ResetPassword($token))
                                 ->setUrl($url)
-                                ->setRequestUrl(filament()->getRequestPasswordResetUrl())
+                                ->setRequestUrl(filament()->getRequestPasswordResetUrl()),
                         );
                     });
                 },
@@ -100,7 +134,7 @@ class RequestPasswordReset extends BaseComponent
             }
 
             return $status;
-        }, microseconds: config('randallwilk.timebox_duration'));
+        }, microseconds: AppConfig::authTimeboxDuration());
 
         if ($status === Password::RESET_THROTTLED) {
             Notification::make()
@@ -124,20 +158,55 @@ class RequestPasswordReset extends BaseComponent
         $this->form->fill();
     }
 
-    public function resend(): void
-    {
-        $this->email = null;
-    }
-
     public function loginAction(): Action
     {
         return parent::loginAction()
-            ->label(__('pages/auth/request-password-reset.actions.login.label'));
+            ->label(__('pages/auth/request-password-reset.actions.login.label'))
+            ->visible(fn () => auth()->guest());
+    }
+
+    protected function getFormActions(): array
+    {
+        return [
+            $this->getRequestFormAction(),
+            $this->resendAction(),
+        ];
     }
 
     protected function getRequestFormAction(): Action
     {
         return parent::getRequestFormAction()
-            ->label(__('pages/auth/request-password-reset.actions.submit.label'));
+            ->label(__('pages/auth/request-password-reset.actions.submit.label'))
+            ->hidden(fn (): bool => filled($this->email));
+    }
+
+    protected function resendAction(): Action
+    {
+        return Action::make('resend')
+            ->label(__('pages/auth/request-password-reset.actions.resend.label'))
+            ->visible(fn (): bool => filled($this->email))
+            ->action(function () {
+                $this->form->fill([
+                    'email' => $this->email,
+                ]);
+
+                $this->email = null;
+            });
+    }
+
+    protected function getEmailSentComponent(): Component
+    {
+        return Text::make(
+            fn () => new HtmlString(Blade::render(<<<'HTML'
+            <div class="space-y-3">
+                {{
+                    str(__('pages/auth/request-password-reset.alerts.sent.description', ['email' => e($email)]))->markdown()->toHtmlString()
+                }}
+            </div>
+            HTML, [
+                'email' => e($this->email),
+            ])),
+        )
+            ->visible(fn () => filled($this->email));
     }
 }

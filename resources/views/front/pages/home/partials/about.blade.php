@@ -5,7 +5,7 @@
 
     <x-front.content-area>
         <p>
-            I'm a full-stack developer based in Wausau, WI. I'm passionate about PHP, and I specialize in the Laravel framework.
+            I'm a full-stack developer based in Madison, WI. I'm passionate about PHP, and I specialize in the Laravel framework.
             Although I specialize in PHP, I didn't actually start out with this language.
         </p>
 
@@ -24,15 +24,6 @@
             <a href="https://www.bellevue.edu/" target="_blank" rel="nofollow noreferrer">
                 Bellevue University
             </a>.
-        </p>
-
-        <p>
-            Right around the time I received my Bachelor's, I started working for my current employer,
-            <a href="https://riverwoodeducational.com" target="_blank" rel="nofollow noreferrer">
-                Riverwood Educational Services, Inc
-            </a>
-            . Although I do manage some client sites, the majority of my time here is spent building and maintaining a technology asset deployment
-            system for charter schools.
         </p>
 
         <p>

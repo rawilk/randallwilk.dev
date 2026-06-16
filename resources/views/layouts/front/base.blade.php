@@ -45,7 +45,7 @@
         <x-layout.front.header />
     @endif
 
-    <main class="flex-grow">
+    <main class="grow">
         {{ $slot }}
     </main>
 

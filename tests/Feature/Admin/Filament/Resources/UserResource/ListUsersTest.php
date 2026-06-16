@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Actions\Users\DeleteUserAction;
 use App\Filament\Admin\Actions\Users\DeleteUserTableAction;
-use App\Filament\Admin\Resources\UserResource;
+use App\Filament\Admin\Resources\Users\UserResource;
 use App\Models\User;
 use Filament\Tables\Actions\EditAction;
 
@@ -27,7 +27,7 @@ it('renders', function () {
 it('lists the users', function () {
     $users = User::factory()->count(5)->create();
 
-    livewire(UserResource\Pages\ListUsers::class)
+    livewire(Users\Pages\ListUsers::class)
         ->assertCanSeeTableRecords($users);
 });
 
@@ -37,7 +37,7 @@ it('is searchable', function () {
     $user1 = $users->first();
     $user2 = $users->last();
 
-    livewire(UserResource\Pages\ListUsers::class)
+    livewire(Users\Pages\ListUsers::class)
         ->searchTable($user1->email)
         ->assertCanSeeTableRecords([$user1])
         ->assertCanNotSeeTableRecords($users->filter(fn (User $other) => $other->isNot($user1)))
@@ -49,7 +49,7 @@ it('is searchable', function () {
 it('does not show delete action for the authenticated user row', function () {
     $users = User::factory()->count(5)->create();
 
-    livewire(UserResource\Pages\ListUsers::class)
+    livewire(Users\Pages\ListUsers::class)
         ->assertTableActionDisabled(DeleteUserTableAction::class, record: $this->user)
         ->assertTableActionEnabled(DeleteUserTableAction::class, record: $users->first());
 });
@@ -57,7 +57,7 @@ it('does not show delete action for the authenticated user row', function () {
 it('has an edit action', function () {
     $user = User::factory()->create();
 
-    livewire(UserResource\Pages\ListUsers::class)
+    livewire(Users\Pages\ListUsers::class)
         ->assertTableActionHasUrl(
             name: EditAction::class,
             url: UserResource::getUrl('view', ['record' => $user]),
@@ -72,6 +72,6 @@ it('deletes a user', function () {
         ->shouldReceive('__invoke')
         ->withArgs(fn ($param) => $user->is($param));
 
-    livewire(UserResource\Pages\ListUsers::class)
+    livewire(Users\Pages\ListUsers::class)
         ->callTableAction(DeleteUserTableAction::class, record: $user);
 });

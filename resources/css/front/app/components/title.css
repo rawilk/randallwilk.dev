@@ -21,5 +21,5 @@
     @apply font-sans;
     @apply font-bold;
     @apply uppercase;
-    @apply leading-tight !important;
+    @apply leading-tight!;
 }

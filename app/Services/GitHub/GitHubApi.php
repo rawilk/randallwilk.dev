@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Services\GitHub;
 
 use Exception;
+use Github\Api\Repo;
+use Github\Api\Repository\Contents;
+use Github\Api\User;
 use Github\Client as GitHubClient;
 use Github\ResultPager;
 use Illuminate\Support\Collection;
@@ -17,7 +20,7 @@ readonly class GitHubApi
 
     public function fetchPublicRepositories(string $username): Collection
     {
-        /** @var \Github\Api\User $api */
+        /** @var User $api */
         $api = $this->client->api('user');
 
         $paginator = new ResultPager($this->client);
@@ -29,7 +32,7 @@ readonly class GitHubApi
 
     public function fetchSingleRepository(string $username, string $repository): ?array
     {
-        /** @var \Github\Api\Repo $api */
+        /** @var Repo $api */
         $api = $this->client->api('repo');
 
         return rescue(fn () => $api->show($username, $repository));
@@ -37,7 +40,7 @@ readonly class GitHubApi
 
     public function fetchRepositoryTopics(string $username, string $repository): Collection
     {
-        /** @var \Github\Api\Repo $api */
+        /** @var Repo $api */
         $api = $this->client->api('repository');
 
         return collect($api->topics($username, $repository)['names'] ?? []);
@@ -45,7 +48,7 @@ readonly class GitHubApi
 
     public function updateFile(string $username, string $repository, string $path, ?string $content, string $message): array
     {
-        /** @var \Github\Api\Repository\Contents $api */
+        /** @var Contents $api */
         $api = $this->client->api('repo')->contents();
 
         // We need the sha to update a file.

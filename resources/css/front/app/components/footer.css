@@ -4,5 +4,6 @@
 
 .footer-links a {
     @apply font-bold
-    hover:underline;
+    hover:underline
+    dark:hover:text-white;
 }

@@ -85,7 +85,7 @@ const replaceBlockquotesWithCallouts = () => {
         el.parentNode.insertBefore(wrapper, el);
 
         el.innerHTML = str.replace(/\{(.*?)\}/, '');
-        el.classList = `prose m-0 ${styles.body}`;
+        el.classList = `prose m-0! ${styles.body}`;
         textWrapper.appendChild(el);
 
         wrapper.parentNode.classList = 'pl-0 border-0';

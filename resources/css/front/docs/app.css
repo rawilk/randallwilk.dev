@@ -1,13 +1,103 @@
 @import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
-@import 'bootstrap.css';
-@import 'components/variables.css';
+@import './bootstrap.css';
+@import './components/variables.css';
 @import '../../components/front/index.css';
 @import '../../components/logo.css';
-@import 'components/footer.css';
-@import 'components/prism.css';
-@import 'components/docs.css';
-@import 'components/docsearch.css';
-@import 'components/scrollbar.css';
+@import './components/footer.css';
+@import './components/prism.css';
+@import './components/docs.css';
+@import './components/docsearch.css';
+@import './components/scrollbar.css';
 @import '../app/components/footer.css';
+@plugin '@tailwindcss/typography';
 
-@config('tailwind.config.js');
+@theme {
+    /* Colors */
+    --color-brand: #0088CC; /* If updating, be sure to update mail layout logo colors */
+    --color-fenced: #2d3748;
+    --color-fenced-border: #778195;
+
+    /* Fonts */
+    --font-sans: var(--font-family), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-display: var(--font-display-family), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    /* Max Width */
+    --max-width-8xl: 88rem;
+
+    /* Breakpoints */
+    --breakpoint-logo-min: 510px;
+
+    /* Z-Index */
+    --z-index-top: 9999;
+
+    /* Font Sizes */
+    --text-xs: 0.75rem;
+    --text-xs--line-height: 1rem;
+
+    --text-sm: 0.875rem;
+    --text-sm--line-height: 1.5rem;
+
+    --text-base: 1rem;
+    --text-base--line-height: 2rem;
+
+    --text-lg: 1.125rem;
+    --text-lg--line-height: 1.75rem;
+
+    --text-xl: 1.25rem;
+    --text-xl--line-height: 2rem;
+
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: 2.5rem;
+
+    --text-3xl: 2rem;
+    --text-3xl--line-height: 2.5rem;
+
+    --text-4xl: 2.5rem;
+    --text-4xl--line-height: 3rem;
+
+    --text-5xl: 3rem;
+    --text-5xl--line-height: 3.5rem;
+
+    --text-6xl: 3.75rem;
+    --text-6xl--line-height: 1;
+
+    --text-7xl: 4.5rem;
+    --text-7xl--line-height: 1;
+
+    --text-8xl: 6rem;
+    --text-8xl--line-height: 1;
+
+    --text-9xl: 8rem;
+    --text-9xl--line-height: 1;
+}
+
+/* Custom Variants (Screens) */
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant mobile (@media (max-width: 768px));
+
+/* View Components */
+@source '../../../../resources/views/components/layout/html.blade.php';
+@source '../../../../resources/views/components/layout/front/footer.blade.php';
+@source '../../../../resources/views/components/layout/docs/**/*';
+@source '../../../../resources/views/components/docs/**/*';
+
+/* Providers */
+@source '../../../../app/Providers/NavigationServiceProvider.php';
+
+/* Layouts */
+@source '../../../../resources/views/layouts/docs/**/*';
+
+/* Views */
+@source '../../../../resources/views/front/pages/docs/**/*';
+@source '../../../../resources/views/errors/**/*';
+@source '../../../../resources/views/components/errors/**/*';
+
+/* JavaScript */
+@source '../../../../resources/js/docs/**/*';
+
+/* Svg */
+@source '../../../../resources/svg/**/*';
+
+/* Vendor */
+@source '../../../../vendor/filament/support/resources/views/components/dropdown/**/*';

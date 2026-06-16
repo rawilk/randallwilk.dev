@@ -1,3 +1,21 @@
+.fi-dropdown-panel {
+    @apply absolute
+    z-20
+    w-screen
+    rounded-lg
+    bg-white
+    shadow-lg
+    ring-1
+    ring-gray-950/5
+    transition
+    dark:bg-gray-900
+    dark:ring-white/10;
+}
+
+.fi-dropdown-list {
+    @apply p-1;
+}
+
 #docs-content .table-of-contents {
     @apply hidden;
 }
@@ -111,23 +129,27 @@
     rounded-md
     w-8
     inline-flex
-    bg-white/10
-    hover:bg-white/20
     text-white
     border
-    border-zinc-600
-    hover:border-zinc-600
     shadow-sm
     focus:outline-none
-    focus:border-zinc-600
-    focus:bg-white/20;
+    cursor-pointer;
+
+    background-color: rgb(63 63 70 / 0.5);
+    border-color: rgb(82 82 91);
+}
+
+#docs-content .copy-btn:hover,
+#docs-content .copy-btn:focus {
+    background-color: rgb(82 82 91 / 0.65);
+    border-color: rgb(82 82 91);
 }
 
 .anchor-link {
     @apply pr-2;
     @apply text-right;
     @apply inline-block;
-    @apply shadow-none !important;
+    @apply shadow-none!;
     @apply text-sky-400;
     @apply focus:outline-none;
     @apply lg:absolute;

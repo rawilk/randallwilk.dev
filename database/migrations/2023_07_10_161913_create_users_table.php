@@ -20,8 +20,6 @@ return new class extends Migration
             $table->text('two_factor_recovery_codes')->nullable();
             $table->boolean('two_factor_enabled')->default(false);
             $table->string('avatar_path')->nullable();
-            $table->unsignedInteger('github_id')->nullable();
-            $table->string('github_username')->nullable();
             $table->boolean('is_admin')->default(false);
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();

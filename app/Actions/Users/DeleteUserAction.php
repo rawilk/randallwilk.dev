@@ -6,12 +6,12 @@ namespace App\Actions\Users;
 
 use App\Models\User;
 
-class DeleteUserAction
+readonly class DeleteUserAction
 {
+    use Concerns\DeletesUsers;
+
     public function __invoke(User $user): void
     {
-        $user->deleteAvatar();
-
-        $user->delete();
+        $this->deleteUser($user);
     }
 }

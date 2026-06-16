@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\RepositoryType;
-use App\Filament\Admin\Resources\RepositoryResource;
+use App\Filament\Admin\Resources\Repositories\RepositoryResource;
 use App\Models\Repository;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\RestoreBulkAction;
@@ -31,7 +31,7 @@ it('lists repositories', function () {
     $records = Repository::factory()->count(5)->create();
     $trashed = Repository::factory()->trashed()->count(2)->create();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->assertCanSeeTableRecords($records)
         ->assertCanNotSeeTableRecords($trashed)
         ->set('activeTab', 'trashed')
@@ -46,7 +46,7 @@ it('has an action to view a repository', function () {
         'record' => $record,
     ]);
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->assertTableActionHasUrl(
             name: 'view',
             url: $expectedUrl,
@@ -60,7 +60,7 @@ it('can delete a repository', function () {
     $records = Repository::factory()->count(5)->create();
     $record = $records->first();
 
-    $component = livewire(RepositoryResource\Pages\ListRepositories::class)
+    $component = livewire(Repositories\Pages\ListRepositories::class)
         ->assertTableActionVisible('delete', $record)
         ->callTableAction('delete', $record)
         ->assertCanNotSeeTableRecords([$record]);
@@ -78,7 +78,7 @@ it('can delete a repository', function () {
 it('can restore a repository', function () {
     $record = Repository::factory()->trashed()->create();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->set('activeTab', 'trashed')
         ->assertTableActionVisible('restore', $record)
         ->callTableAction('restore', $record)
@@ -92,7 +92,7 @@ it('can restore a repository', function () {
 it('can edit a repository', function () {
     $record = Repository::factory()->create();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->mountTableAction('edit', $record)
         ->assertTableActionDataSet([
             'type' => $record->type,
@@ -115,7 +115,7 @@ it('can edit a repository', function () {
 it('requires a type', function () {
     $record = Repository::factory()->create();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->callTableAction('edit', $record, data: $this->formData->create(['type' => null]))
         ->assertHasTableActionErrors([
             'type' => ['required'],
@@ -126,7 +126,7 @@ it('requires a unique scoped name', function () {
     $record = Repository::factory()->create();
     Repository::factory()->create(['scoped_name' => 'foo']);
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->callTableAction('edit', $record, data: $this->formData->create(['scoped_name' => 'foo']))
         ->assertHasTableActionErrors([
             'scoped_name' => ['unique'],
@@ -137,7 +137,7 @@ it('is searchable', function () {
     $records = Repository::factory()->count(5)->create();
     $record = $records->first();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->searchTable($record->name)
         ->assertCanSeeTableRecords([$record])
         ->assertCanNotSeeTableRecords($records->filter(fn (Repository $other) => $other->isNot($record)));
@@ -146,7 +146,7 @@ it('is searchable', function () {
 it('has an action to sync all repositories', function () {
     Bus::fake();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->assertTableActionExists('sync')
         ->callTableAction('sync');
 
@@ -161,7 +161,7 @@ it('has an action to sync all repositories', function () {
 it('has an action to import all docs', function () {
     Bus::fake();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->assertTableActionExists('importDocs')
         ->callTableAction('importDocs');
 
@@ -178,7 +178,7 @@ it('has an action to import all docs', function () {
 it('can bulk edit repositories', function () {
     $records = Repository::factory()->visible()->package()->count(2)->create();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->callTableBulkAction('editBulk', $records, data: [
             'type_status' => 'edit',
             'type' => RepositoryType::Project->value,
@@ -197,7 +197,7 @@ it('can bulk edit repositories', function () {
 it('can soft delete multiple repositories', function () {
     $records = Repository::factory()->count(2)->create();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->callTableBulkAction(DeleteBulkAction::class, $records)
         ->assertCanNotSeeTableRecords($records)
         ->set('activeTab', 'trashed')
@@ -208,7 +208,7 @@ it('can soft delete multiple repositories', function () {
 it('can restore multiple repositories', function () {
     $records = Repository::factory()->trashed()->count(2)->create();
 
-    livewire(RepositoryResource\Pages\ListRepositories::class)
+    livewire(Repositories\Pages\ListRepositories::class)
         ->assertTableBulkActionHidden(RestoreBulkAction::class)
         ->set('activeTab', 'trashed')
         ->callTableBulkAction(RestoreBulkAction::class, $records)

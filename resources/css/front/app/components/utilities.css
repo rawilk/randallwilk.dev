@@ -1,5 +1,3 @@
-@layer utilities {
-    .backface-hidden {
-        backface-visibility: hidden;
-    }
+.backface-hidden {
+    backface-visibility: hidden;
 }

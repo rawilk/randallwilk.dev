@@ -6,8 +6,11 @@ namespace App\Http\Controllers\Docs;
 
 use App\Docs\Docs;
 use App\Docs\DocumentationPage;
+use App\Docs\Repository;
+use App\Models\Repository as RepositoryModel;
 use App\Support\CommonMark\TableOfContentsBuilder;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -15,10 +18,32 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class DocsController
 {
-    public function index(Docs $docs): View
+    public function index(Docs $docs, Request $request): View
     {
+        $repositories = $docs->getRepositories();
+
+        $stars = RepositoryModel::query()
+            ->whereIn('name', $repositories->pluck('slug'))
+            ->pluck('stars', 'name');
+
+        $repositories->each(
+            fn (Repository $repository) => $repository->stars = $stars[$repository->slug] ?? null,
+        );
+
+        $repositories = $repositories->sortBy('slug')->values();
+
+        $haystacks = $repositories
+            ->map(fn (Repository $repository): string => Str::lower(implode(' ', array_filter([
+                $repository->slug,
+                $repository->aliases->last()?->slogan,
+                $repository->category,
+            ]))))
+            ->values();
+
         return view('front.pages.docs.index', [
-            'repositories' => $docs->getRepositories(),
+            'repositories' => $repositories,
+            'haystacks' => $haystacks,
+            'search' => e($request->query('q')),
         ]);
     }
 

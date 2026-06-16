@@ -9,6 +9,7 @@ use App\Console\Commands\RefreshStagingDataCommand;
 use App\Docs\DocumentationContentParser;
 use App\Docs\DocumentationPage;
 use App\Docs\DocumentationPathParser;
+use App\Support\AppConfig;
 use App\Support\Macros\MigrationMacroHelper;
 use App\Support\MorphMapConfig;
 use Carbon\CarbonImmutable;
@@ -122,7 +123,7 @@ class AppServiceProvider extends ServiceProvider
             $signature = hash_hmac(
                 'sha256',
                 str($id)->append('|', $timestamp)->value(),
-                config('randallwilk.secrets.email_hash_key'),
+                AppConfig::emailHashKey(),
             );
 
             $headers->addTextHeader('X-Timestamp', $timestamp);

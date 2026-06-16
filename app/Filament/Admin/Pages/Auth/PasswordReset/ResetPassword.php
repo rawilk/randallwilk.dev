@@ -9,25 +9,27 @@ use App\Enums\SessionAlert;
 use App\Filament\Concerns\Auth\IsAuthPage;
 use App\Models\User;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
-use Filament\Forms\Components\Component;
-use Filament\Forms\Form;
-use Filament\Http\Responses\Auth\Contracts\PasswordResetResponse;
-use Filament\Pages\Auth\PasswordReset\ResetPassword as BaseResetPassword;
+use Filament\Auth\Http\Responses\Contracts\PasswordResetResponse;
+use Filament\Auth\Pages\PasswordReset\ResetPassword as BasePage;
+use Filament\Facades\Filament;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Text;
+use Filament\Schemas\Schema;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password as PasswordRule;
 use Rawilk\FilamentPasswordInput\Password as PasswordInput;
 
-class ResetPassword extends BaseResetPassword
+class ResetPassword extends BasePage
 {
     use IsAuthPage;
 
     protected static string $layout = 'layouts.auth.base';
-
-    protected static string $view = 'filament.admin.pages.auth.password-reset.reset-password';
 
     public function mount(?string $email = null, ?string $token = null): void
     {
@@ -43,10 +45,11 @@ class ResetPassword extends BaseResetPassword
         return __('pages/auth/reset-password.subheading', ['email' => e($this->email)]);
     }
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
+                $this->getSessionAlertComponent(),
                 $this->getPasswordFormComponent(),
             ]);
     }
@@ -92,6 +95,34 @@ class ResetPassword extends BaseResetPassword
         SessionAlert::Error->flash(__($status));
 
         return null;
+    }
+
+    protected function getSessionAlertComponent(): Component
+    {
+        $enum = SessionAlert::Error;
+
+        return Text::make(
+            fn () => new HtmlString(Blade::render(<<<'HTML'
+            <x-feedback.alert
+                :color="$enum->color()"
+            >
+                {{ $enum->message() }}
+
+                <x-slot:actions>
+                    <x-feedback.alert-action :href="$url">
+                        {{ __('pages/auth/reset-password.actions.request_password_reset.label') }}
+                    </x-feedback.alert-action>
+                </x-slot:actions>
+            </x-feedback.alert>
+            HTML, [
+                'enum' => $enum,
+                'url' => Filament::getRequestPasswordResetUrl(),
+            ])),
+        )
+            ->visible(fn (): bool => $enum->exists())
+            ->extraAttributes([
+                'class' => 'w-full',
+            ]);
     }
 
     protected function getPasswordFormComponent(): Component

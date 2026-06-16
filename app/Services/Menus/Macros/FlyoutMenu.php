@@ -33,7 +33,7 @@ class FlyoutMenu implements MenuMacro
             $this->submenu('', function (Menu $menu) use ($callback, $footerCallback) {
                 $menu->setWrapperTag('div')
                     ->withoutParentTag()
-                    ->addClass('overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5');
+                    ->addClass('overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5');
 
                 $menu->submenu('', function (Menu $menu) use ($callback) {
                     $menu->setWrapperTag('div')

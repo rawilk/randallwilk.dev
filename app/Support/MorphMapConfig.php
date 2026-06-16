@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Support;
 
-use App\Models;
+use App\Models\Repository;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Rawilk\ProfileFilament\Models as ProfileFilamentModels;
 use Rawilk\Settings\Models\Setting;
@@ -15,12 +16,11 @@ readonly class MorphMapConfig
     {
         Relation::enforceMorphMap([
             'authenticator_app' => ProfileFilamentModels\AuthenticatorApp::class,
-            'old_user_email' => ProfileFilamentModels\OldUserEmail::class,
             'pending_user_email' => ProfileFilamentModels\PendingUserEmail::class,
-            'repository' => Models\Repository::class,
+            'repository' => Repository::class,
             'setting' => Setting::class,
-            'user' => Models\User::class,
-            'webauthn_key' => Models\WebauthnKey::class,
+            'user' => User::class,
+            'webauthn_key' => ProfileFilamentModels\WebauthnKey::class,
         ]);
     }
 }

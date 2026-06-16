@@ -2,7 +2,7 @@
     {{
         $attributes
             ->class([
-                'shadow-inner-light bg-white text-gray-600',
+                'shadow-inner-light bg-white text-gray-600 dark:bg-slate-900 dark:text-white',
                 'print:shadow-none print:bg-transparent',
             ])
     }}
@@ -21,7 +21,7 @@
                                 />
                             </div>
 
-                            <p class="mx-0 mb-6 max-w-sm text-sm md:text-base font-normal leading-loose lg:mx-0 lg:max-w-full text-pretty">
+                            <p class="mx-0 mb-6 max-w-sm text-sm md:text-base font-normal lg:mx-0 lg:max-w-full text-pretty">
                                 {{ __('front.footer.summary') }}
                             </p>
 
@@ -39,7 +39,7 @@
                             <div class="flex w-auto mb-8">
                                 <a
                                     href="https://github.com/sponsors/rawilk?o=esb"
-                                    class="footer-sponsor-btn border border-black py-2.5 px-4 rounded-lg bg-black text-gray-200 text-sm hover:bg-gray-600"
+                                    class="footer-sponsor-btn border border-black py-2.5 px-4 rounded-lg bg-black text-gray-200 text-sm hover:bg-gray-600 dark:bg-slate-700 dark:text-white dark:hover:bg-slate-200 dark:hover:text-slate-900"
                                 >
                                     {{ __('front.footer.sponsor_button') }}
                                 </a>
@@ -71,12 +71,12 @@
                 </div>
             </div>
 
-            <div class="footer-bottom mt-8 border-t border-gray-300 pt-8 md:flex md:items-center md:justify-between">
+            <div class="footer-bottom mt-8 border-t border-gray-300 pt-8 md:flex md:items-center md:justify-between dark:border-slate-600">
                 <div class="flex space-x-4 md:order-2">
                     @foreach (config('randallwilk.contact.social', []) as $name => $socialContact)
                         <a
                             href="{{ $socialContact['url'] }}"
-                            class="footer-social w-9 h-9 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-800 grid place-content-center"
+                            class="footer-social w-9 h-9 rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-800 grid place-content-center dark:bg-slate-700 dark:text-white dark:hover:bg-slate-200"
                             target="_blank"
                             rel="nofollow noreferrer noopener"
                         >
@@ -91,7 +91,7 @@
                 </div>
 
                 {{-- copyright --}}
-                <p class="footer-copyright mt-8 text-sm text-gray-600 md:order-1 md:mt-0">
+                <p class="footer-copyright mt-8 text-sm text-gray-600 md:order-1 md:mt-0 dark:text-gray-200">
                     {{
                         str(__('front.menus.footer.copyright', ['year' => now()->year]))
                             ->inlineMarkdown()

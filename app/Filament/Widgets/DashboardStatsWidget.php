@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace App\Filament\Widgets;
 
-use App\Filament\Admin\Resources\RepositoryResource;
+use App\Filament\Admin\Resources\Repositories\RepositoryResource;
 use App\Models\Repository;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Number;
 
 class DashboardStatsWidget extends BaseWidget
 {
-    protected static ?string $pollingInterval = null;
+    protected ?string $pollingInterval = null;
 
     protected static ?int $sort = 0;
 
@@ -34,9 +35,9 @@ class DashboardStatsWidget extends BaseWidget
 
     protected function getVisibleReposCount(): int
     {
-        return (int) cache()->remember(
+        return (int) Cache::flexible(
             'repos.visible_count',
-            now()->addWeek(),
+            [now()->addWeek(), now()->addMonth()],
             fn () => Repository::visible()->whereNotNull('type')->count(),
         );
     }

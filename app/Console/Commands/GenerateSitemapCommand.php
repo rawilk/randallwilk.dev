@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Docs\Alias;
 use App\Docs\Docs;
+use App\Docs\DocumentationPage;
 use App\Docs\Repository;
 use DateTimeInterface;
 use Illuminate\Console\Command;
@@ -110,7 +112,7 @@ class GenerateSitemapCommand extends Command
 
     protected function addAliasPagesToSitemap(Collection $pages, Sitemap $sitemap): void
     {
-        /** @var \App\Docs\DocumentationPage $page */
+        /** @var DocumentationPage $page */
         foreach ($pages as $page) {
             if (Str::contains($page->slug, '_index')) {
                 continue;
@@ -133,7 +135,7 @@ class GenerateSitemapCommand extends Command
     }
 
     /**
-     * @return \Illuminate\Support\Collection<int, \App\Docs\Alias>
+     * @return Collection<int, Alias>
      */
     protected function getDocAliases(): Collection
     {

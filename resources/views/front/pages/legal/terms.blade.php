@@ -320,7 +320,7 @@
                     You agree that all matters relating to your access to or use of the Site, including all
                     disputes, will be governed by the laws of the United States and by the laws of the State of
                     Wisconsin without regard to its conflicts of laws provisions. You agree to the personal
-                    jurisdiction by and venue in the state and federal courts in Marathon County, Wisconsin, and
+                    jurisdiction by and venue in the state and federal courts in Dane County, Wisconsin, and
                     waive any objection to such jurisdiction or venue. The preceding provision regarding venue does
                     not apply if you are a consumer based in the European Union. If you are a consumer based in the
                     European Union, you may take a claim in the courts of the country where you reside. Any claim
@@ -339,7 +339,7 @@
                 <p>
                     Randall administers and operates the
                     <x-front.legal-link :url="url('/')" />
-                    Site from his location in Wausau, Wisconsin USA; other sites from Randall may be administered
+                    Site from his location in Madison, Wisconsin USA; other sites from Randall may be administered
                     and operated from various locations inside or outside the United States. Although the Site is
                     accessible worldwide, not all features or services discussed, referenced, provided or offered
                     through or on the Site are available to all persons or in all geographic locations, or

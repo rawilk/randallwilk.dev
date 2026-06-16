@@ -5,19 +5,22 @@ declare(strict_types=1);
 namespace App\Notifications\Auth;
 
 use App\Notifications\Users\AccountSecurityNotification;
+use App\Support\AppConfig;
 
 class UserPasswordUpdatedNotification extends AccountSecurityNotification
 {
     protected function booted(): void
     {
-        $this->greeting = __('notifications/auth/security.password_updated.greeting');
+        $this->greeting = __('notifications/auth/security.password-updated.greeting');
 
-        $this->line(__('notifications/auth/security.password_updated.line1'));
+        $supportEmail = AppConfig::supportEmail();
 
-        $this->line(
-            str(__('notifications/auth/security.password_updated.line2', ['support' => config('randallwilk.support_email')]))
-                ->inlineMarkdown()
-                ->toHtmlString()
-        );
+        $lines = __('notifications/auth/security.password-updated.lines') ?? [];
+
+        foreach ($lines as $line) {
+            $this->markdownLine(__($line, [
+                'support' => $supportEmail,
+            ]));
+        }
     }
 }

@@ -20,8 +20,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerAdminGate();
 
         Password::defaults(function (): Password {
-            return Password::min(8)
-                ->when($this->app->isProduction(), function (Password $rule): void {
+            $isProduction = $this->app->isProduction();
+
+            $minPasswordLength = $isProduction
+                ? 8
+                : 4;
+
+            return Password::min($minPasswordLength)
+                ->when($isProduction, function (Password $rule): void {
                     $rule->uncompromised();
                 });
         });

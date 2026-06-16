@@ -7,7 +7,7 @@
     <x-front.content-area>
         <div class="text-sm">
             {{
-                str(__('front.uses.last_updated', ['date' => '<time datetime="2025-05-09">May 09, 2025</time>']))
+                str(__('front.uses.last_updated', ['date' => '<time datetime="2026-06-15">June 15, 2026</time>']))
                     ->inlineMarkdown()
                     ->toHtmlString()
             }}

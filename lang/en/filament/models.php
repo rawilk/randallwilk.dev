@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'h_key' => [
-        'label' => 'ID',
+        'label' => 'Public ID',
     ],
 
     'created_at' => [

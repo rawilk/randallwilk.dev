@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Plugins;
 
+use Filament\Actions\Action;
 use Filament\Contracts\Plugin;
-use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,7 +25,7 @@ class HorizonPlugin implements Plugin
     {
         $panel
             ->userMenuItems([
-                MenuItem::make()
+                Action::make('viewHorizon')
                     ->label('Horizon')
                     ->visible(fn (): bool => Gate::allows('viewHorizon'))
                     ->icon('svg-horizon')

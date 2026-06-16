@@ -55,6 +55,7 @@
 /* Button */
 .DocSearch-Button {
     @apply flex
+    cursor-pointer
     h-6
     w-6
     items-center
@@ -154,8 +155,17 @@
     font: inherit;
 }
 
+.DocSearch-Container button,
+.DocSearch-Hit a,
+.DocSearch-Logo a,
+.DocSearch-Prefill {
+    cursor: pointer;
+}
+
 .DocSearch-Modal {
     position: relative;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     width: 100%;
     max-width: 100%;
@@ -163,6 +173,21 @@
     height: -webkit-fill-available;
     height: calc(var(--docsearch-vh, 1vh) * 100);
     background: var(--docsearch-modal-background);
+}
+
+.DocSearch-Modal:not(:has(.DocSearch-Dropdown))::after {
+    content: 'No recent searches';
+    position: absolute;
+    top: 6.5rem;
+    left: 50%;
+    color: var(--docsearch-muted-color);
+    font-size: 0.875rem;
+    transform: translateX(-50%);
+}
+
+.DocSearch-Modal:not(:has(.DocSearch-Dropdown)) .DocSearch-Footer {
+    position: absolute;
+    bottom: 0;
 }
 
 .DocSearch-SearchBar {
@@ -177,6 +202,35 @@
     display: flex;
 }
 
+.DocSearch-Actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-right: 0.75rem;
+}
+
+.DocSearch-Clear {
+    color: var(--docsearch-muted-color);
+    font-size: 0.75rem;
+}
+
+.DocSearch-Close {
+    padding: 0 0.375rem;
+    height: 1.5rem;
+    border-radius: theme('borderRadius.md');
+    background: var(--docsearch-key-background);
+    color: var(--docsearch-key-color);
+    font-size: 0.75rem;
+}
+
+.DocSearch-Close svg {
+    display: none;
+}
+
+.DocSearch-Close::after {
+    content: 'Cancel';
+}
+
 .DocSearch-Input {
     appearance: none;
     color: var(--docsearch-input-color);
@@ -188,10 +242,10 @@
     border: 0;
     box-shadow: none;
     outline: 0 !important;
-    @apply focus:outline-0 !important;
-    @apply focus:shadow-none !important;
-    @apply focus:border-0 !important;
-    @apply focus:ring-0 !important;
+    @apply focus:outline-0!;
+    @apply focus:shadow-none!;
+    @apply focus:border-0!;
+    @apply focus:ring-0!;
 }
 
 .DocSearch-Input::placeholder {
@@ -267,7 +321,7 @@
 }
 
 .DocSearch-Dropdown {
-    height: 100%;
+    flex: 1 1 auto;
     max-height: calc(
         var(--docsearch-vh, 1vh) * 100 - var(--docsearch-searchbox-height) -
         var(--docsearch-footer-height)
@@ -330,6 +384,15 @@
 .DocSearch-Logo svg {
     color: var(--docsearch-logo-color);
     margin-left: 0.5rem;
+}
+
+.DocSearch-Logo .DocSearch-Label {
+    font-size: 0;
+}
+
+.DocSearch-Logo .DocSearch-Label::after {
+    content: 'Search by';
+    font-size: 0.75rem;
 }
 
 .DocSearch-Hits + .DocSearch-Hits {
@@ -495,8 +558,6 @@ svg.DocSearch-Hit-Select-Icon {
 }
 
 .DocSearch-Footer {
-    position: absolute;
-    bottom: 0;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -530,18 +591,24 @@ svg.DocSearch-Hit-Select-Icon {
     background: var(--docsearch-key-hover-background);
 }
 
-@screen sm {
+@media (min-width: 640px) {
     .DocSearch-Container {
         height: 100vh;
     }
 
     .DocSearch-Modal {
         height: auto;
+        min-height: 13.5rem;
         border-radius: theme('borderRadius.xl');
         box-shadow: var(--docsearch-modal-shadow);
         margin: 4rem auto auto;
         width: auto;
         max-width: var(--docsearch-modal-width);
+    }
+
+    .DocSearch-Modal:not(:has(.DocSearch-Dropdown))::after {
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .DocSearch-Input {
@@ -561,6 +628,18 @@ svg.DocSearch-Hit-Select-Icon {
         display: flex;
     }
 
+    .DocSearch-Commands li:nth-child(1) {
+        order: 2;
+    }
+
+    .DocSearch-Commands li:nth-child(2) {
+        order: 1;
+    }
+
+    .DocSearch-Commands li:nth-child(3) {
+        order: 3;
+    }
+
     .DocSearch-Commands li:not(:last-of-type) {
         margin-right: 1rem;
     }
@@ -575,6 +654,38 @@ svg.DocSearch-Hit-Select-Icon {
         justify-content: center;
         border-radius: theme('borderRadius.md');
         margin-right: 0.375rem;
+    }
+
+    .DocSearch-Commands .DocSearch-Label {
+        font-size: 0;
+    }
+
+    .DocSearch-Commands .DocSearch-Label::after {
+        font-size: 0.75rem;
+        line-height: 1rem;
+    }
+
+    .DocSearch-Commands li:nth-child(1) .DocSearch-Label::after {
+        content: 'to navigate';
+    }
+
+    .DocSearch-Commands li:nth-child(2) .DocSearch-Label::after {
+        content: 'to select';
+    }
+
+    .DocSearch-Commands li:nth-child(3) .DocSearch-Label::after {
+        content: 'to close';
+    }
+
+    .DocSearch-Commands-Key svg {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+
+    .DocSearch-Escape-Key {
+        font-size: 0.5rem;
+        line-height: 1;
+        text-transform: lowercase;
     }
 
     .DocSearch-Dropdown {

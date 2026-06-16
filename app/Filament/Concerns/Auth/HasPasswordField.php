@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Filament\Concerns\Auth;
 
-use Filament\Forms\Components\Component;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
 use Rawilk\FilamentPasswordInput\Password;
 
 trait HasPasswordField
 {
-    protected function getPasswordFormComponent(): Component
+    protected function getPasswordFormComponent(): \Filament\Schemas\Components\Component
     {
         return Password::make('password')
             ->label(__('filament-panels::pages/auth/login.form.password.label'))

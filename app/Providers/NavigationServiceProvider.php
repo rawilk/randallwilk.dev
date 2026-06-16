@@ -14,7 +14,7 @@ class NavigationServiceProvider extends ServiceProvider
 {
     protected const string FOOTER_MENU_CONTAINER_CLASSES = 'footer-list mt-2 lg:mt-4 space-y-1 mx-0 w-3/4';
 
-    protected const string FOOTER_ITEM_CLASSES = 'footer-link text-sm hover:text-gray-950 hover:underline';
+    protected const string FOOTER_ITEM_CLASSES = 'footer-link text-sm hover:text-gray-950 hover:underline dark:hover:text-white';
 
     public function register(): void
     {

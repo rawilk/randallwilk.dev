@@ -26,21 +26,16 @@
         <x-images.lightbox
             :src="asset('images/uses/about-this-mac.png')"
             alt="macOS Specs"
-            class="w-1/2 mx-auto -mb-[35px] mt-6"
+            class="w-1/2 mx-auto mb-[-35px] mt-6"
         />
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="OWC 11-Port Thunderbolt Dock">
+    <x-front.section-list-item title="CalDigit TS5 Plus Dock">
         <p>
-            I looked at a lot of docks, and I've found that the
-            <x-front.legal-link url="https://eshop.macsales.com/shop/owc-thunderbolt-dock" target="_blank" text="OWC 11-Port Thunderbolt Dock" />
-            does an amazing job for a docking station. It's not the cheapest dock, but it has everything I was looking for in a
-            docking station.
-        </p>
-
-        <p>
-            I'm able to connect both my monitors, my external drive for backups, ethernet, and more all with a single
-            cable running to the MacBook. As a plus, it also charges the MacBook at the same time.
+            When I purchased this
+            <x-front.legal-link url="https://us.caldigit.com/products/ts5-plus" target="_blank" text="dock" />
+            it cost me $500, so it was not cheap! It has been well worth the cost though, giving me plenty of ports to
+            use and even allowing me to charge accessories without having my MacBook plugged into it.
         </p>
     </x-front.section-list-item>
 
@@ -53,12 +48,16 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="LG 32UN500-W 32-Inch Monitor x2">
+    <x-front.section-list-item title="BenQ ScreenBar Halo 2 Light Bar">
         <p>
-            While at the office, I'm usually docked and use two 32" monitors from LG in addition to the built-in screen from
-            the MacBook. Here's the
-            <x-front.legal-link url="https://www.amazon.com/LG-32UN500-W-Compatibility-Virtually-Borderless-dp-B08FPLLX6Y/dp/B08FPLLX6Y/ref=dp_ob_title_ce?th=1" target="_blank" text="link" />
-            to buy them.
+            Using these
+            <x-front.legal-link
+                url="https://www.amazon.com/BenQ-ScreenBar-Halo-Monitor-Light/dp/B0DK59YKRS/ref=sr_1_1_pp?crid=FOZ6M2YXBH65&dib=eyJ2IjoiMSJ9.i6fX6CYdYm933a9ezC6fs8boY8sCtdkkQGYFG8UB5_w6x1OPFYXhQQ1yYtnILdK8-ha589fap81E8CvDL1iGMgS5u51wvoNYlu86aZ_I7GmtVFES5n7SxfF60aGM1LDIEJ3A9oi-qPkkrxakxy1eoTmkSFB_fwVtmoXMaeXhk_KivBSm-qjBq_uYnOOYcSq_W5LYJbmBOSfdnle-I_k2Ut1X42fcv51k1KZg1PBJ5Lw.YpZlkd8eRgSkFlQmYi_RlBl3pTxDbIC-mDZulizxawI&dib_tag=se&keywords=benq+light+bar&qid=1781582253&sprefix=benq+light+b%2Caps%2C148&sr=8-1"
+                target="_blank"
+                text="BenQ light bars"
+            />
+            allows me to better illuminate my desk at night without having to keep my overhead lights on. What I really like about this light bar is that it
+            can be configured to automatically turn off when I leave the desk.
         </p>
     </x-front.section-list-item>
 
@@ -99,49 +98,52 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Epomaker x Aula F99 Keyboard">
+    <x-front.section-list-item title="NuPhy Halo IO Series 96 Keyboard">
         <p>
-            By far the best mechanical keyboard I've ever used. The
-            <x-front.legal-link url="https://epomaker.com/products/epomaker-aula-f99?_pos=1&_sid=d2ca2dab0&_ss=r" target="_blank" text="Epomaker x Aula F99 Keyboard" />
-            looks and sounds amazing out-of-the-box.
+            I decided to give NuPhy keyboards a try, and I'm glad I did. This
+            <x-front.legal-link url="https://nuphy.com/products/nuphy-halo-v2-io?variant=43464077705325" target="_blank" text="keyboard" />
+            has become my favorite one to use.
         </p>
 
         <p>
-            However, I chose to put in
+            I chose to put in
             <x-front.legal-link
-                url="https://www.gateron.co/products/gateron-baby-kangaroo-tactile-switch-set?_pos=1&_psq=baby+kan&_ss=e&_v=1.0"
+                url="https://www.gateron.co/products/gateron-baby-raccoon-linear-switch-set"
                 target="_blank"
-                text="Gateron Baby Kangaroo"
+                text="Gateron Baby Raccoon"
             />
-            tactile switches, along with some
-            <x-front.legal-link
-                url="https://mechanicalkeyboards.com/products/kbdfans-pbtfans-retro-100-icon-base-149-key-double-shot-pbt-keycap-set?_pos=1&_psq=pbtfans+retro&_ss=e&_v=1.0"
-                target="_blank"
-                text="KBD Fans Retro Doubleshot PBT Keycaps"
-            />.
-            I love how the baby kangaroo switches sound and feel, and the retro keycaps paired nicely with this board in my opinion.
-        </p>
-
-        <p>
-            My only complaint with this board is how much it flexes when changing out the switches.
+            linear switches in this keyboard, and they feel absolutely amazing to type on.
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Logitech MX Master 3s Mouse">
+    <x-front.section-list-item title="Logitech MX Master 4 Mouse">
         <p>
             Even when not docked, I still prefer an external mouse for most operations. I really love the
-            <x-front.legal-link url="https://www.logitech.com/en-us/products/mice/mx-master-3s.910-006557.html" target="_blank" text="Logitech MX Master 3s" />
+            <x-front.legal-link url="https://www.logitech.com/en-us/shop/p/mx-master-4" target="_blank" text="Logitech MX Master 4" />
             mouse. For me, it feels great to hold, and it also provides support for some macOS gestures like swiping up
             for mission control.
         </p>
 
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Samsung 1 TB Portable SSD T7 Touch">
+    <x-front.section-list-item title="UniFi UNAS Pro 8">
         <p>
-            For my time machine backups, I use the
-            <x-front.legal-link url="https://www.samsung.com/us/computing/memory-storage/portable-solid-state-drives/portable-ssd-t7-touch-usb-3-2-1tb-black-mu-pc1t0k-ww/" target="_blank" text="Portable SSD T7 Touch" />
-            external ssd from Samsung.
+            I've been wanting to get a NAS for a while now, so I decided to go all-in and get the
+            <x-front.legal-link url="https://store.ui.com/us/en/category/network-storage/products/unas-pro-8?s=us&l=en" target="_blank" text="UNAS Pro 8" />
+            from UniFi. The initial cost was a lot but for me it's been well worth the investment.
+        </p>
+
+        <p>
+            Even though the NAS has 8 bays, I only filled 4 of them with 12TB NAS Hard Drives initially, so I still have
+            plenty of room to expand if necessary in the future. I'm using the NAS to store my Time Machine backups on, as well as my media
+            for my Jellyfin server I've been building over the last several months.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="AirPods Max">
+        <p>
+            I decided to splurge a little bit last year and this one of those purchases. When I want to use over-the-ear headphones,
+            I've been using the (1st Gen) AirPods Max headphones.
         </p>
     </x-front.section-list-item>
 
@@ -160,8 +162,15 @@
 
     <x-front.section-list-item title="Watch">
         <p>
-            I never was much of a watch person until I bought my Apple Watch Series 7. Now I feel naked if I leave home
+            I never was much of a watch person until I bought my Apple Watch Series 10. Now I feel naked if I leave home
             without wearing it.
+        </p>
+    </x-front.section-list-item>
+
+    <x-front.section-list-item title="iPad Pro M4 13-inch">
+        <p>
+            Another one of my splurge purchases from last year is the iPad Pro M4 13-inch model with nano texture glass.
+            It's definitely over-kill for my needs but I love it and that's all that matters.
         </p>
     </x-front.section-list-item>
 
@@ -196,19 +205,11 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="Laravel Desk Pad">
+    <x-front.section-list-item title="Aer City Pack Pro Backpack">
         <p>
-            I like a big desk pad and when I can I try to support Laravel, so of course I was going to buy
-            <x-front.legal-link url="https://laravel.bigcartel.com/product/laravel-desk-pad" target="_blank" text="Laravel Desk Pad" />
-            when I found it. The quality and size of the pad are great and worth every penny.
-        </p>
-    </x-front.section-list-item>
-
-    <x-front.section-list-item title="Laptop Messenger Bag">
-        <p>
-            For transporting the MacBook between home and the office, this
-            <x-front.legal-link url="https://www.amazon.com/gp/product/B07PQ9YBPR/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1" target="_blank" text="messenger bag" />
-            works nicely and has plenty of room for accessories.
+            A little pricy but this
+            <x-front.legal-link url="https://aersf.com/collections/backpacks/products/city-pack-pro-2-24l?country=US" target="_blank" text="backpack" />
+            it allows me to comfortably carry basically all my tech and more with me when I'm on-the-go.
         </p>
     </x-front.section-list-item>
 </x-front.section-list>

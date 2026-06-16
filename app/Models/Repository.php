@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\ProgrammingLanguage;
 use App\Enums\RepositorySort;
 use App\Enums\RepositoryType;
+use App\Models\Concerns\UsesHumanKeys;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,9 +18,9 @@ use Illuminate\Support\Str;
 
 class Repository extends Model
 {
-    use Concerns\UsesHumanKeys;
     use HasFactory;
     use SoftDeletes;
+    use UsesHumanKeys;
 
     public static function humanKeyPrefix(): string
     {
