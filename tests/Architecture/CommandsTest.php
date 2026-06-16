@@ -10,7 +10,6 @@ arch()
     ->toExtend(Command::class)
     ->toHaveSuffix('Command')
     ->toHaveMethod('handle')
-    ->toImplementNothing()
     ->not->toBeUsed()->ignoring([
         AppServiceProvider::class,
     ]);

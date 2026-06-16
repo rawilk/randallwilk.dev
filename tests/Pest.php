@@ -4,18 +4,11 @@ declare(strict_types=1);
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Tests\TestCase;
 
-pest()->extend(Tests\TestCase::class)->in(
-    'Feature',
-    'Unit',
-    'Arch',
-);
+pest()->uses(TestCase::class)->in(__DIR__);
 
-pest()->uses(
-    LazilyRefreshDatabase::class,
-)->in(
-    'Feature',
-);
+pest()->uses(LazilyRefreshDatabase::class)->in('Feature');
 
 // Helpers
 
@@ -50,7 +43,7 @@ function passwordResetUrl(string $token, string $email): string
     );
 }
 
-function sudoChallengeTitle(): string
+function putAppInProduction(): void
 {
-    return __('profile-filament::messages.sudo_challenge.title');
+    app()->detectEnvironment(fn () => 'production');
 }
