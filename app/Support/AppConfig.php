@@ -44,7 +44,7 @@ class AppConfig
         return config('randallwilk.secrets.email_hash_key');
     }
 
-    public static function horizonEmail(): string
+    public static function horizonEmail(): ?string
     {
         return config('services.horizon.email');
     }
