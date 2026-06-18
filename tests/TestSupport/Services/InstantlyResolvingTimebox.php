@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Fixtures\Support;
+namespace Tests\TestSupport\Services;
 
 use Illuminate\Support\Timebox;
 

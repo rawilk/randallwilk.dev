@@ -47,7 +47,7 @@
                 <div class="relative mx-auto w-[30px] h-[50px] border-2 border-slate-400 rounded-[50px] bg-white group-hover:bg-gray-50 group-hover:border-slate-800/80 transition-all | before:absolute before:top-1 before:left-1/2 before:ml-[-3.5px] before:w-[7px] before:h-[7px] before:rounded-full before:bg-slate-400 group-hover:before:bg-slate-800/80 before:animate-scroller">
                 </div>
 
-                <div class="mx-auto mt-2 text-xs text-slate-400 group-hover:text-slate-800/80 transition-colors">
+                <div class="mx-auto mt-2 text-xs text-slate-600 group-hover:text-slate-800/80 transition-colors">
                     {{ __('scroll down') }}
                 </div>
             </div>

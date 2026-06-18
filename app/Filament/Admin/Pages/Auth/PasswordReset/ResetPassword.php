@@ -64,6 +64,10 @@ class ResetPassword extends BasePage
             return null;
         }
 
+        if ($this->isResetPasswordRateLimited($this->email)) {
+            return null;
+        }
+
         $data = $this->form->getState();
 
         $data['email'] = $this->email;

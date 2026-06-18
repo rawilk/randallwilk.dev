@@ -40,6 +40,6 @@ it('generates the correct context for settings', function () {
 
     expect($user->context()->toArray())->toEqualCanonicalizing([
         'model' => $user::class,
-        'id' => $user->h_key,
+        'id' => $user->getRouteKey(),
     ]);
 });

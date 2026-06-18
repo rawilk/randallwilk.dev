@@ -15,8 +15,8 @@ beforeEach(function () {
 
     $this->disk = Storage::fake('docs_laravel-settings');
 
-    // Copy files from tests/Fixtures/stubs/docs/laravel-settings to disk root
-    $stubPath = __DIR__ . '/../../Fixtures/stubs/docs/laravel-settings';
+    // Copy files from tests/TestSupport/stubs/docs/laravel-settings to disk root
+    $stubPath = __DIR__ . '/../../TestSupport/stubs/docs/laravel-settings';
     File::copyDirectory(
         $stubPath,
         $this->disk->path('/'),
@@ -34,6 +34,25 @@ it('renders a doc page', function () {
         ->assertOk()
         ->assertSeeText('Installation')
         ->assertSeeText('Migrations');
+});
+
+it('renders the docs index in the browser with no accessibility issues', function () {
+    visit(route('docs'))
+        ->assertNoSmoke()
+        ->assertNoAccessibilityIssues()
+        ->assertSee('laravel-settings');
+});
+
+it('can search docs packages in the browser', function () {
+    visit(route('docs'))
+        ->assertSee('laravel-settings')
+        ->type('input[type="search"]', 'settings')
+        ->assertScript("new URL(window.location.href).searchParams.get('q')", 'settings')
+        ->assertScript("Array.from(document.querySelectorAll('a[href$=\"/docs/laravel-settings\"]')).some((element) => getComputedStyle(element).display !== 'none')")
+        ->type('input[type="search"]', 'missing')
+        ->assertScript("new URL(window.location.href).searchParams.get('q')", 'missing')
+        ->assertScript("Array.from(document.querySelectorAll('a[href$=\"/docs/laravel-settings\"]')).every((element) => getComputedStyle(element).display === 'none')")
+        ->assertScript("getComputedStyle(document.querySelector('[x-show=\"noMatches\"]')).display !== 'none'");
 });
 
 it('renders a doc page for a previous version', function () {

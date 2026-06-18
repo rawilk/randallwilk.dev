@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Timebox;
 use Stevebauman\Location\Facades\Location;
 use Stevebauman\Location\Position;
-use Tests\Fixtures\Support\InstantlyResolvingTimebox;
+use Tests\TestSupport\Services\InstantlyResolvingTimebox;
 
 abstract class TestCase extends BaseTestCase
 {

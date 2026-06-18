@@ -9,90 +9,81 @@ use App\Models\Repository;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
-    $this->records = Repository::factory()
-        ->sequence(
-            ['type' => RepositoryType::Package],
-            ['type' => RepositoryType::Project],
-        )
+    $this->component = Repositories::class;
+
+    $this->packages = Repository::factory()
         ->visible()
-        ->count(6)
+        ->sequence(
+            ['name' => 'zeta-package', 'type' => RepositoryType::Package, 'description' => 'Last package'],
+            ['name' => 'alpha-package', 'type' => RepositoryType::Package, 'description' => 'First package'],
+        )
+        ->count(2)
         ->create();
+
+    $this->projects = Repository::factory()
+        ->visible()
+        ->sequence(
+            ['name' => 'zeta-project', 'type' => RepositoryType::Project, 'description' => 'Last project'],
+            ['name' => 'alpha-project', 'type' => RepositoryType::Project, 'description' => 'First project'],
+        )
+        ->count(2)
+        ->create();
+
+    $this->hiddenPackage = Repository::factory()
+        ->hidden()
+        ->package()
+        ->create(['name' => 'hidden-package']);
+
+    $this->hiddenProject = Repository::factory()
+        ->hidden()
+        ->project()
+        ->create(['name' => 'hidden-project']);
 });
 
 it('renders', function () {
-    livewire(Repositories::class)
+    livewire($this->component)
         ->assertSuccessful();
 });
 
-it('can show repositories of a given type', function (string $key, RepositoryType $type) {
-    $records = $this->records->where('type', $type);
+it('can show visible repositories of a given type', function (string $key, RepositoryType $type) {
+    $records = $type === RepositoryType::Package
+        ? $this->packages
+        : $this->projects;
 
-    $component = livewire(Repositories::class, ['type' => $key])
-        ->assertCount('repositories', 3)
-        ->assertSet('total', 3)
-        ->assertSet('hasMore', false);
+    $component = livewire($this->component, ['type' => $key]);
 
     foreach ($records as $record) {
-        $component->assertSee(
-            'wire:key="repositories.' . $record->name . '"',
-            escape: false,
-        );
+        $component->assertSee($record->name);
     }
+
+    $component
+        ->assertDontSee($this->hiddenPackage->name)
+        ->assertDontSee($this->hiddenProject->name);
 })->with([
     ['packages', RepositoryType::Package],
     ['projects', RepositoryType::Project],
 ]);
 
+it('renders repositories alphabetically', function () {
+    livewire($this->component, ['type' => 'packages'])
+        ->assertSeeInOrder([
+            'alpha-package',
+            'zeta-package',
+        ]);
+});
+
 it('shows the correct search placeholder for each type', function (string $type, string $placeholder) {
-    livewire(Repositories::class, ['type' => $type])
-        ->assertSet('searchPlaceholder', $placeholder);
+    livewire($this->component, ['type' => $type])
+        ->assertSeeHtml('placeholder="' . $placeholder . '"');
 })->with([
     ['packages', 'Search packages...'],
     ['projects', 'Search projects...'],
 ]);
 
-it('can load more repositories', function () {
-    $records = $this->records
-        ->where('type', RepositoryType::Package)
-        ->sortBy('name')
-        ->values();
-
-    livewire(Repositories::class, ['type' => 'packages', 'pageSize' => 1, 'sort' => 'name'])
-        ->assertCount('repositories', 1)
-        ->assertSet('repositories.0.id', $records[0]->id)
-        ->call('loadMore')
-        ->assertCount('repositories', 2)
-        ->assertSet('repositories.1.id', $records[1]->id)
-        ->assertSet('hasMore', true)
-        ->call('loadMore')
-        ->assertCount('repositories', 3)
-        ->assertSet('repositories.2.id', $records[2]->id)
-        ->assertSet('hasMore', false);
-});
-
-it('can search repositories', function () {
-    $record = $this->records
-        ->where('type', RepositoryType::Package)
-        ->first();
-
-    livewire(Repositories::class, ['type' => 'packages'])
-        ->assertCount('repositories', 3)
-        ->set('search', $record->name)
-        ->assertCount('repositories', 1)
-        ->assertSet('repositories.0.id', $record->id)
-        ->assertSet('hasMore', false);
-});
-
-it('does not show hidden repositories', function () {
-    $records = $this->records
-        ->where('type', RepositoryType::Package);
-
-    $records->first()->update(['visible' => false]);
-
-    livewire(Repositories::class, ['type' => 'packages'])
-        ->assertCount('repositories', 2)
-        ->assertDontSee(
-            'wire:key="records.' . $records->first()->name . '"',
-            escape: false,
-        );
+it('uses the initial search query when rendering results', function () {
+    livewire($this->component, [
+        'type' => 'packages',
+        'search' => 'alpha',
+    ])
+        ->assertSeeHtml('value="alpha"');
 });

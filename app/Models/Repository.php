@@ -5,16 +5,15 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\ProgrammingLanguage;
-use App\Enums\RepositorySort;
 use App\Enums\RepositoryType;
 use App\Models\Concerns\UsesHumanKeys;
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class Repository extends Model
 {
@@ -54,42 +53,6 @@ class Repository extends Model
         return $this;
     }
 
-    public function scopeByType(Builder $query, ?RepositoryType $type): void
-    {
-        $query->when(
-            $type !== null,
-            fn (Builder $query) => $query->where($query->qualifyColumn('type'), $type),
-        );
-    }
-
-    public function scopeVisible(Builder $query): void
-    {
-        $query->where($query->qualifyColumn('visible'), true);
-    }
-
-    public function scopeSearch(Builder $query, ?string $search): void
-    {
-        if (! $search) {
-            return;
-        }
-
-        $query->whereLike($query->qualifyColumn('name'), "%{$search}%");
-    }
-
-    public function scopeApplySort(Builder $query, ?string $sort = null): void
-    {
-        /** @var RepositorySort $enum */
-        $enum = rescue(fn () => RepositorySort::tryFrom(ltrim($sort, '-')));
-        if (! $enum) {
-            return;
-        }
-
-        $query->orderBy(
-            $query->qualifyColumn($enum->value),
-            Str::startsWith($sort, '-') ? 'desc' : 'asc',
-        );
-    }
-
     /**
      * If the package has a scoped namespace, we need to use that instead.
      */
@@ -105,6 +68,21 @@ class Repository extends Model
                 cache()->forget('repos.visible_count');
             }
         });
+    }
+
+    #[Scope]
+    protected function visible(Builder $query): void
+    {
+        $query->where($query->qualifyColumn('visible'), true);
+    }
+
+    #[Scope]
+    protected function byType(Builder $query, ?RepositoryType $type): void
+    {
+        $query->when(
+            $type !== null,
+            fn (Builder $query) => $query->where($query->qualifyColumn('type'), $type),
+        );
     }
 
     protected function fullName(): Attribute

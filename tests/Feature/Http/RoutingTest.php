@@ -2,51 +2,67 @@
 
 declare(strict_types=1);
 
-use App\Enums\SkillType;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
-use function Pest\Laravel\get;
+use function Spatie\RouteTesting\routeTesting;
 
-/**
- * Note: I was originally going to use the spatie/pest-plugin-route-testing
- * package to test the routes, however there is an issue right now with
- * tests that have some kind of setUp method defined.
- *
- * So for now, since there aren't that many routes in the application,
- * I'll just test them all manually.
- *
- * @see https://github.com/spatie/pest-plugin-route-testing/issues/6
- */
-test('front-end routes', function (string $route) {
-    get(route($route))->assertSuccessful();
-})->with([
-    'home',
-    'contact',
-    'docs',
-    'legal.disclaimer',
-    'legal.index',
-    'legal.privacy',
-    'legal.terms',
-    'open-source.packages',
-    'open-source.projects',
-    'open-source.support',
-    'sitemap',
-    'uses',
-]);
+routeTesting('front-end routes')
+    ->exclude(
+        '_ignition*',
+        'admin*',
+        'api*',
+        'docs/*',
+        'filament*',
+        'livewire*',
+        'projects',
+        'sessions*',
+        'storage*',
+        'up',
+    )
+    ->assertSuccessful();
 
-test('redirects', function (string $path) {
-    get($path)->assertRedirect();
-})->with([
-    'projects',
-]);
+routeTesting('docs repository routes')
+    ->include('docs/{repository}/{alias?}')
+    ->setUp(function () {
+        config()->set('cache.stores.docs.driver', 'array');
 
-test('home page test', function () {
-    $response = get(route('home'));
+        $repositoriesWithDocs = collect(config('docs.repositories'))->keyBy('repository');
 
-    foreach (SkillType::cases() as $case) {
-        $response->assertSeeText($case->getLabel());
+        config()->set('docs.repositories', $repositoriesWithDocs->only('rawilk/laravel-settings'));
 
-        foreach (config("randallwilk.skills.{$case->value}") as $skill) {
-            $response->assertSeeText($skill);
-        }
-    }
-});
+        $disk = Storage::fake('docs_laravel-settings');
+
+        File::copyDirectory(
+            __DIR__ . '/../../TestSupport/stubs/docs/laravel-settings',
+            $disk->path('/'),
+        );
+    })
+    ->bind('repository', fn () => 'laravel-settings')
+    ->bind('alias', fn () => 'v3')
+    ->assertRedirect();
+
+routeTesting('docs page routes')
+    ->include('docs/{repository}/{alias}/{slug}')
+    ->setUp(function () {
+        config()->set('cache.stores.docs.driver', 'array');
+
+        $repositoriesWithDocs = collect(config('docs.repositories'))->keyBy('repository');
+
+        config()->set('docs.repositories', $repositoriesWithDocs->only('rawilk/laravel-settings'));
+
+        $disk = Storage::fake('docs_laravel-settings');
+
+        File::copyDirectory(
+            __DIR__ . '/../../TestSupport/stubs/docs/laravel-settings',
+            $disk->path('/'),
+        );
+    })
+    ->bind('repository', fn () => 'laravel-settings')
+    ->bind('alias', fn () => 'v3')
+    ->bind('slug', fn () => 'installation')
+    ->assertSuccessful();
+
+routeTesting('redirects')
+    ->include('projects')
+    ->assertRedirect();

@@ -62,6 +62,7 @@
 
 /* View Components */
 @source '../../../../resources/views/components/front/**/*';
+@source '../../../../resources/views/components/forms/**/*';
 @source '../../../../resources/views/components/layout/html.blade.php';
 @source '../../../../resources/views/components/layout/front/**/*';
 @source '../../../../resources/views/components/images/**/*';

@@ -29,7 +29,7 @@ it('passes when the edited users email is unchanged with different casing', func
     $validator = Validator::make([
         'email' => 'EMAIL@example.com',
     ], [
-        'email' => [new UniqueEmail($user)],
+        'email' => [UniqueEmail::make()->withUser($user)],
     ]);
 
     expect($validator->passes())->toBeTrue();
@@ -47,7 +47,7 @@ it('fails when the edited users email matches another user with different casing
     $validator = Validator::make([
         'email' => 'TWO@example.com',
     ], [
-        'email' => [new UniqueEmail($user)],
+        'email' => [UniqueEmail::make()->withUser($user)],
     ]);
 
     expect($validator->fails())->toBeTrue();

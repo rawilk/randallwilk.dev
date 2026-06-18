@@ -29,6 +29,7 @@ class ProfileInfo extends BaseProfileInfo
             ->record(Filament::auth()->user())
             ->components([
                 Section::make(__('profile-filament::pages/profile/page.info.heading'))
+                    ->key('profile-information')
                     ->headerActions([
                         $this->editAction(),
                     ])

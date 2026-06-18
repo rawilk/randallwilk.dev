@@ -5,21 +5,30 @@ declare(strict_types=1);
 use App\Filament\Admin\Pages\Auth\PasswordReset\RequestPasswordReset;
 use App\Notifications\Auth\ResetPassword;
 use App\Notifications\Auth\ResetPasswordInvalidUser;
+use App\Support\AppConfig;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertGuest;
+use function Pest\Laravel\freezeSecond;
 use function Pest\Laravel\get;
+use function Pest\Laravel\withoutDefer;
 use function Pest\Livewire\livewire;
 
 beforeEach(function () {
     $this->panel = filament()->getPanel('admin');
 
     filament()->setCurrentPanel($this->panel);
+
+    $this->page = RequestPasswordReset::class;
+
+    withoutDefer();
+    freezeSecond();
 });
 
 it('renders', function () {
     get($this->panel->getRequestPasswordResetUrl())
         ->assertOk()
-        ->assertSeeLivewire(RequestPasswordReset::class)
+        ->assertSeeLivewire($this->page)
         ->assertSee($this->panel->getLoginUrl());
 });
 
@@ -27,105 +36,167 @@ it('can be viewed by authenticated users', function () {
     actingAs(adminUser())
         ->get($this->panel->getRequestPasswordResetUrl())
         ->assertOk()
-        ->assertSeeLivewire(RequestPasswordReset::class)
-        // We shouldn't see the back to login link when we're authenticated.
+        ->assertSeeLivewire($this->page)
+        // We shouldn't see the back-to-login link when we're authenticated.
         ->assertDontSee($this->panel->getLoginUrl());
 });
 
-it('sends a reset link to valid users', function () {
-    $user = adminUser();
+describe('requesting password reset', function () {
+    it('can request a password reset', function () {
+        $user = adminUser();
 
-    Notification::fake();
+        Notification::fake();
+        Event::fake();
 
-    $this->withoutDefer();
-    $this->freezeSecond();
+        assertGuest();
 
-    livewire(RequestPasswordReset::class)
-        ->fillForm([
-            'email' => $user->email,
-        ])
-        ->call('request')
-        ->assertSee(
-            str(__('pages/auth/request-password-reset.alerts.sent.description', ['email' => e($user->email)]))->markdown()->toHtmlString()
-        )
-        ->assertFormSet(['email' => null]);
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+            ])
+            ->call('request')
+            ->assertSet('email', $user->email);
 
-    expect($user->email)->toHavePasswordResetToken();
+        expect($user->email)->toHavePasswordResetToken();
 
-    Notification::assertSentTo($user, function (ResetPassword $notification) use ($user) {
-        // Make sure the correct url is being sent in the email.
-        $expectedUrl = URL::temporarySignedRoute(
-            name: $this->panel->generateRouteName('auth.password-reset.reset'),
-            expiration: now()->addMinutes(config('auth.passwords.users.expire')),
-            parameters: [
-                'token' => $notification->token,
-                'email' => $user->getEmailForPasswordReset(),
-            ],
+        Notification::assertSentTo($user, function (ResetPassword $notification) use ($user) {
+            $expectedUrl = URL::temporarySignedRoute(
+                name: $this->panel->generateRouteName('auth.password-reset.reset'),
+                expiration: now()->addMinutes(AppConfig::passwordResetDecayMinutes()),
+                parameters: [
+                    'token' => $notification->token,
+                    'email' => $user->getEmailForPasswordReset(),
+                ],
+            );
+
+            $actualUrl = (fn () => $this->resetUrl($user))->call($notification);
+
+            expect($actualUrl)->toBe($expectedUrl, 'Password reset link does not match expected url');
+
+            return true;
+        });
+    });
+
+    it('sends an email to non-existing users', function () {
+        $email = 'not-exists@example.com';
+
+        Notification::fake();
+
+        assertGuest();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $email,
+            ])
+            ->call('request')
+            ->assertSuccessful()
+            ->assertSet('email', $email);
+
+        expect($email)->toBeMissingFromPasswordResets();
+
+        Notification::assertSentOnDemand(
+            ResetPasswordInvalidUser::class,
+            function (ResetPasswordInvalidUser $notification, array $channels, object $notifiable) use ($email) {
+                $loginUrl = (fn () => $this->loginUrl)->call($notification);
+
+                expect($notifiable->routes['mail'])->toBe($email)
+                    ->and($loginUrl)->toBe($this->panel->getLoginUrl());
+
+                return true;
+            },
         );
+    });
 
-        $actualUrl = (fn () => $this->resetUrl($user))->call($notification);
+    it('can throttle requests', function () {
+        Notification::fake();
 
-        expect($actualUrl)->toBe($expectedUrl, 'Password reset link does not match expected url');
+        assertGuest();
 
-        return true;
+        foreach (range(1, 2) as $i) {
+            $user = adminUser();
+
+            livewire($this->page)
+                ->fillForm([
+                    'email' => $user->email,
+                ])
+                ->call('request')
+                ->assertSet('email', $user->email);
+
+            Notification::assertSentToTimes($user, ResetPassword::class, times: 1);
+        }
+
+        $user = adminUser();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+            ])
+            ->call('request')
+            ->assertNotified();
+
+        Notification::assertNotSentTo($user, ResetPassword::class);
     });
 });
 
-test('email address is required', function () {
-    livewire(RequestPasswordReset::class)
-        ->fillForm([
-            'email' => '',
-        ])
-        ->call('request')
-        ->assertHasFormErrors(['email' => 'required']);
+describe('validation', function () {
+    it('requires an email', function () {
+        livewire($this->page)
+            ->fillForm([
+                'email' => '',
+            ])
+            ->call('request')
+            ->assertHasFormErrors(['email' => ['required']]);
+    });
+
+    it('requires a valid email', function () {
+        livewire($this->page)
+            ->fillForm([
+                'email' => 'invalid-email',
+            ])
+            ->call('request')
+            ->assertHasFormErrors(['email' => ['email']]);
+    });
+
+    it('is strict with email validation in production', function (string $invalidEmail) {
+        putAppInProduction();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $invalidEmail,
+            ])
+            ->call('request')
+            ->assertHasFormErrors(['email']);
+    })->with('invalid production emails');
 });
 
-it('requires a valid email address', function () {
-    livewire(RequestPasswordReset::class)
-        ->fillForm([
-            'email' => 'bad-email',
-        ])
-        ->call('request')
-        ->assertHasFormErrors(['email' => 'email']);
-});
+describe('browser tests', function () {
+    it('can fill the form and request a password reset', function () {
+        $user = adminUser();
 
-test('a user can reset the form to send a link again after the form has been submitted', function () {
-    $user = adminUser();
+        Notification::fake();
 
-    Notification::fake();
+        visit($this->panel->getRequestPasswordResetUrl())
+            ->assertSee(__('pages/auth/request-password-reset.heading'))
+            ->assertNoSmoke()
+            ->assertNoAccessibilityIssues()
+            ->type('input[type="email"]', $user->email)
+            ->click('button[type="submit"]')
+            ->assertNoAccessibilityIssues()
+            ->assertNoSmoke()
+            ->assertDontSee(__('pages/auth/request-password-reset.heading'))
+            ->assertSee($user->email);
+    });
 
-    livewire(RequestPasswordReset::class)
-        ->fillForm(['email' => $user->email])
-        ->call('request')
-        ->assertSet('email', $user->email)
-        ->call('resend')
-        ->assertSet('email', null);
-});
+    test('dark mode is accessible', function () {
+        $user = adminUser();
 
-test('an email will be sent to non-registered users', function () {
-    Notification::fake();
+        Notification::fake();
 
-    $this->withoutDefer();
-
-    livewire(RequestPasswordReset::class)
-        ->fillForm(['email' => 'not-exists@example.com'])
-        ->call('request')
-        ->assertSuccessful()
-        ->assertSet('email', 'not-exists@example.com');
-
-    expect('not-exists@example.com')->toBeMissingFromPasswordResets();
-
-    Notification::assertCount(1);
-
-    Notification::assertSentOnDemand(
-        ResetPasswordInvalidUser::class,
-        function (ResetPasswordInvalidUser $notification, array $channels, object $notifiable) {
-            $loginUrl = (fn () => $this->loginUrl)->call($notification);
-
-            expect($notifiable->routes['mail'])->toBe('not-exists@example.com')
-                ->and($loginUrl)->toBe($this->panel->getLoginUrl());
-
-            return true;
-        },
-    );
+        visit($this->panel->getRequestPasswordResetUrl())
+            ->inDarkMode()
+            ->assertNoAccessibilityIssues()
+            ->type('input[type="email"]', $user->email)
+            ->click('button[type="submit"]')
+            ->assertNoAccessibilityIssues();
+    });
 });

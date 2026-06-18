@@ -73,7 +73,9 @@ class ViewUserInfolist
 
                         Actions::make([
                             DeleteUserAction::make(),
-                        ])->grow(false),
+                        ])
+                            ->key('user-actions')
+                            ->grow(false),
                     ])->from('md'),
                 ]),
         ];

@@ -75,7 +75,7 @@ class Login extends BaseLogin
             Text::make(new HtmlString(Blade::render(<<<'HTML'
             <div class="relative -mb-4 -mt-4 flex py-5 items-center text-sm">
                 <div class="grow border-t border-gray-200 dark:border-gray-600"></div>
-                <span class="shrink mx-4 text-gray-400 dark:text-gray-200">Or use email</span>
+                <span class="shrink mx-4 text-gray-600 dark:text-gray-200">Or use email</span>
                 <div class="grow border-t border-gray-200 dark:border-gray-600"></div>
             </div>
             HTML,

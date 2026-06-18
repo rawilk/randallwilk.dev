@@ -61,23 +61,6 @@ it('has a query scope to get visible repositories only', function () {
         ->modelsMatchExactly($models->where('visible', true));
 });
 
-it('has a query scope to search by name', function () {
-    $models = Repository::factory()
-        ->sequence(
-            ['name' => 'repo one'],
-            ['name' => 'repo two'],
-            ['name' => 'repo three'],
-        )
-        ->count(3)
-        ->create();
-
-    $results = Repository::search('repo one')->get();
-
-    expect($results)
-        ->toHaveCount(1)
-        ->and($results[0])->toBe($models[0]);
-});
-
 it('returns a proper name for npm operations', function (Repository $record, string $expectedName) {
     expect($record->nameForNpm())->toBe($expectedName);
 })->with([

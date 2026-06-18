@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Fixtures\Factories\Users;
+namespace Tests\TestSupport\Factories\Users;
 
 class UpdateUserDataFactory
 {
@@ -22,10 +22,10 @@ class UpdateUserDataFactory
     public function create(array $extra = []): array
     {
         return $extra + [
-            'name' => $this->name,
-            'email' => $this->email,
-            'timezone' => $this->timezone,
-            'is_admin' => $this->isAdmin,
-        ];
+                'name' => $this->name,
+                'email' => $this->email,
+                'timezone' => $this->timezone,
+                'is_admin' => $this->isAdmin,
+            ];
     }
 }

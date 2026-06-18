@@ -16,6 +16,6 @@ it('parses a doc page path', function (string $path, string $expectedSlug, ?stri
 })->with([
     ['installation', 'installation'],
     ['installation.md', 'installation'],
-    ['api/settings', 'api', 'settings'],
-    ['advanced-usage/cache.md', 'advanced-usage', 'cache'],
+    ['api/settings', 'settings', 'api'],
+    ['advanced-usage/cache.md', 'cache', 'advanced-usage'],
 ]);

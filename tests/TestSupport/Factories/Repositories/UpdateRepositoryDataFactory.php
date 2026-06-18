@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Fixtures\Factories\Repositories;
+namespace Tests\TestSupport\Factories\Repositories;
 
 use App\Enums\RepositoryType;
 
@@ -30,13 +30,13 @@ class UpdateRepositoryDataFactory
     public function create(array $extra = []): array
     {
         return $extra + [
-            'type' => $this->type,
-            'scoped_name' => $this->scopedName,
-            'documentation_url' => $this->documentationUrl,
-            'blogpost_url' => $this->blogpostUrl,
-            'visible' => $this->visible,
-            'highlighted' => $this->highlighted,
-            'new' => $this->new,
-        ];
+                'type' => $this->type,
+                'scoped_name' => $this->scopedName,
+                'documentation_url' => $this->documentationUrl,
+                'blogpost_url' => $this->blogpostUrl,
+                'visible' => $this->visible,
+                'highlighted' => $this->highlighted,
+                'new' => $this->new,
+            ];
     }
 }

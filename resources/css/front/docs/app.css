@@ -78,6 +78,7 @@
 
 /* View Components */
 @source '../../../../resources/views/components/layout/html.blade.php';
+@source '../../../../resources/views/components/forms/**/*';
 @source '../../../../resources/views/components/layout/front/footer.blade.php';
 @source '../../../../resources/views/components/layout/docs/**/*';
 @source '../../../../resources/views/components/docs/**/*';

@@ -385,7 +385,7 @@
                 </p>
 
                 <p>
-                    Updated by Randall Wilk on Aug. 25, 2022
+                    Updated by Randall Wilk on June 18, 2026
                 </p>
             </x-front.content-area>
         </section>
