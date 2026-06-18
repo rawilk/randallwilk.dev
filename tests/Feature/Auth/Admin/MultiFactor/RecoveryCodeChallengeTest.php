@@ -289,6 +289,7 @@ describe('browser tests', function () {
             ->assertSee(__('profile-filament::auth/multi-factor/challenge/challenge.form.provider.heading'))
             ->click(__('profile-filament::auth/multi-factor/recovery/provider.challenge-form.actions.change-provider.label'))
             ->assertSee(__('profile-filament::auth/multi-factor/recovery/provider.challenge-form.code.label'))
+            ->click('input[type="password"]')
             ->assertNoAccessibilityIssues()
             ->assertNoSmoke()
             ->type('input[type="password"]', 'one')
@@ -313,6 +314,7 @@ describe('browser tests', function () {
             ->click(__('profile-filament::auth/multi-factor/challenge/challenge.actions.change-provider.label'))
             ->click(__('profile-filament::auth/multi-factor/recovery/provider.challenge-form.actions.change-provider.label'))
             ->assertSee(__('profile-filament::auth/multi-factor/recovery/provider.challenge-form.code.label'))
+            ->click('input[type="password"]')
             ->assertNoAccessibilityIssues()
             ->type('input[type="password"]', 'two')
             ->submit()
@@ -338,6 +340,7 @@ describe('browser tests', function () {
             ->assertRoute($this->panel->generateRouteName('auth.multi-factor-challenge'))
             ->assertSee(__('profile-filament::auth/multi-factor/recovery/provider.challenge-form.code.messages.invalid'))
             ->assertNoSmoke()
+            ->click('input[type="password"]')
             ->assertNoAccessibilityIssues();
 
         expect($this->user->fresh()->getAuthenticationRecoveryCodes())->toHaveCount(4);
