@@ -1,0 +1,72 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if [ ! -f composer.json ]; then
+    echo "Please make sure you run this script from the root directory of this repo."
+    exit 1
+fi
+
+if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
+    echo "Usage: bin/deploy [branch]"
+    echo ""
+    echo "Merges the given branch into main and pushes main to origin."
+    echo "Defaults to merging develop."
+    exit 0
+fi
+
+SOURCE_BRANCH="${1:-develop}"
+MAIN_BRANCH="main"
+REMOTE="origin"
+
+if [ -n "$(git status --porcelain)" ]; then
+    echo "Your working tree has uncommitted changes. Commit or stash them before merging."
+    exit 1
+fi
+
+echo "Fetching latest refs from ${REMOTE}..."
+git fetch "$REMOTE" "$MAIN_BRANCH"
+
+if git ls-remote --exit-code --heads "$REMOTE" "$SOURCE_BRANCH" >/dev/null; then
+    git fetch "$REMOTE" "$SOURCE_BRANCH"
+fi
+
+if ! git show-ref --verify --quiet "refs/remotes/${REMOTE}/${MAIN_BRANCH}"; then
+    echo "Could not find ${REMOTE}/${MAIN_BRANCH}."
+    exit 1
+fi
+
+if git show-ref --verify --quiet "refs/heads/${SOURCE_BRANCH}"; then
+    MERGE_REF="$SOURCE_BRANCH"
+elif git show-ref --verify --quiet "refs/remotes/${REMOTE}/${SOURCE_BRANCH}"; then
+    MERGE_REF="${REMOTE}/${SOURCE_BRANCH}"
+else
+    echo "Could not find branch '${SOURCE_BRANCH}' locally or on ${REMOTE}."
+    exit 1
+fi
+
+CURRENT_BRANCH="$(git branch --show-current)"
+
+echo "Checking out ${MAIN_BRANCH}..."
+if git show-ref --verify --quiet "refs/heads/${MAIN_BRANCH}"; then
+    git checkout "$MAIN_BRANCH"
+else
+    git checkout -b "$MAIN_BRANCH" --track "${REMOTE}/${MAIN_BRANCH}"
+fi
+
+echo "Fast-forwarding ${MAIN_BRANCH} from ${REMOTE}/${MAIN_BRANCH}..."
+git merge --ff-only "${REMOTE}/${MAIN_BRANCH}"
+
+echo "Merging ${MERGE_REF} into ${MAIN_BRANCH}..."
+git merge --no-edit "$MERGE_REF"
+
+echo "Pushing ${MAIN_BRANCH} to ${REMOTE}..."
+git push "$REMOTE" "$MAIN_BRANCH"
+
+if [ -n "$CURRENT_BRANCH" ] && [ "$CURRENT_BRANCH" != "$MAIN_BRANCH" ]; then
+    echo ""
+    echo "Merged and pushed. You are still on ${MAIN_BRANCH}; previous branch was ${CURRENT_BRANCH}."
+else
+    echo ""
+    echo "Merged and pushed."
+fi
