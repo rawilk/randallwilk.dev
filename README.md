@@ -17,8 +17,8 @@ assume you are serving the site using Laravel Valet or Herd out of your `~/Sites
 Be sure the following are installed on your machine:
 
 - [Composer](https://getcomposer.org/download/)
-- PHP >= 8.3
-- PostgreSQL >= 16
+- PHP >= 8.5
+- PostgreSQL >= 17
 - Node >= 18
 - Redis for queues/cache
 - (Optional) A GitHub OAuth app for your local installation for social login
