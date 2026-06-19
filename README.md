@@ -1,7 +1,7 @@
 # The source code of randallwilk.dev
 
 [![Tests](https://github.com/rawilk/randallwilk.dev/actions/workflows/pest.yml/badge.svg?branch=develop)](https://github.com/rawilk/randallwilk.dev/actions/workflows/pest.yml)
-[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2F2154a8d9-deed-48ab-ad0d-c8ff49b46bf4%3Fdate%3D1%26label%3D1%26commit%3D1&style=plastic)](https://forge.laravel.com/servers/855537/sites/2525798)
+[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2F8346954d-74d5-4659-9e2b-7992ace2a022%3Fdate%3D1%26label%3D1&style=flat-square)](https://forge.laravel.com/randall-wilk/randallwilk/3164389)
 
 This repo contains the source code of [my personal website](https://randallwilk.dev).
 
@@ -39,11 +39,14 @@ cd randallwilk.dev
 
 > **Note:** Be sure to fill out GitHub credentials in the `.env` to import docs (optional).
 
-> **Note:** The `repositories` database table is only populated by running the `php artisan import:github-repositories` command, and the repositories pulled in are based on your GitHub credentials in the `.env` file.
+> **Note:** The `repositories` database table is only populated by running the `php artisan import:github-repositories`
+> command, and the repositories pulled in are based on your GitHub credentials in the `.env` file.
 
 ## Docs
 
-Docs can be imported from the artisan command, as long as you have Laravel Horizon running and the credentials for the GitHub api filled in. It also requires you to have read access to each of the repositories that have docs (I don't think that should be an issue since they're all public).
+Docs can be imported from the artisan command, as long as you have Laravel Horizon running and the credentials for the
+GitHub api filled in. It also requires you to have read access to each of the repositories that have docs (I don't think
+that should be an issue since they're all public).
 
 ```bash
 php artisan import:docs
@@ -65,36 +68,40 @@ Composer and NPM dependencies. For convenience, you may run the `bin/update-deps
 
 # Commands
 
-| Command | Description                                                                                    |
-| --- |------------------------------------------------------------------------------------------------|
-| `npm run dev` | Watch for changes in CSS and JS files                                                          |
-| `php artisan test` | Run tests                                                                                      |
-| `php artisan import:docs` | Import doc files                                                                               |
+| Command                                  | Description                                                                                    |
+|------------------------------------------|------------------------------------------------------------------------------------------------|
+| `npm run dev`                            | Watch for changes in CSS and JS files                                                          |
+| `php artisan test`                       | Run tests                                                                                      |
+| `php artisan import:docs`                | Import doc files                                                                               |
 | `php artisan import:github-repositories` | Sync public repo info with GitHub                                                              |
 | `php artisan import:packagist-downloads` | Sync download stats for composer packages                                                      |
-| `php artisan sitemap:generate` | Regenerate sitemaps                                                                            |
-| `php artisan app:refresh-staging-data` | Sync staging database with production; only available to run in production environment         |
-| `php artisan app:redact-sensitive-data` | Redact sensitive information from certain tables; not allowed to run in production environment |
+| `php artisan sitemap:generate`           | Regenerate sitemaps                                                                            |
+| `php artisan app:refresh-staging-data`   | Sync staging database with production; only available to run in production environment         |
+| `php artisan app:redact-sensitive-data`  | Redact sensitive information from certain tables; not allowed to run in production environment |
 
 # Deployment
 
-Deployments for the `main` and `stage` branch are handled through GitHub actions that will handle generating a fresh copy of the `.env` file with secrets from my 1Password vault. The action will send the fresh copy to the server and trigger a deployment through Forge.
+Deployments for the `main` and `stage` branch are handled through GitHub actions that will handle generating a fresh
+copy of the `.env` file with secrets from my 1Password vault. The action will send the fresh copy to the server and
+trigger a deployment through Forge.
 
-A deployment to the production and staging environments can only be triggered manually by dispatching the GitHub workflow, which requires the correct access permissions to the repository.
+A deployment to the production and staging environments can only be triggered manually by dispatching the GitHub
+workflow, which requires the correct access permissions to the repository.
 
 ## Secrets
 
-For the GitHub actions workflow `deploy.yml` to work correctly, the following repository secrets are defined for the `production` and `staging` environments.
+For the GitHub actions workflow `deploy.yml` to work correctly, the following repository secrets are defined for the
+`production` and `staging` environments.
 
-| Secret                    | Description                                                                                                                                                            |
-|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `FORGE_TRIGGER_URL`       | The deployment trigger URL for the site in Laravel Forge                                                                                                               |
-| `KNOWN_HOSTS`             | The server ip and public keys. Can find this info in `known_hosts` file after connecting the server via ssh.                                                           |
+| Secret                     | Description                                                                                                                                                            |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `FORGE_TRIGGER_URL`        | The deployment trigger URL for the site in Laravel Forge                                                                                                               |
+| `KNOWN_HOSTS`              | The server ip and public keys. Can find this info in `known_hosts` file after connecting the server via ssh.                                                           |
 | `OP_SERVICE_ACCOUNT_TOKEN` | 1Password service account token to connect the environment's vault and 1Password secrets                                                                               |
-| `REMOTE_HOST`             | The server ip address                                                                                                                                                  |
-| `REMOTE_TARGET`           | The full path to the production site on the server, e.g `/home/user_name/randallwilk.dev`                                                                              |
-| `REMOTE_USER`             | The linux user that owns the site on the server, e.g `forge`.                                                                                                          |
-| `SSH_KEY`                 | The private ssh key for the linux user that owns the site. Be sure to add the public key to the server in Forge. Note: do **not** add a passphrase to the private key. |
+| `REMOTE_HOST`              | The server ip address                                                                                                                                                  |
+| `REMOTE_TARGET`            | The full path to the production site on the server, e.g `/home/user_name/randallwilk.dev`                                                                              |
+| `REMOTE_USER`              | The linux user that owns the site on the server, e.g `forge`.                                                                                                          |
+| `SSH_KEY`                  | The private ssh key for the linux user that owns the site. Be sure to add the public key to the server in Forge. Note: do **not** add a passphrase to the private key. |
 
 # Credits
 
@@ -105,4 +112,5 @@ This website was principally designed and developed by [Randall Wilk](https://gi
 - The web application falls under the [MIT License](https://choosealicense.com/licenses/mit/)
 - The content and design are under [exclusive copyright](https://choosealicense.com/no-license/)
 
-If you'd like to reuse or repost something, feel free to reach out at randall@randallwilk.dev. Please remember that the design is not meant to be forked!
+If you'd like to reuse or repost something, feel free to reach out at randall@randallwilk.dev. Please remember that the
+design is not meant to be forked!
