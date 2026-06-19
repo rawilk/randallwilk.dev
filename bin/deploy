@@ -45,7 +45,7 @@ else
     exit 1
 fi
 
-CURRENT_BRANCH="$(git branch --show-current)"
+STARTING_BRANCH="$(git branch --show-current)"
 
 echo "Checking out ${MAIN_BRANCH}..."
 if git show-ref --verify --quiet "refs/heads/${MAIN_BRANCH}"; then
@@ -63,9 +63,15 @@ git merge --no-edit "$MERGE_REF"
 echo "Pushing ${MAIN_BRANCH} to ${REMOTE}..."
 git push "$REMOTE" "$MAIN_BRANCH"
 
-if [ -n "$CURRENT_BRANCH" ] && [ "$CURRENT_BRANCH" != "$MAIN_BRANCH" ]; then
+if [ -n "$STARTING_BRANCH" ] && [ "$STARTING_BRANCH" != "$MAIN_BRANCH" ]; then
+    echo "Checking out ${STARTING_BRANCH}..."
+    git checkout "$STARTING_BRANCH"
+
     echo ""
-    echo "Merged and pushed. You are still on ${MAIN_BRANCH}; previous branch was ${CURRENT_BRANCH}."
+    echo "Merged and pushed. Switched back to ${STARTING_BRANCH}."
+elif [ -z "$STARTING_BRANCH" ]; then
+    echo ""
+    echo "Merged and pushed. Started in detached HEAD, so still on ${MAIN_BRANCH}."
 else
     echo ""
     echo "Merged and pushed."
