@@ -5,7 +5,7 @@
     @class([
         'group inline-flex items-center rounded-md bg-transparent text-base font-medium hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2',
         'text-slate-500' => ! $active,
-        'text-brand' => $active,
+        'text-slate-900' => $active,
     ])>
     <span>{{ $label }}</span>
 

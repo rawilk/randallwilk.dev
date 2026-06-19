@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Notifications\Auth;
 
 use App\Mail\CustomMailMessage;
+use App\Support\AppConfig;
 use Illuminate\Auth\Notifications\ResetPassword as BaseResetPassword;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Support\Uri;
 
 class ResetPassword extends BaseResetPassword
 {
@@ -33,24 +33,35 @@ class ResetPassword extends BaseResetPassword
     {
         $domain = $this->getDomain();
 
-        return (new CustomMailMessage)
+        $message = (new CustomMailMessage)
             ->forEmail($notifiable->email)
             ->subject(__('notifications/auth/reset-password.subject', ['domain' => $domain]))
             ->greeting(__('notifications/auth/reset-password.greeting'))
-            ->line(__('notifications/auth/reset-password.intro', ['domain' => $domain, 'email' => $notifiable->email]))
-            ->line(__('notifications/auth/reset-password.link_instructions'))
-            ->action(__('notifications/auth/reset-password.button'), $this->resetUrl($notifiable))
-            ->markdownLine(
-                __('notifications/auth/reset-password.line3', ['support' => config('randallwilk.support_email')])
-            )
-            ->markdownLine(
-                __('notifications/auth/reset-password.expire_info', [
-                    'expiration' => $this->getLinkExpiration(),
-                    'request_url' => $this->requestUrl,
-                ])
-            )
-            ->line(__('notifications/auth/reset-password.multiple_requests_notice'))
             ->addTextHeader('X-Context', 'password-reset');
+
+        $introLines = __('notifications/auth/reset-password.intro-lines') ?? [];
+
+        $replacements = [
+            'domain' => $domain,
+            'email' => e($notifiable->email),
+            'support' => AppConfig::supportEmail(),
+            'request_url' => $this->requestUrl,
+            'expiration' => $this->getLinkExpiration(),
+        ];
+
+        foreach ($introLines as $line) {
+            $message->markdownLine(__($line, $replacements));
+        }
+
+        $message->action(__('notifications/auth/reset-password.action'), $this->resetUrl($notifiable));
+
+        $outroLines = __('notifications/auth/reset-password.outro-lines') ?? [];
+
+        foreach ($outroLines as $line) {
+            $message->markdownLine(__($line, $replacements));
+        }
+
+        return $message;
     }
 
     protected function resetUrl($notifiable): string
@@ -60,8 +71,7 @@ class ResetPassword extends BaseResetPassword
 
     protected function getDomain(): string
     {
-        return Uri::of(config('app.url'))
-            ->host();
+        return AppConfig::appDomain();
     }
 
     protected function getLinkExpiration(): string
@@ -75,6 +85,6 @@ class ResetPassword extends BaseResetPassword
 
     protected function getDecayMinutes(): int
     {
-        return config('auth.passwords.' . config('auth.defaults.passwords') . '.expire');
+        return AppConfig::passwordResetDecayMinutes();
     }
 }

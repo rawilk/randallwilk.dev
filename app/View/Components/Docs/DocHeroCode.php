@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\View\Components\Docs;
 
+use App\Docs\DocHeaders\DocHeader;
 use App\Docs\DocHeaders\DocHeaderFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class DocHeroCode extends Component
 {
-    /** @var class-string<\App\Docs\DocHeaders\DocHeader>|null */
+    /** @var class-string<DocHeader>|null */
     public ?string $config;
 
     public function __construct(public string $repository, public string $version)

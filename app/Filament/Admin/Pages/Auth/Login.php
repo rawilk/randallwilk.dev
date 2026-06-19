@@ -4,48 +4,36 @@ declare(strict_types=1);
 
 namespace App\Filament\Admin\Pages\Auth;
 
-use App\Actions\Auth\Login\AttemptToAuthenticate;
-use App\Actions\Auth\Login\Mfa\EnsureUserIsActive;
-use App\Actions\Auth\Login\PrepareAuthenticatedSession;
-use App\Actions\Auth\Login\RedirectIfUserHasMfa;
-use App\Dto\Auth\LoginEventBag;
-use App\Filament\Actions\Auth\GitHubLoginAction;
-use App\Filament\Concerns\Auth\HasPasswordField;
 use App\Filament\Concerns\Auth\IsAuthPage;
-use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
-use Filament\Actions\Action;
-use Filament\Http\Responses\Auth\Contracts\LoginResponse;
-use Filament\Pages\Auth\Login as BaseLogin;
-use Filament\Support\Enums\ActionSize;
+use Filament\Auth\Pages\Login as BaseLogin;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\RenderHook;
+use Filament\Schemas\Components\Text;
+use Filament\Schemas\Schema;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Facades\Pipeline;
-use Rawilk\ProfileFilament\Actions\Auth\PrepareUserSession;
-use Rawilk\ProfileFilament\Filament\Actions\PasskeyLoginAction;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\HtmlString;
+use Rawilk\FilamentPasswordInput\Password;
+use Rawilk\ProfileFilament\Auth\Login\Concerns\HandlesLoginForm;
 
 class Login extends BaseLogin
 {
-    use HasPasswordField;
+    use HandlesLoginForm;
     use IsAuthPage;
 
     protected static string $layout = 'layouts.auth.base';
 
-    public function authenticate(): ?LoginResponse
+    public function content(Schema $schema): Schema
     {
-        try {
-            $this->rateLimit(5);
-        } catch (TooManyRequestsException $exception) {
-            $this->getRateLimitedNotification($exception)?->send();
-
-            return null;
-        }
-
-        return Pipeline::send(
-            new LoginEventBag($this->form->getState())
-        )->through([
-            RedirectIfUserHasMfa::class,
-            AttemptToAuthenticate::class,
-            PrepareAuthenticatedSession::class,
-        ])->then(fn () => app(LoginResponse::class));
+        return $schema
+            ->components([
+                RenderHook::make(PanelsRenderHook::AUTH_LOGIN_FORM_BEFORE),
+                $this->alternativesComponent(),
+                $this->getFormContentComponent(),
+                RenderHook::make(PanelsRenderHook::AUTH_LOGIN_FORM_AFTER),
+            ]);
     }
 
     public function getTitle(): string|Htmlable
@@ -58,22 +46,52 @@ class Login extends BaseLogin
         return __('pages/auth/login.heading');
     }
 
-    public function passkeyLoginAction(): Action
+    protected function alternativesComponent(): Component
     {
-        return PasskeyLoginAction::make()
-            ->icon('pf-passkey')
-            ->size(ActionSize::Large)
-            ->pipeThrough([
-                EnsureUserIsActive::class,
-                PrepareUserSession::class,
-            ])
-            ->extraAttributes([
-                'class' => 'w-full',
-            ]);
+        return Group::make([
+            // Passkey login
+            Text::make(new HtmlString(Blade::render(<<<'HTML'
+            <div class="text-center mt-2">
+                <x-profile-filament::passkey-login
+                    panel="{{ filament()->getId() }}"
+                >
+                    <x-filament::button
+                        x-show="! processing"
+                        color="gray"
+                        class="w-full"
+                        icon="pf-passkey"
+                        size="lg"
+                    >
+                        {{ __('profile-filament::auth/multi-factor/webauthn/passkeys.login.actions.authenticate.label') }}
+                    </x-filament::button>
+                </x-profile-filament::passkey-login>
+            </div>
+            HTML,
+            )))
+                ->extraAttributes([
+                    'class' => 'w-full',
+                ]),
+
+            Text::make(new HtmlString(Blade::render(<<<'HTML'
+            <div class="relative -mb-4 -mt-4 flex py-5 items-center text-sm">
+                <div class="grow border-t border-gray-200 dark:border-gray-600"></div>
+                <span class="shrink mx-4 text-gray-600 dark:text-gray-200">Or use email</span>
+                <div class="grow border-t border-gray-200 dark:border-gray-600"></div>
+            </div>
+            HTML,
+            )))
+                ->extraAttributes([
+                    'class' => 'w-full',
+                ]),
+        ]);
     }
 
-    public function githubLoginAction(): Action
+    protected function getPasswordFormComponent(): Component
     {
-        return GitHubLoginAction::make();
+        return Password::make('password')
+            ->label(__('filament-panels::auth/pages/login.form.password.label'))
+            ->hint(filament()->hasPasswordReset() ? new HtmlString(Blade::render('<x-filament::link :href="filament()->getRequestPasswordResetUrl()" tabindex="-1"> {{ __(\'filament-panels::auth/pages/login.actions.request_password_reset.label\') }}</x-filament::link>')) : null)
+            ->autocomplete('current-password')
+            ->required();
     }
 }

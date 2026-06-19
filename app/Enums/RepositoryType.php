@@ -24,4 +24,14 @@ enum RepositoryType: string implements HasColor, HasLabel
             self::Project => 'primary',
         };
     }
+
+    public function noResultsLabel(): string
+    {
+        return __("enums/repository-type.{$this->value}.no-results-label");
+    }
+
+    public function searchPlaceholderText(): string
+    {
+        return __("enums/repository-type.{$this->value}.search-placeholder-text");
+    }
 }

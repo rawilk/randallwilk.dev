@@ -13,7 +13,7 @@ class Repository
     protected ?array $config;
 
     /**
-     * @param  \Illuminate\Support\Collection<int, \App\Docs\Alias>  $aliases
+     * @param  Collection<int, Alias>  $aliases
      */
     public function __construct(
         public string $slug,

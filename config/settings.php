@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Rawilk\Settings;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -63,22 +65,19 @@ return [
     | is used by your application. A default configuration has been added
     | for each back-end shipped with this package. You are free to add more.
     |
-    | Each driver you add must implement the \Rawilk\Settings\Contracts\Driver interface.
+    | Each driver you add must implement the Rawilk\Settings\Contracts\Driver interface.
     |
     */
     'drivers' => [
         'database' => [
-            'driver' => 'database',
             'connection' => env('DB_CONNECTION', 'mysql'),
         ],
         'eloquent' => [
-            'driver' => 'eloquent',
-
             /*
              * You can use any model you like for the setting, but it needs to implement
-             * the \Rawilk\Settings\Contracts\Setting interface.
+             * the Rawilk\Settings\Contracts\Setting interface.
              */
-            'model' => Rawilk\Settings\Models\Setting::class,
+            'model' => Settings\Models\Setting::class,
         ],
     ],
 
@@ -122,14 +121,14 @@ return [
     | into a string, which gets appended to a setting key in the database.
     |
     | Any custom serializer you use must implement the
-    | \Rawilk\Settings\Contracts\ContextSerializer interface.
+    | Rawilk\Settings\Contracts\ContextSerializer interface.
     |
     | Supported:
-    | - \Rawilk\Settings\Support\ContextSerializers\ContextSerializer (default)
-    | - \Rawilk\Settings\Support\ContextSerializers\DotNotationContextSerializer
+    | - Rawilk\Settings\Support\ContextSerializers\ContextSerializer
+    | - Rawilk\Settings\Support\ContextSerializers\KeyValueContextSerializer (default)
     |
     */
-    'context_serializer' => Rawilk\Settings\Support\ContextSerializers\DotNotationContextSerializer::class,
+    'context_serializer' => Settings\Support\ContextSerializers\KeyValueContextSerializer::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -140,15 +139,15 @@ return [
     | setting.
     |
     | Any custom key generator you use must implement the
-    | \Rawilk\Settings\Contracts\KeyGenerator interface.
+    | Rawilk\Settings\Contracts\KeyGenerator interface.
     |
     | Supported:
-    | - \Rawilk\Settings\Support\KeyGenerators\ReadableKeyGenerator
-    | - \Rawilk\Settings\Support\KeyGenerators\Md5KeyGenerator (default)
-    | - \Rawilk\Settings\Support\KeyGenerators\HashKeyGenerator
+    | - Rawilk\Settings\Support\KeyGenerators\ReadableKeyGenerator (default)
+    | - Rawilk\Settings\Support\KeyGenerators\Md5KeyGenerator (deprecated)
+    | - Rawilk\Settings\Support\KeyGenerators\HashKeyGenerator
     |
     */
-    'key_generator' => Rawilk\Settings\Support\KeyGenerators\ReadableKeyGenerator::class,
+    'key_generator' => Settings\Support\KeyGenerators\ReadableKeyGenerator::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -157,13 +156,13 @@ return [
     |
     | By default, we use php's serialize() and unserialize() functions to
     | prepare the setting values for storage. You may use the `JsonValueSerializer`
-    | instead if you want to store the values as json instead.
+    | instead if you want to store the values as JSON instead.
     |
     | Any custom value serializer you use must implement the
-    | \Rawilk\Settings\Contracts\ValueSerializer interface.
+    | Rawilk\Settings\Contracts\ValueSerializer interface.
     |
     */
-    'value_serializer' => Rawilk\Settings\Support\ValueSerializers\ValueSerializer::class,
+    'value_serializer' => Settings\Support\ValueSerializers\JsonValueSerializer::class,
 
     /*
     |--------------------------------------------------------------------------

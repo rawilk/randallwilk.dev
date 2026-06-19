@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Illuminate\Auth\Events\Logout;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\post;
 
 beforeEach(function () {
@@ -20,7 +21,7 @@ it('logs a user out', function () {
         ->post($this->panel->getLogoutUrl())
         ->assertRedirect($this->panel->getLoginUrl());
 
-    $this->assertGuest();
+    assertGuest();
 
     Event::assertDispatched(Logout::class, function (Logout $event) use ($user) {
         expect($event->user)->toBe($user);
@@ -35,7 +36,7 @@ it('does not try to log guests out', function () {
     post($this->panel->getLogoutUrl())
         ->assertRedirect($this->panel->getLoginUrl());
 
-    $this->assertGuest();
+    assertGuest();
 
     Event::assertNotDispatched(Logout::class);
 });

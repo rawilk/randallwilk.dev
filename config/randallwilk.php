@@ -66,18 +66,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Timebox Duration
-    |--------------------------------------------------------------------------
-    |
-    | The amount of time (in microseconds) the timebox should force requests
-    | to take when invalid data is provided. Most commonly used in auth
-    | scenarios.
-    |
-    */
-    'timebox_duration' => 300 * 1000,
-
-    /*
-    |--------------------------------------------------------------------------
     | Support Email
     |--------------------------------------------------------------------------
     |
@@ -128,9 +116,17 @@ return [
                 'url' => 'https://laravel-livewire.com',
                 'description' => 'Another game changer for me, Laravel Livewire makes building interactive components almost trivial, and drastically reduces the amount of custom JavaScript I need to write in an application.',
             ],
+            'Filament' => [
+                'url' => 'https://filamentphp.com',
+                'description' => 'Allows me to build admin apps consistently.',
+            ],
+            'PostgreSQL' => [
+                'url' => 'https://postgresql.org',
+                'description' => 'PostgreSQL has become my go-to database lately for projects.',
+            ],
             'MySQL' => [
                 'url' => 'https://www.mysql.com',
-                'description' => 'Almost every web app needs a database, and I prefer to use MySQL or occasionally MariaDB, which is a fork of MySQL.',
+                'description' => 'Almost every web app needs a database, and I sometimes like to use MySQL or occasionally MariaDB, which is a fork of MySQL.',
             ],
             'Pest PHP' => [
                 'url' => 'https://pestphp.com',

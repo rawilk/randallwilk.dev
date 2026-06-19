@@ -6,14 +6,14 @@ namespace App\Listeners\Auth;
 
 use App\Notifications\Auth\RecoveryCodesRegeneratedNotification;
 use App\Notifications\Concerns\SetsDeviceDetails;
-use Rawilk\ProfileFilament\Events\RecoveryCodesRegenerated;
+use Rawilk\ProfileFilament\Auth\Multifactor\Recovery\Events\RecoveryCodesWereRegenerated;
 use Rawilk\ProfileFilament\Filament\Pages\Profile\Security;
 
 readonly class RecoveryCodesRegeneratedListener
 {
     use SetsDeviceDetails;
 
-    public function handle(RecoveryCodesRegenerated $event): void
+    public function handle(RecoveryCodesWereRegenerated $event): void
     {
         $notification = new RecoveryCodesRegeneratedNotification;
         $notification->setUrl($this->getProfileUrl());

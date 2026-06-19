@@ -7,7 +7,7 @@
             <x-login-link
                 :email="config('randallwilk.dev_credentials.email')"
                 label="Login as admin ({{ config('randallwilk.dev_credentials.email') }})"
-                :redirect-url="\Filament\Pages\Dashboard::getUrl(panel: 'admin')"
+                :redirect-url="Filament\Pages\Dashboard::getUrl(panel: 'admin')"
                 :user-attributes="[
                     'timezone' => config('randallwilk.timezone'),
                     'is_admin' => true,

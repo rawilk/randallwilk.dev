@@ -144,7 +144,7 @@
 
                 <h2>Effective Date</h2>
                 <p>
-                    This Disclaimer became effective on: August 25, 2022.
+                    This Disclaimer became effective on: June 18, 2026.
                 </p>
             </x-front.content-area>
         </section>

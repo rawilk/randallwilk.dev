@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Filament\Actions\Auth;
 
 use Filament\Actions\Action;
-use Filament\Support\Enums\ActionSize;
+use Filament\Support\Enums\Size;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\URL;
 
+/** @deprecated */
 class GitHubLoginAction extends Action
 {
     protected function setUp(): void
@@ -19,7 +20,7 @@ class GitHubLoginAction extends Action
 
         $this->icon('svg-github');
 
-        $this->size(ActionSize::Large);
+        $this->size(Size::Large);
 
         $this->label('Continue with GitHub');
 

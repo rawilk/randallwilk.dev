@@ -17,17 +17,17 @@ return [
 
     'broadcasting' => [
 
-        'echo' => [
-            'broadcaster' => 'reverb',
-            'key' => env('REVERB_APP_KEY'),
-            //            'cluster' => env('VITE_PUSHER_APP_CLUSTER'),
-            'wsHost' => env('REVERB_HOST'),
-            'wsPort' => env('REVERB_PORT'),
-            'wssPort' => env('REVERB_PORT'),
-            'authEndpoint' => '/api/v1/broadcasting/auth',
-            'disableStats' => true,
-            'encrypted' => true,
-        ],
+        //        'echo' => [
+        //            'broadcaster' => 'reverb',
+        //            'key' => env('REVERB_APP_KEY'),
+        //            //            'cluster' => env('VITE_PUSHER_APP_CLUSTER'),
+        //            'wsHost' => env('REVERB_HOST'),
+        //            'wsPort' => env('REVERB_PORT'),
+        //            'wssPort' => env('REVERB_PORT'),
+        //            'authEndpoint' => '/api/v1/broadcasting/auth',
+        //            'disableStats' => true,
+        //            'encrypted' => true,
+        //        ],
 
     ],
 
@@ -36,12 +36,29 @@ return [
     | Default Filesystem Disk
     |--------------------------------------------------------------------------
     |
-    | This is the storage disk Filament will use to put media. You may use any
-    | of the disks defined in the `config/filesystems.php`.
+    | This is the storage disk Filament will use to store files. You may use
+    | any of the disks defined in the `config/filesystems.php`.
     |
     */
 
-    'default_filesystem_disk' => env('FILAMENT_FILESYSTEM_DISK', 'public'),
+    'default_filesystem_disk' => env('FILESYSTEM_DISK', 'local'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Temporary File URL Expiry
+    |--------------------------------------------------------------------------
+    |
+    | When Filament generates temporary URLs for previewing private files
+    | (file uploads, image columns, image entries, rich editor attachments,
+    | etc.), this value controls how many minutes those URLs remain valid.
+    |
+    | The generated URL's expiry is rounded up to the end of the hour it
+    | falls in, so the effective lifetime will be between this value and
+    | this value plus up to 60 minutes.
+    |
+    */
+
+    'temporary_file_url_expiry_minutes' => 30,
 
     /*
     |--------------------------------------------------------------------------
@@ -85,5 +102,36 @@ return [
     */
 
     'livewire_loading_delay' => 'default',
+
+    /*
+    |--------------------------------------------------------------------------
+    | File Generation
+    |--------------------------------------------------------------------------
+    |
+    | Artisan commands that generate files can be configured here by setting
+    | configuration flags that will impact their location or content.
+    |
+    | Often, this is useful to preserve file generation behavior from a
+    | previous version of Filament, to ensure consistency between older and
+    | newer generated files. These flags are often documented in the upgrade
+    | guide for the version of Filament you are upgrading to.
+    |
+    */
+
+    'file_generation' => [
+        'flags' => [],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | System Route Prefix
+    |--------------------------------------------------------------------------
+    |
+    | This is the prefix used for the system routes that Filament registers,
+    | such as the routes for downloading exports and failed import rows.
+    |
+    */
+
+    'system_route_prefix' => 'filament',
 
 ];

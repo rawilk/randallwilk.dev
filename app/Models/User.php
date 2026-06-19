@@ -4,28 +4,34 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Models\Concerns\HasCaseInsensitiveEmail;
+use App\Models\Concerns\UsesHumanKeys;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Rawilk\LaravelCasters\Contracts\HasSingleNameColumn;
 use Rawilk\LaravelCasters\Support\Name;
-use Rawilk\ProfileFilament\Concerns\TwoFactorAuthenticatable;
-use Rawilk\ProfileFilament\Contracts\PendingUserEmail\MustVerifyNewEmail;
+use Rawilk\ProfileFilament\Auth\Multifactor\App\Contracts\HasAppAuthentication;
+use Rawilk\ProfileFilament\Auth\Multifactor\Contracts\HasMultiFactorAuthentication;
+use Rawilk\ProfileFilament\Auth\Multifactor\Recovery\Contracts\HasMultiFactorAuthenticationRecovery;
+use Rawilk\ProfileFilament\Auth\Multifactor\Webauthn\Contracts\HasWebauthn;
 use Rawilk\Settings\Models\HasSettings;
 use Rawilk\Settings\Support\Context;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, HasSingleNameColumn, MustVerifyNewEmail
+class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAvatar, HasMultiFactorAuthentication, HasMultiFactorAuthenticationRecovery, HasName, HasSingleNameColumn, HasWebauthn, MustVerifyEmail
 {
     use Concerns\HasAvatar;
-    use Concerns\UsesHumanKeys;
+    use Concerns\MultiFactorAuthenticatable;
+    use HasCaseInsensitiveEmail;
     use HasFactory;
     use HasSettings;
     use Notifiable;
-    use TwoFactorAuthenticatable;
+    use UsesHumanKeys;
 
     protected $hidden = [
         'password',
@@ -34,6 +40,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, 
         'two_factor_enabled',
         'github_id',
         'is_admin',
+        'preferred_mfa_provider',
     ];
 
     public static function humanKeyPrefix(): string
@@ -43,7 +50,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, 
 
     public function isAdmin(): bool
     {
-        return $this->is_admin;
+        return $this->is_admin === true;
     }
 
     public function canAccessPanel(Panel $panel): bool
@@ -67,7 +74,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName, 
     public function context(): Context
     {
         return new Context([
-            'model' => static::class,
+            'model' => $this::class,
             'id' => $this->getRouteKey(),
         ]);
     }

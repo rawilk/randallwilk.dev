@@ -19,7 +19,7 @@ return [
         ],
     ],
     'footer' => [
-        'summary' => 'Full-Stack developer based in Wausau, WI, specializing in Laravel, Livewire, Tailwind and Alpine.js.',
+        'summary' => 'Full-Stack developer based in Madison, WI, specializing in Laravel, Livewire, Tailwind and Alpine.js.',
         'stack_info' => 'Proudly hosted with [Laravel Forge](:forge) and [Hetzner](:hetzner).',
         'sponsor_button' => 'Sponsor on GitHub',
     ],

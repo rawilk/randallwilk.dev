@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace App\Support\Filament;
 
-use App\Filament\Infolists\DateEntry;
-use App\Filament\Tables\Columns\DateColumn;
+use App\Filament\Schemas\Infolists\DateEntry;
+use App\Filament\Schemas\Tables\Columns\DateColumn;
 use Filament\Actions\ActionGroup;
-use Filament\Forms\Components\Actions\Action as FormAction;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Field;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Support\Enums\MaxWidth;
-use Filament\Tables\Actions\Action as TableAction;
-use Filament\Tables\Actions\ActionGroup as TableActionGroup;
+use Filament\Support\Enums\Width;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\Column;
-use Filament\Tables\Enums\ActionsPosition;
 use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Table;
 use Rawilk\FilamentPasswordInput\Password;
 
@@ -59,12 +57,8 @@ class FilamentDefaults
         DateTimePicker::configureUsing(function (DateTimePicker $picker): void {
             $picker
                 ->native(false)
-                ->prefixIcon('heroicon-o-calendar')
+                ->prefixIcon(Heroicon::OutlinedCalendar)
                 ->closeOnDateSelection();
-        });
-
-        FormAction::configureUsing(function (FormAction $action): void {
-            $action->color('gray');
         });
     }
 
@@ -74,9 +68,9 @@ class FilamentDefaults
             $table
                 ->striped()
                 ->filtersLayout(FiltersLayout::Modal)
-                ->filtersFormWidth(MaxWidth::ExtraLarge)
-                ->filtersTriggerAction(fn (TableAction $action) => $action->slideOver())
-                ->actions([], position: ActionsPosition::BeforeColumns);
+                ->filtersFormWidth(Width::ExtraLarge)
+                ->filtersTriggerAction(fn (\Filament\Actions\Action $action) => $action->slideOver())
+                ->recordActions([], position: RecordActionsPosition::BeforeColumns);
         });
 
         Column::configureUsing(function (Column $column): void {
@@ -92,11 +86,11 @@ class FilamentDefaults
 
     protected static function createMacros(): void
     {
-        TableActionGroup::macro('tableHeader', function () {
+        ActionGroup::macro('tableHeader', function () {
             return $this
                 ->button()
                 ->tooltip(null)
-                ->icon('heroicon-m-ellipsis-vertical')
+                ->icon(Heroicon::EllipsisVertical)
                 ->dropdownPlacement('bottom-end');
         });
 
@@ -104,7 +98,7 @@ class FilamentDefaults
             return $this
                 ->button()
                 ->tooltip(null)
-                ->icon('heroicon-m-ellipsis-vertical')
+                ->icon(Heroicon::EllipsisVertical)
                 ->dropdownPlacement('bottom-end');
         });
 

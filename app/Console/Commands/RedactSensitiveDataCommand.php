@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Support\Database\Redaction;
+use App\Support\Database\Redaction\Contracts\Redactor;
+use App\Support\Database\Redaction\UserRedactor;
 use Illuminate\Console\Command;
 use Illuminate\Console\Prohibitable;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
@@ -13,9 +14,9 @@ class RedactSensitiveDataCommand extends Command
 {
     use Prohibitable;
 
-    /** @var array<int, class-string<\App\Support\Database\Redaction\Contracts\Redactor>> */
+    /** @var array<int, class-string<Redactor>> */
     protected const array REDACTORS = [
-        Redaction\UserRedactor::class,
+        UserRedactor::class,
     ];
 
     protected $signature = 'app:redact-sensitive-data';

@@ -148,10 +148,12 @@
         </p>
     </x-front.section-list-item>
 
-    <x-front.section-list-item title="ChatGPT App">
+    <x-front.section-list-item title="Codex">
         <p>
-            Having a desktop app to use for my <x-front.legal-link url="https://chatgpt.com" target="_blank" text="ChatGPT" />
-            needs is just more convenient than having to always navigate to the website when I need AI for something.
+            I try to not rely on AI a lot for programming, but having an AI agent like
+            <x-front.legal-link url="https://openai.com/codex/" target="_blank" text="Codex" />
+            is very helpful when I just can't figure out something or I need something
+            repetitive typed out for me.
         </p>
     </x-front.section-list-item>
 

@@ -4,73 +4,92 @@ declare(strict_types=1);
 
 namespace App\Livewire\Profile;
 
-use App\Filament\Admin\Resources\UserResource;
-use App\Filament\Infolists\AvatarFormEntry;
-use Filament\Forms\Components\Component;
-use Filament\Infolists;
-use Filament\Support\Enums\MaxWidth;
+use App\Filament\Schemas\Forms\Users\AvatarFormEntry;
+use App\Filament\Schemas\Forms\Users\NameInput;
+use App\Filament\Schemas\Forms\Users\UserTimeZoneSelect;
+use Filament\Facades\Filament;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Flex;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Support\Enums\Width;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
+use Rawilk\ProfileFilament\Facades\ProfileFilament;
+use Rawilk\ProfileFilament\Filament\Actions\EditProfileInfoAction;
 use Rawilk\ProfileFilament\Livewire\Profile\ProfileInfo as BaseProfileInfo;
 
 class ProfileInfo extends BaseProfileInfo
 {
-    public function editAction(): Infolists\Components\Actions\Action
+    public function infolist(Schema $schema): Schema
     {
-        $action = parent::editAction();
+        return $schema
+            ->record(Filament::auth()->user())
+            ->components([
+                Section::make(__('profile-filament::pages/profile/page.info.heading'))
+                    ->key('profile-information')
+                    ->headerActions([
+                        $this->editAction(),
+                    ])
+                    ->schema([
+                        Flex::make([
+                            Group::make([
+                                TextEntry::make('name')
+                                    ->label(__('profile-filament::pages/profile/page.info.fields.name.label')),
 
-        $action->modalWidth(MaxWidth::TwoExtraLarge);
-
-        return $action;
-    }
-
-    protected function formSchema(): array
-    {
-        return [
-            $this->nameInput(),
-            UserResource::getTimezoneField(),
-        ];
-    }
-
-    protected function infolistSchema(): array
-    {
-        return [
-            Infolists\Components\Section::make(__('profile-filament::pages/profile.info.heading'))
-                ->headerActions([
-                    $this->editAction(),
-                ])
-                ->schema([
-                    Infolists\Components\Split::make([
-                        Infolists\Components\Group::make([
-                            $this->nameTextEntry(),
-
-                            Infolists\Components\TextEntry::make('timezone')
-                                ->label(__('users/profile.timezone.label'))
-                                ->formatStateUsing(
-                                    fn (string $state): Htmlable => new HtmlString(Blade::render(<<<'HTML'
-                                    <div>
-                                        <div>{{ $timezone }}</div>
-                                        <div class="italic text-xs">
-                                            {{ __('users/profile.timezone.local_time', ['time' => $date->format('g:i a')]) }}
+                                TextEntry::make('timezone')
+                                    ->label(__('users/profile.timezone.label'))
+                                    ->formatStateUsing(
+                                        fn (string $state): Htmlable => new HtmlString(Blade::render(<<<'HTML'
+                                        <div>
+                                            <div>{{ $timezone }}</div>
+                                            <div class="italic text-xs">
+                                                {{ __('users/profile.timezone.local_time', ['time' => $date->format('g:i a')]) }}
+                                            </div>
                                         </div>
-                                    </div>
-                                    HTML, ['date' => now()->tz($state), 'timezone' => $state]))
-                                ),
+                                        HTML, ['date' => now()->tz($state), 'timezone' => $state]))
+                                    ),
 
-                            $this->createdAtTextEntry(),
-                        ])->grow(),
+                                TextEntry::make('created_at')
+                                    ->label(__('profile-filament::pages/profile/page.info.fields.created-at.label'))
+                                    ->dateTime(
+                                        format: 'F j, Y',
+                                        timezone: ProfileFilament::userTimezone(),
+                                    ),
+                            ]),
 
-                        Infolists\Components\Group::make([
-                            AvatarFormEntry::make('avatar_url'),
-                        ])->grow(false),
-                    ])->from('md'),
-                ]),
-        ];
+                            Group::make([
+                                AvatarFormEntry::make('avatar_url'),
+                            ])->grow(false),
+                        ])->from('md'),
+                    ]),
+            ]);
     }
 
-    protected function nameInput(): Component
+    protected function editAction(): EditProfileInfoAction
     {
-        return UserResource::getNameField()->placeholder(null);
+        return EditProfileInfoAction::make()
+            ->modalWidth(Width::TwoExtraLarge)
+            ->fillForm(fn (): array => [
+                'name' => Filament::auth()->user()->name,
+                'timezone' => Filament::auth()->user()->timezone,
+            ])
+            ->schema([
+                NameInput::make()->placeholder(null),
+                UserTimeZoneSelect::make(),
+            ])
+            ->using(function (array $data) {
+                /** @var \App\Models\User $user */
+                $user = Filament::auth()->user();
+
+                $user->fill([
+                    'name' => $data['name']->full,
+                    'timezone' => $data['timezone'],
+                ])->save();
+
+                return true;
+            });
     }
 }

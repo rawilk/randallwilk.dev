@@ -5,15 +5,15 @@ declare(strict_types=1);
 return [
     'sections' => [
         'info' => [
-            'heading' => 'Repository information',
+            'heading' => 'Repository Information',
         ],
 
         'github_meta' => [
-            'heading' => 'GitHub meta',
+            'heading' => 'GitHub Meta',
         ],
 
         'meta' => [
-            'heading' => 'Repository meta',
+            'heading' => 'Repository Meta',
         ],
     ],
 
@@ -23,7 +23,7 @@ return [
         ],
 
         'h_key' => [
-            'label' => 'Human key',
+            'label' => 'Public ID',
         ],
 
         'name' => [

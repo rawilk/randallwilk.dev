@@ -10,7 +10,7 @@
                 HTML,
             ], escape: false)
             ->class([
-                'relative bg-transparent sticky w-full top-0 flex-none z-[100] backface-hidden ease-[cubic-bezier(0.43,0.49,0.51,0.68)] duration-[.25s]',
+                'relative bg-transparent sticky w-full top-0 flex-none z-100 backface-hidden ease-[cubic-bezier(0.43,0.49,0.51,0.68)] duration-[.25s]',
                 'print:bg-transparent print:shadow-none',
             ])
     }}

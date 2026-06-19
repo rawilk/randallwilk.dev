@@ -30,7 +30,7 @@
         <x-images.lightbox
             :src="asset('images/uses/warp.png')"
             alt="Warp Terminal"
-            class="mx-auto w-[40rem] -mb-[35px] mt-6"
+            class="mx-auto w-full max-w-[40rem] mb-[-35px] mt-6"
         />
     </x-front.section-list-item>
 
@@ -79,11 +79,6 @@
             Using <x-front.legal-link url="https://herd.laravel.com/" target="_blank" text="Herd" />
             for local development is a no-brainer. In my experience it's made it much easier to manage my sites and
             local php and node versions, plus it runs each site much faster.
-        </p>
-
-        <p>
-            The free version is enough for my needs, as it's easy enough to install and run my own MySQL/PostgreSQL instances without
-            needing to pay for Herd to do it for me.
         </p>
     </x-front.section-list-item>
 

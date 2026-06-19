@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+use App\Enums\Disk;
+
 return [
     'disks' => [
 
-        'avatars' => match (env('STORAGE_DRIVER', 'local')) {
+        Disk::Avatars->value => match (env('STORAGE_DRIVER', 'local')) {
             's3' => [
                 'driver' => 's3',
                 'root' => 'avatars',
@@ -25,7 +27,7 @@ return [
             ],
         },
 
-        'snapshots' => [
+        Disk::Snapshots->value => [
             'driver' => 'local',
             'root' => database_path('snapshots'),
         ],

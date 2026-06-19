@@ -42,7 +42,7 @@
     page-break-after: avoid;
 }
 
-@screen sm {
+@media (min-width: 640px) {
     .markup-titles h1:not(:first-child) {
         @apply mt-32;
         page-break-before: always;

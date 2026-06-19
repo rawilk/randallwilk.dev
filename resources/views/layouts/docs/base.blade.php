@@ -21,7 +21,7 @@
     :title="$title"
     :html-attributes="
         new Illuminate\View\ComponentAttributeBag([
-            'class' => 'antialiased [font-feature-settings:\'ss01\']',
+            'class' => 'antialiased font-features-[\'ss01\']',
             'id' => 'docsScreen',
         ])
     "
@@ -87,7 +87,7 @@
 
     {{ $hero }}
 
-    <main class="relative mx-auto flex max-w-screen-2xl justify-center sm:px-2 lg:px-8 xl:px-12">
+    <main class="relative mx-auto flex max-w-[theme(screens.2xl)] justify-center sm:px-2 lg:px-8 xl:px-12">
         {{-- nav --}}
         @include('layouts.docs.partials.navigation')
 

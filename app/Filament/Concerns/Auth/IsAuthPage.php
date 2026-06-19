@@ -18,6 +18,6 @@ trait IsAuthPage
 
     protected function setLogoHeight(): void
     {
-        filament()->getCurrentPanel()->brandLogoHeight('2.5rem');
+        filament()->getCurrentOrDefaultPanel()->brandLogoHeight('2.5rem');
     }
 }

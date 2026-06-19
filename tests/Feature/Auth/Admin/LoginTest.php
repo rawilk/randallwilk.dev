@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 use App\Filament\Admin\Pages\Auth\Login;
 use App\Models\User;
-use Illuminate\Auth\Events\Login as LoginEvent;
-use Rawilk\ProfileFilament\Enums\Session\MfaSession;
-use Rawilk\ProfileFilament\Events\TwoFactorAuthenticationChallenged;
+use Illuminate\Auth\Events\Attempting;
+use Illuminate\Auth\Events\Failed;
 
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\assertAuthenticatedAs;
+use function Pest\Laravel\assertGuest;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
@@ -16,12 +18,14 @@ beforeEach(function () {
     $this->panel = filament()->getPanel('admin');
 
     filament()->setCurrentPanel($this->panel);
+
+    $this->page = Login::class;
 });
 
 it('renders', function () {
     get($this->panel->getLoginUrl())
         ->assertSuccessful()
-        ->assertSeeLivewire(Login::class);
+        ->assertSeeLivewire($this->page);
 });
 
 test('authenticated users are redirected', function () {
@@ -30,124 +34,305 @@ test('authenticated users are redirected', function () {
         ->assertRedirect($this->panel->getUrl());
 });
 
-test('a user can login', function () {
-    $user = adminUser(['password' => 'secret']);
+describe('authentication', function () {
+    it('can authenticate', function () {
+        assertGuest();
 
-    Event::fake();
+        $user = adminUser();
 
-    livewire(Login::class)
-        ->fillForm([
-            'email' => $user->email,
-            'password' => 'secret',
-        ])
-        ->call('authenticate')
-        ->assertSuccessful()
-        ->assertRedirect($this->panel->getUrl());
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertRedirect($this->panel->getUrl());
 
-    $this->assertAuthenticatedAs($user);
+        assertAuthenticatedAs($user);
+    });
 
-    Event::assertDispatched(LoginEvent::class, function (LoginEvent $event) use ($user) {
-        expect($event->user)->toBe($user);
+    it('rotates the session ID after a successful authentication to prevent session fixation', function () {
+        $user = adminUser();
 
-        return true;
+        $sessionIdBefore = session()->getId();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertRedirect($this->panel->getUrl());
+
+        expect(session()->getId())->not->toBe($sessionIdBefore);
+    });
+
+    it('rotates the CSRF token after a successful authentication', function () {
+        $user = adminUser();
+
+        session()->start();
+        $csrfTokenBefore = session()->token();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertRedirect($this->panel->getUrl());
+
+        expect(session()->token())->not->toBe($csrfTokenBefore);
+    });
+
+    it('does not rotate the CSRF token when authentication fails (control)', function () {
+        $user = adminUser();
+
+        session()->start();
+        $csrfTokenBefore = session()->token();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+                'password' => 'wrong-password',
+            ])
+            ->call('authenticate')
+            ->assertHasFormErrors(['email']);
+
+        expect(session()->token())->toBe($csrfTokenBefore);
+    });
+
+    it('can authenticate and redirect user to their intended URL', function () {
+        session()->put('url.intended', $intendedUrl = Str::random());
+
+        $user = adminUser();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertRedirect($intendedUrl);
     });
 });
 
-test('email is required', function () {
-    livewire(Login::class)
-        ->fillForm([
-            'email' => '',
-            'password' => 'secret',
-        ])
-        ->call('authenticate')
-        ->assertHasFormErrors(['email' => ['required']]);
-});
+describe('authentication failures', function () {
+    it('requires the correct credentials', function () {
+        Event::fake([Failed::class]);
 
-test('password is required', function () {
-    livewire(Login::class)
-        ->fillForm([
-            'email' => 'email@example.com',
-            'password' => '',
-        ])
-        ->call('authenticate')
-        ->assertHasFormErrors(['password' => 'required']);
-});
+        $user = adminUser();
 
-test('a correct password is required', function () {
-    $user = adminUser(['password' => 'secret']);
-
-    livewire(Login::class)
-        ->fillForm([
-            'email' => $user->email,
-            'password' => 'invalid',
-        ])
-        ->call('authenticate')
-        ->assertHasFormErrors([
-            'email' => [__('auth.failed')],
-        ]);
-
-    $this->assertGuest();
-});
-
-test('login is rate limited', function () {
-    $user = adminUser(['password' => 'secret']);
-
-    $component = livewire(Login::class);
-
-    for ($i = 0; $i < 5; $i++) {
-        $component
+        livewire($this->page)
             ->fillForm([
                 'email' => $user->email,
-                'password' => 'invalid',
+                'password' => 'incorrect-password',
             ])
             ->call('authenticate')
-            ->assertHasFormErrors(['email'])
-            ->assertNotNotified();
-    }
+            ->assertHasFormErrors(['email']);
 
-    $component
-        ->fillForm([
-            'email' => $user->email,
-            'password' => 'invalid',
-        ])
-        ->call('authenticate')
-        ->assertNotified();
+        assertGuest();
+
+        Event::assertDispatched(function (Failed $event) use ($user) {
+            expect($event->guard)->toBe('web')
+                ->and($event->user)->toBe($user)
+                ->and($event->credentials)->toEqualCanonicalizing([
+                    'email' => $user->email,
+                    'password' => 'incorrect-password',
+                ]);
+
+            return true;
+        });
+    });
+
+    it('fires the `Attempting` event when authentication fails because the email is unknown', function () {
+        Event::fake([Attempting::class]);
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => 'not-exists@example.com',
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertHasFormErrors(['email']);
+
+        Event::assertDispatched(function (Attempting $event): bool {
+            expect($event->guard)->toBe('web')
+                ->and($event->credentials)->toEqualCanonicalizing([
+                    'email' => 'not-exists@example.com',
+                    'password' => 'secret',
+                ]);
+
+            return true;
+        });
+    });
+
+    it('fires the `Attempting` event when authentication fails because the password is wrong', function () {
+        Event::fake([Attempting::class]);
+
+        $user = adminUser();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+                'password' => 'incorrect-password',
+            ])
+            ->call('authenticate')
+            ->assertHasFormErrors(['email']);
+
+        Event::assertDispatched(function (Attempting $event) use ($user): bool {
+            expect($event->guard)->toBe('web')
+                ->and($event->credentials)->toEqualCanonicalizing([
+                    'email' => $user->email,
+                    'password' => 'incorrect-password',
+                ]);
+
+            return true;
+        });
+    });
+
+    it('cannot authenticate on unauthorized panel (i.e., app users cannot login to admin panel)', function () {
+        Event::fake([Failed::class]);
+
+        // Non-admin users cannot authenticate to the admin panel.
+        $user = User::factory()->create();
+
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertHasFormErrors(['email']);
+
+        assertGuest();
+
+        Event::assertDispatched(function (Failed $event) use ($user): bool {
+            expect($event->guard)->toBe('web')
+                ->and($event->user)->toBe($user)
+                ->and($event->credentials)->toEqualCanonicalizing([
+                    'email' => $user->email,
+                    'password' => 'secret',
+                ]);
+
+            return true;
+        });
+    });
 });
 
-test('login links are shown in test environments', function (string $environment) {
-    $this->app->detectEnvironment(fn () => $environment);
+describe('validation', function () {
+    it('requires an email', function () {
+        livewire($this->page)
+            ->fillForm([
+                'email' => '',
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertHasFormErrors(['email' => ['required']]);
+    });
 
-    get($this->panel->getLoginUrl())
-        ->assertSeeHtml('data-test="dev-logins"');
-})->with(['local', 'staging']);
+    it('requires a valid email', function () {
+        livewire($this->page)
+            ->fillForm([
+                'email' => 'invalid-email',
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertHasFormErrors(['email' => ['email']]);
+    });
 
-test('login links are not shown in production', function () {
-    $this->app->detectEnvironment(fn () => 'production');
-
-    get($this->panel->getLoginUrl())
-        ->assertDontSeeHtml('data-test="dev-logins"');
+    it('requires a password', function () {
+        livewire($this->page)
+            ->fillForm([
+                'email' => 'email@gmail.com',
+                'password' => '',
+            ])
+            ->call('authenticate')
+            ->assertHasFormErrors(['password' => ['required']]);
+    });
 });
 
-it('redirects to an mfa challenge if the user has mfa enabled', function () {
-    $user = User::factory()->admin()->withMfa()->create(['password' => 'secret']);
+describe('rate limiting', function () {
+    it('can throttle authentication attempts', function () {
+        assertGuest();
 
-    Event::fake();
+        $user = adminUser();
 
-    livewire(Login::class)
-        ->fillForm([
-            'email' => $user->email,
-            'password' => 'secret',
-        ])
-        ->call('authenticate')
-        ->assertRedirect(route($this->panel->generateRouteName('auth.mfa.challenge')));
+        foreach (range(1, 5) as $i) {
+            livewire($this->page)
+                ->fillForm([
+                    'email' => $user->email,
+                    'password' => 'secret',
+                ])
+                ->call('authenticate');
 
-    $this->assertGuest();
+            assertAuthenticated();
 
-    expect(session()->get(MfaSession::User->value))->toBe($user->getKey());
+            auth()->logout();
+        }
 
-    Event::assertDispatched(TwoFactorAuthenticationChallenged::class, function (TwoFactorAuthenticationChallenged $event) use ($user) {
-        expect($event->user)->toBe($user);
+        livewire($this->page)
+            ->fillForm([
+                'email' => $user->email,
+                'password' => 'secret',
+            ])
+            ->call('authenticate')
+            ->assertNotified();
 
-        return true;
+        assertGuest();
+    });
+});
+
+describe('login links', function () {
+    it('shows them in test environments', function (string $environment) {
+        app()->detectEnvironment(fn () => $environment);
+
+        get($this->panel->getLoginUrl())
+            ->assertSeeHtml('data-test="dev-logins"');
+    })->with(['local', 'staging']);
+
+    it('hides them in production', function () {
+        putAppInProduction();
+
+        get($this->panel->getLoginUrl())
+            ->assertDontSeeHtml('data-test="dev-logins"');
+    });
+});
+
+describe('browser testing', function () {
+    it('can fill the form, authenticate, and redirect to the admin panel', function () {
+        $user = adminUser();
+
+        visit($this->panel->getLoginUrl())
+            ->assertSee(__('pages/auth/login.heading'))
+            ->assertNoSmoke()
+            // ->assertNoAccessibilityIssues()
+            ->type('input[type="email"]', $user->email)
+            ->type('input[type="password"]', 'secret')
+            ->check('input[type="checkbox"]')
+            ->click('button[type="submit"]')
+            ->assertUrlIs($this->panel->getUrl())
+            ->assertSee('Dashboard')
+            ->assertNoSmoke();
+
+        assertAuthenticatedAs($user);
+    });
+
+    test('dark mode is accessible', function () {
+        visit($this->panel->getLoginUrl())
+            ->inDarkMode()
+            // ->assertNoAccessibilityIssues()
+            ->assertNoSmoke();
+    });
+
+    it('shows authentication errors in the ui', function () {
+        $user = adminUser();
+
+        visit($this->panel->getLoginUrl())
+            ->type('input[type="email"]', $user->email)
+            ->type('input[type="password"]', 'incorrect-password')
+            ->click('button[type="submit"]')
+            ->assertUrlIs($this->panel->getLoginUrl())
+            // ->assertNoAccessibilityIssues()
+            ->assertSee(__('auth.failed'));
     });
 });

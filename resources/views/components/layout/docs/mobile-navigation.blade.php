@@ -18,8 +18,8 @@
 
     <template x-teleport="body">
         <div
-            {{--class="fixed inset-0 z-[100] flex items-start overflow-y-auto bg-slate-900/50 pr-10 lg:hidden"--}}
-            class="fixed inset-0 z-[100] flex items-start overflow-y-auto pr-10 lg:hidden"
+            {{--class="fixed inset-0 z-100 flex items-start overflow-y-auto bg-slate-900/50 pr-10 lg:hidden"--}}
+            class="fixed inset-0 z-100 flex items-start overflow-y-auto pr-10 lg:hidden"
             role="dialog"
             aria-modal="true"
             aria-label="Navigation"

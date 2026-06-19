@@ -1,21 +1,86 @@
-@import 'bootstrap.css';
-@import '/vendor/filament/filament/resources/css/theme.css';
-@import 'components/variables.css';
-@import '../../components/front/index.css';
-@import '../../components/logo.css';
-@import 'components/banner.css';
-@import 'components/bullets.css';
-@import 'components/counters.css';
-@import 'components/footer.css';
-@import 'components/forms.css';
-@import 'components/gradient.css';
-@import 'components/line.css';
-@import 'components/links.css';
-@import 'components/markup.css';
-@import 'components/section.css';
-@import 'components/select.css';
-@import 'components/title.css';
-@import 'components/wrap.css';
-@import 'components/utilities.css';
+@import './bootstrap.css' layer(base);
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+@import './components/variables.css';
+@import '../../components/front/index.css' layer(components);
+@import '../../components/logo.css' layer(base);
+@import './components/banner.css' layer(components);
+@import './components/bullets.css' layer(components);
+@import './components/counters.css' layer(components);
+@import './components/footer.css' layer(components);
+@import './components/forms.css' layer(components);
+@import './components/gradient.css' layer(components);
+@import './components/line.css' layer(components);
+@import './components/links.css' layer(components);
+@import './components/markup.css' layer(components);
+@import './components/section.css' layer(components);
+@import './components/select.css' layer(components);
+@import './components/title.css' layer(components);
+@import './components/wrap.css' layer(components);
+@import './components/utilities.css' layer(utilities);
+@plugin '@tailwindcss/typography';
 
-@config('tailwind.config.js');
+@theme {
+    /* Colors */
+    --color-brand: #0088CC; /* If updating, be sure to update mail layout logo colors */
+    --color-black: #172a3d;
+
+    --color-gray-50: oklch(98.5% 0.002 247.839);
+    --color-gray-100: oklch(96.7% 0.003 264.542);
+    --color-gray-200: oklch(92.8% 0.006 264.531);
+    --color-gray-300: oklch(87.2% 0.01 258.338);
+    --color-gray-400: oklch(70.7% 0.022 261.325);
+    --color-gray-500: oklch(55.1% 0.027 264.364);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
+    --color-gray-700: oklch(37.3% 0.034 259.733);
+    --color-gray-800: oklch(27.8% 0.033 256.848);
+    --color-gray-900: oklch(21% 0.034 264.665);
+    --color-gray-950: oklch(13% 0.028 261.692);
+
+
+    /* Fonts */
+    --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-serif: var(--font-serif-family), 'Constantia', 'Lucida Bright', 'Lucidabright', 'Lucida', 'Dejavu Serif', serif;
+
+    /* Text Size */
+    --text-6xl: 5rem;
+    --text-6xl--line-height: 1;
+
+    /* Animations */
+    --animate-scroller: scroller 2s infinite;
+
+    @keyframes scroller {
+        0% { transform: translate(0, 0); opacity: 0; }
+        40% { opacity: 1; }
+        80% { transform: translate(0, 23px); opacity: 0; }
+        100% { opacity: 0; }
+    }
+}
+
+/* Screen Sizes */
+@custom-variant mobile (@media (max-width: 768px));
+@custom-variant print (@media print);
+
+/* View Components */
+@source '../../../../resources/views/components/front/**/*';
+@source '../../../../resources/views/components/forms/**/*';
+@source '../../../../resources/views/components/layout/html.blade.php';
+@source '../../../../resources/views/components/layout/front/**/*';
+@source '../../../../resources/views/components/images/**/*';
+@source '../../../../resources/views/components/logo.blade.php';
+@source '../../../../resources/views/components/back-to-top.blade.php';
+@source '../../../../app/Services/Menus/**/*';
+
+/* Providers */
+@source '../../../../app/Providers/NavigationServiceProvider.php';
+
+/* Livewire */
+@source '../../../../resources/views/livewire/front/**/*';
+
+/* Views */
+@source '../../../../resources/views/layouts/front/**/*';
+@source '../../../../resources/views/front/**/*';
+@source '../../../../resources/views/errors/**/*';
+@source '../../../../resources/views/components/errors/**/*';
+
+/* Svg */
+@source '../../../../resources/svg/**/*';

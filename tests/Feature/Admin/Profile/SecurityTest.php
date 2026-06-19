@@ -2,10 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Livewire\Profile\PreferredMfaMethod;
+use Rawilk\ProfileFilament\Auth\Multifactor\Livewire\MultiFactorAuthenticationManager;
 use Rawilk\ProfileFilament\Filament\Pages\Profile\Security;
-use Rawilk\ProfileFilament\Livewire\MfaOverview;
-use Rawilk\ProfileFilament\Livewire\PasskeyManager;
 use Rawilk\ProfileFilament\Livewire\UpdatePassword;
 
 use function Pest\Laravel\be;
@@ -26,7 +24,5 @@ it('renders', function () {
     get(Security::getUrl(panel: 'admin'))
         ->assertOk()
         ->assertSeeLivewire(UpdatePassword::class)
-        ->assertSeeLivewire(PasskeyManager::class)
-        ->assertSeeLivewire(MfaOverview::class)
-        ->assertSeeLivewire(PreferredMfaMethod::class);
+        ->assertSeeLivewire(MultiFactorAuthenticationManager::class);
 });
