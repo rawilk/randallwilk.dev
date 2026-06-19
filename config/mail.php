@@ -8,13 +8,8 @@ return [
             'transport' => 'failover',
             'mailers' => [
                 'resend',
-                'mailgun',
             ],
             'retry_after' => 60,
-        ],
-
-        'mailgun' => [
-            'transport' => 'mailgun',
         ],
     ],
 ];
