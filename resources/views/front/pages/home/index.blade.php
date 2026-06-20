@@ -4,7 +4,7 @@
 >
     <x-slot:description>
         Randall Wilk is a Full-Stack developer that builds websites & web applications using the TALL stack.
-        He is based in Wausau WI, United States.
+        He is based in Madison WI, United States.
     </x-slot:description>
 
     @include('front.pages.home.partials.intro')
