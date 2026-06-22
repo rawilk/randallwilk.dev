@@ -14,7 +14,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Psr\Http\Message\UriInterface;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\SitemapGenerator;
 use Spatie\Sitemap\SitemapIndex;
@@ -53,13 +52,15 @@ class GenerateSitemapCommand extends Command
         $this->comment('Generating main sitemap...');
 
         SitemapGenerator::create(config('app.url'))
-            ->shouldCrawl(function (UriInterface $url) {
-                if (Str::startsWith($url->getPath(), '/docs')) {
+            ->shouldCrawl(function (string $url) {
+                $path = parse_url($url, PHP_URL_PATH) ?: '/';
+
+                if (Str::startsWith($path, '/docs')) {
                     return false;
                 }
 
                 // No need to index social login urls.
-                if (Str::startsWith($url->getPath(), '/login/')) {
+                if (Str::startsWith($path, '/login/')) {
                     return false;
                 }
 
