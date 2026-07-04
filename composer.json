@@ -51,6 +51,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
+        "laravel/boost": "^2.4",
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
@@ -58,6 +59,7 @@
         "pestphp/pest-plugin-browser": "^4.3",
         "pestphp/pest-plugin-laravel": "^4.0",
         "pestphp/pest-plugin-livewire": "^4.0",
+        "rawilk/guidelines-skills": "^1.0",
         "rawilk/laravel-stubs": "^2.0",
         "spatie/laravel-ignition": "^2.0",
         "spatie/laravel-ray": "^1.29",
@@ -86,7 +88,8 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan custom-stub:publish --force"
+            "@php artisan custom-stub:publish --force",
+            "@php artisan boost:update --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

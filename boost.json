@@ -1,0 +1,25 @@
+{
+    "agents": [
+        "junie",
+        "codex"
+    ],
+    "cloud": false,
+    "guidelines": true,
+    "mcp": true,
+    "nightwatch": false,
+    "packages": [
+        "filament/filament",
+        "rawilk/guidelines-skills"
+    ],
+    "sail": false,
+    "skills": [
+        "laravel-best-practices",
+        "configuring-horizon",
+        "pest-testing",
+        "tailwindcss-development",
+        "rawilk-javascript",
+        "rawilk-laravel-php",
+        "rawilk-security",
+        "rawilk-version-control"
+    ]
+}

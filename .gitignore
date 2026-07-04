@@ -35,6 +35,8 @@ yarn-error.log
 .nvmrc
 .junie
 /tests/Browser
+.codex
+.agents
 
 # Storage disks
 public/avatars
