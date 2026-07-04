@@ -5,7 +5,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
     plugins: [
-        babel(),
+        babel({
+            include: /resources\/js\/.*\.js$/,
+        }),
 
         laravel({
             input: [

@@ -1,5 +1,3 @@
-import docSearch from '@docsearch/js';
-
 const defaultOptions = {
     hitsPerPage: 5,
     project: '',
@@ -10,7 +8,9 @@ export default (options = {}) => ({
     ...defaultOptions,
     ...options,
 
-    init() {
+    async init() {
+        const { default: docSearch } = await import('@docsearch/js');
+
         const searchParameters = {
             facetFilters: [
                 `project:${this.project}`,
