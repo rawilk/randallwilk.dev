@@ -9,7 +9,7 @@
     "dependencies": {
         "babel-plugin-prismjs": "^2.1.0",
         "postcss": "^8.5.15",
-        "postcss-nesting": "^14.0.0",
+        "postcss-nesting": "^14.0.1",
         "tailwindcss": "^4.3.0",
         "tippy.js": "^6.3.7"
     },
